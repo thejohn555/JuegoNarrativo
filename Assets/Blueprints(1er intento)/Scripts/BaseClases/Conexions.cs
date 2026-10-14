@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Unity.GraphToolkit.Editor;
 using UnityEngine;
 
 namespace Blueprints.Scripts.BaseClases
@@ -26,11 +27,7 @@ namespace Blueprints.Scripts.BaseClases
         {
             conexions.Add(new ConexionData(originNode, originPort, destinationData, destinationPort));
         }
-
-        private void Start()
-        {
-            
-        }
+        
         
     }
 }

@@ -52,7 +52,7 @@ public class TestNode : NodeData
                 var outputNode = SearchNodeData(inode);
                 var outputPort = port.SearchPortData(outputNode,output); 
                 Conexions.Instance.AddConexion(this,port,outputNode,outputPort);
-                 Debug.Log($"Conexión añadida: {Type} ({Id}) puerto {port.Id} -> {outputNode.Type} ({outputNode.Id}) puerto {outputPort?.Id}");
+                Debug.Log($"Conexión añadida: {Type} ({Id}) puerto {port.Id} -> {outputNode.Type} ({outputNode.Id}) puerto {outputPort?.Id}");
             }
         }
     }
