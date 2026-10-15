@@ -43,6 +43,10 @@ namespace DialogueGraph.Editor
                         ProccessDialogueNode(dialogueNode, runtimeNode, nodeIDMap);
                         break;
 
+                    case ChoiceNode choiceNode:
+                        ProccessChoiceNode(choiceNode, runtimeNode, nodeIDMap);
+                        break;
+
                     default:
                         Debug.LogWarning($"El nodo de tipo {iNode.GetType()} no tiene una funcion de procesado asignada.");
                         break;
@@ -70,7 +74,21 @@ namespace DialogueGraph.Editor
         {
             runtimeNode.DialogueText = GetPortValue<string>(node.GetInputPortByName(PortNames.PortDialogue));
 
-            
+            var choiceOutputNodes = node.GetOutputPorts().Where(p => p.Name.StartsWith(PortNames.PortChoiceOutput));
+
+            foreach (var outputPort in choiceOutputNodes)
+            {
+                var index = outputPort.Name.Substring($"{PortNames.PortChoiceOutput}".Length);
+                var textPort = node.GetInputPortByName($"{PortNames.PortChoiceText} {index}");
+
+                var choiceData = new ChoiceData
+                {
+                    ChoiceText = GetPortValue<string>(textPort),
+                    DestinationNodeID = outputPort.FirstConnectedPort != null ? nodeIDMap[outputPort.FirstConnectedPort.GetNode()] : null
+                };
+
+                runtimeNode.Choices.Add(choiceData);
+            }
         }
 
         private T GetPortValue<T>(IPort port)
