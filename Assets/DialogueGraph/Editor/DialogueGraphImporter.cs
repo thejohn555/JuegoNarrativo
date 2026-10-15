@@ -34,13 +34,43 @@ namespace DialogueGraph.Editor
             foreach (var iNode in editorGraph.GetNodes())
             {
                 if (iNode is StartNode || iNode is EndNode) continue;
+
+                var runtimeNode = new RuntimeDialogueNode { NodeID = nodeIDMap[iNode] };
+
+                switch (iNode)
+                {
+                    case DialogueNode dialogueNode:
+                        ProccessDialogueNode(dialogueNode, runtimeNode, nodeIDMap);
+                        break;
+
+                    default:
+                        Debug.LogWarning($"El nodo de tipo {iNode.GetType()} no tiene una funcion de procesado asignada.");
+                        break;
+
+                }
             }
+
+            ctx.AddObjectToAsset("RuntimeData", runtimeGraph);
+            ctx.SetMainObject(runtimeGraph);
         }
 
         private void ProccessDialogueNode(DialogueNode node, RuntimeDialogueNode runtimeNode,
             Dictionary<INode, string> nodeIDMap)
         {
-            //runtimeNode.DialogueText = GetPortValue<string>(node.GetInputPortByName(node.PortDialogue));
+            runtimeNode.DialogueText = GetPortValue<string>(node.GetInputPortByName(PortNames.PortDialogue));
+
+            var nextNodePort = node.GetOutputPortByName(PortNames.PortOutput)?.FirstConnectedPort;
+            if (nextNodePort != null)
+            {
+                runtimeNode.NextNodeID = nodeIDMap[nextNodePort.GetNode()];
+            }
+        }
+
+        private void ProccessChoiceNode(ChoiceNode node, RuntimeDialogueNode runtimeNode, Dictionary<INode, string> nodeIDMap)
+        {
+            runtimeNode.DialogueText = GetPortValue<string>(node.GetInputPortByName(PortNames.PortDialogue));
+
+            
         }
 
         private T GetPortValue<T>(IPort port)
