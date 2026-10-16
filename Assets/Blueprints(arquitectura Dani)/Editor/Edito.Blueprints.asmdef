@@ -1,0 +1,21 @@
+﻿{
+  "name": "Edito.Blueprints",
+  "rootNamespace": "Blueprints_arquitectura_Dani_.Editor",
+  "references": [
+    "Unity.GraphToolkit.Common.Editor",
+    "Unity.GraphToolkit.Utility.Editor",
+    "Unity.GraphToolkit.Editor",
+    "Blueprints.Runtime"
+  ],
+  "includePlatforms": [
+    "Editor"
+  ],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": false,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}
