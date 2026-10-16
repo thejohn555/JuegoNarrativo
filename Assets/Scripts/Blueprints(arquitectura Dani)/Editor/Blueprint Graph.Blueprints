@@ -48,10 +48,10 @@ MonoBehaviour:
         m_LocalSubgraphs: []
         m_LastKnownBounds:
           serializedVersion: 2
-          x: 4.8
+          x: -63.2
           y: 4.799999
-          width: 692
-          height: 280.8
+          width: 780.8
+          height: 337.6
         m_GraphElementMetaData:
         - m_Guid:
             m_Value0: 7914426677845933448
@@ -146,7 +146,7 @@ MonoBehaviour:
           serializedVersion: 2
           Hash: 88bde18d21b1d56d990bce6d93849abc
         m_Version: 2
-        m_Position: {x: 4.827263, y: 170.56299}
+        m_Position: {x: -63.307945, y: 221.66438}
         m_Title: 
         m_Tooltip: 
         m_NodePreviewModel:
@@ -183,7 +183,7 @@ MonoBehaviour:
           serializedVersion: 2
           Hash: ec32fb50c901e4e6352eb50422dd8b4f
         m_Version: 2
-        m_Position: {x: 238.14465, y: 168.954}
+        m_Position: {x: 218.67746, y: 227.35562}
         m_Title: 
         m_Tooltip: 
         m_NodePreviewModel:
@@ -220,7 +220,7 @@ MonoBehaviour:
           serializedVersion: 2
           Hash: 98570dc4da7e087f9489019c756746b9
         m_Version: 2
-        m_Position: {x: 526.17114, y: 170.56306}
+        m_Position: {x: 546.8551, y: 226.53128}
         m_Title: 
         m_Tooltip: 
         m_NodePreviewModel:
@@ -321,7 +321,7 @@ MonoBehaviour:
           serializedVersion: 2
           Hash: 8681d03c3c62672e128d2606046d26e5
         m_Version: 2
-        m_Position: {x: 9.654526, y: 6.4363556}
+        m_Position: {x: -26.84647, y: 21.036755}
         m_Title: 
         m_Tooltip: 
         m_NodePreviewModel:
