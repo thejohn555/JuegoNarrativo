@@ -32,7 +32,7 @@ public class EventBus:Singleton<EventBus>
         list.Add(handler);
     }
 
-    public void Unsubscribe<T>(Action<T> handler) where T : IEvent
+    public void UnSubscribe<T>(Action<T> handler) where T : IEvent
     {
         Type t = typeof(T);
         if (subs.TryGetValue(t, out List<Delegate> list))

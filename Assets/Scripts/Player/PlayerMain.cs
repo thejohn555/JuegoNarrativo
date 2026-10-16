@@ -1,20 +1,26 @@
+using Player;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class PlayerMain : MonoBehaviour
 {
     
     [SerializeField] private InputActionsSO inputReader;
-    [SerializeField] private LayerMask whatIsClickable;
+    [SerializeField] public LayerMask whatIsClickable;
     
-    private Camera cam;
+    public NavMeshAgent Agent { get; private set; }
+    
+    public PlayerMovementSystem playerMovementSystem;
+    
+    public Camera cam;
     
     private void Awake()
     {
-        // Agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
-        // cam = Camera.main;
-        // playerNavMovementSystem = GetComponent<PlayerNavMovementSystem>();
-        // attackSystem = GetComponent<PlayerAttackSystem>();
+        Agent = GetComponent<NavMeshAgent>();
+        cam = Camera.main;
+        playerMovementSystem = GetComponent<PlayerMovementSystem>();
     }
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
