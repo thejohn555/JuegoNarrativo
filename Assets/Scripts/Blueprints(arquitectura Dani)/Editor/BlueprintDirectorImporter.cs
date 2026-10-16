@@ -66,6 +66,7 @@ namespace Blueprints_arquitectura_Dani_.Editor.Blueprints_arquitectura_Dani_.Edi
                     {
                         nodeMap[currentNode] = NodePack.Nodes.Count;
                         NodePack.Nodes.Add(runtimeNode);
+                        Debug.Log($"[Importer] Nodo añadido {runtimeNode}");
                         //runtimeGraph.RuntimeNodes.Add(runtimeNode);
                     }
 
