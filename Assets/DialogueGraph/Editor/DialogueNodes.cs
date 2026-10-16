@@ -6,6 +6,7 @@ namespace DialogueGraph.Editor
     public static class PortNames
     {
         public const string PortDialogue = "Dialogue Text";
+        public const string PortSpeaker = "Speaker";
         public const string PortOutput = "Out";
         public const string PortInput = "In";
         public const string PortChoiceOutput = "Choice ";
@@ -38,6 +39,7 @@ namespace DialogueGraph.Editor
             context.AddInputPort(PortNames.PortInput).Build();
             context.AddOutputPort(PortNames.PortOutput).Build();
 
+            context.AddInputPort<string>(PortNames.PortSpeaker).Build();
             context.AddInputPort<string>(PortNames.PortDialogue).Build();
         }
     }
@@ -50,6 +52,7 @@ namespace DialogueGraph.Editor
         {
             context.AddInputPort(PortNames.PortInput).Build();
 
+            context.AddInputPort<string>(PortNames.PortSpeaker).Build();
             context.AddInputPort<string>(PortNames.PortDialogue).Build();
 
             var option = GetNodeOptionByName(optionID);
