@@ -26,10 +26,10 @@ namespace Player
             Ray ray = main.cam.ScreenPointToRay(Mouse.current.position.ReadValue());
             if(!Physics.Raycast(ray, out RaycastHit hit,main.whatIsClickable))return;
             
-            if (hit.collider.TryGetComponent(out Interactive newinteractuable))
+            if (hit.collider.TryGetComponent(out Interactive newInteractuable))
             {
-                currentInteractuable = newinteractuable;
-                currentStoppingDistance = newinteractuable.InteractionDistance;
+                currentInteractuable = newInteractuable;
+                currentStoppingDistance = newInteractuable.InteractionDistance;
                 StartCoroutine(TrackingInteractuable());
             }
             else
