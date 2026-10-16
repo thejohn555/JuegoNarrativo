@@ -112,28 +112,10 @@ namespace Blueprints_arquitectura_Dani_.Editor.Blueprints_arquitectura_Dani_.Edi
         }
         static List<RuntimeNode> TranslateNodeModelToRuntimeNodes(INode nodeModel)
         {
-            var returnNodes = new List<RuntimeNode>();
-            switch (nodeModel) //Hya que ir añadiendo todos los tipos de nodos que creemos
-            {
-                case StartNode startNode:
-                    returnNodes.Add(new StartRuntimeNode());
-                    break;
-                case ConditionNode conditionNode: //Este hay que borrarlo es solo para probar
-                    // var conditionPort = conditionNode.GetInputPortByName("Transition");
-                    // if (conditionPort == null)
-                    // {
-                    //     Debug.LogError("[Importer] ConditionNode no tiene un puerto con ese nombre");
-                    //     returnNodes.Add(new ConditionRuntimeNode());
-                    //     break;
-                    // }
-                    // var condition = GetInputPortValue<int>(conditionPort);
-                    returnNodes.Add(new ConditionRuntimeNode());
-                    break;
-                default:
-                    throw new ArgumentException($"Unsupported node type: {nodeModel.GetType()}");
-            }
+            List<RuntimeNode> retornedNodes = new List<RuntimeNode>();
+            NodeTranslator.AnalizeNodes(nodeModel, retornedNodes);
+            return retornedNodes;
 
-            return returnNodes;
         }
         static T GetInputPortValue<T>(IPort port)
         {
