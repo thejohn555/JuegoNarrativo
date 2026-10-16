@@ -17,7 +17,7 @@ namespace Blueprints_arquitectura_Dani_.Runtime
             executors = new Dictionary<Type, object>
             {
                 {typeof(StartRuntimeNode),new StartNodeExecutor()},
-                {typeof(ConditionRuntimeNode),new ConditionRuntimeNode()},
+                {typeof(ConditionRuntimeNode),new ConditionNodeExecutor()},
             };
         }
 
@@ -29,33 +29,58 @@ namespace Blueprints_arquitectura_Dani_.Runtime
                 return;
             }
 
-            var currentNode = RuntimeGraph.RuntimeNodes[0];
-
-            while (currentNode != null)
+            foreach (var node in RuntimeGraph.RuntimeNodes)
             {
-                if (!executors.TryGetValue(currentNode.GetType(), out var executor))
+                if (node.Nodes.Count == 0)
+                    continue;
+                var currentNode = node.Nodes[0];
+                while (currentNode != null)
                 {
-                    Debug.LogError($"No executor found for this type: {currentNode.GetType()}");
-                    break;
-                }
-
-                if (currentNode is ConditionRuntimeNode conditionRuntimeNode)
-                {
-                    var condicionExecutor = (IBlueprintNodeExecutor<ConditionRuntimeNode>)executor;
-                    if (condicionExecutor.Execute(conditionRuntimeNode, this) &&
-                        conditionRuntimeNode.NextNodeIndex.Count > 0)
+                    if (!executors.TryGetValue(currentNode.GetType(), out var executor))
                     {
-                        currentNode = RuntimeGraph.RuntimeNodes[conditionRuntimeNode.NextNodeIndex[0]];
+                        Debug.LogError(
+                            $"No executor found for this type: {currentNode.GetType()}");
+                        break;
                     }
-                }
 
-                if (currentNode is StartRuntimeNode startNode)
-                {
-                    var startExecutor = (IBlueprintNodeExecutor<StartRuntimeNode>)executor;
-                    startExecutor.Execute(startNode,this);
-                    currentNode = startNode.NextNodeIndex.Count > 0
-                        ? RuntimeGraph.RuntimeNodes[startNode.NextNodeIndex[0]]
-                        : null;
+                    int nextNodeIndex = -1;
+
+                    if (currentNode is StartRuntimeNode startNode)
+                    {
+                        var startExecutor =
+                            (IBlueprintNodeExecutor<StartRuntimeNode>)executor;
+
+                        startExecutor.Execute(startNode, this);
+
+                        if (startNode.NextNodeIndex.Count > 0)
+                            nextNodeIndex = startNode.NextNodeIndex[0];
+                    }
+                    else if (currentNode is ConditionRuntimeNode conditionNode)
+                    {
+                        var conditionExecutor =
+                            (IBlueprintNodeExecutor<ConditionRuntimeNode>)executor;
+
+                        bool result = conditionExecutor.Execute(conditionNode, this);
+
+                        if (conditionNode.NextNodeIndex.Count > 0)
+                        {
+                            // Provisional: solo funciona si la primera conexión
+                            // corresponde al resultado que quieres seguir.
+                            if (result)
+                                nextNodeIndex = conditionNode.NextNodeIndex[0];
+                        }
+                    }
+
+                    if (nextNodeIndex < 0)
+                        break;
+
+                    if (nextNodeIndex >= node.Nodes.Count)
+                    {
+                        Debug.LogError($"Índice de nodo inválido: {nextNodeIndex}");
+                        break;
+                    }
+
+                    currentNode = node.Nodes[nextNodeIndex];
                 }
             }
         }

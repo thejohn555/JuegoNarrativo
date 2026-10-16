@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Blueprints_arquitectura_Dani_.Editor.Blueprints_arquitectura_Dani_.Editor;
 using Blueprints_arquitectura_Dani_.Editor.Nodes;
 using Blueprints_arquitectura_Dani_.Runtime;
+using NUnit.Framework;
 using Unity.GraphToolkit.Editor;
 using UnityEditor.AssetImporters;
 using UnityEngine;
@@ -17,26 +19,28 @@ namespace Blueprints_arquitectura_Dani_.Editor.Blueprints_arquitectura_Dani_.Edi
         {
             Debug.Log($"[Importer] Importando: {ctx.assetPath}");
             var graph = GraphDatabase.LoadGraphForImporter<BlueprintDirectorGraph>(ctx.assetPath);
-
+            
             if (graph == null)
             {
                 Debug.Log($"Failed to load Blueprint director graph asset: {ctx.assetPath}");
                 return;
             }
             //Seguramente haya que quitar esto xq no solo vamos a empezar desde el start
-            var startNodeModel = graph.GetNodes().OfType<StartNode>().FirstOrDefault();
-            if (startNodeModel == null)
+            //var startNodeModel = graph.GetNodes().OfType<StartNode>();
+            //Guardamos en una lista todos los nodos de start
+            List<INode> roots = graph.GetNodes().OfType<IStartNode>().Cast<INode>().ToList();
+            if (roots.Count == 0)
             {
                 Debug.LogError("[Importer] El grafo no tiene StartNode");
                 return;
             }
             var runtimeAsset = ScriptableObject.CreateInstance<BlueprintRuntimeGraph>();
-            var nodeMap = new Dictionary<INode, int>();
+            List<Dictionary<INode, int>> nodeMaps = new();
             
             //First pass: Create all runtime nodes (without conections)
-            CreateRuntimeNodes(startNodeModel,runtimeAsset, nodeMap);
+            CreateRuntimeNodes(roots,runtimeAsset, nodeMaps);
             //Second pass: Set up connections using the index;
-            SetUpConnections(startNodeModel,runtimeAsset, nodeMap);
+            SetUpConnections(roots,runtimeAsset, nodeMaps);
             
             Debug.Log($"[Importer] Terminado: {runtimeAsset.RuntimeNodes.Count} nodos");
             
@@ -44,49 +48,64 @@ namespace Blueprints_arquitectura_Dani_.Editor.Blueprints_arquitectura_Dani_.Edi
             ctx.SetMainObject(runtimeAsset);
         }
 
-        void CreateRuntimeNodes(INode startNode, BlueprintRuntimeGraph runtimeGraph, Dictionary<INode, int> nodeMap)
+        void CreateRuntimeNodes(List<INode> roots, BlueprintRuntimeGraph runtimeGraph, List<Dictionary<INode, int>> nodeMaps)
         {
             var nodesToProcess = new Queue<INode>();
-            nodesToProcess.Enqueue(startNode);
-            while (nodesToProcess.Count > 0)
+            foreach (var node in roots)
             {
-                var currentNode = nodesToProcess.Dequeue();
-                if (nodeMap.ContainsKey(currentNode)) continue;
-                var runtimeNodes = TranslateNodeModelToRuntimeNodes(currentNode);
+                RuntimeNodeGroup NodePack = new RuntimeNodeGroup();
+                Dictionary<INode, int> nodeMap = new();
+                nodesToProcess.Enqueue(node);
+                while (nodesToProcess.Count > 0)
+                {
+                    var currentNode = nodesToProcess.Dequeue();
+                    if (nodeMap.ContainsKey(currentNode)) continue;
+                    var runtimeNodes = TranslateNodeModelToRuntimeNodes(currentNode);
 
-                foreach (var runtimeNode in runtimeNodes)
-                {
-                    nodeMap[currentNode] = runtimeGraph.RuntimeNodes.Count;
-                    runtimeGraph.RuntimeNodes.Add(runtimeNode);
-                }
-                
-                //Queue up all conected nodes
-                for (int i = 0; i < currentNode.OutputPortCount; i++)
-                {
-                    var port = currentNode.GetOutputPort(i);
-                    if (port.IsConnected)
+                    foreach (var runtimeNode in runtimeNodes)
                     {
-                        nodesToProcess.Enqueue(port.FirstConnectedPort.GetNode());
+                        nodeMap[currentNode] = NodePack.Nodes.Count;
+                        NodePack.Nodes.Add(runtimeNode);
+                        //runtimeGraph.RuntimeNodes.Add(runtimeNode);
+                    }
+
+                    //Queue up all conected nodes
+                    for (int i = 0; i < currentNode.OutputPortCount; i++)
+                    {
+                        var port = currentNode.GetOutputPort(i);
+                        if (port.IsConnected)
+                        {
+                            nodesToProcess.Enqueue(port.FirstConnectedPort.GetNode());
+                        }
                     }
                 }
+                runtimeGraph.RuntimeNodes.Add(NodePack);
+                nodeMaps.Add(nodeMap);
             }
         }
 
-        void SetUpConnections(INode startNode, BlueprintRuntimeGraph runtimeGraph, Dictionary<INode, int> nodeMap)
+        void SetUpConnections(List<INode> roots, BlueprintRuntimeGraph runtimeGraph, List<Dictionary<INode, int>> nodeMaps)
         {
-            foreach (var kvp in nodeMap)
+            for(int k=0;k<roots.Count;k++)
             {
-                var editorNode = kvp.Key;
-                var runtimeIndex = kvp.Value;
-                var runtimeNode = runtimeGraph.RuntimeNodes[runtimeIndex];
-
-                for (int i = 0; i < editorNode.OutputPortCount; i++)
+                var nodeGroup = runtimeGraph.RuntimeNodes[k];
+                var map = nodeMaps[k];
+                foreach (var kvp in map)
                 {
-                    var port =editorNode.GetOutputPort(i);
+                    var editorNode = kvp.Key;
+                    var runtimeIndex = kvp.Value;
+                    var runtimeNode = nodeGroup.Nodes[runtimeIndex];
 
-                    if (port.IsConnected && nodeMap.TryGetValue(port.FirstConnectedPort.GetNode(), out int nextIndex))
+                    for (int i = 0; i < editorNode.OutputPortCount; i++)
                     {
-                        runtimeNode.NextNodeIndex.Add(nextIndex);
+                        var port = editorNode.GetOutputPort(i);
+
+                        if (port.IsConnected &&
+                            map.TryGetValue(port.FirstConnectedPort.GetNode(), out int nextIndex))
+                        {
+                            runtimeNode.NextNodeIndex.Add(nextIndex);
+                            //node.NextNodeIndex.Add(nextIndex);
+                        }
                     }
                 }
             }
@@ -100,14 +119,14 @@ namespace Blueprints_arquitectura_Dani_.Editor.Blueprints_arquitectura_Dani_.Edi
                     returnNodes.Add(new StartRuntimeNode());
                     break;
                 case ConditionNode conditionNode: //Este hay que borrarlo es solo para probar
-                    var conditionPort = conditionNode.GetInputPortByName("Transition");
-                    if (conditionPort == null)
-                    {
-                        Debug.LogError("[Importer] ConditionNode no tiene un puerto con ese nombre");
-                        returnNodes.Add(new ConditionRuntimeNode());
-                        break;
-                    }
-                    var condition = GetInputPortValue<int>(conditionPort);
+                    // var conditionPort = conditionNode.GetInputPortByName("Transition");
+                    // if (conditionPort == null)
+                    // {
+                    //     Debug.LogError("[Importer] ConditionNode no tiene un puerto con ese nombre");
+                    //     returnNodes.Add(new ConditionRuntimeNode());
+                    //     break;
+                    // }
+                    // var condition = GetInputPortValue<int>(conditionPort);
                     returnNodes.Add(new ConditionRuntimeNode());
                     break;
                 default:
