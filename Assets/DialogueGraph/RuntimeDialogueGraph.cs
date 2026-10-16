@@ -13,6 +13,7 @@ public class RuntimeDialogueNode
 {
     public string NodeID;
     public string DialogueText;
+    public string SpeakerName;
     public List<ChoiceData> Choices = new List<ChoiceData>();
     public string NextNodeID;
 }

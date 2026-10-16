@@ -62,6 +62,7 @@ namespace DialogueGraph.Editor
             Dictionary<INode, string> nodeIDMap)
         {
             runtimeNode.DialogueText = GetPortValue<string>(node.GetInputPortByName(PortNames.PortDialogue));
+            runtimeNode.SpeakerName = GetPortValue<string>(node.GetInputPortByName(PortNames.PortSpeaker));
 
             var nextNodePort = node.GetOutputPortByName(PortNames.PortOutput)?.FirstConnectedPort;
             if (nextNodePort != null)
@@ -73,6 +74,7 @@ namespace DialogueGraph.Editor
         private void ProccessChoiceNode(ChoiceNode node, RuntimeDialogueNode runtimeNode, Dictionary<INode, string> nodeIDMap)
         {
             runtimeNode.DialogueText = GetPortValue<string>(node.GetInputPortByName(PortNames.PortDialogue));
+            runtimeNode.SpeakerName = GetPortValue<string>(node.GetInputPortByName(PortNames.PortSpeaker));
 
             var choiceOutputNodes = node.GetOutputPorts().Where(p => p.Name.StartsWith(PortNames.PortChoiceOutput));
 
