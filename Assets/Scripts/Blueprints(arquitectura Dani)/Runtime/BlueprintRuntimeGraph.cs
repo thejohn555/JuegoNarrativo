@@ -13,5 +13,7 @@ namespace Blueprints_arquitectura_Dani_.Runtime
     public class BlueprintRuntimeGraph : ScriptableObject
     {
         public List<RuntimeNodeGroup> RuntimeNodes = new();
+        public string sceneName;
     }
+    
 }
