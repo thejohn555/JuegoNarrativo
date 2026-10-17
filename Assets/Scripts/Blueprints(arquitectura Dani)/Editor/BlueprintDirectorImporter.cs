@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using Blueprints_arquitectura_Dani_.Editor.Blueprints_arquitectura_Dani_.Editor;
+using Blueprints_arquitectura_Dani_.Editor.Blueprints_arquitectura_Dani_.Editor.Nodes;
 using Blueprints_arquitectura_Dani_.Editor.Nodes;
 using Blueprints_arquitectura_Dani_.Runtime;
 using NUnit.Framework;
 using Unity.GraphToolkit.Editor;
+using UnityEditor;
 using UnityEditor.AssetImporters;
 using UnityEngine;
 
@@ -17,7 +19,7 @@ namespace Blueprints_arquitectura_Dani_.Editor.Blueprints_arquitectura_Dani_.Edi
         
         public override void OnImportAsset(AssetImportContext ctx)
         {
-            Debug.Log($"[Importer] Importando: {ctx.assetPath}");
+            //Debug.Log($"[Importer] Importando: {ctx.assetPath}");
             var graph = GraphDatabase.LoadGraphForImporter<BlueprintDirectorGraph>(ctx.assetPath);
             
             if (graph == null)
@@ -29,12 +31,32 @@ namespace Blueprints_arquitectura_Dani_.Editor.Blueprints_arquitectura_Dani_.Edi
             //var startNodeModel = graph.GetNodes().OfType<StartNode>();
             //Guardamos en una lista todos los nodos de start
             List<INode> roots = graph.GetNodes().OfType<IStartNode>().Cast<INode>().ToList();
+            
             if (roots.Count == 0)
             {
                 Debug.LogError("[Importer] El grafo no tiene StartNode");
                 return;
             }
+            var levelNode = graph.GetNodes().OfType<LevelNode>().FirstOrDefault();
+            string levelName = null;
+            if (levelNode == null)
+            {
+                Debug.LogError("[Importer] El grafo no tiene LevelNode");
+                return;
+            }
+            else
+            {
+
+                levelNode.GetNodeOptionByName("GraphLevel")?.TryGetValue(out levelName);
+                if (levelName == null || levelName.Length == 0)
+                {
+                    Debug.LogError("[Importer] El LevelNode no tien un nivel asignado");
+                    return;
+                }
+            }
+            
             var runtimeAsset = ScriptableObject.CreateInstance<BlueprintRuntimeGraph>();
+            runtimeAsset.sceneName = levelName;
             List<Dictionary<INode, int>> nodeMaps = new();
             
             //First pass: Create all runtime nodes (without conections)
@@ -42,10 +64,11 @@ namespace Blueprints_arquitectura_Dani_.Editor.Blueprints_arquitectura_Dani_.Edi
             //Second pass: Set up connections using the index;
             SetUpConnections(roots,runtimeAsset, nodeMaps);
             
-            Debug.Log($"[Importer] Terminado: {runtimeAsset.RuntimeNodes.Count} nodos");
+            
             
             ctx.AddObjectToAsset("RunTimeAsset", runtimeAsset);
             ctx.SetMainObject(runtimeAsset);
+            Debug.Log("\"<color=green>[Importer] Todo correcto</color>\"");
         }
 
         void CreateRuntimeNodes(List<INode> roots, BlueprintRuntimeGraph runtimeGraph, List<Dictionary<INode, int>> nodeMaps)
