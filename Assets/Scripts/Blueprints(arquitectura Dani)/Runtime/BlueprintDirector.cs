@@ -11,6 +11,7 @@ namespace Blueprints_arquitectura_Dani_.Runtime
         [SerializeField]private BlueprintRuntimeGraph RuntimeGraph;
         private Dictionary<System.Type, object> executors;
 
+        public BlueprintDirector Instance { get; private set; }
         private void Awake()
         {
             //Inicializamos el dicionario con el tipo y el ejecutor
@@ -19,6 +20,14 @@ namespace Blueprints_arquitectura_Dani_.Runtime
                 {typeof(StartRuntimeNode),new StartNodeExecutor()},
                 {typeof(ConditionRuntimeNode),new ConditionNodeExecutor()},
             };
+            if (Instance == null)
+            {
+                Instance = this;
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
 
         private void Start()
