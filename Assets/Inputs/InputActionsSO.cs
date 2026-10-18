@@ -1,3 +1,4 @@
+using Assets.Scripts.EventBuses;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -22,5 +23,11 @@ public class InputActionsSO : ScriptableObject,NewInputActions.IGamePlayActions
     public void OnLeftMouse(InputAction.CallbackContext context)
     {
         EventBus.Instance.Publish(new OnLeftMouseClick(context));
+    }
+
+    public void OnSkipDialogue(InputAction.CallbackContext context)
+    {
+        if (context.started)
+            EventBus.Instance.Publish(new OnSkipDialogueEvent(context));
     }
 }
