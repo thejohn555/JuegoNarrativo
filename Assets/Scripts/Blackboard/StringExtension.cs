@@ -4,7 +4,7 @@ public static class StringExtension
     public static int ComputerFNV1aHash(this string str)
     {
         uint hash = 2166136261;
-        foreach(char c in str)
+        foreach (char c in str)
         {
             hash = (hash ^ c) * 16777619;
         }
