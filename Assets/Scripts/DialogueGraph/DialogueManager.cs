@@ -2,23 +2,10 @@ using Assets.Scripts.EventBuses;
 using System;
 using UnityEngine;
 
-public class DialogueManager : MonoBehaviour
+public class DialogueManager : Singleton<DialogueManager>
 {
-    public static DialogueManager Instance { get; private set; } 
-
     private RuntimeDialogueGraph currentGraph;
     private RuntimeDialogueNode currentNode;
-
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-            Destroy(gameObject);
-    }
 
     public void StartDialogue(RuntimeDialogueGraph graph)
     {

@@ -30,13 +30,6 @@ public class InputActionsSO : ScriptableObject, NewInputActions.IGamePlayActions
         }
     }
 
-    //[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-    //private static void AutoInitialize()
-    //{
-    //    //carga el ScriptableObject desde la carpeta Resources al arrancar el juego
-    //    Resources.Load<InputActionsSO>("InputActionsSO");
-    //}
-
     private void SwitchMap(InputActionMap newMap)
     {
         currentMap?.Disable();
@@ -61,12 +54,9 @@ public class InputActionsSO : ScriptableObject, NewInputActions.IGamePlayActions
     }
 
     public void OnNextDialogue(InputAction.CallbackContext context)
-    {
-        Debug.Log($"[InputActionsSO] Callback OnNextDialogue detectada. Fase: {context.phase}");
-
+    { 
         if (context.performed)
         {
-            Debug.Log("[InputActionsSO] ¡Publicando OnSkipDialogueEvent!");
             EventBus.Instance.Publish(new OnSkipDialogueEvent());
         }
     }
