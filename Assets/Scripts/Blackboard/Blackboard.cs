@@ -1,14 +1,13 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace BlackboardSystem
 {
     [Serializable]
     public readonly struct BlackboardKey : IEquatable<BlackboardKey>
     {
-        readonly string name;
-        readonly int hashedKey;
+        private readonly string name;
+        private readonly int hashedKey;
 
         public BlackboardKey(string name)
         {
@@ -50,8 +49,8 @@ namespace BlackboardSystem
     [Serializable]
     public class Blackboard
     {
-        Dictionary<string, BlackboardKey> keyRegistry = new();
-        Dictionary<BlackboardKey, object> entries = new();
+        private Dictionary<string, BlackboardKey> keyRegistry = new();
+        private Dictionary<BlackboardKey, object> entries = new();
 
         public BlackboardKey GetOrRegisterKey(string keyName)
         {
@@ -62,7 +61,6 @@ namespace BlackboardSystem
             }
 
             return key;
-
         }
     }
 }
