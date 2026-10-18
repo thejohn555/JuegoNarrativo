@@ -52,6 +52,8 @@ namespace DialogueGraph.Editor
                         break;
 
                 }
+
+                runtimeGraph.AllNodes.Add(runtimeNode);
             }
 
             ctx.AddObjectToAsset("RuntimeData", runtimeGraph);

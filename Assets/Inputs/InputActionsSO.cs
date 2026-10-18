@@ -6,13 +6,19 @@ using UnityEngine.InputSystem;
 public class InputActionsSO : ScriptableObject, NewInputActions.IGamePlayActions, NewInputActions.IUIActions
 {
     private NewInputActions inputActions;
+    private InputActionMap currentMap;
     private void OnEnable()
     {
         inputActions = new NewInputActions();
         inputActions.Enable();
-        SwitchToGameplayMapping();
+
+        inputActions.GamePlay.SetCallbacks(this);
+        inputActions.UI.SetCallbacks(this);
+
         EventBus.Instance.Subscribe<OnDialogueStartedEvent>(OnDialogueStarted);
         EventBus.Instance.Subscribe<OnDialogueEndedEvent>(OnDialogueEnded);
+
+        SwitchMap(inputActions.GamePlay);
     }
 
     private void OnDisable()
@@ -24,27 +30,22 @@ public class InputActionsSO : ScriptableObject, NewInputActions.IGamePlayActions
         }
     }
 
-    private void SwitchToGameplayMapping()
+    private void SwitchMap(InputActionMap newMap)
     {
-        inputActions.GamePlay.Enable();
-        //inputActions.Interacting.Disable();
-        inputActions.GamePlay.AddCallbacks(this);
-    }
-    
-    private void SwitchToUIMapping()
-    {
-        inputActions.UI.Enable();
-        inputActions.UI.AddCallbacks(this);
+        currentMap?.Disable();
+        currentMap = newMap;
+        currentMap?.Enable();
+        Debug.Log($"Mapa cambiado, actual: {currentMap}");
     }
 
     private void OnDialogueStarted(OnDialogueStartedEvent ev)
     {
-        SwitchToUIMapping();
+        SwitchMap(inputActions.UI);
     }
 
     private void OnDialogueEnded(OnDialogueEndedEvent ev)
     {
-        SwitchToGameplayMapping();
+        SwitchMap(inputActions.GamePlay);
     }
 
     public void OnLeftMouse(InputAction.CallbackContext context)
@@ -53,8 +54,10 @@ public class InputActionsSO : ScriptableObject, NewInputActions.IGamePlayActions
     }
 
     public void OnNextDialogue(InputAction.CallbackContext context)
-    {
-        if (context.started)
+    { 
+        if (context.performed)
+        {
             EventBus.Instance.Publish(new OnSkipDialogueEvent());
+        }
     }
 }
