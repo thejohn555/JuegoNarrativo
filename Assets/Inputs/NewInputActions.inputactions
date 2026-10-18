@@ -15,16 +15,6 @@
                     "interactions": "",
                     "initialStateCheck": false,
                     "priority": 0
-                },
-                {
-                    "name": "SkipDialogue",
-                    "type": "Button",
-                    "id": "2933bec8-59c2-423e-8e36-3319525573d6",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false,
-                    "priority": 0
                 }
             ],
             "bindings": [
@@ -38,15 +28,33 @@
                     "action": "Left Mouse",
                     "isComposite": false,
                     "isPartOfComposite": false
-                },
+                }
+            ]
+        },
+        {
+            "name": "UI",
+            "id": "c7ff50c8-eedf-4be2-8f6d-6707a5b1d693",
+            "actions": [
+                {
+                    "name": "Next Dialogue",
+                    "type": "Button",
+                    "id": "06d1e109-0e29-4228-8b39-ac7b73366723",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false,
+                    "priority": 0
+                }
+            ],
+            "bindings": [
                 {
                     "name": "",
-                    "id": "104631b3-7a76-464c-a5bb-c6ccf00fb0eb",
-                    "path": "<Keyboard>/space",
+                    "id": "73e54607-eeff-4947-b426-2a8e8598ea74",
+                    "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "SkipDialogue",
+                    "action": "Next Dialogue",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

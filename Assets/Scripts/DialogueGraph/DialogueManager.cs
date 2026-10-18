@@ -1,12 +1,10 @@
+using Assets.Scripts.EventBuses;
 using System;
 using UnityEngine;
 
 public class DialogueManager : MonoBehaviour
 {
-    public static DialogueManager Instance { get; private set; }
-
-    public event Action<RuntimeDialogueNode> OnNodeDisplayed;
-    public event Action OnDialogueEnded;
+    public static DialogueManager Instance { get; private set; } 
 
     private RuntimeDialogueGraph currentGraph;
     private RuntimeDialogueNode currentNode;
@@ -27,6 +25,7 @@ public class DialogueManager : MonoBehaviour
         if (graph == null) return;
 
         currentGraph = graph;
+        EventBus.Instance.Publish(new OnDialogueStartedEvent());
         DisplayNode(graph.EntryNodeID);
     }
 
@@ -40,7 +39,7 @@ public class DialogueManager : MonoBehaviour
             return;
         }
 
-        OnNodeDisplayed?.Invoke(currentNode);
+        EventBus.Instance.Publish(new OnNodeDisplayedEvent(currentNode));
     }
 
     public void AdvanceToNextNode()
@@ -61,6 +60,6 @@ public class DialogueManager : MonoBehaviour
     {
         currentGraph = null;
         currentNode = null;
-        OnDialogueEnded?.Invoke();
+        EventBus.Instance.Publish(new OnDialogueEndedEvent());
     }
 }
