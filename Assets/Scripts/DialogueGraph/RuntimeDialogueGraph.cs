@@ -6,6 +6,11 @@ public class RuntimeDialogueGraph : ScriptableObject
 {
     public string EntryNodeID;
     public List<RuntimeDialogueNode> AllNodes = new List<RuntimeDialogueNode>();
+
+    public RuntimeDialogueNode GetNodeByID(string id)
+    {
+        return AllNodes.Find(n => n.NodeID == id);
+    }
 }
 
 [Serializable]
