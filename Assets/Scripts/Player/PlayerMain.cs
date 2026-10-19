@@ -7,15 +7,15 @@ namespace Player
     {
         [SerializeField] private InputActionsSO inputReader;
         [SerializeField] public LayerMask whatIsClickable;
-        
-        public PlayerMovementSystem playerMovementSystem;
-    
-        public Camera cam;
-    
+
+        public PlayerMovementSystem MovementSystem { get; private set; }
+
+        public Camera Cam { get; private set; }
+
         private void Awake()
         {
-            cam = Camera.main;
-            playerMovementSystem = GetComponent<PlayerMovementSystem>();
+            Cam = Camera.main;
+            MovementSystem = GetComponent<PlayerMovementSystem>();
         }
     }
 }

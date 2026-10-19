@@ -50,7 +50,10 @@ public class InputActionsSO : ScriptableObject, NewInputActions.IGamePlayActions
 
     public void OnLeftMouse(InputAction.CallbackContext context)
     {
-        EventBus.Instance.Publish(new OnLeftMouseClick(context));
+        if (context.started)
+        {
+            EventBus.Instance.Publish(new OnLeftMouseClick(context));
+        }
     }
 
     public void OnNextDialogue(InputAction.CallbackContext context)

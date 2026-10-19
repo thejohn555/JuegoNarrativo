@@ -7,8 +7,9 @@ namespace Player
 {
     public class PlayerInteractSystem : PlayerSystem
     {
-        private Interactive currentInteractuable;
+        [SerializeField]private float DefaultStoppingDistance;
         private float currentStoppingDistance;
+        private Interactive currentInteractuable;
         private Vector3 currentDestination;
         
         private void OnEnable()
@@ -23,8 +24,14 @@ namespace Player
         
         private void Clicked(OnLeftMouseClick ctx)
         {
-            Ray ray = main.cam.ScreenPointToRay(Mouse.current.position.ReadValue());
-            if(!Physics.Raycast(ray, out RaycastHit hit,main.whatIsClickable))return;
+            
+            Vector2  mousePosition  = main.Cam.ScreenToWorldPoint(
+                Mouse.current.position.ReadValue());
+
+            RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero, 
+                Mathf.Infinity, main.whatIsClickable);
+            
+            if(!hit.collider)return;
             
             if (hit.collider.TryGetComponent(out Interactive newInteractuable))
             {
@@ -34,12 +41,13 @@ namespace Player
             }
             else
             {
-                currentStoppingDistance = 0f;
+                currentStoppingDistance = DefaultStoppingDistance;
                 StopAllCoroutines();
                 currentInteractuable = null;
                 currentDestination = hit.point;
-                main.playerMovementSystem.SetNewDestination(currentDestination,currentStoppingDistance);
+                main.MovementSystem.SetNewDestination(currentDestination,currentStoppingDistance);
             }
+            
         }
         
         private IEnumerator TrackingInteractuable()
@@ -47,10 +55,11 @@ namespace Player
             do
             {
                 currentDestination = currentInteractuable.transform.position;
-                main.playerMovementSystem.SetNewDestination(currentDestination,currentStoppingDistance);
+                main.MovementSystem.SetNewDestination(currentDestination,currentStoppingDistance);
                 yield return new WaitForSeconds(0.2f);
-            } while (!main.playerMovementSystem.ReacheDestination());
+            } while (!main.MovementSystem.ReacheDestination());
             currentInteractuable.Interact(gameObject);
         }
+        
     }
 }
