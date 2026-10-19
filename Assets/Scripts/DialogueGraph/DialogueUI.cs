@@ -1,4 +1,5 @@
 using Assets.Scripts.EventBuses;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -8,6 +9,8 @@ public class DialogueUI : MonoBehaviour
     [SerializeField] private TMP_Text speakerText;
     [SerializeField] private TMP_Text dialogueText;
     private bool isWritingText;
+    private string currentFullText;
+    private Coroutine typeWritingCoroutine;
 
     private void OnEnable()
     {
@@ -38,8 +41,11 @@ public class DialogueUI : MonoBehaviour
     private void NextNode(OnSkipDialogueEvent ev)
     {
         if (isWritingText)
-        {
+        { 
             //completar animacion del tiron
+            if (typeWritingCoroutine != null) StopCoroutine(typeWritingCoroutine);
+            dialogueText.SetText(currentFullText);
+            isWritingText = false;
         }
         else
         {
@@ -50,7 +56,26 @@ public class DialogueUI : MonoBehaviour
 
     private void OnNodeDisplayed(OnNodeDisplayedEvent ev)
     {
+        if (typeWritingCoroutine != null) StopCoroutine(typeWritingCoroutine);
         speakerText.text = ev.Node.SpeakerName;
-        dialogueText.text = ev.Node.DialogueText;
+        typeWritingCoroutine = StartCoroutine(TypeWrittingText(ev.Node.DialogueText, ev.Node.TextSpeed));
+    }
+
+    private IEnumerator TypeWrittingText(string fullText, float lettersPerSecond)
+    {
+        // iterar cuantas letras por segundo hay
+        isWritingText = true;
+        currentFullText = fullText;
+        dialogueText.SetText("");
+
+        float delay = 1 / lettersPerSecond;
+
+        foreach (char letter in fullText)
+        {
+            dialogueText.text += letter;
+            yield return new WaitForSeconds(delay);
+        }
+
+        isWritingText = false;
     }
 }

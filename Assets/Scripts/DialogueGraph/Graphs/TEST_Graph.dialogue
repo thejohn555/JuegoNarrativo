@@ -202,9 +202,11 @@ MonoBehaviour:
           m_KeyList:
           - Speaker
           - Dialogue Text
+          - Text Speed
           m_ValueList:
           - rid: 1528751485592797268
           - rid: 1528751485592797269
+          - rid: 1528751508500774988
         m_InputPortInfos:
           expandedPortsById:
             m_KeyList: []
@@ -283,9 +285,11 @@ MonoBehaviour:
           m_KeyList:
           - Speaker
           - Dialogue Text
+          - Text Speed
           m_ValueList:
           - rid: 1528751485592797273
           - rid: 1528751485592797274
+          - rid: 1528751508500774989
         m_InputPortInfos:
           expandedPortsById:
             m_KeyList: []
@@ -401,9 +405,11 @@ MonoBehaviour:
           m_KeyList:
           - Speaker
           - Dialogue Text
+          - Text Speed
           m_ValueList:
           - rid: 1528751490782724174
           - rid: 1528751490782724175
+          - rid: 1528751508500774990
         m_InputPortInfos:
           expandedPortsById:
             m_KeyList: []
@@ -458,7 +464,7 @@ MonoBehaviour:
     - rid: 1528751490782724175
       type: {class: 'Constant`1[[System.String, mscorlib]]', ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
       data:
-        m_Value: Miauuuuuu
+        m_Value: Miauuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu
     - rid: 1528751490782724176
       type: {class: DialogueNode, ns: DialogueGraph.Editor, asm: Assembly-CSharp-Editor}
       data: 
@@ -494,3 +500,15 @@ MonoBehaviour:
           m_PortDirection: 1
           m_PortOrientation: 0
           m_Title: In
+    - rid: 1528751508500774988
+      type: {class: 'Constant`1[[System.Single, mscorlib]]', ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
+      data:
+        m_Value: 5
+    - rid: 1528751508500774989
+      type: {class: 'Constant`1[[System.Single, mscorlib]]', ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
+      data:
+        m_Value: 10
+    - rid: 1528751508500774990
+      type: {class: 'Constant`1[[System.Single, mscorlib]]', ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
+      data:
+        m_Value: 30

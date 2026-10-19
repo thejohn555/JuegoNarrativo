@@ -65,6 +65,8 @@ namespace DialogueGraph.Editor
         {
             runtimeNode.DialogueText = GetPortValue<string>(node.GetInputPortByName(PortNames.PortDialogue));
             runtimeNode.SpeakerName = GetPortValue<string>(node.GetInputPortByName(PortNames.PortSpeaker));
+            float portSpeed = GetPortValue<float>(node.GetInputPortByName("Text Speed"));
+            runtimeNode.TextSpeed = portSpeed > 0 ? portSpeed : runtimeNode.TextSpeed;
 
             var nextNodePort = node.GetOutputPortByName(PortNames.PortOutput)?.FirstConnectedPort;
             if (nextNodePort != null)
@@ -77,6 +79,8 @@ namespace DialogueGraph.Editor
         {
             runtimeNode.DialogueText = GetPortValue<string>(node.GetInputPortByName(PortNames.PortDialogue));
             runtimeNode.SpeakerName = GetPortValue<string>(node.GetInputPortByName(PortNames.PortSpeaker));
+            float portSpeed = GetPortValue<float>(node.GetInputPortByName("Text Speed"));
+            runtimeNode.TextSpeed = portSpeed > 0 ? portSpeed : runtimeNode.TextSpeed;
 
             var choiceOutputNodes = node.GetOutputPorts().Where(p => p.Name.StartsWith(PortNames.PortChoiceOutput));
 

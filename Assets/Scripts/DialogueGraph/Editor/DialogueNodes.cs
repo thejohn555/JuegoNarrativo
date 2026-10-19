@@ -41,6 +41,7 @@ namespace DialogueGraph.Editor
 
             context.AddInputPort<string>(PortNames.PortSpeaker).Build();
             context.AddInputPort<string>(PortNames.PortDialogue).Build();
+            context.AddInputPort<float>("Text Speed").Build();
         }
     }
 
@@ -54,6 +55,7 @@ namespace DialogueGraph.Editor
 
             context.AddInputPort<string>(PortNames.PortSpeaker).Build();
             context.AddInputPort<string>(PortNames.PortDialogue).Build();
+            context.AddInputPort<float>("Text Speed").Build();
 
             var option = GetNodeOptionByName(optionID);
             option.TryGetValue(out int portCount);

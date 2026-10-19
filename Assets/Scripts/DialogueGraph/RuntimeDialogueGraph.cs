@@ -16,9 +16,11 @@ public class RuntimeDialogueGraph : ScriptableObject
 [Serializable]
 public class RuntimeDialogueNode
 {
+    public const float DefaultTextSpeed = 25f;
     public string NodeID;
     public string DialogueText;
     public string SpeakerName;
+    public float TextSpeed = DefaultTextSpeed;
     public List<ChoiceData> Choices = new List<ChoiceData>();
     public string NextNodeID;
 }
