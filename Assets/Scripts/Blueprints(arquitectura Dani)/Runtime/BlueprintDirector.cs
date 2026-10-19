@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Blueprints_arquitectura_Dani_.Runtime
 {
     public class BlueprintDirector : MonoBehaviour
     {
         [Header("Graph")]
-        public BlueprintRuntimeGraph RuntimeGraph;
-
+        [SerializeField]private BlueprintRuntimeGraph RuntimeGraph;
         private Dictionary<System.Type, object> executors;
 
+        public BlueprintDirector Instance { get; private set; }
         private void Awake()
         {
             //Inicializamos el dicionario con el tipo y el ejecutor
@@ -19,16 +20,30 @@ namespace Blueprints_arquitectura_Dani_.Runtime
                 {typeof(StartRuntimeNode),new StartNodeExecutor()},
                 {typeof(ConditionRuntimeNode),new ConditionNodeExecutor()},
             };
+            if (Instance == null)
+            {
+                Instance = this;
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
 
         private void Start()
         {
+            
             if (RuntimeGraph == null)
             {
-                Debug.LogError("No Graph assigned to StartRuntimeNode");
+                Debug.LogError("No hay ningun grafo asignado");
                 return;
             }
-
+            string actualevel = SceneManager.GetActiveScene().name;
+            if (actualevel != RuntimeGraph.sceneName)
+            {
+                Debug.LogError("El nivel asignado y el actual son distintos");
+                return;
+            }
             foreach (var node in RuntimeGraph.RuntimeNodes)
             {
                 if (node.Nodes.Count == 0)

@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using Blueprints_arquitectura_Dani_.Editor.Blueprints_arquitectura_Dani_.Editor;
+using Blueprints_arquitectura_Dani_.Editor.Blueprints_arquitectura_Dani_.Editor.Nodes;
 using Blueprints_arquitectura_Dani_.Editor.Nodes;
 using Blueprints_arquitectura_Dani_.Runtime;
 using NUnit.Framework;
 using Unity.GraphToolkit.Editor;
+using UnityEditor;
 using UnityEditor.AssetImporters;
 using UnityEngine;
 
@@ -17,7 +19,7 @@ namespace Blueprints_arquitectura_Dani_.Editor.Blueprints_arquitectura_Dani_.Edi
         
         public override void OnImportAsset(AssetImportContext ctx)
         {
-            Debug.Log($"[Importer] Importando: {ctx.assetPath}");
+            //Debug.Log($"[Importer] Importando: {ctx.assetPath}");
             var graph = GraphDatabase.LoadGraphForImporter<BlueprintDirectorGraph>(ctx.assetPath);
             
             if (graph == null)
@@ -29,12 +31,32 @@ namespace Blueprints_arquitectura_Dani_.Editor.Blueprints_arquitectura_Dani_.Edi
             //var startNodeModel = graph.GetNodes().OfType<StartNode>();
             //Guardamos en una lista todos los nodos de start
             List<INode> roots = graph.GetNodes().OfType<IStartNode>().Cast<INode>().ToList();
+            
             if (roots.Count == 0)
             {
                 Debug.LogError("[Importer] El grafo no tiene StartNode");
                 return;
             }
+            var levelNode = graph.GetNodes().OfType<LevelNode>().FirstOrDefault();
+            string levelName = null;
+            if (levelNode == null)
+            {
+                Debug.LogError("[Importer] El grafo no tiene LevelNode");
+                return;
+            }
+            else
+            {
+
+                levelNode.GetNodeOptionByName("GraphLevel")?.TryGetValue(out levelName);
+                if (levelName == null || levelName.Length == 0)
+                {
+                    Debug.LogError("[Importer] El LevelNode no tien un nivel asignado");
+                    return;
+                }
+            }
+            
             var runtimeAsset = ScriptableObject.CreateInstance<BlueprintRuntimeGraph>();
+            runtimeAsset.sceneName = levelName;
             List<Dictionary<INode, int>> nodeMaps = new();
             
             //First pass: Create all runtime nodes (without conections)
@@ -42,10 +64,11 @@ namespace Blueprints_arquitectura_Dani_.Editor.Blueprints_arquitectura_Dani_.Edi
             //Second pass: Set up connections using the index;
             SetUpConnections(roots,runtimeAsset, nodeMaps);
             
-            Debug.Log($"[Importer] Terminado: {runtimeAsset.RuntimeNodes.Count} nodos");
+            
             
             ctx.AddObjectToAsset("RunTimeAsset", runtimeAsset);
             ctx.SetMainObject(runtimeAsset);
+            Debug.Log("\"<color=green>[Importer] Todo correcto</color>\"");
         }
 
         void CreateRuntimeNodes(List<INode> roots, BlueprintRuntimeGraph runtimeGraph, List<Dictionary<INode, int>> nodeMaps)
@@ -112,28 +135,10 @@ namespace Blueprints_arquitectura_Dani_.Editor.Blueprints_arquitectura_Dani_.Edi
         }
         static List<RuntimeNode> TranslateNodeModelToRuntimeNodes(INode nodeModel)
         {
-            var returnNodes = new List<RuntimeNode>();
-            switch (nodeModel) //Hya que ir añadiendo todos los tipos de nodos que creemos
-            {
-                case StartNode startNode:
-                    returnNodes.Add(new StartRuntimeNode());
-                    break;
-                case ConditionNode conditionNode: //Este hay que borrarlo es solo para probar
-                    // var conditionPort = conditionNode.GetInputPortByName("Transition");
-                    // if (conditionPort == null)
-                    // {
-                    //     Debug.LogError("[Importer] ConditionNode no tiene un puerto con ese nombre");
-                    //     returnNodes.Add(new ConditionRuntimeNode());
-                    //     break;
-                    // }
-                    // var condition = GetInputPortValue<int>(conditionPort);
-                    returnNodes.Add(new ConditionRuntimeNode());
-                    break;
-                default:
-                    throw new ArgumentException($"Unsupported node type: {nodeModel.GetType()}");
-            }
+            List<RuntimeNode> retornedNodes = new List<RuntimeNode>();
+            NodeTranslator.AnalizeNodes(nodeModel, retornedNodes);
+            return retornedNodes;
 
-            return returnNodes;
         }
         static T GetInputPortValue<T>(IPort port)
         {
