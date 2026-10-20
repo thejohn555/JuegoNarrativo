@@ -12,6 +12,7 @@ public class DialogueManager : Singleton<DialogueManager>
         if (graph == null) return;
 
         currentGraph = graph;
+        //Felipe
         EventBus.Instance.Publish(new OnDialogueStartedEvent());
         DisplayNode(graph.EntryNodeID);
     }
@@ -26,6 +27,7 @@ public class DialogueManager : Singleton<DialogueManager>
             return;
         }
 
+        //Felipe
         EventBus.Instance.Publish(new OnNodeDisplayedEvent(currentNode));
     }
 
@@ -47,6 +49,7 @@ public class DialogueManager : Singleton<DialogueManager>
     {
         currentGraph = null;
         currentNode = null;
+        //Felipe
         EventBus.Instance.Publish(new OnDialogueEndedEvent());
     }
 }

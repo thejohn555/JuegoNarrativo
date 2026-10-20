@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 [CreateAssetMenu(fileName = "InputActionsSO", menuName = "Scriptable Objects/InputActionsSO")]
 public class InputActionsSO : ScriptableObject, NewInputActions.IGamePlayActions, NewInputActions.IUIActions
 {
+    [field: SerializeField] public EventBusSO EventBus { get; private set; }
     private NewInputActions inputActions;
     private InputActionMap currentMap;
     private void OnEnable()
@@ -15,18 +16,18 @@ public class InputActionsSO : ScriptableObject, NewInputActions.IGamePlayActions
         inputActions.GamePlay.SetCallbacks(this);
         inputActions.UI.SetCallbacks(this);
 
-        EventBus.Instance.Subscribe<OnDialogueStartedEvent>(OnDialogueStarted);
-        EventBus.Instance.Subscribe<OnDialogueEndedEvent>(OnDialogueEnded);
+        EventBus.Subscribe<OnDialogueStartedEvent>(OnDialogueStarted);
+        EventBus.Subscribe<OnDialogueEndedEvent>(OnDialogueEnded);
 
         SwitchMap(inputActions.GamePlay);
     }
 
     private void OnDisable()
     {
-        if (EventBus.Instance != null)
+        if (EventBus != null)
         {
-            EventBus.Instance.UnSubscribe<OnDialogueStartedEvent>(OnDialogueStarted);
-            EventBus.Instance.UnSubscribe<OnDialogueEndedEvent>(OnDialogueEnded);
+            EventBus.UnSubscribe<OnDialogueStartedEvent>(OnDialogueStarted);
+            EventBus.UnSubscribe<OnDialogueEndedEvent>(OnDialogueEnded);
         }
     }
 
@@ -52,7 +53,7 @@ public class InputActionsSO : ScriptableObject, NewInputActions.IGamePlayActions
     {
         if (context.started)
         {
-            EventBus.Instance.Publish(new OnLeftMouseClick(context));
+            EventBus.Publish(new OnLeftMouseClick(context));
         }
     }
 
@@ -60,7 +61,7 @@ public class InputActionsSO : ScriptableObject, NewInputActions.IGamePlayActions
     { 
         if (context.performed)
         {
-            EventBus.Instance.Publish(new OnSkipDialogueEvent());
+            EventBus.Publish(new OnSkipDialogueEvent());
         }
     }
 }

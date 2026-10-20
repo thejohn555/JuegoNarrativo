@@ -14,18 +14,20 @@ public class DialogueUI : MonoBehaviour
 
     private void OnEnable()
     {
+        //Felipe
         EventBus.Instance.Subscribe<OnNodeDisplayedEvent>(OnNodeDisplayed);
-        EventBus.Instance.Subscribe<OnDialogueStartedEvent>(ShowPanel);
-        EventBus.Instance.Subscribe<OnDialogueEndedEvent>(HidePanel);
-        EventBus.Instance.Subscribe<OnSkipDialogueEvent>(NextNode);
+         EventBus.Instance.Subscribe<OnDialogueStartedEvent>(ShowPanel);
+         EventBus.Instance.Subscribe<OnDialogueEndedEvent>(HidePanel);
+         EventBus.Instance.Subscribe<OnSkipDialogueEvent>(NextNode);
     }
 
     private void OnDisable()
     {
+        //Felipe
         EventBus.Instance.UnSubscribe<OnNodeDisplayedEvent>(OnNodeDisplayed);
-        EventBus.Instance.UnSubscribe<OnDialogueStartedEvent>(ShowPanel);
-        EventBus.Instance.UnSubscribe<OnDialogueEndedEvent>(HidePanel);
-        EventBus.Instance.UnSubscribe<OnSkipDialogueEvent>(NextNode);
+         EventBus.Instance.UnSubscribe<OnDialogueStartedEvent>(ShowPanel);
+         EventBus.Instance.UnSubscribe<OnDialogueEndedEvent>(HidePanel);
+         EventBus.Instance.UnSubscribe<OnSkipDialogueEvent>(NextNode);
     }
 
     private void ShowPanel(OnDialogueStartedEvent ev)

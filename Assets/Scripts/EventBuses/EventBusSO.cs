@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 public interface IEvent
 { }
 
-public class EventBus:Singleton<EventBus>
+[CreateAssetMenu(fileName = "EventBusSO", menuName = "Scriptable Objects/EventBusSO")]
+public class EventBusSO : ScriptableObject
 {
     private readonly Dictionary<Type, List<Delegate>> subs = new();
 
