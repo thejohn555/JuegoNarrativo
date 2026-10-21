@@ -8,6 +8,7 @@ public class DialogueUI : MonoBehaviour
     [SerializeField] private GameObject dialoguePanel;
     [SerializeField] private TMP_Text speakerText;
     [SerializeField] private TMP_Text dialogueText;
+    [SerializeField] private EventBusSO EventBus;
     private bool isWritingText;
     private string currentFullText;
     private Coroutine typeWritingCoroutine;
@@ -15,19 +16,20 @@ public class DialogueUI : MonoBehaviour
     private void OnEnable()
     {
         //Felipe
-        EventBus.Instance.Subscribe<OnNodeDisplayedEvent>(OnNodeDisplayed);
-         EventBus.Instance.Subscribe<OnDialogueStartedEvent>(ShowPanel);
-         EventBus.Instance.Subscribe<OnDialogueEndedEvent>(HidePanel);
-         EventBus.Instance.Subscribe<OnSkipDialogueEvent>(NextNode);
+        
+         EventBus.Subscribe<OnNodeDisplayedEvent>(OnNodeDisplayed);
+         EventBus.Subscribe<OnDialogueStartedEvent>(ShowPanel);
+         EventBus.Subscribe<OnDialogueEndedEvent>(HidePanel);
+         EventBus.Subscribe<OnSkipDialogueEvent>(NextNode);
     }
 
     private void OnDisable()
     {
         //Felipe
-        EventBus.Instance.UnSubscribe<OnNodeDisplayedEvent>(OnNodeDisplayed);
-         EventBus.Instance.UnSubscribe<OnDialogueStartedEvent>(ShowPanel);
-         EventBus.Instance.UnSubscribe<OnDialogueEndedEvent>(HidePanel);
-         EventBus.Instance.UnSubscribe<OnSkipDialogueEvent>(NextNode);
+        EventBus.UnSubscribe<OnNodeDisplayedEvent>(OnNodeDisplayed);
+         EventBus.UnSubscribe<OnDialogueStartedEvent>(ShowPanel);
+         EventBus.UnSubscribe<OnDialogueEndedEvent>(HidePanel);
+         EventBus.UnSubscribe<OnSkipDialogueEvent>(NextNode);
     }
 
     private void ShowPanel(OnDialogueStartedEvent ev)
