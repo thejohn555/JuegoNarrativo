@@ -2,7 +2,7 @@
 
 namespace Player
 {
-    
+    [RequireComponent(typeof(PlayerMain))]
     public class PlayerSystem : MonoBehaviour
     {
         protected PlayerMain main;

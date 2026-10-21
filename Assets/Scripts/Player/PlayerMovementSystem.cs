@@ -6,15 +6,35 @@ namespace Player
 {
     public class PlayerMovementSystem : PlayerSystem
     {
+        private float stoppingDistance;
+        private float remainingDistance;
+        private Vector3 currentDirection;
+        private Vector3 destinationPoint;
+        [SerializeField]private float Velocity;
+        
         public void SetNewDestination(Vector3 destinationPoint, float stoppingDistance)
         {
-            main.Agent.stoppingDistance = stoppingDistance;
-            main.Agent.SetDestination(destinationPoint);
+            StopAllCoroutines();
+            this.stoppingDistance = stoppingDistance;
+            this.destinationPoint = destinationPoint;
+            currentDirection = (this.destinationPoint - transform.position).normalized;
+            remainingDistance = (this.destinationPoint - transform.position).magnitude;
+            StartCoroutine(MovePlayer());
+        }
+
+        private IEnumerator MovePlayer()
+        {
+            do
+            {
+                main.transform.position += currentDirection * Velocity; 
+                remainingDistance = (destinationPoint - transform.position).magnitude;
+                yield return new WaitForSeconds(0.01f);
+            } while (!ReacheDestination());
         }
 
         public bool ReacheDestination()
         {
-            return !main.Agent.pathPending&&main.Agent.remainingDistance <= main.Agent.stoppingDistance;
+            return remainingDistance <= stoppingDistance;
         }
     }
 }

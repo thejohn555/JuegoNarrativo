@@ -1,35 +1,23 @@
-using Player;
 using UnityEngine;
-using UnityEngine.AI;
 
-public class PlayerMain : MonoBehaviour
+namespace Player
 {
-    
-    [SerializeField] private InputActionsSO inputReader;
-    [SerializeField] public LayerMask whatIsClickable;
-    
-    public NavMeshAgent Agent { get; private set; }
-    
-    public PlayerMovementSystem playerMovementSystem;
-    
-    public Camera cam;
-    
-    private void Awake()
+    [RequireComponent(typeof(PlayerMovementSystem))]
+    public class PlayerMain : MonoBehaviour
     {
-        Agent = GetComponent<NavMeshAgent>();
-        cam = Camera.main;
-        playerMovementSystem = GetComponent<PlayerMovementSystem>();
-    }
-    
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+        public EventBusSO  EventBus;
+        [SerializeField] private InputActionsSO inputReader;
+        [SerializeField] public LayerMask whatIsClickable;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public PlayerMovementSystem MovementSystem { get; private set; }
+
+        public Camera Cam { get; private set; }
+
+        private void Awake()
+        {
+            EventBus=inputReader.EventBus;
+            Cam = Camera.main;
+            MovementSystem = GetComponent<PlayerMovementSystem>();
+        }
     }
 }
