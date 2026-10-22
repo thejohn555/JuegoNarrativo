@@ -1,13 +1,15 @@
-﻿using UnityEngine;
+﻿using Blueprints_arquitectura_Dani_.Runtime.BaseClases;
+using UnityEngine;
 
 namespace Blueprints_arquitectura_Dani_.Runtime
 {
-    public class ConditionNodeExecutor : IBlueprintNodeExecutor<ConditionRuntimeNode>
+    public class ConditionNodeExecutor : BlueprintNodeExecutor<ConditionRuntimeNode>
     {
-        public bool Execute(ConditionRuntimeNode node, BlueprintDirector ctx)
+        protected override int OnExecute(ConditionRuntimeNode node, BlueprintDirector ctx)
         {
             Debug.Log("Executing condition node");
-            return true;
+            return 0;
         }
+        
     }
 }

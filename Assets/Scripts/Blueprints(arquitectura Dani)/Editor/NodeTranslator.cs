@@ -1,8 +1,10 @@
 using Blueprints_arquitectura_Dani_.Editor.Nodes;
 using Blueprints_arquitectura_Dani_.Runtime;
 using System.Collections.Generic;
+using Blueprints_arquitectura_Dani_.Editor;
 using Blueprints_arquitectura_Dani_.Editor.Blueprints_arquitectura_Dani_.Editor.Nodes;
 using Blueprints_arquitectura_Dani_.Runtime.LevelNode;
+using Blueprints_arquitectura_Dani_.Runtime.TriggerNode;
 using Unity.GraphToolkit.Editor;
 using UnityEngine;
 
@@ -44,17 +46,22 @@ public static class NodeTranslator
             case ConditionNode conditionNode:
                 list.Add(new ConditionRuntimeNode());
                 return true;
-            // case LevelNode levelNode:
-            //     string levelName = null;
-            //     levelNode.GetNodeOptionByName("GraphLevel")?.TryGetValue(out levelName);
-            //     if (levelName == null)
-            //     {
-            //         Debug.LogWarning($"Node {levelNode} has not a level name assign" );
-            //         return false;
-            //     }
-            //     Debug.Log($"Nombre del nivel: {levelName}");
-            //     list.Add(new LevelNodeRuntime(levelName));
-            //     return true;
+            case OnTriggerEnterNode triggerNode:
+                var port = triggerNode.GetInputPortByName(OnTriggerEnterNode.targetPort);
+                string varName = null;
+                if (port != null && port.IsConnected &&
+                    port.FirstConnectedPort.GetNode() is IVariableNode varNode)
+                {
+                    varName = varNode.Variable.Name;
+                }
+                if (string.IsNullOrEmpty(varName))
+                {
+                    Debug.LogWarning("OnTriggerEnter sin variable de blackboard conectada");
+                    return false;
+                }
+                list.Add(new TriggerEnterRuntimeNode(varName));
+                return true;
+                
         }
         return false;
     }

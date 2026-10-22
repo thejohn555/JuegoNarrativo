@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using Blueprints_arquitectura_Dani_.Runtime.TriggerNode;
+using Unity.GraphToolkit.Editor;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,16 +12,17 @@ namespace Blueprints_arquitectura_Dani_.Runtime
     {
         [Header("Graph")]
         [SerializeField]private BlueprintRuntimeGraph RuntimeGraph;
-        private Dictionary<System.Type, object> executors;
+        private Dictionary<System.Type, IBlueprintNodeExecutor> executors;
 
         public BlueprintDirector Instance { get; private set; }
         private void Awake()
         {
             //Inicializamos el dicionario con el tipo y el ejecutor
-            executors = new Dictionary<Type, object>
+            executors = new Dictionary<Type, IBlueprintNodeExecutor>
             {
                 {typeof(StartRuntimeNode),new StartNodeExecutor()},
                 {typeof(ConditionRuntimeNode),new ConditionNodeExecutor()},
+                {typeof(TriggerEnterRuntimeNode),new TriggerNodeExecutor()}
             };
             if (Instance == null)
             {
@@ -48,56 +52,51 @@ namespace Blueprints_arquitectura_Dani_.Runtime
             {
                 if (node.Nodes.Count == 0)
                     continue;
-                var currentNode = node.Nodes[0];
-                while (currentNode != null)
+                if (node.Nodes[0] is StartRuntimeNode)
                 {
-                    if (!executors.TryGetValue(currentNode.GetType(), out var executor))
-                    {
-                        Debug.LogError(
-                            $"No executor found for this type: {currentNode.GetType()}");
-                        break;
-                    }
+                    RunFrom(node);
+                }
+                //Implementar si es un nodo de evento
+            }
+        }
 
-                    int nextNodeIndex = -1;
+        private void RunFrom(RuntimeNodeGroup group,int startIndex = 0)
+        {
+            int index = startIndex;
+            
+            while (index>=0&&index < group.Nodes.Count)
+            {
+                var currentNode = group.Nodes[index];
+                if (!executors.TryGetValue(currentNode.GetType(), out var executor))
+                {
+                    Debug.LogError(
+                        $"No executor found for this type: {currentNode.GetType()}");
+                    return;
+                }
+                else
+                {
+                    int output = executor.Execute(currentNode, this);
 
-                    if (currentNode is StartRuntimeNode startNode)
-                    {
-                        var startExecutor =
-                            (IBlueprintNodeExecutor<StartRuntimeNode>)executor;
+                    if (output < 0 || output >= currentNode.NextNodeIndex.Count)
+                        return;                              // fin de la cadena
 
-                        startExecutor.Execute(startNode, this);
-
-                        if (startNode.NextNodeIndex.Count > 0)
-                            nextNodeIndex = startNode.NextNodeIndex[0];
-                    }
-                    else if (currentNode is ConditionRuntimeNode conditionNode)
-                    {
-                        var conditionExecutor =
-                            (IBlueprintNodeExecutor<ConditionRuntimeNode>)executor;
-
-                        bool result = conditionExecutor.Execute(conditionNode, this);
-
-                        if (conditionNode.NextNodeIndex.Count > 0)
-                        {
-                            // Provisional: solo funciona si la primera conexión
-                            // corresponde al resultado que quieres seguir.
-                            if (result)
-                                nextNodeIndex = conditionNode.NextNodeIndex[0];
-                        }
-                    }
-
-                    if (nextNodeIndex < 0)
-                        break;
-
-                    if (nextNodeIndex >= node.Nodes.Count)
-                    {
-                        Debug.LogError($"Índice de nodo inválido: {nextNodeIndex}");
-                        break;
-                    }
-
-                    currentNode = node.Nodes[nextNodeIndex];
+                    index = currentNode.NextNodeIndex[output]; 
                 }
             }
+        }
+
+        public void SuscribeToEnvents(RuntimeNode node)
+        {
+            // Cojemos la varibale de la blackboard asociada 
+            //     Comprobamo que tiene el EventRelay si no se lo ponemos
+            //     Y nos suscribimos al evento
+            // if (node is TriggerEnterRuntimeNode)
+            // {
+            //     
+            //     var go = Blackboard.Get(node.Target);
+            //     if(go))
+            // }
+            //
         }
     }
 }
