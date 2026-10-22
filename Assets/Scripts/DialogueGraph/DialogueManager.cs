@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DialogueManager : Singleton<DialogueManager>
 {
+    [SerializeField] private EventBusSO EventBus;
     private RuntimeDialogueGraph currentGraph;
     private RuntimeDialogueNode currentNode;
 
@@ -13,7 +14,7 @@ public class DialogueManager : Singleton<DialogueManager>
 
         currentGraph = graph;
         //Felipe
-        EventBus.Instance.Publish(new OnDialogueStartedEvent());
+        EventBus.Publish(new OnDialogueStartedEvent());
         DisplayNode(graph.EntryNodeID);
     }
 
@@ -28,7 +29,7 @@ public class DialogueManager : Singleton<DialogueManager>
         }
 
         //Felipe
-        EventBus.Instance.Publish(new OnNodeDisplayedEvent(currentNode));
+        EventBus.Publish(new OnNodeDisplayedEvent(currentNode));
     }
 
     public void AdvanceToNextNode()
@@ -50,6 +51,6 @@ public class DialogueManager : Singleton<DialogueManager>
         currentGraph = null;
         currentNode = null;
         //Felipe
-        EventBus.Instance.Publish(new OnDialogueEndedEvent());
+        EventBus.Publish(new OnDialogueEndedEvent());
     }
 }
