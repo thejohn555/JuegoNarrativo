@@ -1,13 +1,14 @@
-﻿using UnityEngine;
+﻿using Blueprints_arquitectura_Dani_.Runtime.BaseClases;
+using UnityEngine;
 
 namespace Blueprints_arquitectura_Dani_.Runtime
 {
-    public class StartNodeExecutor : IBlueprintNodeExecutor<StartRuntimeNode>
+    public class StartNodeExecutor : BlueprintNodeExecutor<StartRuntimeNode>
     {
-        public bool Execute(StartRuntimeNode node, BlueprintDirector ctx)
+        protected override int OnExecute(StartRuntimeNode node, BlueprintDirector ctx)
         {
             Debug.Log("Starting Blueprints");
-            return true;
+            return 0;
         }
     }
 }

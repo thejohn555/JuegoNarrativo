@@ -5,6 +5,7 @@ namespace Player
     [RequireComponent(typeof(PlayerMovementSystem))]
     public class PlayerMain : MonoBehaviour
     {
+        public EventBusSO  EventBus;
         [SerializeField] private InputActionsSO inputReader;
         [SerializeField] public LayerMask whatIsClickable;
 
@@ -14,6 +15,7 @@ namespace Player
 
         private void Awake()
         {
+            EventBus=inputReader.EventBus;
             Cam = Camera.main;
             MovementSystem = GetComponent<PlayerMovementSystem>();
         }

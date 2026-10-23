@@ -33,7 +33,7 @@ MonoBehaviour:
         - rid: 2622399403556077650
         - rid: 2622399403556077652
         - rid: 2622399403556077655
-        - rid: 2622399403556077663
+        - rid: 2622399446455943168
         m_GraphWireModels:
         - rid: 2622399403556077653
         m_GraphStickyNoteModels: []
@@ -45,10 +45,10 @@ MonoBehaviour:
         m_LocalSubgraphs: []
         m_LastKnownBounds:
           serializedVersion: 2
-          x: -5907.2
-          y: -280.8
-          width: 431.2002
-          height: 420
+          x: -5912
+          y: -276.8
+          width: 436
+          height: 416
         m_GraphElementMetaData:
         - m_Guid:
             m_Value0: 14797694113250302744
@@ -83,11 +83,11 @@ MonoBehaviour:
           m_Category: 0
           m_Index: 2
         - m_Guid:
-            m_Value0: 12654231020937306978
-            m_Value1: 17932697478428758857
+            m_Value0: 276157023579870970
+            m_Value1: 6232254184266504311
           m_HashGuid:
             serializedVersion: 2
-            Hash: 6263b28c11dc9caf49134a5a58bdddf8
+            Hash: fa16b58c591bd50377982523296a7d56
           m_Category: 0
           m_Index: 3
         m_EntryPoint:
@@ -252,17 +252,17 @@ MonoBehaviour:
     - rid: 2622399403556077656
       type: {class: StartNode, ns: Blueprints_arquitectura_Dani_.Editor.Nodes, asm: Edito.Blueprints}
       data: 
-    - rid: 2622399403556077663
+    - rid: 2622399446455943168
       type: {class: UserNodeModelImp, ns: Unity.GraphToolkit.Editor.Implementation, asm: UnityEditor.GraphToolkitModule}
       data:
         m_Guid:
-          m_Value0: 12654231020937306978
-          m_Value1: 17932697478428758857
+          m_Value0: 276157023579870970
+          m_Value1: 6232254184266504311
         m_HashGuid:
           serializedVersion: 2
-          Hash: 6263b28c11dc9caf49134a5a58bdddf8
+          Hash: fa16b58c591bd50377982523296a7d56
         m_Version: 2
-        m_Position: {x: -5963.047, y: -294.44144}
+        m_Position: {x: -5911.9204, y: -276.92004}
         m_Title: 
         m_Tooltip: 
         m_NodePreviewModel:
@@ -272,7 +272,7 @@ MonoBehaviour:
           m_KeyList:
           - __option_GraphLevel
           m_ValueList:
-          - rid: 2622399403556077664
+          - rid: 2622399446455943169
         m_InputPortInfos:
           expandedPortsById:
             m_KeyList: []
@@ -287,11 +287,11 @@ MonoBehaviour:
           m_Color: {r: 0, g: 0, b: 0, a: 0}
           m_HasUserColor: 0
         m_Node:
-          rid: 2622399403556077665
-    - rid: 2622399403556077664
+          rid: 2622399446455943170
+    - rid: 2622399446455943169
       type: {class: 'Constant`1[[System.String, mscorlib]]', ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
       data:
         m_Value: Nacho
-    - rid: 2622399403556077665
+    - rid: 2622399446455943170
       type: {class: LevelNode, ns: Blueprints_arquitectura_Dani_.Editor.Blueprints_arquitectura_Dani_.Editor.Nodes, asm: Edito.Blueprints}
       data: 

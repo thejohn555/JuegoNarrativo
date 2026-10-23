@@ -14,12 +14,12 @@ namespace Player
         
         private void OnEnable()
         {
-            EventBus.Instance.Subscribe<OnLeftMouseClick>(Clicked);
+            main.EventBus.Subscribe<OnLeftMouseClick>(Clicked);
         }
 
         private void OnDisable()
         {
-            EventBus.Instance.UnSubscribe<OnLeftMouseClick>(Clicked);
+            main.EventBus.UnSubscribe<OnLeftMouseClick>(Clicked);
         }
         
         private void Clicked(OnLeftMouseClick ctx)
