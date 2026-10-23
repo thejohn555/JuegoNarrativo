@@ -18,6 +18,10 @@ public class Grid2D : MonoBehaviour
     [Min(0.01f)]
     [SerializeField] private float lineCheckSpacing = 0.1f;
 
+    [Header("Character Size")]
+    [Min(0)]
+    [SerializeField] private int walkableMargin = 1;
+    
     [Header("Debug")]
     [SerializeField] private bool showGrid = true;
 
@@ -93,7 +97,72 @@ public class Grid2D : MonoBehaviour
                 );
             }
         }
+
+        ApplyWalkableMargin();
     }
+    
+    
+    private void ApplyWalkableMargin()
+    {
+        if (walkableMargin <= 0)
+            return;
+
+        // Guardamos el estado original para evitar
+        // que las modificaciones se afecten entre sí.
+        bool[,] originalWalkable = new bool[gridSizeX, gridSizeY];
+
+        for (int x = 0; x < gridSizeX; x++)
+        {
+            for (int y = 0; y < gridSizeY; y++)
+            {
+                originalWalkable[x, y] = grid[x, y].Walkable;
+            }
+        }
+
+        for (int x = 0; x < gridSizeX; x++)
+        {
+            for (int y = 0; y < gridSizeY; y++)
+            {
+                if (!originalWalkable[x, y])
+                    continue;
+
+                // Comprobamos las celdas alrededor.
+                for (int offsetX = -walkableMargin;
+                     offsetX <= walkableMargin;
+                     offsetX++)
+                {
+                    for (int offsetY = -walkableMargin;
+                         offsetY <= walkableMargin;
+                         offsetY++)
+                    {
+                        int checkX = x + offsetX;
+                        int checkY = y + offsetY;
+
+                        // Si el margen sale del grid,
+                        // esta celda no tiene espacio suficiente.
+                        if (checkX < 0 || checkX >= gridSizeX ||
+                            checkY < 0 || checkY >= gridSizeY)
+                        {
+                            grid[x, y].Walkable = false;
+                            break;
+                        }
+
+                        // Si una celda dentro del margen no es
+                        // caminable, descartamos la celda actual.
+                        if (!originalWalkable[checkX, checkY])
+                        {
+                            grid[x, y].Walkable = false;
+                            break;
+                        }
+                    }
+
+                    if (!grid[x, y].Walkable)
+                        break;
+                }
+            }
+        }
+    }
+
 
     private bool IsCellInsideFloor(Vector2 center)
     {
@@ -155,29 +224,37 @@ public class Grid2D : MonoBehaviour
         return false;
     }
 
-    public bool CanWalkStraight(Vector2 start, Vector2 end)
+    
+    
+    public bool CanWalkThroughGrid(Vector2 start, Vector2 end)
     {
         Vector2 direction = end - start;
-
         float distance = direction.magnitude;
 
+        float spacing = cellSize * 0.2f;
         int steps = Mathf.Max(
             1,
-            Mathf.CeilToInt(distance / lineCheckSpacing)
+            Mathf.CeilToInt(distance / spacing)
         );
 
         for (int i = 0; i <= steps; i++)
         {
-            float t = (float)i / steps;
+            Vector2 point = Vector2.Lerp(
+                start,
+                end,
+                (float)i / steps
+            );
 
-            Vector2 point = Vector2.Lerp(start, end, t);
+            NodeGrid node = NodeFromWorldPosition(point);
 
-            if (!IsPositionWalkable(point))
+            if (!node.Walkable)
                 return false;
         }
 
         return true;
     }
+
+
     
     public NodeGrid NodeFromWorldPosition(Vector2 worldPosition)
     {

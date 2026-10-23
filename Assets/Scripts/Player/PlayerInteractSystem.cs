@@ -24,30 +24,42 @@ namespace Player
         
         private void Clicked(OnLeftMouseClick ctx)
         {
-            
-            Vector2  mousePosition  = main.Cam.ScreenToWorldPoint(
-                Mouse.current.position.ReadValue());
+            Vector2 mousePosition = main.Cam.ScreenToWorldPoint(
+                Mouse.current.position.ReadValue()
+            );
 
-            RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero, 
-                Mathf.Infinity, main.whatIsClickable);
-            
-            if(!hit.collider)return;
-            
-            if (hit.collider.TryGetComponent(out Interactive newInteractuable))
+            RaycastHit2D hit = Physics2D.Raycast(
+                mousePosition,
+                Vector2.zero,
+                Mathf.Infinity,
+                main.whatIsClickable
+            );
+
+            if (!hit.collider)
+                return;
+
+            if (hit.collider.TryGetComponent(out Interactive interactuable))
             {
-                currentInteractuable = newInteractuable;
-                currentStoppingDistance = newInteractuable.InteractionDistance;
+                StopAllCoroutines();
+
+                currentInteractuable = interactuable;
+                currentStoppingDistance = interactuable.InteractionDistance;
+
                 StartCoroutine(TrackingInteractuable());
             }
             else
             {
-                currentStoppingDistance = DefaultStoppingDistance;
                 StopAllCoroutines();
+
                 currentInteractuable = null;
+                currentStoppingDistance = DefaultStoppingDistance;
                 currentDestination = hit.point;
-                main.MovementSystem.SetNewDestination(currentDestination,currentStoppingDistance);
+
+                main.MovementSystem.SetNewDestination(
+                    currentDestination,
+                    currentStoppingDistance
+                );
             }
-            
         }
         
         private IEnumerator TrackingInteractuable()

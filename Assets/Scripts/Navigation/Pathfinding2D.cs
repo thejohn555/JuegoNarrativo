@@ -52,7 +52,24 @@ public class Pathfinding2D : MonoBehaviour
 
             // Hemos llegado al destino.
             if (currentNode == targetNode)
-                return RetracePath(cameFrom, startNode, targetNode);
+            {
+                List<NodeGrid> path = RetracePath(
+                    cameFrom,
+                    startNode,
+                    targetNode
+                );
+
+                Debug.Log($"Ruta A*: {path?.Count ?? 0} nodos");
+
+                List<NodeGrid> smoothedPath = SmoothPath(
+                    path,
+                    startPosition
+                );
+
+                Debug.Log($"Ruta suavizada: {smoothedPath?.Count ?? 0} nodos");
+
+                return smoothedPath;
+            }
 
             foreach (NodeGrid neighbour in grid.GetNeighbours(currentNode))
             {
@@ -120,6 +137,50 @@ public class Pathfinding2D : MonoBehaviour
         path.Reverse();
         return path;
     }
+    
+    private List<NodeGrid> SmoothPath(
+        List<NodeGrid> path,
+        Vector2 startPosition)
+    {
+        if (path == null || path.Count == 0)
+            return path;
+
+        List<NodeGrid> smoothedPath = new List<NodeGrid>();
+
+        Vector2 currentPosition = startPosition;
+        int currentIndex = 0;
+
+        while (currentIndex < path.Count)
+        {
+            int furthestVisibleIndex = -1;
+
+            // Buscamos desde el último nodo hacia el primero.
+            for (int i = path.Count - 1; i >= currentIndex; i--)
+            {
+                if (grid.CanWalkThroughGrid(
+                        currentPosition,
+                        path[i].WorldPosition))
+                {
+                    furthestVisibleIndex = i;
+                    break;
+                }
+            }
+
+            // Si no encontramos un tramo visible, conservamos
+            // el siguiente nodo de la ruta original.
+            if (furthestVisibleIndex == -1)
+                furthestVisibleIndex = currentIndex;
+
+            NodeGrid selectedNode = path[furthestVisibleIndex];
+
+            smoothedPath.Add(selectedNode);
+            currentPosition = selectedNode.WorldPosition;
+            currentIndex = furthestVisibleIndex + 1;
+        }
+
+        return smoothedPath;
+    }
+
     private void Update()
     {
         if (startPoint == null || targetPoint == null)
@@ -137,13 +198,17 @@ public class Pathfinding2D : MonoBehaviour
             return;
 
         Gizmos.color = Color.cyan;
+        
+        Vector3 previousPosition = startPoint != null
+            ? startPoint.position
+            : currentPath[0].WorldPosition;
 
-        for (int i = 0; i < currentPath.Count - 1; i++)
+        foreach (NodeGrid node in currentPath)
         {
-            Gizmos.DrawLine(
-                currentPath[i].WorldPosition,
-                currentPath[i + 1].WorldPosition
-            );
+            Gizmos.DrawLine(previousPosition, node.WorldPosition);
+            Gizmos.DrawSphere(node.WorldPosition, 0.08f);
+
+            previousPosition = node.WorldPosition;
         }
 
         foreach (NodeGrid node in currentPath)

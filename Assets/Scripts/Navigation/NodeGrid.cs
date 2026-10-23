@@ -5,7 +5,7 @@ namespace Navigation
     public class NodeGrid
     {
         public Vector2 WorldPosition { get; }
-        public bool Walkable { get; }
+        public bool Walkable { get; set; }
 
         public int GridX { get; }
         public int GridY { get; }
