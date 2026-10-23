@@ -15,6 +15,7 @@ public class DialogueManager : Singleton<DialogueManager>
         currentGraph = graph;
         //Felipe
         EventBus.Publish(new OnDialogueStartedEvent());
+        EventBus.Publish(new OnDialogueCameraDataEvent());
         DisplayNode(graph.EntryNodeID);
     }
 

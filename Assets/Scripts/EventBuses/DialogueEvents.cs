@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Assets.Scripts.Camera;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -14,6 +15,15 @@ namespace Assets.Scripts.EventBuses
         public OnNodeDisplayedEvent(RuntimeDialogueNode node)
         {
             Node = node;
+        }
+    }
+    public struct OnDialogueCameraDataEvent : IEvent 
+    { 
+        public DialogueCameraData DialogueCameraData { get; private set; }
+
+        public OnDialogueCameraDataEvent(DialogueCameraData data)
+        {
+            DialogueCameraData = data;
         }
     }
 }

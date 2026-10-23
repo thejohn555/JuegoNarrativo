@@ -1,9 +1,11 @@
+using Assets.Scripts.Camera;
+using Assets.Scripts.EventBuses;
 using System;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public enum CameraState { Static, Follow }
+    public enum CameraState { Static, Follow, Dialogue }
 
     [SerializeField] private CameraState initialState = CameraState.Follow;
     [SerializeField] private Transform target;
@@ -12,10 +14,21 @@ public class CameraController : MonoBehaviour
     [Header("Dead Zone Settings")]
     [SerializeField] private Vector2 deadZone = new Vector2(3f, 2f);
     [SerializeField] private float smoothTime = 0.2f;
+    [SerializeField] private EventBusSO EventBus;
 
     private Action currentStateBehavior;
     private Vector3 velocity = Vector3.zero;
     private CameraState currentCameraState;
+
+    private void OnEnable()
+    {
+        EventBus.Subscribe<OnDialogueCameraDataEvent>(DialogueStarted);
+    }
+
+    private void OnDisable()
+    {
+        EventBus.UnSubscribe<OnDialogueCameraDataEvent>(DialogueStarted);
+    }
 
     private void Start()
     {
@@ -37,10 +50,12 @@ public class CameraController : MonoBehaviour
         {
             case CameraState.Static:
                 currentStateBehavior = null;
-                Debug.Log("hola");
                 break;
             case CameraState.Follow:
                 currentStateBehavior = FollowState;
+                break;
+            case CameraState.Dialogue:
+                currentStateBehavior = null;
                 break;
             default:
                 Debug.Log($"Camera State {newState} does not exist.");
@@ -51,6 +66,17 @@ public class CameraController : MonoBehaviour
     private void LateUpdate()
     {
         currentStateBehavior?.Invoke();
+    }
+
+    private void DialogueStarted(OnDialogueCameraDataEvent ev)
+    {
+        ChangeCameraState(CameraState.Dialogue);
+        ChangeCameraSettings(ev.DialogueCameraData);
+    }
+
+    private void ChangeCameraSettings(DialogueCameraData data)
+    {
+        Vector3 camPos = transform.position;
     }
 
     private void FollowState()
