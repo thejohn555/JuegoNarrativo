@@ -5,13 +5,13 @@ using UnityEngine;
 
 namespace Blueprints_arquitectura_Dani_.Editor
 {
-    public class OnTriggerEnterNode : BlueprintNode,IStartNode
+    public abstract class OnTriggerEnterNode : BlueprintNode,IStartNode
     {
         public const string targetPort= "Target";
+        public abstract string TriggerKey { get; }
 
         protected override void OnDefinePorts(IPortDefinitionContext context)
-        {
-            context.AddInputPort<GameObject>(targetPort).Build();
+        {   
             context.AddOutputPort("Out").Build();
         }
     }
