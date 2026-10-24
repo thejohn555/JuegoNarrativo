@@ -57,6 +57,14 @@ public class InputActionsSO : ScriptableObject, NewInputActions.IGamePlayActions
         }
     }
 
+    public void OnSpace(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            EventBus.Publish(new OnSpaceBarClick(context));
+        }
+    }
+
     public void OnNextDialogue(InputAction.CallbackContext context)
     { 
         if (context.performed)
