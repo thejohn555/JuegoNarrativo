@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using Blueprints_arquitectura_Dani_.Runtime.Managers;
 using Blueprints_arquitectura_Dani_.Runtime.TriggerNode;
 using Unity.GraphToolkit.Editor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
 
 namespace Blueprints_arquitectura_Dani_.Runtime
 {
@@ -52,12 +54,25 @@ namespace Blueprints_arquitectura_Dani_.Runtime
             {
                 if (node.Nodes.Count == 0)
                     continue;
-                if (node.Nodes[0] is StartRuntimeNode)
+                int idx = 0;
+                switch (node.Nodes[idx])
                 {
-                    RunFrom(node);
+                   case StartRuntimeNode:
+                       RunFrom(node);
+                       break;
+                   case TriggerEnterRuntimeNode trigger:
+                       if (!BlueprintDictionaryManager.Instance.HasTrigger(trigger.trigger))
+                       {
+                           Debug.LogWarning($"[Director] No existe el trigger '{trigger.trigger}' en la escena");
+                           break;
+                       }
+                       BlueprintDictionaryManager.Instance.AddTriggerToDictionary(trigger.trigger, node);
+                       Debug.Log($"[Director] Registrado trigger '{trigger.trigger}'");
+                       break;
                 }
-                //Implementar si es un nodo de evento
+                idx++;
             }
+            SuscribeToEnvents();
         }
 
         private void RunFrom(RuntimeNodeGroup group,int startIndex = 0)
@@ -85,18 +100,22 @@ namespace Blueprints_arquitectura_Dani_.Runtime
             }
         }
 
-        public void SuscribeToEnvents(RuntimeNode node)
+        public void SuscribeToEnvents()
         {
-            // Cojemos la varibale de la blackboard asociada 
-            //     Comprobamo que tiene el EventRelay si no se lo ponemos
-            //     Y nos suscribimos al evento
-            // if (node is TriggerEnterRuntimeNode)
-            // {
-            //     
-            //     var go = Blackboard.Get(node.Target);
-            //     if(go))
-            // }
-            //
+           BlueprintsEventManager.Instance.OnTrigger += HandelTrigger;
+        }
+
+        private void HandelTrigger(GameObject obj)
+        {
+            if (BlueprintDictionaryManager.Instance.triggerDictionary.ContainsKey(obj.name))
+            {
+                RunFrom(BlueprintDictionaryManager.Instance.triggerDictionary[obj.name]);
+            }
+            else
+            {
+                Debug.LogError(
+                    $"No hay ningun trigger {obj}");
+            }
         }
     }
 }

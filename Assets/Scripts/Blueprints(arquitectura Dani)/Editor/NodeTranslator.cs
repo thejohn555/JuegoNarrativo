@@ -47,19 +47,7 @@ public static class NodeTranslator
                 list.Add(new ConditionRuntimeNode());
                 return true;
             case OnTriggerEnterNode triggerNode:
-                var port = triggerNode.GetInputPortByName(OnTriggerEnterNode.targetPort);
-                string varName = null;
-                if (port != null && port.IsConnected &&
-                    port.FirstConnectedPort.GetNode() is IVariableNode varNode)
-                {
-                    varName = varNode.Variable.Name;
-                }
-                if (string.IsNullOrEmpty(varName))
-                {
-                    Debug.LogWarning("OnTriggerEnter sin variable de blackboard conectada");
-                    return false;
-                }
-                list.Add(new TriggerEnterRuntimeNode(varName));
+                list.Add(new TriggerEnterRuntimeNode(triggerNode.TriggerKey));
                 return true;
                 
         }
