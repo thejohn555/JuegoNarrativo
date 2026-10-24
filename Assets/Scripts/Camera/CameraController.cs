@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public enum CameraState { Static, Follow, Dialogue }
+    public enum CameraState { Static, Follow, Dialogue, Transitioning }
 
     [SerializeField] private CameraState initialState = CameraState.Follow;
     [SerializeField] private Transform target;
@@ -16,18 +16,39 @@ public class CameraController : MonoBehaviour
     [SerializeField] private float smoothTime = 0.2f;
     [SerializeField] private EventBusSO EventBus;
 
+    [Header("Test Mode")]
+    public Transform testDialogueTarget;
+
+    [SerializeField] private float zoomVelocity = 0.5f;
     private Action currentStateBehavior;
     private Vector3 velocity = Vector3.zero;
     private CameraState currentCameraState;
+    private CameraState lastCameraState;
+    private CameraState stateBeforeDialogue;
+    private Camera cam;
+    private float defaultZoom;
+    private Vector3 currentTargetPos;
+    private Vector3 cameraPosBeforeDialogue;
+    private float currentTargetZoom;
+    private float currentSmoothTime;
+    private bool isDialogue;
+
+    private void Awake()
+    {
+        cam = GetComponent<Camera>();
+        defaultZoom = cam.orthographicSize;
+    }
 
     private void OnEnable()
     {
         EventBus.Subscribe<OnDialogueCameraDataEvent>(DialogueStarted);
+        EventBus.Subscribe<OnDialogueEndedEvent>(DialogueEnded);
     }
 
     private void OnDisable()
     {
         EventBus.UnSubscribe<OnDialogueCameraDataEvent>(DialogueStarted);
+        EventBus.UnSubscribe<OnDialogueEndedEvent>(DialogueEnded);
     }
 
     private void Start()
@@ -42,10 +63,38 @@ public class CameraController : MonoBehaviour
             ChangeCameraState(nextState);
             Debug.Log($"[CameraController] Estado cambiado a: {nextState}");
         }
+
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            if (testDialogueTarget == null)
+            {
+                Debug.LogWarning("¡Asigna un Test Dialogue Target en el inspector!");
+                return;
+            }
+
+            // Creamos unos datos falsos simulando lo que enviaría el NPC
+            DialogueCameraData testData = new DialogueCameraData();
+            testData.targetPosition = testDialogueTarget;
+            testData.cameraOffset = new Vector3(2f, 1f, 0f);
+            testData.zoom = 3f;
+            testData.smoothTime = 0.5f;
+
+            Debug.Log("Simulando inicio de diálogo (Tecla T)");
+            EnterDialogueState(testData);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Y))
+        {
+            Debug.Log("Simulando fin de diálogo (Tecla Y)");
+            ExitDialogueState();
+        }
     }
 
     public void ChangeCameraState(CameraState newState)
     {
+        lastCameraState = currentCameraState;
+        currentCameraState = newState;
+
         switch (newState)
         {
             case CameraState.Static:
@@ -57,8 +106,11 @@ public class CameraController : MonoBehaviour
             case CameraState.Dialogue:
                 currentStateBehavior = null;
                 break;
+            case CameraState.Transitioning:
+                currentStateBehavior = HandleTransition;
+                break;
             default:
-                Debug.Log($"Camera State {newState} does not exist.");
+                Debug.LogWarning($"Camera State {newState} does not exist.");
                 break;
         }
     }
@@ -70,13 +122,61 @@ public class CameraController : MonoBehaviour
 
     private void DialogueStarted(OnDialogueCameraDataEvent ev)
     {
-        ChangeCameraState(CameraState.Dialogue);
-        ChangeCameraSettings(ev.DialogueCameraData);
+        EnterDialogueState(ev.DialogueCameraData);
     }
 
-    private void ChangeCameraSettings(DialogueCameraData data)
+    private void DialogueEnded(OnDialogueEndedEvent ev)
     {
-        Vector3 camPos = transform.position;
+        ExitDialogueState();
+    }
+
+    private void EnterDialogueState(DialogueCameraData data)
+    {
+        if (data.targetPosition == null) return;
+        isDialogue = true;
+
+        currentTargetPos = data.targetPosition.position + data.cameraOffset;
+        currentTargetPos.z = transform.position.z;
+
+        currentTargetZoom = data.zoom;
+        currentSmoothTime = data.smoothTime;
+
+        stateBeforeDialogue = currentCameraState;
+        cameraPosBeforeDialogue = transform.position;
+        ChangeCameraState(CameraState.Transitioning);
+    }
+
+    public void ExitDialogueState()
+    {
+        if (target == null) return;
+        isDialogue = false;
+
+        currentTargetPos = cameraPosBeforeDialogue;
+        currentTargetPos.z = transform.position.z;
+
+        currentTargetZoom = defaultZoom;
+        currentSmoothTime = smoothTime;
+
+        ChangeCameraState(CameraState.Transitioning);
+    }
+
+    private void HandleTransition()
+    {
+        transform.position = Vector3.SmoothDamp(transform.position, currentTargetPos, ref velocity, currentSmoothTime);
+        cam.orthographicSize = Mathf.SmoothDamp(cam.orthographicSize, currentTargetZoom, ref zoomVelocity, currentSmoothTime);
+
+        float distance = Vector2.Distance(transform.position, currentTargetPos);
+        float zoomDiff = Mathf.Abs(cam.orthographicSize - currentTargetZoom);
+
+        if (distance < 0.01f && zoomDiff < 0.01f)
+        {
+            transform.position = currentTargetPos;
+            cam.orthographicSize = currentTargetZoom;
+            if (isDialogue)
+                ChangeCameraState(CameraState.Dialogue);
+            else
+                ChangeCameraState(stateBeforeDialogue);
+        }
     }
 
     private void FollowState()
