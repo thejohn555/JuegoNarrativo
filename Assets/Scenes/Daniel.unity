@@ -119,6 +119,92 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &21799388
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 21799390}
+  - component: {fileID: 21799389}
+  m_Layer: 0
+  m_Name: Blackboard
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &21799389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 21799388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69272f872f99da54f9f65f6095c169ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BlackboardSystem.BlackboardData
+  blackboardRef: {fileID: 11400000, guid: d56781fda1e19cc45839249afe354228, type: 2}
+  entries:
+  - keyName: h
+    valueType: 0
+    value:
+      type: 0
+      boolValue: 0
+      intValue: 0
+      floatValue: 0
+      vector3Value: {x: 0, y: 0, z: 0}
+      stringValue: 
+      gameObjectValue: {fileID: 0}
+  - keyName: someRef
+    valueType: 5
+    value:
+      type: 5
+      boolValue: 0
+      intValue: 0
+      floatValue: 0
+      vector3Value: {x: 0, y: 0, z: 0}
+      stringValue: 
+      gameObjectValue: {fileID: 1701654036}
+  - keyName: someRef
+    valueType: 5
+    value:
+      type: 5
+      boolValue: 0
+      intValue: 0
+      floatValue: 0
+      vector3Value: {x: 0, y: 0, z: 0}
+      stringValue: 
+      gameObjectValue: {fileID: 1701654036}
+  - keyName: someRef
+    valueType: 5
+    value:
+      type: 5
+      boolValue: 0
+      intValue: 0
+      floatValue: 0
+      vector3Value: {x: 0, y: 0, z: 0}
+      stringValue: 
+      gameObjectValue: {fileID: 1701654036}
+--- !u!4 &21799390
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 21799388}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &267552710
 GameObject:
   m_ObjectHideFlags: 0
@@ -293,3 +379,4 @@ SceneRoots:
   m_Roots:
   - {fileID: 267552713}
   - {fileID: 1701654038}
+  - {fileID: 21799390}
