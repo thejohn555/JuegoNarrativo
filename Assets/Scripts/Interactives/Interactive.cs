@@ -14,11 +14,11 @@ namespace Interactives
 
         protected virtual void Awake()
         {
-            outline = GetComponent<Outliner>();
         }
 
         protected virtual void Start()
         {
+            outline = GetComponent<Outliner>();
             outline.SwapOutline();
         }
 

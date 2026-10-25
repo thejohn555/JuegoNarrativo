@@ -36,10 +36,16 @@ public class Outliner : MonoBehaviour
     private void Awake()
     {
         sourceRenderer = GetComponentInChildren<SpriteRenderer>();
+        if (sourceRenderer == null)
+        {
+            Debug.LogWarning("Outliner: no se encontro un SpriteRenderer en el objeto o sus hijos.", this);
+            enabled = false;
+            return;
+        }
 
         // Creamos la copia del sprite.
         outlineObject = new GameObject("Outline");
-        outlineObject.transform.SetParent(transform, false);
+        outlineObject.transform.SetParent(sourceRenderer.transform, false);
         outlineObject.transform.localPosition = Vector3.zero;
         outlineObject.transform.localRotation = Quaternion.identity;
         outlineObject.transform.localScale = Vector3.one;
