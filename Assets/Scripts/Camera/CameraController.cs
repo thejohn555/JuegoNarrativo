@@ -53,6 +53,7 @@ public class CameraController : MonoBehaviour
 
     private void Start()
     {
+        currentCameraState = initialState;
         ChangeCameraState(initialState);
     }
     private void Update()
@@ -62,31 +63,6 @@ public class CameraController : MonoBehaviour
             CameraState nextState = (currentStateBehavior != null) ? CameraState.Static : CameraState.Follow;
             ChangeCameraState(nextState);
             Debug.Log($"[CameraController] Estado cambiado a: {nextState}");
-        }
-
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            if (testDialogueTarget == null)
-            {
-                Debug.LogWarning("¡Asigna un Test Dialogue Target en el inspector!");
-                return;
-            }
-
-            // Creamos unos datos falsos simulando lo que enviaría el NPC
-            DialogueCameraData testData = new DialogueCameraData();
-            testData.targetPosition = testDialogueTarget;
-            testData.cameraOffset = new Vector3(2f, 1f, 0f);
-            testData.zoom = 3f;
-            testData.smoothTime = 0.5f;
-
-            Debug.Log("Simulando inicio de diálogo (Tecla T)");
-            EnterDialogueState(testData);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Y))
-        {
-            Debug.Log("Simulando fin de diálogo (Tecla Y)");
-            ExitDialogueState();
         }
     }
 
@@ -173,7 +149,10 @@ public class CameraController : MonoBehaviour
             transform.position = currentTargetPos;
             cam.orthographicSize = currentTargetZoom;
             if (isDialogue)
+            {
+                EventBus.Publish(new OnDialogueStartedEvent());
                 ChangeCameraState(CameraState.Dialogue);
+            }
             else
                 ChangeCameraState(stateBeforeDialogue);
         }

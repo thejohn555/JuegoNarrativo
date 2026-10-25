@@ -24,7 +24,6 @@ namespace DialogueGraph.Editor
             var startNode = editorGraph.GetNodes().OfType<StartNode>().FirstOrDefault();
             if (startNode != null)
             {
-                //Felipe
                 var entryPort = startNode.GetOutputPorts().FirstOrDefault()?.FirstConnectedPort;
                  if (entryPort != null)
                  {
@@ -64,7 +63,6 @@ namespace DialogueGraph.Editor
         private void ProccessDialogueNode(DialogueNode node, RuntimeDialogueNode runtimeNode,
             Dictionary<INode, string> nodeIDMap)
         {
-            //Felipe
             runtimeNode.DialogueText = GetPortValue<string>(node.GetInputPortByName(PortNames.PortDialogue));
              runtimeNode.SpeakerName = GetPortValue<string>(node.GetInputPortByName(PortNames.PortSpeaker));
              float portSpeed = GetPortValue<float>(node.GetInputPortByName("Text Speed"));

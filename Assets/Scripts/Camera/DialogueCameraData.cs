@@ -7,7 +7,7 @@ namespace Assets.Scripts.Camera
     {
         public Transform targetPosition;
         public Vector3 cameraOffset;
-        public Vector2 dialogueTextOffset;
+        public Vector3 dialogueTextOffset;
         public float zoom;
         public float smoothTime;
     }
