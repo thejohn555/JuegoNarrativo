@@ -2,6 +2,7 @@ using Assets.Scripts.EventBuses;
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DialogueUI : MonoBehaviour
 {
@@ -9,27 +10,35 @@ public class DialogueUI : MonoBehaviour
     [SerializeField] private TMP_Text speakerText;
     [SerializeField] private TMP_Text dialogueText;
     [SerializeField] private EventBusSO EventBus;
+    [SerializeField] private Button choiceButtonPrefab;
+    [SerializeField] private Transform choiceContainer;
+    [SerializeField] private Image choiceBackground;
     private bool isWritingText;
     private string currentFullText;
     private Coroutine typeWritingCoroutine;
+    private Vector3 defaultDialoguePanelPos;
 
     private void OnEnable()
     {
-        //Felipe
-        
-         EventBus.Subscribe<OnNodeDisplayedEvent>(OnNodeDisplayed);
-         EventBus.Subscribe<OnDialogueStartedEvent>(ShowPanel);
-         EventBus.Subscribe<OnDialogueEndedEvent>(HidePanel);
-         EventBus.Subscribe<OnSkipDialogueEvent>(NextNode);
+        EventBus.Subscribe<OnNodeDisplayedEvent>(OnNodeDisplayed);
+        EventBus.Subscribe<OnDialogueStartedEvent>(ShowPanel);
+        EventBus.Subscribe<OnDialogueEndedEvent>(HidePanel);
+        EventBus.Subscribe<OnSkipDialogueEvent>(NextNode);
+        EventBus.Subscribe<OnDialogueCameraDataEvent>(RecieveDialoguePositionData);
     }
 
     private void OnDisable()
     {
-        //Felipe
         EventBus.UnSubscribe<OnNodeDisplayedEvent>(OnNodeDisplayed);
-         EventBus.UnSubscribe<OnDialogueStartedEvent>(ShowPanel);
-         EventBus.UnSubscribe<OnDialogueEndedEvent>(HidePanel);
-         EventBus.UnSubscribe<OnSkipDialogueEvent>(NextNode);
+        EventBus.UnSubscribe<OnDialogueStartedEvent>(ShowPanel);
+        EventBus.UnSubscribe<OnDialogueEndedEvent>(HidePanel);
+        EventBus.UnSubscribe<OnSkipDialogueEvent>(NextNode);
+        EventBus.UnSubscribe<OnDialogueCameraDataEvent>(RecieveDialoguePositionData);
+    }
+
+    private void Awake()
+    {
+        defaultDialoguePanelPos = dialoguePanel.transform.position;
     }
 
     private void ShowPanel(OnDialogueStartedEvent ev)
@@ -56,6 +65,12 @@ public class DialogueUI : MonoBehaviour
             //mostrar siguiente nodo
             DialogueManager.Instance.AdvanceToNextNode();
         }
+    }
+
+    private void RecieveDialoguePositionData(OnDialogueCameraDataEvent ev)
+    {
+        dialoguePanel.transform.position = defaultDialoguePanelPos;
+        dialoguePanel.transform.position += ev.DialogueCameraData.dialogueTextOffset;
     }
 
     private void OnNodeDisplayed(OnNodeDisplayedEvent ev)

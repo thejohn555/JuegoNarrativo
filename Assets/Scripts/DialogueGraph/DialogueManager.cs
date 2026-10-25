@@ -1,3 +1,4 @@
+using Assets.Scripts.Camera;
 using Assets.Scripts.EventBuses;
 using System;
 using UnityEngine;
@@ -8,15 +9,27 @@ public class DialogueManager : Singleton<DialogueManager>
     private RuntimeDialogueGraph currentGraph;
     private RuntimeDialogueNode currentNode;
 
-    public void StartDialogue(RuntimeDialogueGraph graph)
+    private void OnEnable()
+    {
+        EventBus.Subscribe<OnDialogueStartedEvent>(DisplayFirstNode);
+    }
+
+    private void OnDisable()
+    {
+        EventBus.UnSubscribe<OnDialogueStartedEvent>(DisplayFirstNode);
+    }
+
+    public void StartDialogue(RuntimeDialogueGraph graph, DialogueCameraData data)
     {
         if (graph == null) return;
 
         currentGraph = graph;
-        //Felipe
-        EventBus.Publish(new OnDialogueStartedEvent());
-        EventBus.Publish(new OnDialogueCameraDataEvent());
-        DisplayNode(graph.EntryNodeID);
+        EventBus.Publish(new OnDialogueCameraDataEvent(data));
+    }
+
+    private void DisplayFirstNode(OnDialogueStartedEvent ev)
+    {
+        DisplayNode(currentGraph.EntryNodeID);
     }
 
     public void DisplayNode(string nodeID)
@@ -29,7 +42,6 @@ public class DialogueManager : Singleton<DialogueManager>
             return;
         }
 
-        //Felipe
         EventBus.Publish(new OnNodeDisplayedEvent(currentNode));
     }
 
@@ -51,7 +63,6 @@ public class DialogueManager : Singleton<DialogueManager>
     {
         currentGraph = null;
         currentNode = null;
-        //Felipe
         EventBus.Publish(new OnDialogueEndedEvent());
     }
 }
