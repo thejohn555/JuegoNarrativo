@@ -68,6 +68,10 @@ namespace Blueprints_arquitectura_Dani_.Editor.Blueprints_arquitectura_Dani_.Edi
             
             ctx.AddObjectToAsset("RunTimeAsset", runtimeAsset);
             ctx.SetMainObject(runtimeAsset);
+            foreach (var VARIABLE in roots)
+            {
+                Debug.Log($"[importer] root : {VARIABLE}");
+            }
             Debug.Log("\"<color=green>[Importer] Todo correcto</color>\"");
         }
 
