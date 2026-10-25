@@ -59,14 +59,12 @@ public class Pathfinding2D : MonoBehaviour
                     targetNode
                 );
 
-                Debug.Log($"Ruta A*: {path?.Count ?? 0} nodos");
 
                 List<NodeGrid> smoothedPath = SmoothPath(
                     path,
                     startPosition
                 );
 
-                Debug.Log($"Ruta suavizada: {smoothedPath?.Count ?? 0} nodos");
 
                 return smoothedPath;
             }
