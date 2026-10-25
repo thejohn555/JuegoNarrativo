@@ -94,7 +94,7 @@ public sealed class CollectableObjectFactoryTypeOptions : FactoryTypeOptions
     public override Type ComponentType => typeof(Interactives.CollectableObject);
     
     private bool isCrafted;
-    private Cole ingredientA;
+    private GameObject ingredientA;
     private GameObject ingredientB;
     
     public override void DrawOptions()
