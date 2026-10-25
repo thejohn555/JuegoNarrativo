@@ -21,7 +21,7 @@ namespace Blueprints_arquitectura_Dani_.Editor.Blueprints_arquitectura_Dani_.Edi
         {
             //Debug.Log($"[Importer] Importando: {ctx.assetPath}");
             var graph = GraphDatabase.LoadGraphForImporter<BlueprintDirectorGraph>(ctx.assetPath);
-            
+            Debug.Log($"{graph.GetType()}");
             if (graph == null)
             {
                 Debug.Log($"Failed to load Blueprint director graph asset: {ctx.assetPath}");
@@ -68,6 +68,10 @@ namespace Blueprints_arquitectura_Dani_.Editor.Blueprints_arquitectura_Dani_.Edi
             
             ctx.AddObjectToAsset("RunTimeAsset", runtimeAsset);
             ctx.SetMainObject(runtimeAsset);
+            foreach (var VARIABLE in roots)
+            {
+                Debug.Log($"[importer] root : {VARIABLE}");
+            }
             Debug.Log("\"<color=green>[Importer] Todo correcto</color>\"");
         }
 
