@@ -21,8 +21,8 @@ public class FactoryWindow : EditorWindow
     private Color spriteTint = Color.red;
 
     private readonly NpcFactoryTypeOptions npcOptions = new NpcFactoryTypeOptions();
-    private readonly InteractObjectFactoryTypeOptions interactObjectOptions =
-        new InteractObjectFactoryTypeOptions();
+    private readonly CollectableObjectFactoryTypeOptions collectableObjectOptions = new CollectableObjectFactoryTypeOptions();
+    private readonly InteractObjectFactoryTypeOptions interactObjectOptions = new InteractObjectFactoryTypeOptions();
     private readonly EmptyFactoryTypeOptions emptyOptions = new EmptyFactoryTypeOptions();
 
     private bool addCollider = true;
@@ -102,7 +102,9 @@ public class FactoryWindow : EditorWindow
     {
         FactoryTypeOptions typeOptions = GetTypeOptions();
         if (typeOptions != null)
+        {
             typeOptions.DrawOptions();
+        }
     }
 
     private void DrawSpriteBrowser()
@@ -302,6 +304,9 @@ public class FactoryWindow : EditorWindow
 
             case FactoryConfiguration.TypeInteractive.InteractObject:
                 return interactObjectOptions;
+            
+            case FactoryConfiguration.TypeInteractive.collectableObject:
+                return collectableObjectOptions;
 
             case FactoryConfiguration.TypeInteractive.Buton:
                 return emptyOptions;

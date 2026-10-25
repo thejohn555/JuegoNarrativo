@@ -63,7 +63,9 @@ public sealed class NpcFactoryTypeOptions : FactoryTypeOptions
     public override void ConfigureCreatedObject(GameObject target)
     {
         if (!assignDialogueGraph)
+        {
             return;
+        }
 
         Interactives.NPC npc = target.GetComponent<Interactives.NPC>();
         if (npc == null)
@@ -84,6 +86,72 @@ public sealed class NpcFactoryTypeOptions : FactoryTypeOptions
         dialogueProperty.objectReferenceValue = dialogueGraph;
         serializedNpc.ApplyModifiedProperties();
         EditorUtility.SetDirty(npc);
+    }
+}
+
+public sealed class CollectableObjectFactoryTypeOptions : FactoryTypeOptions
+{
+    public override Type ComponentType => typeof(Interactives.CollectableObject);
+    
+    private bool isCrafted;
+    private Cole ingredientA;
+    private GameObject ingredientB;
+    
+    public override void DrawOptions()
+    {
+        EditorGUILayout.LabelField("Configuracion de Recolectables", EditorStyles.boldLabel);
+        isCrafted = EditorGUILayout.Toggle("El objeto es un crafteo", isCrafted);
+        
+        if (!isCrafted)
+        {
+            return;  
+        }
+
+        ingredientA = (GameObject)EditorGUILayout.ObjectField("ingredienteA: ", ingredientA, typeof(GameObject), false);
+        ingredientB = (GameObject)EditorGUILayout.ObjectField("ingredienteB: ", ingredientB, typeof(GameObject), false);
+        
+        if (ingredientA == null)
+        {
+            EditorGUILayout.HelpBox("Asigna un ingrediente A para crear este objeto crafteado.", MessageType.Warning);
+        }
+        
+        if (ingredientB == null)
+        {
+            EditorGUILayout.HelpBox("Asigna un ingrediente B para crear este objeto crafteado.", MessageType.Warning);
+        }
+    }
+    
+    public override void ConfigureCreatedObject(GameObject target)
+    {
+        Interactives.CollectableObject collectableObject = target.GetComponent<Interactives.CollectableObject>();
+        if (collectableObject == null)
+        {
+            Debug.LogWarning("Factory: no se encontro el componente collectable.", target);
+            return;
+        }
+
+        SerializedObject serializedCollectable = new SerializedObject(collectableObject);
+        
+        if (isCrafted)
+        {
+            SerializedProperty ingredientA = serializedCollectable.FindProperty("ingredientA");
+            SerializedProperty ingredientB = serializedCollectable.FindProperty("ingredientB");
+            
+            if (ingredientA == null)
+            {
+                Debug.LogWarning("Factory: Collectable no contiene el campo serializado ingredientA.", target);
+                return;
+            }
+            
+            if (ingredientB == null)
+            {
+                Debug.LogWarning("Factory: Collectable no contiene el campo serializado ingredientB.", target);
+                return;
+            }
+        }
+
+        Undo.RecordObject(collectableObject, "Assign ingredients");
+        EditorUtility.SetDirty(collectableObject);
     }
 }
 #endif

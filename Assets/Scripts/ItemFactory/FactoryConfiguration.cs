@@ -7,6 +7,7 @@ public class FactoryConfiguration
     public enum TypeInteractive
     {
         InteractObject,
+        collectableObject,
         NPC,
         Buton
     }
