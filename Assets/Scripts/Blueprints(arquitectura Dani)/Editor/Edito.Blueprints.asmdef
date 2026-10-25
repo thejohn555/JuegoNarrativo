@@ -5,7 +5,8 @@
         "Unity.GraphToolkit.Common.Editor",
         "Unity.GraphToolkit.Utility.Editor",
         "Unity.GraphToolkit.Editor",
-        "Blueprints.Runtime"
+        "Blueprints.Runtime",
+        "Blackboard"
     ],
     "includePlatforms": [
         "Editor"

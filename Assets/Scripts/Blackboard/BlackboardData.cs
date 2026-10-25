@@ -4,50 +4,18 @@ using UnityEngine;
 
 namespace BlackboardSystem
 {
-    //[CreateAssetMenu(fileName = "BlackboardData", menuName = "Scriptable Objects/BlackboardData")]
-    public class BlackboardData : MonoBehaviour//ScriptableObject
+    
+    public class BlackboardData : MonoBehaviour
     {
+        [SerializeField] private Blackboard blackboardRef;
         public List<BlackboardEntryData> entries = new();
 
-        public void SetValuesOnBlackboard(Blackboard blackboard)
+        public void SetValuesOnBlackboard()
         {
             foreach (BlackboardEntryData entry in entries)
             {
-                entry.SetValueOnBlackboard(blackboard);
+                entry.SetValueOnBlackboard(blackboardRef);
             }
-        }
-    }
-
-    [Serializable]
-    public class BlackboardEntryData : ISerializationCallbackReceiver
-    {
-        public string keyName;
-        public AnyValue.ValueType valueType;
-        public AnyValue value;
-
-        public void SetValueOnBlackboard(Blackboard blackboard)
-        {
-            BlackboardKey key = blackboard.GetOrRegisterKey(keyName);
-            setValueDispatchTable[value.type](blackboard, key, value);
-        }
-
-        //Dispatch table
-        private static Dictionary<AnyValue.ValueType, Action<Blackboard, BlackboardKey, AnyValue>> setValueDispatchTable = new()
-            {
-                { AnyValue.ValueType.Bool, (blackboard, key, anyValue) => blackboard.SetValue<bool>(key,anyValue) },
-                { AnyValue.ValueType.Int, (blackboard, key, anyValue) => blackboard.SetValue<int>(key,anyValue) },
-                { AnyValue.ValueType.Float, (blackboard, key, anyValue) => blackboard.SetValue<float>(key,anyValue) },
-                { AnyValue.ValueType.String, (blackboard, key, anyValue) => blackboard.SetValue<string>(key,anyValue) },
-                { AnyValue.ValueType.Vector3, (blackboard, key, anyValue) => blackboard.SetValue<Vector3>(key,anyValue) }
-            };
-
-        public void OnAfterDeserialize()
-        {
-            value.type = valueType;
-        }
-
-        public void OnBeforeSerialize()
-        {
         }
     }
 
@@ -61,6 +29,7 @@ namespace BlackboardSystem
 
         //Storage
         public bool boolValue;
+
         public int intValue;
         public float floatValue;
         public Vector3 vector3Value;
@@ -70,6 +39,7 @@ namespace BlackboardSystem
         //Operators overrides
 
         #region Implicit operators overload
+
         public static implicit operator bool(AnyValue value)
         {
             return value.ConvertValue<bool>();
@@ -99,6 +69,7 @@ namespace BlackboardSystem
         {
             return value.ConvertValue<GameObject>();
         }
+
         #endregion Implicit operators overload
 
         private T ConvertValue<T>()
@@ -110,12 +81,16 @@ namespace BlackboardSystem
 
                 case ValueType.Int:
                     return AsInt<T>(intValue);
+
                 case ValueType.Float:
                     return AsFloat<T>(floatValue);
+
                 case ValueType.String:
                     return (T)(object)stringValue;
+
                 case ValueType.Vector3:
                     return (T)(object)vector3Value;
+
                 case ValueType.GameObject:
                     return (T)(object)gameObjectValue;
 
@@ -125,6 +100,7 @@ namespace BlackboardSystem
         }
 
         #region AsMethods
+
         private T AsBool<T>(bool value)
         {
             return typeof(T) == typeof(bool) && value is T correctType ? correctType : default;
@@ -139,6 +115,7 @@ namespace BlackboardSystem
         {
             return typeof(T) == typeof(float) && value is T correctType ? correctType : default;
         }
-        #endregion
+
+        #endregion AsMethods
     }
 }
