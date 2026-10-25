@@ -11,6 +11,7 @@ public class FactoryConfiguration
         NPC,
         Buton
     }
+    
     public TypeInteractive typeName;
     public string objectName;
     public string prefabName;

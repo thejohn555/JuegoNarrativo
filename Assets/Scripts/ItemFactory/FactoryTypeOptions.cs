@@ -99,59 +99,62 @@ public sealed class CollectableObjectFactoryTypeOptions : FactoryTypeOptions
     
     public override void DrawOptions()
     {
-        EditorGUILayout.LabelField("Configuracion de Recolectables", EditorStyles.boldLabel);
-        isCrafted = EditorGUILayout.Toggle("El objeto es un crafteo", isCrafted);
+        EditorGUILayout.LabelField("Collectibles Configuration", EditorStyles.boldLabel);
+        isCrafted = EditorGUILayout.Toggle("The item is a craftable object.", isCrafted);
         
         if (!isCrafted)
         {
             return;  
         }
 
-        ingredientA = (GameObject)EditorGUILayout.ObjectField("ingredienteA: ", ingredientA, typeof(GameObject), false);
-        ingredientB = (GameObject)EditorGUILayout.ObjectField("ingredienteB: ", ingredientB, typeof(GameObject), false);
+        ingredientA = (GameObject)EditorGUILayout.ObjectField("ingredientA: ", ingredientA, typeof(GameObject), false);
+        ingredientB = (GameObject)EditorGUILayout.ObjectField("ingredientB: ", ingredientB, typeof(GameObject), false);
         
         if (ingredientA == null)
         {
-            EditorGUILayout.HelpBox("Asigna un ingrediente A para crear este objeto crafteado.", MessageType.Warning);
+            EditorGUILayout.HelpBox("Assign an ingredient A to create this crafted item.", MessageType.Warning);
         }
         
         if (ingredientB == null)
         {
-            EditorGUILayout.HelpBox("Asigna un ingrediente B para crear este objeto crafteado.", MessageType.Warning);
+            EditorGUILayout.HelpBox("Assign an ingredient B to create this crafted item.", MessageType.Warning);
         }
     }
-    
+
+    public override bool Validate(out string error)
+    {
+        if (isCrafted && (ingredientA == null || ingredientB == null))
+        {
+            error = "You must assign both ingredients for the crafted item or disable the option.";
+            return false;
+        }
+        
+        error = null;
+        return true;
+    }
+
     public override void ConfigureCreatedObject(GameObject target)
     {
         Interactives.CollectableObject collectableObject = target.GetComponent<Interactives.CollectableObject>();
         if (collectableObject == null)
         {
-            Debug.LogWarning("Factory: no se encontro el componente collectable.", target);
+            Debug.LogWarning("Factory: the collectable component was not found.", target);
             return;
         }
 
-        SerializedObject serializedCollectable = new SerializedObject(collectableObject);
-        
         if (isCrafted)
         {
-            SerializedProperty ingredientA = serializedCollectable.FindProperty("ingredientA");
-            SerializedProperty ingredientB = serializedCollectable.FindProperty("ingredientB");
+            SerializedObject serializedCollectable = new SerializedObject(collectableObject);
+            SerializedProperty propA = serializedCollectable.FindProperty("ingredientA");
+            SerializedProperty propB = serializedCollectable.FindProperty("ingredientB");
             
-            if (ingredientA == null)
-            {
-                Debug.LogWarning("Factory: Collectable no contiene el campo serializado ingredientA.", target);
-                return;
-            }
-            
-            if (ingredientB == null)
-            {
-                Debug.LogWarning("Factory: Collectable no contiene el campo serializado ingredientB.", target);
-                return;
-            }
-        }
+            if (propA != null) propA.objectReferenceValue = ingredientA;
+            if (propB != null) propB.objectReferenceValue = ingredientB;
 
-        Undo.RecordObject(collectableObject, "Assign ingredients");
-        EditorUtility.SetDirty(collectableObject);
+            Undo.RecordObject(collectableObject, "Assign ingredients");
+            serializedCollectable.ApplyModifiedProperties();
+            EditorUtility.SetDirty(collectableObject);
+        }
     }
 }
 #endif

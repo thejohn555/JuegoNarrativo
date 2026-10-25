@@ -24,7 +24,7 @@ public class InventorySettings : ScriptableObject
     [Header("Panel")] //Fondo del inventario
     [SerializeField] public Sprite panelSprite;
     [SerializeField] public Color panelColor;
-    [Tooltip("Si ya existe un panel con ese nombre, lo reemplaza.")]
+    [Tooltip("If a panel with that name already exists, it replaces it.")]
     public bool replaceExisting = true;
     public int SlotCount => rows * columns;
     

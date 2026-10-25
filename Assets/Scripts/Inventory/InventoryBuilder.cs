@@ -13,7 +13,7 @@ public static class InventoryBuilder
     {
         if (settings == null)
         {
-            Debug.LogError("InventoryBuilder: no hay settings.");
+            Debug.LogError("InventoryBuilder: there are no settings.");
             return null;
         }
  

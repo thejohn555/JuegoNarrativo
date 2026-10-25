@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e8e8d653ad277d4eb489364f2826acd, type: 3}
   m_Name: InventorySettings
   m_EditorClassIdentifier: Assembly-CSharp::InventorySettings
-  inventoryName: 2
+  inventoryName: inventory
   rows: 4
   columns: 4
   slotSize: {x: 100, y: 100}
