@@ -11,6 +11,8 @@ public class FactoryConfiguration
         Buton
     }
     public TypeInteractive typeName;
+    public string objectName;
+    public string prefabName;
     public Sprite sprite;
     public Vector2 worldPosition;
     public float worldWidth = 1f;

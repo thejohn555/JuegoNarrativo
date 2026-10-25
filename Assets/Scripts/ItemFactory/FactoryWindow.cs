@@ -9,6 +9,8 @@ public class FactoryWindow : EditorWindow
     public FactoryConfiguration.TypeInteractive selectedType;
 
     private string search = "";
+    private string objectName = "GameObject";
+    private string prefabName = "";
     private Vector2 spriteScroll;
     private Vector2 windowScroll;
     private Sprite selectedSprite;
@@ -58,6 +60,8 @@ public class FactoryWindow : EditorWindow
             "Crea objetos 2D en la escena con sprite, tamano en unidades del mundo y componentes configurables.",
             MessageType.Info);
 
+        EditorGUILayout.LabelField("Nombre del objeto", EditorStyles.boldLabel);
+        objectName = EditorGUILayout.TextField("En la escena", objectName);
         EditorGUILayout.Space(6);
         DrawTypeSection();
         EditorGUILayout.Space(8);
@@ -204,9 +208,10 @@ public class FactoryWindow : EditorWindow
         savePrefab = EditorGUILayout.Toggle("Guardar como prefab", savePrefab);
         using (new EditorGUI.DisabledScope(!savePrefab))
         {
+            prefabName = EditorGUILayout.TextField("Nombre del prefab", prefabName);
             prefabFolder = EditorGUILayout.TextField("Carpeta", prefabFolder);
             EditorGUILayout.HelpBox(
-                "La carpeta se creara si no existe. La ruta debe estar dentro de Assets.",
+                "Si el nombre queda vacio, se usara el nombre del objeto. La carpeta se creara si no existe y debe estar dentro de Assets.",
                 MessageType.None);
         }
     }
@@ -261,6 +266,8 @@ public class FactoryWindow : EditorWindow
         var config = new FactoryConfiguration
         {
             typeName = selectedType,
+            objectName = objectName,
+            prefabName = prefabName,
             sprite = includeSprite ? selectedSprite : null,
             worldPosition = worldPosition,
             worldWidth = worldWidth,

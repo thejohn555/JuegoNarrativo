@@ -10,9 +10,12 @@ public static class GameObjectFactory
         if (config == null)
             throw new ArgumentNullException(nameof(config));
 
-        string objectName = config.sprite != null
+        string defaultObjectName = config.sprite != null
             ? $"{config.typeName}_{config.sprite.name}"
             : config.typeName.ToString();
+        string objectName = string.IsNullOrWhiteSpace(config.objectName)
+            ? defaultObjectName
+            : config.objectName.Trim();
         GameObject go = new GameObject(objectName);
         Undo.RegisterCreatedObjectUndo(go, "Create " + config.typeName);
         go.transform.position = new Vector3(config.worldPosition.x, config.worldPosition.y, 0f);
@@ -121,7 +124,7 @@ public static class GameObjectFactory
         go.name = objectName;
 
         if (config.savePrefab)
-            SavePrefab(go, config.prefabFolder);
+            SavePrefab(go, config.prefabFolder, config.prefabName);
 
         return go;
     }
@@ -138,7 +141,7 @@ public static class GameObjectFactory
             1f);
     }
 
-    private static void SavePrefab(GameObject instance, string folder)
+    private static void SavePrefab(GameObject instance, string folder, string prefabName)
     {
         string normalizedFolder = NormalizeAssetFolder(folder);
         if (normalizedFolder == null)
@@ -159,8 +162,11 @@ public static class GameObjectFactory
             return;
         }
 
+        string assetName = string.IsNullOrWhiteSpace(prefabName)
+            ? instance.name
+            : prefabName.Trim();
         string path = AssetDatabase.GenerateUniqueAssetPath(
-            $"{normalizedFolder}/{instance.name}.prefab");
+            $"{normalizedFolder}/{assetName}.prefab");
 
         try
         {
