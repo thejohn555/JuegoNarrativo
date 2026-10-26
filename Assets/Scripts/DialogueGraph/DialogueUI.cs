@@ -19,6 +19,7 @@ public class DialogueUI : MonoBehaviour
     private string currentFullText;
     private Coroutine typeWritingCoroutine;
     private Vector3 defaultDialoguePanelPos;
+    private Vector3 defaultAnchoredPosition;
 
     private void OnEnable()
     {
@@ -40,7 +41,8 @@ public class DialogueUI : MonoBehaviour
 
     private void Awake()
     {
-        defaultDialoguePanelPos = dialoguePanel.transform.position;
+        defaultAnchoredPosition = dialoguePanel.GetComponent<RectTransform>().anchoredPosition;
+        //defaultDialoguePanelPos = dialoguePanel.transform.position;
     }
 
     private void ShowPanel(OnDialogueStartedEvent ev)
@@ -75,8 +77,15 @@ public class DialogueUI : MonoBehaviour
 
     private void RecieveDialoguePositionData(OnDialogueCameraDataEvent ev)
     {
-        dialoguePanel.transform.position = defaultDialoguePanelPos;
-        dialoguePanel.transform.position += ev.DialogueCameraData.dialogueTextOffset;
+        RectTransform rect = dialoguePanel.GetComponent<RectTransform>();
+
+        Vector3 offset = new Vector3(
+            ev.DialogueCameraData.dialogueTextOffset.x,
+            ev.DialogueCameraData.dialogueTextOffset.y,
+            0
+        );
+
+        rect.anchoredPosition = defaultAnchoredPosition + offset;
     }
 
     private void OnNodeDisplayed(OnNodeDisplayedEvent ev)
@@ -116,8 +125,7 @@ public class DialogueUI : MonoBehaviour
             Button btn = Instantiate(choiceButtonPrefab, buttonContainer);
 
             TMP_Text btnText = btn.GetComponentInChildren<TMP_Text>();
-            Debug.Log($"{btnText != null}");
-            Debug.Log($"{choice.ChoiceText}");
+
             if (btnText != null) btnText.SetText(choice.ChoiceText); 
 
             btn.onClick.AddListener(() =>

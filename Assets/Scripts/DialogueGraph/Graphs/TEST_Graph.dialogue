@@ -339,7 +339,7 @@ MonoBehaviour:
     - rid: 1528751485592797274
       type: {class: 'Constant`1[[System.String, mscorlib]]', ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
       data:
-        m_Value: Deberiamos tomarnos una birras
+        m_Value: Deberiamos tomarnos unas birras
     - rid: 1528751485592797275
       type: {class: DialogueNode, ns: DialogueGraph.Editor, asm: Assembly-CSharp-Editor}
       data: 
