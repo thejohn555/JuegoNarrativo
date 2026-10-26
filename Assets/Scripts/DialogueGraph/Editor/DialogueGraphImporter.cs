@@ -86,8 +86,8 @@ namespace DialogueGraph.Editor
             
              foreach (var outputPort in choiceOutputNodes)
              {
-                 var index = outputPort.Name.Substring($"{PortNames.PortChoiceOutput}".Length);
-                 var textPort = node.GetInputPortByName($"{PortNames.PortChoiceText} {index}");
+                 var index = outputPort.Name.Substring($"{PortNames.PortChoiceOutput}".Length).Trim();
+                 var textPort = node.GetInputPortByName($"{PortNames.PortChoiceText}{index}");
             
                  var choiceData = new ChoiceData
                  {
