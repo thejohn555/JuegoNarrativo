@@ -64,6 +64,7 @@ public class PlayerMovementSystem : PlayerSystem
         if (Vector2.Distance(currentPosition, destinationPoint)
             <= stoppingDistance)
         {
+            Debug.Log(Vector2.Distance(currentPosition, destinationPoint));
             FinishMovement();
             return;
         }

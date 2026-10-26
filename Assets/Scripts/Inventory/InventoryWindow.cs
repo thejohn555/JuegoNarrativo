@@ -49,6 +49,18 @@ public class InventoryWindown : EditorWindow
             settingsWindow.OnInspectorGUI();
         }
         EditorGUILayout.EndScrollView();
+
+        if (settings == null)
+        {
+            EditorGUILayout.HelpBox(
+                $"No hay un asset de InventorySettings asignado. Asignalo arriba o crea uno en {settingsFolder}.",
+                MessageType.Warning);
+            using (new EditorGUI.DisabledScope(true))
+            {
+                GUILayout.Button("Create", GUILayout.Height(30));
+            }
+            return;
+        }
         
         Vector2 size = settings.panelSize;
         

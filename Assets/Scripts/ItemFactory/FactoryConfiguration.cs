@@ -17,9 +17,12 @@ public class FactoryConfiguration
     public string prefabName;
     public Sprite sprite;
     public Vector2 worldPosition;
+    public float worldZ = -1f;
     public float worldWidth = 1f;
     public float worldHeight = 1f;
     public Color spriteTint = Color.white;
+    public string sortingLayerName = "Default";
+    public int sortingOrder = 1;
 
     public bool addCollider = true;
     public bool colliderIsTrigger;
@@ -29,6 +32,7 @@ public class FactoryConfiguration
     public bool addOutliner;
     public Color outlineColor = Color.white;
     public float outlineScale = 1.1f;
+    public float outlineinteractionDistane = 2f;
 
     public Type componentType;
     public bool savePrefab;

@@ -18,7 +18,7 @@ public static class GameObjectFactory
             : config.objectName.Trim();
         GameObject go = new GameObject(objectName);
         Undo.RegisterCreatedObjectUndo(go, "Create " + config.typeName);
-        go.transform.position = new Vector3(config.worldPosition.x, config.worldPosition.y, 0f);
+        go.transform.position = new Vector3(config.worldPosition.x, config.worldPosition.y, config.worldZ);
 
         if (config.sprite != null)
             SetWorldSize(go.transform, config.sprite, config.worldWidth, config.worldHeight);
@@ -54,6 +54,8 @@ public static class GameObjectFactory
                 SpriteRenderer renderer = Undo.AddComponent<SpriteRenderer>(visualObject);
                 renderer.sprite = config.sprite;
                 renderer.color = config.spriteTint;
+                renderer.sortingLayerName = config.sortingLayerName;
+                renderer.sortingOrder = config.sortingOrder;
             }
 
             if (config.addCollider)
@@ -90,6 +92,9 @@ public static class GameObjectFactory
                 try
                 {
                     Undo.AddComponent(go, componentType);
+
+                    if (go.TryGetComponent(out Interactives.Interactive interactive))
+                        ConfigureInteractionDistance(interactive, config.outlineinteractionDistane);
                 }
                 catch (Exception exception)
                 {
@@ -127,6 +132,27 @@ public static class GameObjectFactory
             SavePrefab(go, config.prefabFolder, config.prefabName);
 
         return go;
+    }
+
+    private static void ConfigureInteractionDistance(Interactives.Interactive interactive, float distance)
+    {
+        const string interactionDistancePropertyName = "<InteractionDistance>k__BackingField";
+        SerializedObject serializedInteractive = new SerializedObject(interactive);
+        SerializedProperty interactionDistanceProperty =
+            serializedInteractive.FindProperty(interactionDistancePropertyName);
+
+        if (interactionDistanceProperty == null)
+        {
+            Debug.LogWarning(
+                "Factory: no se encontro el campo serializado InteractionDistance en Interactive.",
+                interactive);
+            return;
+        }
+
+        Undo.RecordObject(interactive, "Set interaction distance");
+        interactionDistanceProperty.floatValue = distance;
+        serializedInteractive.ApplyModifiedProperties();
+        EditorUtility.SetDirty(interactive);
     }
 
     private static void SetWorldSize(Transform target, Sprite sprite, float width, float height)

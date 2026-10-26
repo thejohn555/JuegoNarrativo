@@ -15,7 +15,10 @@ public abstract class FactoryTypeOptions
         return true;
     }
 
-    public virtual void ConfigureCreatedObject(GameObject target) { }
+    public virtual void ConfigureCreatedObject(GameObject target)
+    {
+        
+    }
 }
 
 public sealed class EmptyFactoryTypeOptions : FactoryTypeOptions
