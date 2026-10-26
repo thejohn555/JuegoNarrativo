@@ -19,6 +19,7 @@ namespace Interactives
 
             if (InventoryManager.Instance != null)
             {
+                Debug.Log("Añadido");
                 bool added = InventoryManager.Instance.AddItem(itemName, itemSprite);
                 
                 if (added)
