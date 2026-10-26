@@ -15,14 +15,18 @@ public class FactoryWindow : EditorWindow
     private Vector2 windowScroll;
     private Sprite selectedSprite;
     private bool includeSprite = true;
+    private float worldZ = -1f;
+    private string sortingLayerName = "Default";
+    
     private float worldWidth = 1f;
     private float worldHeight = 1f;
     private Vector2 worldPosition = Vector2.zero;
+    private int sortingOrder = 1;
     private Color spriteTint = Color.red;
 
     private readonly NpcFactoryTypeOptions npcOptions = new NpcFactoryTypeOptions();
-    private readonly InteractObjectFactoryTypeOptions interactObjectOptions =
-        new InteractObjectFactoryTypeOptions();
+    private readonly CollectableObjectFactoryTypeOptions collectableObjectOptions = new CollectableObjectFactoryTypeOptions();
+    private readonly InteractObjectFactoryTypeOptions interactObjectOptions = new InteractObjectFactoryTypeOptions();
     private readonly EmptyFactoryTypeOptions emptyOptions = new EmptyFactoryTypeOptions();
 
     private bool addCollider = true;
@@ -30,8 +34,11 @@ public class FactoryWindow : EditorWindow
     private bool addRigidbody;
     private RigidbodyType2D bodyType = RigidbodyType2D.Static;
     private bool addOutliner;
+    
+    
     private Color outlineColor = Color.white;
     private float outlineScale = 1.1f;
+    private float outlineinteractionDistane = 2f;
 
     private bool savePrefab;
     private string prefabFolder = "Assets/Prefabs/Generated";
@@ -102,7 +109,9 @@ public class FactoryWindow : EditorWindow
     {
         FactoryTypeOptions typeOptions = GetTypeOptions();
         if (typeOptions != null)
+        {
             typeOptions.DrawOptions();
+        }
     }
 
     private void DrawSpriteBrowser()
@@ -170,9 +179,24 @@ public class FactoryWindow : EditorWindow
         worldWidth = Mathf.Max(0.01f, EditorGUILayout.FloatField("Ancho (unidades)", worldWidth));
         worldHeight = Mathf.Max(0.01f, EditorGUILayout.FloatField("Alto (unidades)", worldHeight));
         worldPosition = EditorGUILayout.Vector2Field("Posicion X / Y", worldPosition);
+        worldZ = EditorGUILayout.FloatField("Posicion Z", worldZ);
 
         if (includeSprite)
         {
+            string[] sortingLayerNames = SortingLayer.layers.Select(layer => layer.name).ToArray();
+            if (sortingLayerNames.Length > 0)
+            {
+                int selectedLayerIndex = Array.IndexOf(sortingLayerNames, sortingLayerName);
+                if (selectedLayerIndex < 0)
+                    selectedLayerIndex = Array.IndexOf(sortingLayerNames, "Default");
+                if (selectedLayerIndex < 0)
+                    selectedLayerIndex = 0;
+
+                selectedLayerIndex = EditorGUILayout.Popup("Capa de renderizado", selectedLayerIndex, sortingLayerNames);
+                sortingLayerName = sortingLayerNames[selectedLayerIndex];
+            }
+
+            sortingOrder = EditorGUILayout.IntField("Orden en la capa", sortingOrder);
             spriteTint = EditorGUILayout.ColorField("Color del sprite", spriteTint);
             if (selectedSprite != null)
             {
@@ -199,6 +223,14 @@ public class FactoryWindow : EditorWindow
         {
             outlineColor = EditorGUILayout.ColorField("Color del contorno", outlineColor);
             outlineScale = EditorGUILayout.Slider("Escala del contorno", outlineScale, 1f, 1.5f);
+        }
+
+        FactoryTypeOptions typeOptions = GetTypeOptions();
+        if (typeOptions != null &&
+            typeof(Interactives.Interactive).IsAssignableFrom(typeOptions.ComponentType))
+        {
+            outlineinteractionDistane = EditorGUILayout.FloatField(
+                "Distancia de interacción", outlineinteractionDistane);
         }
     }
 
@@ -270,9 +302,12 @@ public class FactoryWindow : EditorWindow
             prefabName = prefabName,
             sprite = includeSprite ? selectedSprite : null,
             worldPosition = worldPosition,
+            worldZ = worldZ,
             worldWidth = worldWidth,
             worldHeight = worldHeight,
             spriteTint = spriteTint,
+            sortingLayerName = sortingLayerName,
+            sortingOrder = sortingOrder,
             addCollider = addCollider,
             colliderIsTrigger = colliderIsTrigger,
             addRigidbody = addRigidbody,
@@ -280,6 +315,7 @@ public class FactoryWindow : EditorWindow
             addOutliner = addOutliner,
             outlineColor = outlineColor,
             outlineScale = outlineScale,
+            outlineinteractionDistane = outlineinteractionDistane,
             componentType = typeOptions != null ? typeOptions.ComponentType : null,
             savePrefab = savePrefab,
             prefabFolder = prefabFolder
@@ -302,6 +338,9 @@ public class FactoryWindow : EditorWindow
 
             case FactoryConfiguration.TypeInteractive.InteractObject:
                 return interactObjectOptions;
+            
+            case FactoryConfiguration.TypeInteractive.collectableObject:
+                return collectableObjectOptions;
 
             case FactoryConfiguration.TypeInteractive.Buton:
                 return emptyOptions;

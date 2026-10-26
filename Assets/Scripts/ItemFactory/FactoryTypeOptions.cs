@@ -15,7 +15,10 @@ public abstract class FactoryTypeOptions
         return true;
     }
 
-    public virtual void ConfigureCreatedObject(GameObject target) { }
+    public virtual void ConfigureCreatedObject(GameObject target)
+    {
+        
+    }
 }
 
 public sealed class EmptyFactoryTypeOptions : FactoryTypeOptions
@@ -63,7 +66,9 @@ public sealed class NpcFactoryTypeOptions : FactoryTypeOptions
     public override void ConfigureCreatedObject(GameObject target)
     {
         if (!assignDialogueGraph)
+        {
             return;
+        }
 
         Interactives.NPC npc = target.GetComponent<Interactives.NPC>();
         if (npc == null)
@@ -84,6 +89,75 @@ public sealed class NpcFactoryTypeOptions : FactoryTypeOptions
         dialogueProperty.objectReferenceValue = dialogueGraph;
         serializedNpc.ApplyModifiedProperties();
         EditorUtility.SetDirty(npc);
+    }
+}
+
+public sealed class CollectableObjectFactoryTypeOptions : FactoryTypeOptions
+{
+    public override Type ComponentType => typeof(Interactives.CollectableObject);
+    
+    private bool isCrafted;
+    private GameObject ingredientA;
+    private GameObject ingredientB;
+    
+    public override void DrawOptions()
+    {
+        EditorGUILayout.LabelField("Collectibles Configuration", EditorStyles.boldLabel);
+        isCrafted = EditorGUILayout.Toggle("The item is a craftable object.", isCrafted);
+        
+        if (!isCrafted)
+        {
+            return;  
+        }
+
+        ingredientA = (GameObject)EditorGUILayout.ObjectField("ingredientA: ", ingredientA, typeof(GameObject), false);
+        ingredientB = (GameObject)EditorGUILayout.ObjectField("ingredientB: ", ingredientB, typeof(GameObject), false);
+        
+        if (ingredientA == null)
+        {
+            EditorGUILayout.HelpBox("Assign an ingredient A to create this crafted item.", MessageType.Warning);
+        }
+        
+        if (ingredientB == null)
+        {
+            EditorGUILayout.HelpBox("Assign an ingredient B to create this crafted item.", MessageType.Warning);
+        }
+    }
+
+    public override bool Validate(out string error)
+    {
+        if (isCrafted && (ingredientA == null || ingredientB == null))
+        {
+            error = "You must assign both ingredients for the crafted item or disable the option.";
+            return false;
+        }
+        
+        error = null;
+        return true;
+    }
+
+    public override void ConfigureCreatedObject(GameObject target)
+    {
+        Interactives.CollectableObject collectableObject = target.GetComponent<Interactives.CollectableObject>();
+        if (collectableObject == null)
+        {
+            Debug.LogWarning("Factory: the collectable component was not found.", target);
+            return;
+        }
+
+        if (isCrafted)
+        {
+            SerializedObject serializedCollectable = new SerializedObject(collectableObject);
+            SerializedProperty propA = serializedCollectable.FindProperty("ingredientA");
+            SerializedProperty propB = serializedCollectable.FindProperty("ingredientB");
+            
+            if (propA != null) propA.objectReferenceValue = ingredientA;
+            if (propB != null) propB.objectReferenceValue = ingredientB;
+
+            Undo.RecordObject(collectableObject, "Assign ingredients");
+            serializedCollectable.ApplyModifiedProperties();
+            EditorUtility.SetDirty(collectableObject);
+        }
     }
 }
 #endif

@@ -1,0 +1,40 @@
+﻿using UnityEditor.Timeline.Actions;
+using UnityEngine;
+
+namespace Interactives
+{
+    public class CollectableObject : Interactive
+    {
+        [Header("Crafting Ingredients (Opcional)")]
+        public GameObject ingredientA;
+        public GameObject ingredientB;
+
+        public override void Interact(GameObject interactor)
+        {
+            Debug.Log("Se ha interactuado con el objeto");
+            // Extrae el sprite automáticamente del objeto visual en la escena
+            SpriteRenderer spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+            Sprite itemSprite = spriteRenderer != null ? spriteRenderer.sprite : null;
+            string itemName = gameObject.name;
+
+            if (InventoryManager.Instance != null)
+            {
+                bool added = InventoryManager.Instance.AddItem(itemName, itemSprite);
+                
+                if (added)
+                {
+                    // Si se añadió correctamente al inventario, desaparece de la escena
+                    Destroy(gameObject);
+                }
+                else
+                {
+                    Debug.Log("El inventario está lleno.");
+                }
+            }
+            else
+            {
+                Debug.LogWarning("No se encontró ningún InventoryManager activo en la escena.");
+            }
+        }
+    }
+}
