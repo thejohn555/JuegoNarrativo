@@ -19,6 +19,11 @@ public class CameraController : MonoBehaviour
     [Header("Test Mode")]
     public Transform testDialogueTarget;
 
+    [Header("Camera Bounds")]
+    public bool useCameraBounds = false;
+    public Vector3 boundsCenter = Vector3.zero;
+    public Vector3 boundsSize = new Vector3(20f, 10f, 0f);
+
     [SerializeField] private float zoomVelocity = 0.5f;
     private Action currentStateBehavior;
     private Vector3 velocity = Vector3.zero;
@@ -56,6 +61,7 @@ public class CameraController : MonoBehaviour
         currentCameraState = initialState;
         ChangeCameraState(initialState);
     }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.C))
@@ -184,14 +190,54 @@ public class CameraController : MonoBehaviour
         if (moveX != 0 || moveY != 0)
         {
             Vector3 desiredPos = new Vector3(camPos.x + moveX, camPos.y + moveY, camPos.z);
-            transform.position = Vector3.SmoothDamp(transform.position, desiredPos, ref velocity, smoothTime);
-        }
+            Vector3 nextPosition = Vector3.SmoothDamp(transform.position, desiredPos, ref velocity, smoothTime);
 
+            if (useCameraBounds)
+            {
+                float halfHeight = cam.orthographicSize;
+                float halfWidth = halfHeight * cam.aspect;
+
+                float minX = boundsCenter.x - (boundsSize.x / 2f) + halfWidth;
+                float maxX = boundsCenter.x + (boundsSize.x / 2f) - halfWidth;
+                float minY = boundsCenter.y - (boundsSize.y / 2f) + halfHeight;
+                float maxY = boundsCenter.y + (boundsSize.y / 2f) - halfHeight;
+
+                if (minX > maxX) minX = maxX = boundsCenter.x;
+                if (minY > maxY) minY = maxY = boundsCenter.y;
+
+                nextPosition.x = Mathf.Clamp(nextPosition.x, minX, maxX);
+                nextPosition.y = Mathf.Clamp(nextPosition.y, minY, maxY);
+            }
+
+            transform.position = nextPosition;
+        }
     }
 
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
         Gizmos.DrawWireCube(transform.position, new Vector3(deadZone.x, deadZone.y, 0f));
+
+        if (useCameraBounds)
+        {
+            Gizmos.color = Color.darkOliveGreen;
+            Gizmos.DrawWireCube(boundsCenter, boundsSize);
+
+            Camera editorCam = GetComponent<Camera>();
+            if (editorCam != null)
+            {
+                float halfHeight = editorCam.orthographicSize;
+                float halfWidth = halfHeight * editorCam.aspect;
+
+                Vector3 centerBoundsSize = new Vector3(
+                    Mathf.Max(0, boundsSize.x - (halfWidth * 2f)),
+                    Mathf.Max(0, boundsSize.y - (halfHeight * 2f)),
+                    0f
+                );
+
+                Gizmos.color = new Color(1f, 0f, 0f, 0.4f);
+                Gizmos.DrawWireCube(boundsCenter, centerBoundsSize);
+            }
+        }
     }
 }

@@ -11,12 +11,15 @@ public class DialogueUI : MonoBehaviour
     [SerializeField] private TMP_Text dialogueText;
     [SerializeField] private EventBusSO EventBus;
     [SerializeField] private Button choiceButtonPrefab;
-    [SerializeField] private Transform choiceContainer;
+    [SerializeField] private GameObject choiceContainer;
+    [SerializeField] private Transform buttonContainer;
     [SerializeField] private Image choiceBackground;
+    private RuntimeDialogueNode currentNode;
     private bool isWritingText;
     private string currentFullText;
     private Coroutine typeWritingCoroutine;
     private Vector3 defaultDialoguePanelPos;
+    private Vector3 defaultAnchoredPosition;
 
     private void OnEnable()
     {
@@ -38,7 +41,8 @@ public class DialogueUI : MonoBehaviour
 
     private void Awake()
     {
-        defaultDialoguePanelPos = dialoguePanel.transform.position;
+        defaultAnchoredPosition = dialoguePanel.GetComponent<RectTransform>().anchoredPosition;
+        //defaultDialoguePanelPos = dialoguePanel.transform.position;
     }
 
     private void ShowPanel(OnDialogueStartedEvent ev)
@@ -54,47 +58,105 @@ public class DialogueUI : MonoBehaviour
     private void NextNode(OnSkipDialogueEvent ev)
     {
         if (isWritingText)
-        { 
-            //completar animacion del tiron
+        {
             if (typeWritingCoroutine != null) StopCoroutine(typeWritingCoroutine);
-            dialogueText.SetText(currentFullText);
+            dialogueText.maxVisibleCharacters = dialogueText.textInfo.characterCount;
             isWritingText = false;
+
+            // si el jugador skipea la animación, mostramos los botones de golpe
+            GenerateChoices();
         }
         else
         {
-            //mostrar siguiente nodo
-            DialogueManager.Instance.AdvanceToNextNode();
+            if (currentNode.Choices == null || currentNode.Choices.Count == 0)
+            {
+                DialogueManager.Instance.AdvanceToNextNode();
+            }
         }
     }
 
     private void RecieveDialoguePositionData(OnDialogueCameraDataEvent ev)
     {
-        dialoguePanel.transform.position = defaultDialoguePanelPos;
-        dialoguePanel.transform.position += ev.DialogueCameraData.dialogueTextOffset;
+        RectTransform rect = dialoguePanel.GetComponent<RectTransform>();
+
+        Vector3 offset = new Vector3(
+            ev.DialogueCameraData.dialogueTextOffset.x,
+            ev.DialogueCameraData.dialogueTextOffset.y,
+            0
+        );
+
+        rect.anchoredPosition = defaultAnchoredPosition + offset;
     }
 
     private void OnNodeDisplayed(OnNodeDisplayedEvent ev)
     {
         if (typeWritingCoroutine != null) StopCoroutine(typeWritingCoroutine);
+        currentNode = ev.Node;
         speakerText.text = ev.Node.SpeakerName;
+
+        ClearChoices();
+
         typeWritingCoroutine = StartCoroutine(TypeWrittingText(ev.Node.DialogueText, ev.Node.TextSpeed));
+    }
+
+    private void ClearChoices()
+    {
+        // 1. Apagamos todo el bloque (Fondo + Contenedor de botones)
+        if (choiceContainer != null) choiceContainer.SetActive(false);
+
+        // 2. Destruimos los botones viejos que estén dentro del BUTTON CONTAINER
+        if (buttonContainer != null)
+        {
+            foreach (Transform child in buttonContainer)
+            {
+                Destroy(child.gameObject);
+            }
+        }
+    }
+
+    private void GenerateChoices()
+    {
+        if (currentNode.Choices == null || currentNode.Choices.Count == 0) return;
+
+        if (choiceContainer != null) choiceContainer.SetActive(true);
+
+        foreach (var choice in currentNode.Choices)
+        {
+            Button btn = Instantiate(choiceButtonPrefab, buttonContainer);
+
+            TMP_Text btnText = btn.GetComponentInChildren<TMP_Text>();
+
+            if (btnText != null) btnText.SetText(choice.ChoiceText); 
+
+            btn.onClick.AddListener(() =>
+            {
+                ClearChoices();
+                DialogueManager.Instance.DisplayNode(choice.DestinationNodeID);
+            });
+        }
     }
 
     private IEnumerator TypeWrittingText(string fullText, float lettersPerSecond)
     {
-        // iterar cuantas letras por segundo hay
         isWritingText = true;
         currentFullText = fullText;
-        dialogueText.SetText("");
 
-        float delay = 1 / lettersPerSecond;
+        dialogueText.SetText(fullText);
 
-        foreach (char letter in fullText)
+        dialogueText.maxVisibleCharacters = 0;
+
+        yield return null;
+
+        int totalCharacters = dialogueText.textInfo.characterCount;
+        float delay = 1f / lettersPerSecond;
+
+        for (int i = 0; i <= totalCharacters; i++)
         {
-            dialogueText.text += letter;
+            dialogueText.maxVisibleCharacters = i;
             yield return new WaitForSeconds(delay);
         }
 
         isWritingText = false;
+        GenerateChoices();
     }
 }

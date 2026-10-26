@@ -237,9 +237,9 @@ GameObject:
   m_Component:
   - component: {fileID: 472253353}
   - component: {fileID: 472253352}
+  - component: {fileID: 472253355}
   - component: {fileID: 472253351}
   - component: {fileID: 472253354}
-  - component: {fileID: 472253355}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -384,6 +384,9 @@ MonoBehaviour:
   smoothTime: 0.2
   EventBus: {fileID: 11400000, guid: 12dd33ac5088a19498397bad87f52e37, type: 2}
   testDialogueTarget: {fileID: 812776301}
+  useCameraBounds: 1
+  boundsCenter: {x: 0, y: 0, z: 0}
+  boundsSize: {x: 20, y: 10, z: 0}
   zoomVelocity: 0.3
 --- !u!1 &778147687
 GameObject:
@@ -798,7 +801,7 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 1
+  m_ChildAlignment: 4
   m_Spacing: 0
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
@@ -838,10 +841,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DialogueTestTrigger
   testDialogueGraph: {fileID: 3965311268370046156, guid: 3a13d3d9cc957f04a92db2d896aad449, type: 3}
   testDialogueTarget: {fileID: 812776301}
-  cameraOffset: {x: -2.04, y: 1.1, z: 0}
-  zoom: 3
+  cameraOffset: {x: 1.59, y: 1.1, z: 0}
+  zoom: 3.66
   smoothTime: 0.5
-  dialogueTextOffset: {x: 114.8, y: 25.2}
+  dialogueTextOffset: {x: 103.7, y: 25.2}
   testKey: 116
 --- !u!4 &1175517464
 Transform:
@@ -947,9 +950,9 @@ MonoBehaviour:
   m_fontSize: 20
   m_fontSizeBase: 20
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 20
+  m_fontSizeMax: 30
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
@@ -1371,7 +1374,8 @@ MonoBehaviour:
   dialogueText: {fileID: 1464412401}
   EventBus: {fileID: 11400000, guid: 12dd33ac5088a19498397bad87f52e37, type: 2}
   choiceButtonPrefab: {fileID: 108156796184780734, guid: c77cbcfd331d38d49a0742d92a3f687f, type: 3}
-  choiceContainer: {fileID: 1987117081}
+  choiceContainer: {fileID: 1987117080}
+  buttonContainer: {fileID: 1023013476}
   choiceBackground: {fileID: 1660917275}
 --- !u!1 &1987117080
 GameObject:
