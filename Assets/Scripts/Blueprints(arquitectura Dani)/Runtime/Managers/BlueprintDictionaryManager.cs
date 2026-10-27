@@ -9,6 +9,7 @@ namespace Blueprints_arquitectura_Dani_.Runtime.Managers
     {
         
         public static BlueprintDictionaryManager Instance { get; private set; }
+        [SerializeField] private DictionarySO dictionarySo;          
         public List<GameObject> triggerList = new();
         public Dictionary <string, RuntimeNodeGroup> triggerDictionary = new ();
         
@@ -34,6 +35,13 @@ namespace Blueprints_arquitectura_Dani_.Runtime.Managers
             {
                 triggerList.Add(trigger);
             }
+#if UNITY_EDITOR
+            UnityEditor.EditorUtility.SetDirty(this);
+            if (dictionarySo != null)
+                dictionarySo.AddName(trigger.name);
+            else
+                Debug.LogWarning("[Manager] Falta asignar el DictionarySO", this);
+#endif
         }
 
         public void AddTriggerToDictionary(string trigger, RuntimeNodeGroup group)

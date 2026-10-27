@@ -9,7 +9,7 @@ namespace Blueprints_arquitectura_Dani_.Editor.Blueprints_arquitectura_Dani_.Edi
 {
     public class TriggerNodeGenerator
     {
-      public const string outPutPath = "\"Assets/Scripts/Blueprints(arquitectura Dani)/Editor/Nodes/Generated/TriggerNodes.cs\";";
+      public const string outPutPath = "Assets/Scripts/Blueprints(arquitectura Dani)/Editor/Nodes/Generated/TriggerNodes.cs";
 
       [MenuItem("Blueprints/Generar nodos de trigger")]
       static void GenerateFromScene()
