@@ -29,6 +29,21 @@ public sealed class EmptyFactoryTypeOptions : FactoryTypeOptions
 public sealed class InteractObjectFactoryTypeOptions : FactoryTypeOptions
 {
     public override Type ComponentType => typeof(Interactives.InteractObject);
+    // esto esta aqui de forma temporal cuando este el crear trigger lo pongo donde toca
+    public override void ConfigureCreatedObject(GameObject target)
+    {
+        var manager = UnityEngine.Object.FindFirstObjectByType<
+            Blueprints_arquitectura_Dani_.Runtime.Managers.BlueprintDictionaryManager>();
+
+        if (manager == null)
+        {
+            Debug.LogWarning("Factory: no hay BlueprintDictionaryManager en la escena.", target);
+            return;
+        }
+
+        manager.AddTriggerToList(target);
+        UnityEditor.SceneManagement.EditorSceneManager.MarkSceneDirty(target.scene);
+    }
 }
 
 public sealed class NpcFactoryTypeOptions : FactoryTypeOptions

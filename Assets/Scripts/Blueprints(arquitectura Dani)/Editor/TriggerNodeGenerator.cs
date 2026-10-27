@@ -58,7 +58,7 @@ namespace Blueprints_arquitectura_Dani_.Editor.Blueprints_arquitectura_Dani_.Edi
                   }
 
                   sb.AppendLine("    [Serializable]");
-                  sb.AppendLine($"    public class OnTriggerEnter_{id} : TriggerEnterNodeBase");
+                  sb.AppendLine($"    public class OnTriggerEnter_{id} : OnTriggerEnterNode");
                   sb.AppendLine($"    {{ public override string TriggerKey => \"{name}\"; }}");
                   used.Add(id);
               }
