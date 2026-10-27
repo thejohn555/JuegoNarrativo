@@ -4,7 +4,6 @@ using UnityEngine;
 public class InventoryController : MonoBehaviour
 {
     [Header("Configuración")]
-    [SerializeField] private KeyCode toggleKey;
     [SerializeField] private GameObject inventoryPanel;
 
     [Header("Inputs")]
@@ -41,6 +40,5 @@ public class InventoryController : MonoBehaviour
         // Alternamos el estado
         isOpen = !isOpen;
         inventoryPanel.SetActive(isOpen);
-        //inputs.Publish(new OnInventoryToggle(isOpen));
     }
 }
