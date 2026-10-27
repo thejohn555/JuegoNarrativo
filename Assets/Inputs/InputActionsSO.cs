@@ -93,7 +93,7 @@ public class InputActionsSO : ScriptableObject, NewInputActions.IGamePlayActions
     
     public void OnCloseInventory(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (context.canceled)
         {
             EventBus.Publish(onScrollWheelPressed);
             SwitchMap(inputActions.GamePlay);
