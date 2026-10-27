@@ -20,7 +20,10 @@ namespace Interactives
 
         [Header("Dialogues")]
         [SerializeField] private RuntimeDialogueGraph currentGraph;
+        [SerializeField] private Color npcTextColor = Color.white;
         [SerializeField] private List<DialogueState> alternativeStates;
+        [SerializeField] bool cameraMove;
+        [SerializeField] bool zoomCamera;
 
         [Header("Events")]
         [SerializeField] private EventBusSO EventBus;
@@ -35,7 +38,6 @@ namespace Interactives
         {
             EventBus.Subscribe<OnNPCStateChangedEvent>(HandleStateChange);
         }
-
         private void OnDisable()
         {
             EventBus.UnSubscribe<OnNPCStateChangedEvent>(HandleStateChange);
@@ -67,11 +69,15 @@ namespace Interactives
             testData.zoom = zoom;
             testData.smoothTime = smoothTime;
             testData.dialogueTextOffset = dialogueTextOffset;
+            testData.moveCamera = cameraMove;
+            testData.zoomCamera = zoomCamera;
+            testData.isDialogue = true;
+            testData.textColor = npcTextColor;
 
             DialogueManager.Instance.StartDialogue(currentGraph, testData);
         }
 
-        private void OnDrawGizmosSelected()
+        protected override void OnDrawGizmosSelected()
         {
             if (transform == null) return;
 
