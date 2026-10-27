@@ -33,6 +33,7 @@ public class FactoryConfiguration
     public Color outlineColor = Color.white;
     public float outlineScale = 1.1f;
     public float outlineinteractionDistane = 2f;
+    public RuntimeDialogueGraph interactiveDescription;
 
     public Type componentType;
     public bool savePrefab;

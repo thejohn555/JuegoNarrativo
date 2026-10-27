@@ -2162,6 +2162,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Interactives.NPC
   <InteractionDistance>k__BackingField: 2
+  description: {fileID: 0}
   interactionCursor: {fileID: 0}
   npcID: 
   currentGraph: {fileID: 0}

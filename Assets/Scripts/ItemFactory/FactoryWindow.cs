@@ -39,6 +39,7 @@ public class FactoryWindow : EditorWindow
     private Color outlineColor = Color.white;
     private float outlineScale = 1.1f;
     private float outlineinteractionDistane = 2f;
+    private RuntimeDialogueGraph interactiveDescription;
 
     private bool savePrefab;
     private string prefabFolder = "Assets/Prefabs/Generated";
@@ -64,18 +65,18 @@ public class FactoryWindow : EditorWindow
         windowScroll = EditorGUILayout.BeginScrollView(windowScroll);
         EditorGUILayout.LabelField("2D Object Factory", EditorStyles.largeLabel);
         EditorGUILayout.HelpBox(
-            "Crea objetos 2D en la escena con sprite, tamano en unidades del mundo y componentes configurables.",
+            "Create 2D objects in the scene with a sprite, world-space size, and configurable components.",
             MessageType.Info);
 
-        EditorGUILayout.LabelField("Nombre del objeto", EditorStyles.boldLabel);
-        objectName = EditorGUILayout.TextField("En la escena", objectName);
+        EditorGUILayout.LabelField("Object name", EditorStyles.boldLabel);
+        objectName = EditorGUILayout.TextField("In scene", objectName);
         EditorGUILayout.Space(6);
         DrawTypeSection();
         EditorGUILayout.Space(8);
         DrawTypeOptions();
         EditorGUILayout.Space(8);
         EditorGUILayout.LabelField("Sprite", EditorStyles.boldLabel);
-        includeSprite = EditorGUILayout.Toggle("Incluir sprite", includeSprite);
+        includeSprite = EditorGUILayout.Toggle("Include sprite", includeSprite);
         if (includeSprite)
             DrawSpriteBrowser();
 
@@ -92,7 +93,7 @@ public class FactoryWindow : EditorWindow
         bool invalidTypeOptions = typeOptions != null && !typeOptions.Validate(out _);
         using (new EditorGUI.DisabledScope(needsSprite || invalidTypeOptions))
         {
-            if (GUILayout.Button("Crear objeto en escena", GUILayout.Height(34)))
+            if (GUILayout.Button("Create object in scene", GUILayout.Height(34)))
                 CreateObject();
         }
 
@@ -101,8 +102,13 @@ public class FactoryWindow : EditorWindow
 
     private void DrawTypeSection()
     {
-        EditorGUILayout.LabelField("Tipo de objeto", EditorStyles.boldLabel);
-        selectedType = (FactoryConfiguration.TypeInteractive)EditorGUILayout.EnumPopup("Tipo", selectedType);
+        EditorGUILayout.LabelField("Object type", EditorStyles.boldLabel);
+        string[] typeLabels = { "Interact Object", "Collectible Object", "NPC", "Button" };
+        int selectedIndex = Mathf.Max(0, Array.IndexOf(
+            (FactoryConfiguration.TypeInteractive[])Enum.GetValues(typeof(FactoryConfiguration.TypeInteractive)),
+            selectedType));
+        selectedIndex = EditorGUILayout.Popup("Type", selectedIndex, typeLabels);
+        selectedType = (FactoryConfiguration.TypeInteractive)selectedIndex;
     }
 
     private void DrawTypeOptions()
@@ -117,31 +123,31 @@ public class FactoryWindow : EditorWindow
     private void DrawSpriteBrowser()
     {
         EditorGUILayout.BeginHorizontal();
-        string newSearch = EditorGUILayout.TextField("Buscar", search);
+        string newSearch = EditorGUILayout.TextField("Search", search);
         if (newSearch != search)
         {
             search = newSearch;
             RefreshSprites();
         }
 
-        if (GUILayout.Button("Actualizar", GUILayout.Width(78)))
+        if (GUILayout.Button("Refresh", GUILayout.Width(78)))
             RefreshSprites();
         EditorGUILayout.EndHorizontal();
 
         selectedSprite = (Sprite)EditorGUILayout.ObjectField(
-            "Sprite elegido", selectedSprite, typeof(Sprite), false);
+            "Selected sprite", selectedSprite, typeof(Sprite), false);
 
         if (selectedSprite != null)
         {
             GUILayout.Label(AssetPreview.GetAssetPreview(selectedSprite) ??
                             AssetPreview.GetMiniThumbnail(selectedSprite),
                 GUILayout.Width(100), GUILayout.Height(100));
-            EditorGUILayout.LabelField("Nombre", selectedSprite.name);
-            EditorGUILayout.LabelField("Tamano original",
+            EditorGUILayout.LabelField("Name", selectedSprite.name);
+            EditorGUILayout.LabelField("Original size",
                 $"{selectedSprite.rect.width:0} x {selectedSprite.rect.height:0} px");
         }
 
-        EditorGUILayout.LabelField($"Sprites encontrados: {sprites.Count}", EditorStyles.miniLabel);
+        EditorGUILayout.LabelField($"Sprites found: {sprites.Count}", EditorStyles.miniLabel);
         spriteScroll = EditorGUILayout.BeginScrollView(spriteScroll, GUILayout.Height(160));
         const int columns = 4;
         int index = 0;
@@ -175,11 +181,11 @@ public class FactoryWindow : EditorWindow
 
     private void DrawTransformSection()
     {
-        EditorGUILayout.LabelField("Tamano y posicion", EditorStyles.boldLabel);
-        worldWidth = Mathf.Max(0.01f, EditorGUILayout.FloatField("Ancho (unidades)", worldWidth));
-        worldHeight = Mathf.Max(0.01f, EditorGUILayout.FloatField("Alto (unidades)", worldHeight));
-        worldPosition = EditorGUILayout.Vector2Field("Posicion X / Y", worldPosition);
-        worldZ = EditorGUILayout.FloatField("Posicion Z", worldZ);
+        EditorGUILayout.LabelField("Size and position", EditorStyles.boldLabel);
+        worldWidth = Mathf.Max(0.01f, EditorGUILayout.FloatField("Width (units)", worldWidth));
+        worldHeight = Mathf.Max(0.01f, EditorGUILayout.FloatField("Height (units)", worldHeight));
+        worldPosition = EditorGUILayout.Vector2Field("Position X / Y", worldPosition);
+        worldZ = EditorGUILayout.FloatField("Position Z", worldZ);
 
         if (includeSprite)
         {
@@ -192,37 +198,37 @@ public class FactoryWindow : EditorWindow
                 if (selectedLayerIndex < 0)
                     selectedLayerIndex = 0;
 
-                selectedLayerIndex = EditorGUILayout.Popup("Capa de renderizado", selectedLayerIndex, sortingLayerNames);
+                selectedLayerIndex = EditorGUILayout.Popup("Sorting layer", selectedLayerIndex, sortingLayerNames);
                 sortingLayerName = sortingLayerNames[selectedLayerIndex];
             }
 
-            sortingOrder = EditorGUILayout.IntField("Orden en la capa", sortingOrder);
-            spriteTint = EditorGUILayout.ColorField("Color del sprite", spriteTint);
+            sortingOrder = EditorGUILayout.IntField("Sorting order", sortingOrder);
+            spriteTint = EditorGUILayout.ColorField("Sprite tint", spriteTint);
             if (selectedSprite != null)
             {
                 Vector2 size = GetSpriteWorldSize(selectedSprite);
-                EditorGUILayout.LabelField("Tamano base estimado",
-                    $"{size.x:0.###} x {size.y:0.###} unidades");
+                EditorGUILayout.LabelField("Estimated base size",
+                    $"{size.x:0.###} x {size.y:0.###} units");
             }
         }
     }
 
     private void DrawComponentsSection()
     {
-        EditorGUILayout.LabelField("Componentes", EditorStyles.boldLabel);
-        addCollider = EditorGUILayout.Toggle("Anadir Collider2D", addCollider);
+        EditorGUILayout.LabelField("Components", EditorStyles.boldLabel);
+        addCollider = EditorGUILayout.Toggle("Add Collider2D", addCollider);
         if (addCollider)
-            colliderIsTrigger = EditorGUILayout.Toggle("Es Trigger", colliderIsTrigger);
+            colliderIsTrigger = EditorGUILayout.Toggle("Is trigger", colliderIsTrigger);
 
-        addRigidbody = EditorGUILayout.Toggle("Anadir Rigidbody2D", addRigidbody);
+        addRigidbody = EditorGUILayout.Toggle("Add Rigidbody2D", addRigidbody);
         if (addRigidbody)
-            bodyType = (RigidbodyType2D)EditorGUILayout.EnumPopup("Tipo Rigidbody", bodyType);
+            bodyType = (RigidbodyType2D)EditorGUILayout.EnumPopup("Rigidbody type", bodyType);
 
-        addOutliner = EditorGUILayout.Toggle("Configurar Outliner", addOutliner);
+        addOutliner = EditorGUILayout.Toggle("Configure Outliner", addOutliner);
         if (addOutliner)
         {
-            outlineColor = EditorGUILayout.ColorField("Color del contorno", outlineColor);
-            outlineScale = EditorGUILayout.Slider("Escala del contorno", outlineScale, 1f, 1.5f);
+            outlineColor = EditorGUILayout.ColorField("Outline color", outlineColor);
+            outlineScale = EditorGUILayout.Slider("Outline scale", outlineScale, 1f, 1.5f);
         }
 
         FactoryTypeOptions typeOptions = GetTypeOptions();
@@ -230,20 +236,22 @@ public class FactoryWindow : EditorWindow
             typeof(Interactives.Interactive).IsAssignableFrom(typeOptions.ComponentType))
         {
             outlineinteractionDistane = EditorGUILayout.FloatField(
-                "Distancia de interacción", outlineinteractionDistane);
+                "Interaction distance", outlineinteractionDistane);
+            interactiveDescription = (RuntimeDialogueGraph)EditorGUILayout.ObjectField(
+                "Description graph (optional)", interactiveDescription, typeof(RuntimeDialogueGraph), false);
         }
     }
 
     private void DrawPrefabSection()
     {
-        EditorGUILayout.LabelField("Prefab opcional", EditorStyles.boldLabel);
-        savePrefab = EditorGUILayout.Toggle("Guardar como prefab", savePrefab);
+        EditorGUILayout.LabelField("Optional prefab", EditorStyles.boldLabel);
+        savePrefab = EditorGUILayout.Toggle("Save as prefab", savePrefab);
         using (new EditorGUI.DisabledScope(!savePrefab))
         {
-            prefabName = EditorGUILayout.TextField("Nombre del prefab", prefabName);
-            prefabFolder = EditorGUILayout.TextField("Carpeta", prefabFolder);
+            prefabName = EditorGUILayout.TextField("Prefab name", prefabName);
+            prefabFolder = EditorGUILayout.TextField("Folder", prefabFolder);
             EditorGUILayout.HelpBox(
-                "Si el nombre queda vacio, se usara el nombre del objeto. La carpeta se creara si no existe y debe estar dentro de Assets.",
+                "If the name is empty, the object name will be used. The folder will be created if needed and must be inside Assets.",
                 MessageType.None);
         }
     }
@@ -284,14 +292,14 @@ public class FactoryWindow : EditorWindow
     {
         if (includeSprite && selectedSprite == null)
         {
-            EditorUtility.DisplayDialog("Factory", "Selecciona un sprite o desactiva Incluir sprite.", "Aceptar");
+            EditorUtility.DisplayDialog("Factory", "Select a sprite or disable Include sprite.", "OK");
             return;
         }
 
         FactoryTypeOptions typeOptions = GetTypeOptions();
         if (typeOptions != null && !typeOptions.Validate(out string validationError))
         {
-            EditorUtility.DisplayDialog("Factory", validationError, "Aceptar");
+            EditorUtility.DisplayDialog("Factory", validationError, "OK");
             return;
         }
 
@@ -316,6 +324,7 @@ public class FactoryWindow : EditorWindow
             outlineColor = outlineColor,
             outlineScale = outlineScale,
             outlineinteractionDistane = outlineinteractionDistane,
+            interactiveDescription = interactiveDescription,
             componentType = typeOptions != null ? typeOptions.ComponentType : null,
             savePrefab = savePrefab,
             prefabFolder = prefabFolder

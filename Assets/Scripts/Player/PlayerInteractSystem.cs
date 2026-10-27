@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Assets.Scripts.EventBuses;
 using Interactives;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -14,15 +15,53 @@ namespace Player
         
         private void OnEnable()
         {
-            main.EventBus.Subscribe<OnLeftMouseClick>(Clicked);
+            main.EventBus.Subscribe<OnLeftMouseClick>(LeftMouseClicked);
+            main.EventBus.Subscribe<OnRightMouseClick>(RightMouseClicked);
         }
 
         private void OnDisable()
         {
-            main.EventBus.UnSubscribe<OnLeftMouseClick>(Clicked);
+            main.EventBus.UnSubscribe<OnLeftMouseClick>(LeftMouseClicked);
+            main.EventBus.UnSubscribe<OnRightMouseClick>(RightMouseClicked);
         }
-        
-        private void Clicked(OnLeftMouseClick ctx)
+
+        private void RightMouseClicked(OnRightMouseClick ctx)
+        {
+            if (!TryGetClickedInteractive(out Interactive interactable) ||
+                interactable.description == null)
+                return;
+
+            StartTracking(interactable, showDescriptionOnArrival: true);
+        }
+
+        private bool showDescriptionOnArrival;
+
+        private bool TryGetClickedInteractive(out Interactive interactable)
+        {
+            interactable = null;
+            if (Mouse.current == null || main.Cam == null)
+                return false;
+
+            Vector2 mousePosition = main.Cam.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+            RaycastHit2D hit = Physics2D.Raycast(
+                mousePosition,
+                Vector2.zero,
+                Mathf.Infinity,
+                main.whatIsClickable);
+
+            return hit.collider && hit.transform.root.TryGetComponent(out interactable);
+        }
+
+        private void StartTracking(Interactive interactable, bool showDescriptionOnArrival)
+        {
+            StopAllCoroutines();
+            currentInteractuable = interactable;
+            currentStoppingDistance = interactable.InteractionDistance;
+            this.showDescriptionOnArrival = showDescriptionOnArrival;
+            StartCoroutine(TrackingInteractuable());
+        }
+
+        private void LeftMouseClicked(OnLeftMouseClick ctx)
         {
             Vector2 mousePosition = main.Cam.ScreenToWorldPoint(
                 Mouse.current.position.ReadValue()
@@ -37,28 +76,21 @@ namespace Player
 
             if (!hit.collider)
                 return;
-
-            Debug.Log(hit.transform.root.name);
-            
             
             if (hit.transform.root.TryGetComponent(out Interactive interactuable))
             {
-                StopAllCoroutines();
-
-                currentInteractuable = interactuable;
-                currentStoppingDistance = interactuable.InteractionDistance;
-
-                StartCoroutine(TrackingInteractuable());
+                StartTracking(interactuable, showDescriptionOnArrival: false);
             }
             else
             {
                 StopAllCoroutines();
 
                 currentInteractuable = null;
+                showDescriptionOnArrival = false;
                 currentStoppingDistance = DefaultStoppingDistance;
                 currentDestination = hit.point;
 
-                main.MovementSystem.SetNewDestination(
+                    main.MovementSystem.SetNewDestination(
                     currentDestination,
                     currentStoppingDistance
                 );
@@ -67,14 +99,27 @@ namespace Player
         
         private IEnumerator TrackingInteractuable()
         {
-            Debug.Log("TrackingInteractuable");
+            Interactive target = currentInteractuable;
+            if (target == null) yield break;
             do
             {
-                currentDestination = currentInteractuable.transform.position;
+                if (target == null) yield break;
+
+                currentDestination = target.transform.position;
                 main.MovementSystem.SetNewDestination(currentDestination,currentStoppingDistance);
                 yield return new WaitForSeconds(0.2f);
             } while (!main.MovementSystem.ReacheDestination());
-            currentInteractuable.Interact(gameObject);
+
+            if (target == null) yield break;
+
+            if (showDescriptionOnArrival)
+            {
+                target.ShowDescription();
+            }
+            else
+            {
+                target.Interact(gameObject);
+            }
         }
         
     }
