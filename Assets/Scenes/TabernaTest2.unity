@@ -1060,7 +1060,7 @@ MonoBehaviour:
   currentGraph: {fileID: 3965311268370046156, guid: d5dde4f164902424fa264115875f328b, type: 3}
   alternativeStates: []
   EventBus: {fileID: 11400000, guid: 12dd33ac5088a19498397bad87f52e37, type: 2}
-  cameraOffset: {x: -0.92, y: 3.96, z: 0}
+  cameraOffset: {x: 1.66, y: 1.37, z: 0}
   zoom: 3
   smoothTime: 0.5
   dialogueTextOffset: {x: 0, y: -200}
@@ -5372,7 +5372,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62a8ed14b8c891047a109305d3030931, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InventoryController
-  toggleKey: 9
   inventoryPanel: {fileID: 1158216481}
   inputs: {fileID: 11400000, guid: 12dd33ac5088a19498397bad87f52e37, type: 2}
 --- !u!1 &2113063308
