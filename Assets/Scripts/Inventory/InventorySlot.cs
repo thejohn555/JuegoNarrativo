@@ -9,10 +9,23 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
     private static GameObject draggedIconObject;
     private static int draggedFromIndex = -1;
+    
+    // Si el slot se desactiva mientras se arrastra (por ejemplo, al cerrar el inventario),
+    // Unity ya no le envía OnEndDrag, así que la limpieza se hace aquí.
+    void OnDisable()
+    {
+        if (draggedFromIndex == slotIndex)
+        {
+            EndDragCleanup();
+        }
+    }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (iconImage == null || !iconImage.enabled || iconImage.sprite == null) return;
+        if (iconImage == null || !iconImage.enabled || iconImage.sprite == null)
+        {
+            return;
+        }
 
         draggedFromIndex = slotIndex;
 
@@ -41,18 +54,31 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         tempImg.preserveAspect = true;
 
         RectTransform rt = (RectTransform)draggedIconObject.transform;
-        rt.sizeDelta = iconImage.rectTransform.rect.size;   // tamaño real, no sizeDelta
+        rt.sizeDelta = iconImage.rectTransform.rect.size;   
         rt.anchorMin = rt.anchorMax = rt.pivot = new Vector2(0.5f, 0.5f);
 
         MoveGhost(eventData);
         iconImage.enabled = false;
     }
 
-    public void OnDrag(PointerEventData eventData) => MoveGhost(eventData);
+    public void OnDrag(PointerEventData eventData)
+    {
+        // Si el inventario se cierra mientras estás arrastrando, cancelamos al vuelo
+        if (InventoryManager.Instance != null && !InventoryManager.Instance.gameObject.activeInHierarchy)
+        {
+            EndDragCleanup();
+            return;
+        }
+
+        MoveGhost(eventData);
+    }
 
     static void MoveGhost(PointerEventData eventData)
     {
-        if (draggedIconObject == null) return;
+        if (draggedIconObject == null)
+        {
+            return;
+        }
 
         RectTransform canvasRect = (RectTransform)draggedIconObject.transform.parent;
         if (RectTransformUtility.ScreenPointToWorldPointInRectangle(canvasRect, eventData.position, eventData.pressEventCamera, out Vector3 worldPos))
@@ -63,12 +89,10 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (draggedIconObject != null)
-        {
-            Destroy(draggedIconObject);
-            InventoryManager.Instance.UpdateUI(); // Restaura la UI original si se soltó fuera
-        }
-        draggedFromIndex = -1;
+        // Aquí puedes añadir en el futuro el método que compruebe la interacción con NPCs / escena:
+        // if (!EventSystem.current.IsPointerOverGameObject()) { CheckWorldInteraction(); }
+
+        EndDragCleanup();
     }
 
     public void OnDrop(PointerEventData eventData)
@@ -78,10 +102,23 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
             InventoryManager.Instance.TryCraftOrMove(draggedFromIndex, slotIndex);
         }
 
+        EndDragCleanup();
+    }
+
+    //Metodo para evitar que el objeto al arrastrarlo fuera del inventario quede bugeado en la escena
+    private void EndDragCleanup()
+    {
         if (draggedIconObject != null)
         {
             Destroy(draggedIconObject);
-            draggedFromIndex = -1;
+            draggedIconObject = null;
+        }
+
+        draggedFromIndex = -1;
+
+        if (InventoryManager.Instance != null)
+        {
+            InventoryManager.Instance.UpdateUI();
         }
     }
 }
