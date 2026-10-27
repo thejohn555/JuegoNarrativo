@@ -3,11 +3,14 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [CreateAssetMenu(fileName = "InputActionsSO", menuName = "Scriptable Objects/InputActionsSO")]
-public class InputActionsSO : ScriptableObject, NewInputActions.IGamePlayActions, NewInputActions.IUIActions
+public class InputActionsSO : ScriptableObject, NewInputActions.IGamePlayActions, NewInputActions.IUIActions, NewInputActions.IInventoryActions
 {
     [field: SerializeField] public EventBusSO EventBus { get; private set; }
     private NewInputActions inputActions;
     private InputActionMap currentMap;
+
+    //events to avoid creating them multiple times
+    OnTabPressed onTabPressed = new OnTabPressed();
     private void OnEnable()
     {
         inputActions = new NewInputActions();
@@ -15,6 +18,7 @@ public class InputActionsSO : ScriptableObject, NewInputActions.IGamePlayActions
 
         inputActions.GamePlay.SetCallbacks(this);
         inputActions.UI.SetCallbacks(this);
+        inputActions.Inventory.SetCallbacks(this);
 
         EventBus.Subscribe<OnDialogueCameraDataEvent>(OnDialogueStarted);
         EventBus.Subscribe<OnDialogueEndedEvent>(OnDialogueEnded);
@@ -49,6 +53,14 @@ public class InputActionsSO : ScriptableObject, NewInputActions.IGamePlayActions
         SwitchMap(inputActions.GamePlay);
     }
 
+    public void OnNextDialogue(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            EventBus.Publish(new OnSkipDialogueEvent());
+        }
+    }
+
     public void OnLeftMouse(InputAction.CallbackContext context)
     {
         if (context.started)
@@ -65,11 +77,33 @@ public class InputActionsSO : ScriptableObject, NewInputActions.IGamePlayActions
         }
     }
 
-    public void OnNextDialogue(InputAction.CallbackContext context)
-    { 
-        if (context.performed)
+    public void OnInventory(InputAction.CallbackContext context)
+    {
+        if (context.started)
         {
-            EventBus.Publish(new OnSkipDialogueEvent());
-        }
+            EventBus.Publish(onTabPressed);
+            SwitchMap(inputActions.Inventory);
+            Debug.Log("a");
+        }  
     }
+
+    #region inventoryInputMap
+
+
+    public void OnCloseInventory(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            EventBus.Publish(onTabPressed);
+            SwitchMap(inputActions.GamePlay);
+            Debug.Log("b");
+        } 
+    }
+    #endregion
+
+
+
+
+
+
 }
