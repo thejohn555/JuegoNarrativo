@@ -10,5 +10,25 @@ namespace Assets.Scripts.Camera
         public Vector3 dialogueTextOffset;
         public float zoom;
         public float smoothTime;
+        public bool moveCamera;
+        public bool zoomCamera;
+
+        public DialogueCameraData(
+        Transform targetPosition,
+        Vector3 cameraOffset,
+        Vector3 dialogueTextOffset,
+        float zoom = 5f,
+        float smoothTime = 0.2f,
+        bool moveCamera = true,
+        bool zoomCamera = true)
+        {
+            this.targetPosition = targetPosition;
+            this.cameraOffset = cameraOffset;
+            this.dialogueTextOffset = dialogueTextOffset;
+            this.zoom = zoom;
+            this.smoothTime = smoothTime;
+            this.moveCamera = moveCamera;
+            this.zoomCamera = zoomCamera;
+        }
     }
 }

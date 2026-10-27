@@ -114,24 +114,50 @@ public class CameraController : MonoBehaviour
 
     private void EnterDialogueState(DialogueCameraData data)
     {
-        if (data.targetPosition == null) return;
         isDialogue = true;
-
-        currentTargetPos = data.targetPosition.position + data.cameraOffset;
-        currentTargetPos.z = transform.position.z;
-
-        currentTargetZoom = data.zoom;
-        currentSmoothTime = data.smoothTime;
-
         stateBeforeDialogue = currentCameraState;
         cameraPosBeforeDialogue = transform.position;
-        ChangeCameraState(CameraState.Transitioning);
+
+        if (data.moveCamera && data.targetPosition != null)
+        {
+            currentTargetPos = data.targetPosition.position + data.cameraOffset;
+            currentTargetPos.z = transform.position.z;
+        }
+        else
+        {
+            currentTargetPos = transform.position;
+        }
+
+        if (data.zoomCamera)
+        {
+            currentTargetZoom = data.zoom;
+        }
+        else
+        {
+            currentTargetZoom = cam.orthographicSize;
+        }
+        currentSmoothTime = data.smoothTime;
+
+        if (!data.moveCamera && !data.zoomCamera)
+        {
+            EventBus.Publish(new OnDialogueStartedEvent());
+            ChangeCameraState(CameraState.Dialogue);
+        }
+        else
+        {
+            ChangeCameraState(CameraState.Transitioning);
+        }
     }
 
     public void ExitDialogueState()
     {
-        if (target == null) return;
         isDialogue = false;
+
+        if (currentCameraState == CameraState.Dialogue && transform.position == cameraPosBeforeDialogue && cam.orthographicSize == defaultZoom)
+        {
+            ChangeCameraState(stateBeforeDialogue);
+            return;
+        }
 
         currentTargetPos = cameraPosBeforeDialogue;
         currentTargetPos.z = transform.position.z;

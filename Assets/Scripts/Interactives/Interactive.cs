@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Scripts.Camera;
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -10,6 +11,7 @@ namespace Interactives
     {
         [field: SerializeField] public float InteractionDistance { get; private set; } = 1.5f;
         public RuntimeDialogueGraph description;
+        [SerializeField] protected Vector3 textOffsetAbovePlayer = new Vector3(0f, 2.5f, 0f);
         [SerializeField] protected Texture2D interactionCursor;
         protected Outliner outline;
 
@@ -27,7 +29,20 @@ namespace Interactives
 
         public void ShowDescription(GameObject interactor)
         {
-            
+            if (description == null || interactor == null) return;
+
+            DialogueCameraData monologueCameraData = new DialogueCameraData
+            {
+                targetPosition = interactor.transform,
+                cameraOffset = Vector3.zero,
+                dialogueTextOffset = textOffsetAbovePlayer,
+                zoom = Camera.main.orthographicSize,
+                smoothTime = 0.2f,
+                moveCamera = false,
+                zoomCamera = false  
+            };
+
+            DialogueManager.Instance.StartDialogue(description, monologueCameraData);
         }
 
         public void OnPointerEnter(PointerEventData eventData)
