@@ -9,6 +9,7 @@ namespace Blueprints_arquitectura_Dani_.Runtime.Managers
     {
         
         public static BlueprintDictionaryManager Instance { get; private set; }
+        [SerializeField] private DictionarySO dictionarySo;          
         public List<GameObject> triggerList = new();
         public Dictionary <string, RuntimeNodeGroup> triggerDictionary = new ();
         
@@ -25,15 +26,23 @@ namespace Blueprints_arquitectura_Dani_.Runtime.Managers
         }
         public void AddTriggerToList(GameObject trigger)
         {
-            if (!trigger.TryGetComponent<TriggerEnterRelay>(out var eventRelay))
+            var col = trigger.GetComponentInChildren<Collider2D>();
+            if (col == null)
             {
-                trigger.AddComponent<TriggerEnterRelay>();
+                Debug.LogWarning($"[Manager] '{trigger.name}' no tiene Collider2D", trigger);
+            }
+            else if (!col.TryGetComponent<TriggerEnterRelay>(out _))
+            {
+                col.gameObject.AddComponent<TriggerEnterRelay>();
             }
 
             if (!triggerList.Contains(trigger))
-            {
                 triggerList.Add(trigger);
-            }
+
+#if UNITY_EDITOR
+            UnityEditor.EditorUtility.SetDirty(this);
+            dictionarySo?.AddName(trigger.name);
+#endif
         }
 
         public void AddTriggerToDictionary(string trigger, RuntimeNodeGroup group)

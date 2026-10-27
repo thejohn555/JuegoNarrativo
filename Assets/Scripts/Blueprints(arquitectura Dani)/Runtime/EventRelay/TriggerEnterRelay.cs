@@ -8,8 +8,8 @@ namespace Blueprints_arquitectura_Dani_.EventRelay
     {
         public void OnTriggerEnter2D(Collider2D other)
         {
-            Debug.Log("[TriggerEnterRelay] Triggered");
-            BlueprintsEventManager.Instance.TriggerInvoque(gameObject);
+            Debug.Log($"[Relay] Trigger en '{name}' por '{other.name}'");
+            BlueprintsEventManager.Instance.TriggerInvoque(transform.root.gameObject);
         }
         
     }
