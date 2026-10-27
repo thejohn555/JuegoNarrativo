@@ -194,12 +194,12 @@ public partial class @NewInputActions: IInputActionCollection2, IDisposable
             ""actions"": [
                 {
                     ""name"": ""CloseInventory"",
-                    ""type"": ""Button"",
+                    ""type"": ""Value"",
                     ""id"": ""e26d4ac1-7cbd-4912-97e8-5afba0b5d733"",
-                    ""expectedControlType"": """",
+                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false,
+                    ""initialStateCheck"": true,
                     ""priority"": 0
                 }
             ],
@@ -207,7 +207,7 @@ public partial class @NewInputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""fec8bd52-bc55-474b-a65c-af1c25e19b53"",
-                    ""path"": ""<Keyboard>/tab"",
+                    ""path"": ""<Mouse>/scroll"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

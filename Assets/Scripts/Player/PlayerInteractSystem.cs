@@ -114,7 +114,7 @@ namespace Player
 
             if (showDescriptionOnArrival)
             {
-                target.ShowDescription();
+                target.ShowDescription(gameObject);
             }
             else
             {

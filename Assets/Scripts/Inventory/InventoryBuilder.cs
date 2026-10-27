@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEditor;
 using UnityEditor.SceneManagement;
@@ -73,6 +74,20 @@ public static class InventoryBuilder
                 iconImage.enabled = false;
 
                 slotComponent.iconImage = iconImage; // <-- Vinculamos la imagen del icono al slot
+                
+                GameObject textObj = NewUI("Text", slot.transform, typeof(TextMeshPro));
+                RectTransform textRectangle = (RectTransform)textObj.transform;
+                textRectangle.anchorMin = Vector2.zero;
+                textRectangle.anchorMax = Vector2.one;
+                textRectangle.offsetMin = Vector2.zero;
+                textRectangle.offsetMax = Vector2.zero;
+
+                TextMeshPro slotText = textObj.GetComponent<TextMeshPro>(); // O TextMeshProUGUI si aplica
+                slotText.text = ""; // Inicialmente vacío
+                slotText.color = Color.white;
+                slotText.raycastTarget = false;
+                slotText.fontSize = 12;
+                
                 currentSlotIndex++;
             }
         }
