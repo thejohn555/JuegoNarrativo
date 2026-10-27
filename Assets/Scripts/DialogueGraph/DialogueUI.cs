@@ -1,5 +1,6 @@
 using Assets.Scripts.EventBuses;
 using System.Collections;
+using EventBuses;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
