@@ -114,12 +114,12 @@ public partial class @NewInputActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""Inventory"",
-                    ""type"": ""Button"",
+                    ""type"": ""Value"",
                     ""id"": ""17da0a6d-eaf0-4a94-8b33-09b757783863"",
-                    ""expectedControlType"": """",
+                    ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false,
+                    ""initialStateCheck"": true,
                     ""priority"": 0
                 }
             ],
@@ -149,7 +149,7 @@ public partial class @NewInputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""5f87a506-4c6f-4a3e-b19c-17cc45bd4df5"",
-                    ""path"": ""<Keyboard>/tab"",
+                    ""path"": ""<Mouse>/scroll/down"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -194,20 +194,20 @@ public partial class @NewInputActions: IInputActionCollection2, IDisposable
             ""actions"": [
                 {
                     ""name"": ""CloseInventory"",
-                    ""type"": ""Button"",
+                    ""type"": ""Value"",
                     ""id"": ""e26d4ac1-7cbd-4912-97e8-5afba0b5d733"",
-                    ""expectedControlType"": """",
+                    ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false,
+                    ""initialStateCheck"": true,
                     ""priority"": 0
                 }
             ],
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""fec8bd52-bc55-474b-a65c-af1c25e19b53"",
-                    ""path"": ""<Keyboard>/tab"",
+                    ""id"": ""11c9cb67-0fb0-4077-8cce-53961b305efb"",
+                    ""path"": ""<Mouse>/scroll/up"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

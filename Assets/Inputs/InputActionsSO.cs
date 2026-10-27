@@ -9,9 +9,8 @@ public class InputActionsSO : ScriptableObject, NewInputActions.IGamePlayActions
     [field: SerializeField] public EventBusSO EventBus { get; private set; }
     private NewInputActions inputActions;
     private InputActionMap currentMap;
-
-    //events to avoid creating them multiple times
-    OnTabPressed onTabPressed = new OnTabPressed();
+    OnScrollWheelPressed onScrollWheelPressed = new OnScrollWheelPressed();
+    
     private void OnEnable()
     {
         inputActions = new NewInputActions();
@@ -83,29 +82,23 @@ public class InputActionsSO : ScriptableObject, NewInputActions.IGamePlayActions
     {
         if (context.started)
         {
-            EventBus.Publish(onTabPressed);
+            EventBus.Publish(onScrollWheelPressed);
+            Debug.Log("going to inventory");
             SwitchMap(inputActions.Inventory);
-            Debug.Log("a");
+           
         }  
     }
 
     #region inventoryInputMap
-
-
+    
     public void OnCloseInventory(InputAction.CallbackContext context)
     {
         if (context.started)
         {
-            EventBus.Publish(onTabPressed);
+            EventBus.Publish(onScrollWheelPressed);
             SwitchMap(inputActions.GamePlay);
-            Debug.Log("b");
+            Debug.Log("Marco is a zoofilic");
         } 
     }
     #endregion
-
-
-
-
-
-
 }

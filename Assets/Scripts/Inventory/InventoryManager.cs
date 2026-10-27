@@ -184,7 +184,6 @@ public class InventoryManager : MonoBehaviour
 
         if (matchedRecipe.resultIcon != null)
         {
-            // ¡Crafteo exitoso! Borramos los dos ingredientes o vaciamos sus slots
             inventorySlots[fromIndex] = new InventoryItem { itemName = null, icon = null };
             inventorySlots[toIndex] = new InventoryItem { itemName = matchedRecipe.resultName, icon = matchedRecipe.resultIcon };
             
