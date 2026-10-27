@@ -1,10 +1,10 @@
 using Assets.Scripts.EventBuses;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class InventoryController : MonoBehaviour
 {
     [Header("Configuración")]
-    [SerializeField] private KeyCode toggleKey;
     [SerializeField] private GameObject inventoryPanel;
 
     [Header("Inputs")]
@@ -14,7 +14,7 @@ public class InventoryController : MonoBehaviour
 
     private void Start()
     {
-        inputs.Subscribe<OnTabPressed>(ToggleInventory);
+        inputs.Subscribe<OnScrollWheelPressed>(ToggleInventory);
         //Si no asignamos el panel en el inspector, intentamos encontrarlo automáticamente
         if (inventoryPanel == null && InventoryManager.Instance != null && InventoryManager.Instance.settings != null)
         {
@@ -26,7 +26,7 @@ public class InventoryController : MonoBehaviour
             }
         }
 
-        // Al iniciar el juego el inventario esta en invisible
+        // Al iniciar el juego el inventario está desactivado
         if (inventoryPanel != null)
         {
             isOpen = false;
@@ -34,13 +34,10 @@ public class InventoryController : MonoBehaviour
         }
     }
 
-    
-
-    public void ToggleInventory(OnTabPressed eventArgs)
+    public void ToggleInventory(OnScrollWheelPressed eventArgs)
     {
         // Alternamos el estado
         isOpen = !isOpen;
         inventoryPanel.SetActive(isOpen);
-        //inputs.Publish(new OnInventoryToggle(isOpen));
     }
 }
