@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace BlackboardSystem
 {
@@ -46,34 +47,11 @@ namespace BlackboardSystem
         }
     }
 
-    [Serializable]
-    public class BlackboardEntry<T>
-    {
-        public BlackboardKey Key { get; }
-        public T Value { get; }
-        public Type ValueType { get; }
-
-        public BlackboardEntry(BlackboardKey key, T value)
-        {
-            Key = key;
-            Value = value;
-        }
-
-        public override bool Equals(object obj)
-        {
-            return obj is BlackboardEntry<T> other && other.Key == Key;
-        }
-
-        public override int GetHashCode()
-        {
-            return Key.GetHashCode();
-        }
-    }
-
-    public class Blackboard
+    [CreateAssetMenu(fileName = "Blackboard", menuName = "Scriptable Objects/Blackboard")]
+    public class Blackboard : ScriptableObject
     {
         private Dictionary<string, BlackboardKey> keyRegistry = new();
-        private Dictionary<BlackboardKey, object> entries = new();
+        public Dictionary<BlackboardKey, object> entries { get; private set; } = new();
 
         public bool TryGetValue<T>(BlackboardKey key, out T value)
         {
@@ -111,6 +89,11 @@ namespace BlackboardSystem
         public void Remove(BlackboardKey key)
         {
             entries.Remove(key);
+        }
+
+        public BlackboardKey GetKey(string keyName)
+        {
+            return keyRegistry[keyName];
         }
     }
 }

@@ -318,6 +318,22 @@ MonoBehaviour:
           m_PortDirection: 1
           m_PortOrientation: 0
           m_Title: In
+    - rid: 1528751644600696832
+      type: {class: 'Constant`1[[System.Single, mscorlib]]', ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
+      data:
+        m_Value: 0
+    - rid: 1528751644600696833
+      type: {class: 'Constant`1[[System.Single, mscorlib]]', ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
+      data:
+        m_Value: 0
+    - rid: 1528751644600696834
+      type: {class: 'Constant`1[[System.Single, mscorlib]]', ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
+      data:
+        m_Value: 0
+    - rid: 1528751644600696835
+      type: {class: 'Constant`1[[System.Single, mscorlib]]', ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
+      data:
+        m_Value: 0
     - rid: 8310634783867666508
       type: {class: UserNodeModelImp, ns: Unity.GraphToolkit.Editor.Implementation, asm: UnityEditor.GraphToolkitModule}
       data:
@@ -375,9 +391,11 @@ MonoBehaviour:
           m_KeyList:
           - Dialogue Text
           - Speaker
+          - Text Speed
           m_ValueList:
           - rid: 8310634783867666512
           - rid: 8310634826582458461
+          - rid: 1528751644600696832
         m_InputPortInfos:
           expandedPortsById:
             m_KeyList: []
@@ -455,12 +473,14 @@ MonoBehaviour:
           - Choice Text  0
           - Choice Text  1
           - Speaker
+          - Text Speed
           m_ValueList:
           - rid: 8310634783867666516
           - rid: 8310634783867666517
           - rid: 1528751420343320576
           - rid: 1528751420343320577
           - rid: 8310634826582458464
+          - rid: 1528751644600696833
         m_InputPortInfos:
           expandedPortsById:
             m_KeyList: []
@@ -539,9 +559,11 @@ MonoBehaviour:
           m_KeyList:
           - Dialogue Text
           - Speaker
+          - Text Speed
           m_ValueList:
           - rid: 8310634783867666523
           - rid: 8310634826582458462
+          - rid: 1528751644600696834
         m_InputPortInfos:
           expandedPortsById:
             m_KeyList: []
@@ -584,9 +606,11 @@ MonoBehaviour:
           m_KeyList:
           - Dialogue Text
           - Speaker
+          - Text Speed
           m_ValueList:
           - rid: 8310634783867666527
           - rid: 8310634826582458463
+          - rid: 1528751644600696835
         m_InputPortInfos:
           expandedPortsById:
             m_KeyList: []

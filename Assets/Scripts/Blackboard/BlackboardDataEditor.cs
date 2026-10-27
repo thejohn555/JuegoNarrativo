@@ -9,9 +9,12 @@ namespace BlackboardSystem
     public class BlackboardDataEditor : Editor
     {
         private ReorderableList entryList;
+        SerializedProperty blackboard;
 
         private void OnEnable()
         {
+            blackboard = serializedObject.FindProperty("blackboardRef");
+            Debug.Log($"blackboard == {blackboard}");
             entryList = new ReorderableList(serializedObject, serializedObject.FindProperty("entries"), true, true, true, true)
             {
                 //anonymous method
@@ -45,25 +48,30 @@ namespace BlackboardSystem
                         SerializedProperty boolValue = value.FindPropertyRelative("boolValue");
                         EditorGUI.PropertyField(valueRect, boolValue, GUIContent.none);
                         break;
+
                     case AnyValue.ValueType.Int:
                         SerializedProperty intValue = value.FindPropertyRelative("intValue");
                         EditorGUI.PropertyField(valueRect, intValue, GUIContent.none);
                         break;
+
                     case AnyValue.ValueType.Float:
                         SerializedProperty floatValue = value.FindPropertyRelative("floatValue");
                         EditorGUI.PropertyField(valueRect, floatValue, GUIContent.none);
                         break;
+
                     case AnyValue.ValueType.String:
                         SerializedProperty stringValue = value.FindPropertyRelative("stringValue");
                         EditorGUI.PropertyField(valueRect, stringValue, GUIContent.none);
                         break;
+
                     case AnyValue.ValueType.Vector3:
                         SerializedProperty vector3Value = value.FindPropertyRelative("vector3Value");
                         EditorGUI.PropertyField(valueRect, vector3Value, GUIContent.none);
                         break;
+
                     case AnyValue.ValueType.GameObject:
                         SerializedProperty gameObjectValue = value.FindPropertyRelative("gameObjectValue");
-                        EditorGUI.PropertyField(valueRect, gameObjectValue, GUIContent.none);
+                        EditorGUI.ObjectField(valueRect, gameObjectValue, GUIContent.none);
                         break;
 
                     default:
@@ -73,10 +81,16 @@ namespace BlackboardSystem
         }
 
         public override void OnInspectorGUI()
-        {
+        { 
             serializedObject.Update();
+            EditorGUILayout.PropertyField(blackboard);
             entryList.DoLayoutList();
             serializedObject.ApplyModifiedProperties();
+            if (GUILayout.Button("Save"))
+            {
+                BlackboardData blackboardData = (BlackboardData)target;
+                blackboardData.SetValuesOnBlackboard();
+            }
         }
     }
 }

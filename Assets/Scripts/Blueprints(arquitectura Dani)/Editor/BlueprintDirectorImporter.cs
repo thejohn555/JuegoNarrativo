@@ -21,7 +21,7 @@ namespace Blueprints_arquitectura_Dani_.Editor.Blueprints_arquitectura_Dani_.Edi
         {
             //Debug.Log($"[Importer] Importando: {ctx.assetPath}");
             var graph = GraphDatabase.LoadGraphForImporter<BlueprintDirectorGraph>(ctx.assetPath);
-            
+            Debug.Log($"{graph.GetType()}");
             if (graph == null)
             {
                 Debug.Log($"Failed to load Blueprint director graph asset: {ctx.assetPath}");

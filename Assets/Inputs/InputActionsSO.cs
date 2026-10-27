@@ -16,7 +16,7 @@ public class InputActionsSO : ScriptableObject, NewInputActions.IGamePlayActions
         inputActions.GamePlay.SetCallbacks(this);
         inputActions.UI.SetCallbacks(this);
 
-        EventBus.Subscribe<OnDialogueStartedEvent>(OnDialogueStarted);
+        EventBus.Subscribe<OnDialogueCameraDataEvent>(OnDialogueStarted);
         EventBus.Subscribe<OnDialogueEndedEvent>(OnDialogueEnded);
 
         SwitchMap(inputActions.GamePlay);
@@ -26,7 +26,7 @@ public class InputActionsSO : ScriptableObject, NewInputActions.IGamePlayActions
     {
         if (EventBus != null)
         {
-            EventBus.UnSubscribe<OnDialogueStartedEvent>(OnDialogueStarted);
+            EventBus.UnSubscribe<OnDialogueCameraDataEvent>(OnDialogueStarted);
             EventBus.UnSubscribe<OnDialogueEndedEvent>(OnDialogueEnded);
         }
     }
@@ -39,7 +39,7 @@ public class InputActionsSO : ScriptableObject, NewInputActions.IGamePlayActions
         Debug.Log($"Mapa cambiado, actual: {currentMap}");
     }
 
-    private void OnDialogueStarted(OnDialogueStartedEvent ev)
+    private void OnDialogueStarted(OnDialogueCameraDataEvent ev)
     {
         SwitchMap(inputActions.UI);
     }
@@ -54,6 +54,14 @@ public class InputActionsSO : ScriptableObject, NewInputActions.IGamePlayActions
         if (context.started)
         {
             EventBus.Publish(new OnLeftMouseClick(context));
+        }
+    }
+
+    public void OnSpace(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            EventBus.Publish(new OnSpaceBarClick(context));
         }
     }
 

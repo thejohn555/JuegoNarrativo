@@ -38,7 +38,10 @@ namespace Player
             if (!hit.collider)
                 return;
 
-            if (hit.collider.TryGetComponent(out Interactive interactuable))
+            Debug.Log(hit.transform.root.name);
+            
+            
+            if (hit.transform.root.TryGetComponent(out Interactive interactuable))
             {
                 StopAllCoroutines();
 
@@ -64,6 +67,7 @@ namespace Player
         
         private IEnumerator TrackingInteractuable()
         {
+            Debug.Log("TrackingInteractuable");
             do
             {
                 currentDestination = currentInteractuable.transform.position;
