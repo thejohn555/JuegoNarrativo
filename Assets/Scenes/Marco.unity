@@ -5634,71 +5634,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1914921446}
   m_CullTransparentMesh: 1
---- !u!1001 &2055619590
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 852087497982314868, guid: f49fc54804ccc4646991f8b9664e785c, type: 3}
-      propertyPath: m_SortingOrder
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5297139691341167357, guid: f49fc54804ccc4646991f8b9664e785c, type: 3}
-      propertyPath: m_Name
-      value: Metal
-      objectReference: {fileID: 0}
-    - target: {fileID: 5519712329914600783, guid: f49fc54804ccc4646991f8b9664e785c, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 3.08
-      objectReference: {fileID: 0}
-    - target: {fileID: 5519712329914600783, guid: f49fc54804ccc4646991f8b9664e785c, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.44
-      objectReference: {fileID: 0}
-    - target: {fileID: 5519712329914600783, guid: f49fc54804ccc4646991f8b9664e785c, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5519712329914600783, guid: f49fc54804ccc4646991f8b9664e785c, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5519712329914600783, guid: f49fc54804ccc4646991f8b9664e785c, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5519712329914600783, guid: f49fc54804ccc4646991f8b9664e785c, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5519712329914600783, guid: f49fc54804ccc4646991f8b9664e785c, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5519712329914600783, guid: f49fc54804ccc4646991f8b9664e785c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5519712329914600783, guid: f49fc54804ccc4646991f8b9664e785c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5519712329914600783, guid: f49fc54804ccc4646991f8b9664e785c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6843215270570811897, guid: f49fc54804ccc4646991f8b9664e785c, type: 3}
-      propertyPath: outlineWidth
-      value: 1.161
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: f49fc54804ccc4646991f8b9664e785c, type: 3}
 --- !u!1 &2065856785
 GameObject:
   m_ObjectHideFlags: 0
@@ -5916,8 +5851,8 @@ MonoBehaviour:
   - ingredientA: madera
     ingredientB: hierro
     resultName: pitudo
-    resultIcon: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
-    resultPrefab: {fileID: 1631600610931634730, guid: a29417e0161266943b093237e22f0de6, type: 3}
+    resultIcon: {fileID: 0}
+    resultPrefab: {fileID: 2332182593240962732, guid: a29417e0161266943b093237e22f0de6, type: 3}
 --- !u!4 &2101573023
 Transform:
   m_ObjectHideFlags: 0
@@ -6205,5 +6140,4 @@ SceneRoots:
   - {fileID: 815723860}
   - {fileID: 1696660234}
   - {fileID: 1175481794134472632}
-  - {fileID: 2055619590}
   - {fileID: 5184288942371764052}
