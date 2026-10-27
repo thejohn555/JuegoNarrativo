@@ -57,6 +57,8 @@ public class DialogueUI : MonoBehaviour
 
     private void NextNode(OnSkipDialogueEvent ev)
     {
+        if (currentNode == null) return;
+
         if (isWritingText)
         {
             if (typeWritingCoroutine != null) StopCoroutine(typeWritingCoroutine);

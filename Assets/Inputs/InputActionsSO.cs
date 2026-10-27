@@ -1,4 +1,5 @@
 using Assets.Scripts.EventBuses;
+using Unity.Jobs;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -74,6 +75,15 @@ public class InputActionsSO : ScriptableObject, NewInputActions.IGamePlayActions
         if (context.started)
         {
             EventBus.Publish(new OnSpaceBarClick(context));
+        }
+    }
+
+    public void OnNextDialogue(InputAction.CallbackContext context)
+    {
+        if (context.action.actionMap.name != "UI") return;
+        if (context.started)
+        {
+            EventBus.Publish(new OnSkipDialogueEvent());
         }
     }
 
