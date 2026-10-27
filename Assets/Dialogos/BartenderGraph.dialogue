@@ -229,7 +229,7 @@ MonoBehaviour:
     - rid: 5438168638866063454
       type: {class: 'Constant`1[[System.Single, mscorlib]]', ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
       data:
-        m_Value: 2
+        m_Value: 7
     - rid: 5438168638866063455
       type: {class: DialogueNode, ns: DialogueGraph.Editor, asm: Assembly-CSharp-Editor}
       data: 
