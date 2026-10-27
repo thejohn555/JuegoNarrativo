@@ -54,14 +54,6 @@ public class InputActionsSO : ScriptableObject, NewInputActions.IGamePlayActions
         SwitchMap(inputActions.GamePlay);
     }
 
-    public void OnNextDialogue(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-        {
-            EventBus.Publish(new OnSkipDialogueEvent());
-        }
-    }
-
     public void OnLeftMouse(InputAction.CallbackContext context)
     {
         if (context.started)
