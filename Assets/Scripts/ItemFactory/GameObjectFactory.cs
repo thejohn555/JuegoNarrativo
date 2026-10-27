@@ -85,7 +85,7 @@ public static class GameObjectFactory
                 componentType.IsAbstract ||
                 componentType.ContainsGenericParameters)
             {
-                Debug.LogWarning("Factory: el script seleccionado no es un MonoBehaviour concreto valido.", go);
+                Debug.LogWarning("Factory: the selected script is not a valid concrete MonoBehaviour.", go);
             }
             else
             {
@@ -94,12 +94,15 @@ public static class GameObjectFactory
                     Undo.AddComponent(go, componentType);
 
                     if (go.TryGetComponent(out Interactives.Interactive interactive))
+                    {
                         ConfigureInteractionDistance(interactive, config.outlineinteractionDistane);
+                        ConfigureDescription(interactive, config.interactiveDescription);
+                    }
                 }
                 catch (Exception exception)
                 {
                     Debug.LogError(
-                        $"Factory: no se pudo anadir el componente {componentType.FullName}. {exception.Message}",
+                        $"Factory: could not add component {componentType.FullName}. {exception.Message}",
                         go);
                 }
             }
@@ -107,8 +110,8 @@ public static class GameObjectFactory
 
         typeOptions?.ConfigureCreatedObject(go);
 
-        // El script interactivo puede exigir Outliner con RequireComponent.
-        // Configuramos el componente que Unity ya haya agregado; nunca lo anadimos aqui.
+        // The interactive script may require an Outliner through RequireComponent.
+        // Configure the component Unity has already added; do not add one here.
         if (config.addOutliner)
         {
             Outliner outliner = go.GetComponent<Outliner>();
@@ -121,7 +124,7 @@ public static class GameObjectFactory
             else
             {
                 Debug.LogWarning(
-                    "Factory: el objeto no tiene un Outliner que se pueda configurar; no se anadio ninguno.",
+                    "Factory: the object has no configurable Outliner; none was added.",
                     go);
             }
         }
@@ -144,7 +147,7 @@ public static class GameObjectFactory
         if (interactionDistanceProperty == null)
         {
             Debug.LogWarning(
-                "Factory: no se encontro el campo serializado InteractionDistance en Interactive.",
+                "Factory: the serialized InteractionDistance field was not found on Interactive.",
                 interactive);
             return;
         }
@@ -152,6 +155,15 @@ public static class GameObjectFactory
         Undo.RecordObject(interactive, "Set interaction distance");
         interactionDistanceProperty.floatValue = distance;
         serializedInteractive.ApplyModifiedProperties();
+        EditorUtility.SetDirty(interactive);
+    }
+
+    private static void ConfigureDescription(
+        Interactives.Interactive interactive,
+        RuntimeDialogueGraph description)
+    {
+        Undo.RecordObject(interactive, "Set interactive description");
+        interactive.description = description;
         EditorUtility.SetDirty(interactive);
     }
 
@@ -173,18 +185,18 @@ public static class GameObjectFactory
         if (normalizedFolder == null)
         {
             EditorUtility.DisplayDialog(
-                "Ruta de prefab no valida",
-                "La ruta debe estar dentro de Assets, por ejemplo Assets/Prefabs/Generated.",
-                "Aceptar");
+                "Invalid prefab path",
+                "The path must be inside Assets, for example Assets/Prefabs/Generated.",
+                "OK");
             return;
         }
 
         if (!EnsureAssetFolder(normalizedFolder))
         {
             EditorUtility.DisplayDialog(
-                "No se pudo crear la carpeta",
-                $"No se pudo preparar la carpeta {normalizedFolder}.",
-                "Aceptar");
+                "Could not create folder",
+                $"Could not prepare folder {normalizedFolder}.",
+                "OK");
             return;
         }
 
@@ -200,16 +212,16 @@ public static class GameObjectFactory
                 instance, path, InteractionMode.UserAction);
             if (prefab == null)
             {
-                Debug.LogError($"Factory: Unity no pudo guardar el prefab en {path}.", instance);
+                Debug.LogError($"Factory: Unity could not save the prefab to {path}.", instance);
                 return;
             }
 
             AssetDatabase.SaveAssets();
-            Debug.Log($"Factory: prefab guardado en {path}", instance);
+            Debug.Log($"Factory: prefab saved to {path}", instance);
         }
         catch (Exception exception)
         {
-            Debug.LogError($"Factory: error al guardar el prefab en {path}. {exception.Message}", instance);
+            Debug.LogError($"Factory: error saving the prefab to {path}. {exception.Message}", instance);
         }
     }
 

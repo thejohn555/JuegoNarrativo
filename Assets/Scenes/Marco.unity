@@ -2162,9 +2162,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Interactives.NPC
   <InteractionDistance>k__BackingField: 2
+  description: {fileID: 0}
   interactionCursor: {fileID: 0}
-  Dialogue: {fileID: 3965311268370046156, guid: 3a13d3d9cc957f04a92db2d896aad449, type: 3}
-  testDialogueTarget: {fileID: 0}
+  npcID: 
+  currentGraph: {fileID: 0}
+  alternativeStates: []
+  EventBus: {fileID: 0}
   cameraOffset: {x: 0, y: 1, z: 0}
   zoom: 3
   smoothTime: 0.5

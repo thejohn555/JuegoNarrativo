@@ -29,7 +29,7 @@ public sealed class EmptyFactoryTypeOptions : FactoryTypeOptions
 public sealed class InteractObjectFactoryTypeOptions : FactoryTypeOptions
 {
     public override Type ComponentType => typeof(Interactives.InteractObject);
-    // esto esta aqui de forma temporal cuando este el crear trigger lo pongo donde toca
+    // Temporary location until trigger creation has its own factory option.
     public override void ConfigureCreatedObject(GameObject target)
     {
         var manager = UnityEngine.Object.FindFirstObjectByType<
@@ -37,7 +37,7 @@ public sealed class InteractObjectFactoryTypeOptions : FactoryTypeOptions
 
         if (manager == null)
         {
-            Debug.LogWarning("Factory: no hay BlueprintDictionaryManager en la escena.", target);
+            Debug.LogWarning("Factory: no BlueprintDictionaryManager was found in the scene.", target);
             return;
         }
 
@@ -48,29 +48,59 @@ public sealed class InteractObjectFactoryTypeOptions : FactoryTypeOptions
 
 public sealed class NpcFactoryTypeOptions : FactoryTypeOptions
 {
-    private bool assignDialogueGraph;
-    private RuntimeDialogueGraph dialogueGraph;
+    private string npcID = string.Empty;
+    private bool hasDialogues;
+    private RuntimeDialogueGraph currentGraph;
+    private readonly System.Collections.Generic.List<Interactives.DialogueState> alternativeStates =
+        new System.Collections.Generic.List<Interactives.DialogueState>();
 
     public override Type ComponentType => typeof(Interactives.NPC);
 
     public override void DrawOptions()
     {
-        EditorGUILayout.LabelField("Configuracion de NPC", EditorStyles.boldLabel);
-        assignDialogueGraph = EditorGUILayout.Toggle("Asignar grafo de dialogo", assignDialogueGraph);
-        if (!assignDialogueGraph)
+        EditorGUILayout.LabelField("NPC Settings", EditorStyles.boldLabel);
+        npcID = EditorGUILayout.TextField("NPC ID", npcID);
+        hasDialogues = EditorGUILayout.Toggle("Has dialogues", hasDialogues);
+        if (!hasDialogues)
             return;
 
-        dialogueGraph = (RuntimeDialogueGraph)EditorGUILayout.ObjectField(
-            "Grafo de dialogo", dialogueGraph, typeof(RuntimeDialogueGraph), false);
-        if (dialogueGraph == null)
-            EditorGUILayout.HelpBox("Asigna un RuntimeDialogueGraph para crear este NPC.", MessageType.Warning);
+        currentGraph = (RuntimeDialogueGraph)EditorGUILayout.ObjectField(
+            "Current graph", currentGraph, typeof(RuntimeDialogueGraph), false);
+        if (currentGraph == null)
+            EditorGUILayout.HelpBox("Assign a RuntimeDialogueGraph for this NPC.", MessageType.Warning);
+
+        EditorGUILayout.LabelField("Alternative states", EditorStyles.boldLabel);
+        for (int i = 0; i < alternativeStates.Count; i++)
+        {
+            EditorGUILayout.BeginVertical(EditorStyles.helpBox);
+            Interactives.DialogueState state = alternativeStates[i];
+            state.StateID = EditorGUILayout.TextField("State ID", state.StateID);
+            state.DialogueGraph = (RuntimeDialogueGraph)EditorGUILayout.ObjectField(
+                "Dialogue graph", state.DialogueGraph, typeof(RuntimeDialogueGraph), false);
+            alternativeStates[i] = state;
+            if (GUILayout.Button("Remove state"))
+            {
+                alternativeStates.RemoveAt(i);
+                i--;
+            }
+            EditorGUILayout.EndVertical();
+        }
+
+        if (GUILayout.Button("Add alternative state"))
+            alternativeStates.Add(new Interactives.DialogueState());
     }
 
     public override bool Validate(out string error)
     {
-        if (assignDialogueGraph && dialogueGraph == null)
+        if (string.IsNullOrWhiteSpace(npcID))
         {
-            error = "Asigna un RuntimeDialogueGraph o desactiva esa opcion.";
+            error = "Enter an NPC ID.";
+            return false;
+        }
+
+        if (hasDialogues && currentGraph == null)
+        {
+            error = "Assign a current graph or disable the dialogue option.";
             return false;
         }
 
@@ -80,28 +110,34 @@ public sealed class NpcFactoryTypeOptions : FactoryTypeOptions
 
     public override void ConfigureCreatedObject(GameObject target)
     {
-        if (!assignDialogueGraph)
-        {
-            return;
-        }
-
         Interactives.NPC npc = target.GetComponent<Interactives.NPC>();
         if (npc == null)
         {
-            Debug.LogWarning("Factory: no se encontro el componente NPC para asignar el grafo.", target);
+            Debug.LogWarning("Factory: the NPC component was not found.", target);
             return;
         }
 
         SerializedObject serializedNpc = new SerializedObject(npc);
-        SerializedProperty dialogueProperty = serializedNpc.FindProperty("Dialogue");
-        if (dialogueProperty == null)
+        SerializedProperty npcIdProperty = serializedNpc.FindProperty("npcID");
+        SerializedProperty graphProperty = serializedNpc.FindProperty("currentGraph");
+        SerializedProperty statesProperty = serializedNpc.FindProperty("alternativeStates");
+        if (npcIdProperty == null || graphProperty == null || statesProperty == null)
         {
-            Debug.LogWarning("Factory: NPC no contiene el campo serializado Dialogue.", target);
+            Debug.LogWarning("Factory: one or more serialized NPC fields could not be found.", target);
             return;
         }
 
-        Undo.RecordObject(npc, "Assign NPC dialogue graph");
-        dialogueProperty.objectReferenceValue = dialogueGraph;
+        Undo.RecordObject(npc, "Configure NPC");
+        npcIdProperty.stringValue = npcID.Trim();
+        graphProperty.objectReferenceValue = hasDialogues ? currentGraph : null;
+        statesProperty.arraySize = hasDialogues ? alternativeStates.Count : 0;
+        for (int i = 0; i < statesProperty.arraySize; i++)
+        {
+            SerializedProperty stateProperty = statesProperty.GetArrayElementAtIndex(i);
+            stateProperty.FindPropertyRelative("StateID").stringValue = alternativeStates[i].StateID;
+            stateProperty.FindPropertyRelative("DialogueGraph").objectReferenceValue =
+                alternativeStates[i].DialogueGraph;
+        }
         serializedNpc.ApplyModifiedProperties();
         EditorUtility.SetDirty(npc);
     }
@@ -117,25 +153,25 @@ public sealed class CollectableObjectFactoryTypeOptions : FactoryTypeOptions
     
     public override void DrawOptions()
     {
-        EditorGUILayout.LabelField("Collectibles Configuration", EditorStyles.boldLabel);
-        isCrafted = EditorGUILayout.Toggle("The item is a craftable object.", isCrafted);
+        EditorGUILayout.LabelField("Collectible Settings", EditorStyles.boldLabel);
+        isCrafted = EditorGUILayout.Toggle("Is this a craftable object?", isCrafted);
         
         if (!isCrafted)
         {
             return;  
         }
 
-        ingredientA = (GameObject)EditorGUILayout.ObjectField("ingredientA: ", ingredientA, typeof(GameObject), false);
-        ingredientB = (GameObject)EditorGUILayout.ObjectField("ingredientB: ", ingredientB, typeof(GameObject), false);
+        ingredientA = (GameObject)EditorGUILayout.ObjectField("Ingredient A", ingredientA, typeof(GameObject), false);
+        ingredientB = (GameObject)EditorGUILayout.ObjectField("Ingredient B", ingredientB, typeof(GameObject), false);
         
         if (ingredientA == null)
         {
-            EditorGUILayout.HelpBox("Assign an ingredient A to create this crafted item.", MessageType.Warning);
+            EditorGUILayout.HelpBox("Assign Ingredient A to create this crafted item.", MessageType.Warning);
         }
         
         if (ingredientB == null)
         {
-            EditorGUILayout.HelpBox("Assign an ingredient B to create this crafted item.", MessageType.Warning);
+            EditorGUILayout.HelpBox("Assign Ingredient B to create this crafted item.", MessageType.Warning);
         }
     }
 
@@ -143,7 +179,7 @@ public sealed class CollectableObjectFactoryTypeOptions : FactoryTypeOptions
     {
         if (isCrafted && (ingredientA == null || ingredientB == null))
         {
-            error = "You must assign both ingredients for the crafted item or disable the option.";
+            error = "Assign both ingredients for the crafted item or disable this option.";
             return false;
         }
         
@@ -156,7 +192,7 @@ public sealed class CollectableObjectFactoryTypeOptions : FactoryTypeOptions
         Interactives.CollectableObject collectableObject = target.GetComponent<Interactives.CollectableObject>();
         if (collectableObject == null)
         {
-            Debug.LogWarning("Factory: the collectable component was not found.", target);
+            Debug.LogWarning("Factory: the collectible component was not found.", target);
             return;
         }
 

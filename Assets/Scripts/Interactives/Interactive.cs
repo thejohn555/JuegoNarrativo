@@ -8,7 +8,8 @@ namespace Interactives
     [RequireComponent(typeof(Outliner))]
     public abstract class Interactive:MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
     {
-        [field: SerializeField] public float InteractionDistance { get; private set; } = 2f;
+        [field: SerializeField] public float InteractionDistance { get; private set; } = 1.5f;
+        public RuntimeDialogueGraph description;
         [SerializeField] protected Texture2D interactionCursor;
         protected Outliner outline;
 
@@ -23,6 +24,23 @@ namespace Interactives
         }
 
         public abstract void Interact(GameObject interactor);
+
+        public void ShowDescription()
+        {
+            if (description == null)
+                return;
+
+            var cameraData = new Assets.Scripts.Camera.DialogueCameraData
+            {
+                targetPosition = transform,
+                cameraOffset = Vector3.zero,
+                dialogueTextOffset = Vector3.zero,
+                zoom = 3f,
+                smoothTime = 0.5f
+            };
+
+            DialogueManager.Instance.StartDialogue(description, cameraData);
+        }
 
         public void OnPointerEnter(PointerEventData eventData)
         {

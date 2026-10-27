@@ -49,12 +49,12 @@ namespace Interactives
                 if (state.StateID == ev.NewStateID)
                 {
                     currentGraph = state.DialogueGraph;
-                    Debug.Log($"[{npcID}] Grafo cambiado al estado: {ev.NewStateID}");
+                    Debug.Log($"[{npcID}] Dialogue graph changed to state: {ev.NewStateID}");
                     return;
                 }
             }
 
-            Debug.LogWarning($"[{npcID}] No se encontró el estado: {ev.NewStateID}");
+            Debug.LogWarning($"[{npcID}] State not found: {ev.NewStateID}");
         }
 
         public override void Interact(GameObject interactor)
