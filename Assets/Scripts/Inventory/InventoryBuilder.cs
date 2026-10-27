@@ -46,16 +46,20 @@ public static class InventoryBuilder
         panelGrid.constraintCount = settings.columns;
  
         // Slots
+        int currentSlotIndex = 0; // Contador para el índice de cada slot
         for (int row = 0; row < settings.rows; row++)
         {
             for (int colum = 0; colum < settings.columns; colum++)
             {
-                GameObject slot = NewUI($"Slot_{row}_{colum}", panel.transform, typeof(Image));
+                GameObject slot = NewUI($"Slot_{row}_{colum}", panel.transform, typeof(Image), typeof(InventorySlot)); // <-- Añadido InventorySlot aquí
                 Image slotImg = slot.GetComponent<Image>();
                 slotImg.sprite = settings.slotSprite;
                 slotImg.color = settings.slotColor;
  
-                // Hijo del slot donde se mostrará el icono del item (oculto hasta que haya uno)
+                // Configuramos el componente InventorySlot recién creado
+                InventorySlot slotComponent = slot.GetComponent<InventorySlot>();
+                slotComponent.slotIndex = currentSlotIndex;
+
                 GameObject icon = NewUI("Icon", slot.transform, typeof(Image));
                 RectTransform iconeRectangle = (RectTransform)icon.transform;
                 iconeRectangle.anchorMin = Vector2.zero;
@@ -66,7 +70,10 @@ public static class InventoryBuilder
                 Image iconImage = icon.GetComponent<Image>();
                 iconImage.preserveAspect = true;
                 iconImage.raycastTarget = false;
-                iconImage.enabled = true;
+                iconImage.enabled = false;
+
+                slotComponent.iconImage = iconImage; // <-- Vinculamos la imagen del icono al slot
+                currentSlotIndex++;
             }
         }
         Selection.activeGameObject = panel;
