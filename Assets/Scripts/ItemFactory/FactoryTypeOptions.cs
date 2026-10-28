@@ -1,5 +1,6 @@
 #if UNITY_EDITOR
 using System;
+using Blueprints_arquitectura_Dani_.Runtime.Managers;
 using UnityEditor;
 using UnityEngine;
 
@@ -41,7 +42,7 @@ public sealed class InteractObjectFactoryTypeOptions : FactoryTypeOptions
             return;
         }
 
-        manager.AddTriggerToList(target);
+        manager.AddToList(target,NodeTypes.Trigger);
         UnityEditor.SceneManagement.EditorSceneManager.MarkSceneDirty(target.scene);
     }
 }
