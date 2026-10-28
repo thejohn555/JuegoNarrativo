@@ -3,19 +3,34 @@ using EventBuses;
 using Unity.Jobs;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Assets.CodingTools;
 
 [CreateAssetMenu(fileName = "InputActionsSO", menuName = "Scriptable Objects/InputActionsSO")]
 public class InputActionsSO : ScriptableObject, NewInputActions.IGamePlayActions, NewInputActions.IUIActions, NewInputActions.IInventoryActions
 {
     [field: SerializeField] public EventBusSO EventBus { get; private set; }
+    [Header("Inventory Cooldown")]
+    [SerializeField]private float cooldownTime;
+    private bool cooldown;
     private NewInputActions inputActions;
     private InputActionMap currentMap;
+    //Map refs
+    private InputActionMap gameplayMap;
+    private InputActionMap inventoryMap;
     OnScrollWheelPressed onScrollWheelPressed = new OnScrollWheelPressed();
+    
+    
     
     private void OnEnable()
     {
+        //cooldown var
+        cooldown = true;
+
+
         inputActions = new NewInputActions();
         inputActions.Enable();
+        gameplayMap = inputActions.GamePlay;
+        inventoryMap = inputActions.Inventory;
 
         inputActions.GamePlay.SetCallbacks(this);
         inputActions.UI.SetCallbacks(this);
@@ -41,7 +56,8 @@ public class InputActionsSO : ScriptableObject, NewInputActions.IGamePlayActions
         currentMap?.Disable();
         currentMap = newMap;
         currentMap?.Enable();
-        Debug.Log($"Mapa cambiado, actual: {currentMap}");
+        //Debug.Log($"Mapa cambiado, actual: {currentMap}");
+        Debug.Log(currentMap?.ToString());
     }
 
     private void OnDialogueStarted(OnDialogueCameraDataEvent ev)
@@ -89,11 +105,11 @@ public class InputActionsSO : ScriptableObject, NewInputActions.IGamePlayActions
 
     public void OnInventory(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (context.started && currentMap == gameplayMap && cooldown)
         {
-            EventBus.Publish(onScrollWheelPressed);
-            Debug.Log("going to inventory");
             SwitchMap(inputActions.Inventory);
+            EventBus.Publish(onScrollWheelPressed);
+            //Timer.Instance.StartCoroutine(Timer.Instance.Countdown(cooldownTime, cooldown));
            
         }  
     }
@@ -102,11 +118,11 @@ public class InputActionsSO : ScriptableObject, NewInputActions.IGamePlayActions
     
     public void OnCloseInventory(InputAction.CallbackContext context)
     {
-        if (context.canceled)
+        if (context.started && currentMap == inventoryMap)
         {
-            EventBus.Publish(onScrollWheelPressed);
             SwitchMap(inputActions.GamePlay);
-            Debug.Log("Marco is a zoofilic");
+            EventBus.Publish(onScrollWheelPressed);
+            
         } 
     }
     #endregion

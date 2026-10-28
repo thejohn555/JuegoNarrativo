@@ -2,7 +2,7 @@
 
 namespace Assets.Scripts.EventBuses
 {
-    public class OnScrollWheelPressed : IEvent
+    public struct OnScrollWheelPressed : IEvent
     {
         
     }
