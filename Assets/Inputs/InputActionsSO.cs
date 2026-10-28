@@ -32,7 +32,8 @@ public class InputActionsSO : ScriptableObject, NewInputActions.IGamePlayActions
 
         EventBus.Subscribe<OnDialogueCameraDataEvent>(OnDialogueStarted);
         EventBus.Subscribe<OnDialogueEndedEvent>(OnDialogueEnded);
-
+        EventBus.Subscribe<OnInventoryCloseEvent>(OnInventoryClosed);
+        
         SwitchMap(inputActions.GamePlay);
     }
 
@@ -42,6 +43,7 @@ public class InputActionsSO : ScriptableObject, NewInputActions.IGamePlayActions
         {
             EventBus.UnSubscribe<OnDialogueCameraDataEvent>(OnDialogueStarted);
             EventBus.UnSubscribe<OnDialogueEndedEvent>(OnDialogueEnded);
+            EventBus.UnSubscribe<OnInventoryCloseEvent>(OnInventoryClosed);
         }
     }
 
@@ -103,8 +105,16 @@ public class InputActionsSO : ScriptableObject, NewInputActions.IGamePlayActions
         {
             SwitchMap(inputActions.Inventory);
             EventBus.Publish(onScrollWheelPressed);
-           
         }  
+    }
+    
+    private void OnInventoryClosed(OnInventoryCloseEvent ev)
+    {
+        // Solo si realmente estamos en el mapa de inventario
+        if (currentMap == inventoryMap)
+        {
+            SwitchMap(inputActions.GamePlay);
+        }
     }
 
     #region inventoryInputMap

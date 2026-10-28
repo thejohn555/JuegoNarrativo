@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
+public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler, IPointerDownHandler, IPointerUpHandler
 {
     public int slotIndex;
     public Image iconImage;
@@ -120,5 +120,28 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         {
             InventoryManager.Instance.UpdateUI();
         }
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        Debug.Log($"Slot clicked {slotIndex} | button: {eventData.button} | dragging: {eventData.dragging}");
+
+        if (eventData.button != PointerEventData.InputButton.Left || eventData.dragging)
+        {
+            return;
+        }
+
+        if (HeldItemController.Instance == null)
+        {
+            Debug.LogError("There is no HeldItemController in the scene.");
+            return;
+        }
+
+        HeldItemController.Instance.Hold(slotIndex);
     }
 }
