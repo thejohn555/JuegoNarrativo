@@ -3989,6 +3989,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Interactives.NPC
   <InteractionDistance>k__BackingField: 2
   description: {fileID: 0}
+  textOffsetAbovePlayer: {x: 0, y: 2.5, z: 0}
   interactionCursor: {fileID: 0}
   npcID: 
   currentGraph: {fileID: 0}

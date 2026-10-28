@@ -1,6 +1,7 @@
 using Assets.Scripts.Camera;
 using Assets.Scripts.EventBuses;
 using System;
+using EventBuses;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour

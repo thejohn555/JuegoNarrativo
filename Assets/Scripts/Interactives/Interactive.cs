@@ -39,9 +39,10 @@ namespace Interactives
                 zoom = Camera.main.orthographicSize,
                 smoothTime = 0.2f,
                 moveCamera = false,
-                zoomCamera = false  
+                zoomCamera = false,
+                isDialogue = false
             };
-
+            Debug.Log($"Player Pos:{interactor.transform.position}");
             DialogueManager.Instance.StartDialogue(description, monologueCameraData);
         }
 
@@ -57,6 +58,19 @@ namespace Interactives
             //Cambio del cursor
             // Cursor.SetCursor(null, new Vector2(0.5f,0.5f), CursorMode.Auto);
             outline.SwapOutline();
+        }
+
+        protected virtual void OnDrawGizmosSelected()
+        {
+            //Vector3 textPosition = transform.position + textOffsetAbovePlayer;
+
+            //Gizmos.color = Color.yellow;
+            //Gizmos.DrawLine(transform.position, textPosition);
+
+            //Gizmos.DrawWireSphere(textPosition, 0.2f);
+
+            //Gizmos.color = new Color(1f, 0.92f, 0.016f, 0.35f);
+            //Gizmos.DrawCube(textPosition, new Vector3(2f, 0.8f, 0.01f));
         }
     }
 }

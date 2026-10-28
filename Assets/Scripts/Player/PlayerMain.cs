@@ -1,3 +1,4 @@
+using EventBuses;
 using UnityEngine;
 
 namespace Player

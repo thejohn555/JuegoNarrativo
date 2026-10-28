@@ -25,7 +25,7 @@ namespace Player
             main.EventBus.UnSubscribe<OnRightMouseClick>(RightMouseClicked);
         }
 
-        private void RightMouseClicked(OnRightMouseClick ctx)
+        private void RightMouseClicked()
         {
             if (!TryGetClickedInteractive(out Interactive interactable) ||
                 interactable.description == null)
@@ -61,7 +61,7 @@ namespace Player
             StartCoroutine(TrackingInteractuable());
         }
 
-        private void LeftMouseClicked(OnLeftMouseClick ctx)
+        private void LeftMouseClicked()
         {
             Vector2 mousePosition = main.Cam.ScreenToWorldPoint(
                 Mouse.current.position.ReadValue()

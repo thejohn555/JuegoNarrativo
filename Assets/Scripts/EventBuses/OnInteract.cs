@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using EventBuses;
+using UnityEngine;
 
 namespace Assets.Scripts.EventBuses
 {

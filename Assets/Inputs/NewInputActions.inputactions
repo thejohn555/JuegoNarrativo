@@ -17,6 +17,16 @@
                     "priority": 0
                 },
                 {
+                    "name": "Right Mouse",
+                    "type": "Button",
+                    "id": "95651cca-1cc4-4566-b953-ed31396db267",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false,
+                    "priority": 0
+                },
+                {
                     "name": "Space",
                     "type": "Button",
                     "id": "67fc76b2-5d82-474e-a83e-2236c89f36bb",
@@ -46,6 +56,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Left Mouse",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9593e815-a1fa-4edd-8877-8c5f65a2a71f",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Right Mouse",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

@@ -1,5 +1,6 @@
 using Assets.Scripts.EventBuses;
 using System.Collections;
+using EventBuses;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -80,14 +81,40 @@ public class DialogueUI : MonoBehaviour
     private void RecieveDialoguePositionData(OnDialogueCameraDataEvent ev)
     {
         RectTransform rect = dialoguePanel.GetComponent<RectTransform>();
+        var data = ev.DialogueCameraData;
 
-        Vector3 offset = new Vector3(
-            ev.DialogueCameraData.dialogueTextOffset.x,
-            ev.DialogueCameraData.dialogueTextOffset.y,
-            0
-        );
+        if (data.textColor.a == 0)
+            dialogueText.color = Color.white;
+        else
+            dialogueText.color = data.textColor;
 
-        rect.anchoredPosition = defaultAnchoredPosition + offset;
+        if (data.isDialogue)
+        {
+            Vector3 offset = new Vector3(
+                data.dialogueTextOffset.x,
+                data.dialogueTextOffset.y,
+                0
+            );
+            rect.anchoredPosition = defaultAnchoredPosition + offset;
+        }
+        else
+        {
+            if (data.targetPosition != null)
+            {
+                Vector3 worldTargetPos = data.targetPosition.position + data.dialogueTextOffset;
+                Vector2 screenPos = Camera.main.WorldToScreenPoint(worldTargetPos);
+                RectTransform parentRect = rect.parent.GetComponent<RectTransform>();
+
+                RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                    parentRect,
+                    screenPos,
+                    null,
+                    out Vector2 canvasLocalPos
+                );
+
+                rect.localPosition = canvasLocalPos;
+            }
+        }
     }
 
     private void OnNodeDisplayed(OnNodeDisplayedEvent ev)
@@ -103,10 +130,8 @@ public class DialogueUI : MonoBehaviour
 
     private void ClearChoices()
     {
-        // 1. Apagamos todo el bloque (Fondo + Contenedor de botones)
         if (choiceContainer != null) choiceContainer.SetActive(false);
 
-        // 2. Destruimos los botones viejos que estén dentro del BUTTON CONTAINER
         if (buttonContainer != null)
         {
             foreach (Transform child in buttonContainer)

@@ -1,12 +1,5 @@
-using UnityEngine;
-using UnityEngine.InputSystem;
+using EventBuses;
 
 public class OnLeftMouseClick : IEvent
 {
-    private InputAction.CallbackContext context;
-
-    public OnLeftMouseClick(InputAction.CallbackContext context)
-    {
-        this.context = context;
-    }
 }

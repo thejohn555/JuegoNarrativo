@@ -103,6 +103,16 @@ public partial class @NewInputActions: IInputActionCollection2, IDisposable
                     ""priority"": 0
                 },
                 {
+                    ""name"": ""Right Mouse"",
+                    ""type"": ""Button"",
+                    ""id"": ""95651cca-1cc4-4566-b953-ed31396db267"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false,
+                    ""priority"": 0
+                },
+                {
                     ""name"": ""Space"",
                     ""type"": ""Button"",
                     ""id"": ""67fc76b2-5d82-474e-a83e-2236c89f36bb"",
@@ -132,6 +142,17 @@ public partial class @NewInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Left Mouse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9593e815-a1fa-4edd-8877-8c5f65a2a71f"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Right Mouse"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -223,6 +244,7 @@ public partial class @NewInputActions: IInputActionCollection2, IDisposable
         // GamePlay
         m_GamePlay = asset.FindActionMap("GamePlay", throwIfNotFound: true);
         m_GamePlay_LeftMouse = m_GamePlay.FindAction("Left Mouse", throwIfNotFound: true);
+        m_GamePlay_RightMouse = m_GamePlay.FindAction("Right Mouse", throwIfNotFound: true);
         m_GamePlay_Space = m_GamePlay.FindAction("Space", throwIfNotFound: true);
         m_GamePlay_Inventory = m_GamePlay.FindAction("Inventory", throwIfNotFound: true);
         // UI
@@ -314,6 +336,7 @@ public partial class @NewInputActions: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_GamePlay;
     private List<IGamePlayActions> m_GamePlayActionsCallbackInterfaces = new List<IGamePlayActions>();
     private readonly InputAction m_GamePlay_LeftMouse;
+    private readonly InputAction m_GamePlay_RightMouse;
     private readonly InputAction m_GamePlay_Space;
     private readonly InputAction m_GamePlay_Inventory;
     /// <summary>
@@ -331,6 +354,10 @@ public partial class @NewInputActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "GamePlay/LeftMouse".
         /// </summary>
         public InputAction @LeftMouse => m_Wrapper.m_GamePlay_LeftMouse;
+        /// <summary>
+        /// Provides access to the underlying input action "GamePlay/RightMouse".
+        /// </summary>
+        public InputAction @RightMouse => m_Wrapper.m_GamePlay_RightMouse;
         /// <summary>
         /// Provides access to the underlying input action "GamePlay/Space".
         /// </summary>
@@ -368,6 +395,9 @@ public partial class @NewInputActions: IInputActionCollection2, IDisposable
             @LeftMouse.started += instance.OnLeftMouse;
             @LeftMouse.performed += instance.OnLeftMouse;
             @LeftMouse.canceled += instance.OnLeftMouse;
+            @RightMouse.started += instance.OnRightMouse;
+            @RightMouse.performed += instance.OnRightMouse;
+            @RightMouse.canceled += instance.OnRightMouse;
             @Space.started += instance.OnSpace;
             @Space.performed += instance.OnSpace;
             @Space.canceled += instance.OnSpace;
@@ -388,6 +418,9 @@ public partial class @NewInputActions: IInputActionCollection2, IDisposable
             @LeftMouse.started -= instance.OnLeftMouse;
             @LeftMouse.performed -= instance.OnLeftMouse;
             @LeftMouse.canceled -= instance.OnLeftMouse;
+            @RightMouse.started -= instance.OnRightMouse;
+            @RightMouse.performed -= instance.OnRightMouse;
+            @RightMouse.canceled -= instance.OnRightMouse;
             @Space.started -= instance.OnSpace;
             @Space.performed -= instance.OnSpace;
             @Space.canceled -= instance.OnSpace;
@@ -633,6 +666,13 @@ public partial class @NewInputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnLeftMouse(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Right Mouse" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnRightMouse(InputAction.CallbackContext context);
         /// <summary>
         /// Method invoked when associated input action "Space" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>

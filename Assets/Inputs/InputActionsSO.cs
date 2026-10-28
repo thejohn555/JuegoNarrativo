@@ -1,4 +1,5 @@
 using Assets.Scripts.EventBuses;
+using EventBuses;
 using Unity.Jobs;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -57,7 +58,15 @@ public class InputActionsSO : ScriptableObject, NewInputActions.IGamePlayActions
     {
         if (context.started)
         {
-            EventBus.Publish(new OnLeftMouseClick(context));
+            EventBus.Publish(new OnLeftMouseClick());
+        }
+    }
+
+    public void OnRightMouse(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            EventBus.Publish(new OnRightMouseClick());
         }
     }
 
