@@ -33,11 +33,11 @@ MonoBehaviour:
         - rid: 2622399403556077650
         - rid: 2622399403556077652
         - rid: 2622399446455943168
-        - rid: 2622399554606071887
-        - rid: 2622399625196470348
+        - rid: 2622399646585061454
+        - rid: 2622399646585061456
         m_GraphWireModels:
         - rid: 2622399403556077653
-        - rid: 2622399625196470350
+        - rid: 2622399646585061457
         m_GraphStickyNoteModels: []
         m_GraphPlacematModels: []
         m_GraphVariableModels: []
@@ -47,10 +47,10 @@ MonoBehaviour:
         m_LocalSubgraphs: []
         m_LastKnownBounds:
           serializedVersion: 2
-          x: -5999.2
+          x: -5968.8
           y: -276.8
-          width: 537.6001
-          height: 470.4
+          width: 472.7998
+          height: 506.4
         m_GraphElementMetaData:
         - m_Guid:
             m_Value0: 14797694113250302744
@@ -85,27 +85,27 @@ MonoBehaviour:
           m_Category: 0
           m_Index: 2
         - m_Guid:
-            m_Value0: 1059445313632616897
-            m_Value1: 7636407137665256412
+            m_Value0: 16895201290642918887
+            m_Value1: 11895362744399923404
           m_HashGuid:
             serializedVersion: 2
-            Hash: c141064ae6e7b30edc8bcb10d5f7f969
+            Hash: e70d7e290fd077eacc885f4664d114a5
           m_Category: 0
           m_Index: 3
         - m_Guid:
-            m_Value0: 1869901308523983654
-            m_Value1: 15930636718413056370
+            m_Value0: 15072097481450474167
+            m_Value1: 18188283632209071056
           m_HashGuid:
             serializedVersion: 2
-            Hash: 26339c3b5539f3197209cef6b0fd14dd
+            Hash: b74aead1cdd82ad1d08bdf0b99c369fc
           m_Category: 0
           m_Index: 4
         - m_Guid:
-            m_Value0: 3451717365384338608
-            m_Value1: 401536923542055817
+            m_Value0: 15049471510403156329
+            m_Value1: 4492941226790182127
           m_HashGuid:
             serializedVersion: 2
-            Hash: b0dcc7e4a7f6e62f896bed5bb48b9205
+            Hash: 6909f16a9a76dad0ef5c89bb3d225a3e
           m_Category: 2
           m_Index: 1
         m_EntryPoint:
@@ -276,17 +276,17 @@ MonoBehaviour:
     - rid: 2622399446455943170
       type: {class: LevelNode, ns: Blueprints_arquitectura_Dani_.Editor.Blueprints_arquitectura_Dani_.Editor.Nodes, asm: Edito.Blueprints}
       data: 
-    - rid: 2622399554606071887
+    - rid: 2622399646585061454
       type: {class: UserNodeModelImp, ns: Unity.GraphToolkit.Editor.Implementation, asm: UnityEditor.GraphToolkitModule}
       data:
         m_Guid:
-          m_Value0: 1059445313632616897
-          m_Value1: 7636407137665256412
+          m_Value0: 16895201290642918887
+          m_Value1: 11895362744399923404
         m_HashGuid:
           serializedVersion: 2
-          Hash: c141064ae6e7b30edc8bcb10d5f7f969
+          Hash: e70d7e290fd077eacc885f4664d114a5
         m_Version: 2
-        m_Position: {x: -5632.107, y: 78.5533}
+        m_Position: {x: -5969.0396, y: 113.99999}
         m_Title: 
         m_Tooltip: 
         m_NodePreviewModel:
@@ -309,21 +309,21 @@ MonoBehaviour:
           m_Color: {r: 0, g: 0, b: 0, a: 0}
           m_HasUserColor: 0
         m_Node:
-          rid: 2622399554606071889
-    - rid: 2622399554606071889
-      type: {class: ConditionNode, ns: Blueprints_arquitectura_Dani_.Editor.Nodes, asm: Edito.Blueprints}
+          rid: 2622399646585061455
+    - rid: 2622399646585061455
+      type: {class: OnTriggerEnter_Trigger1, ns: Blueprints_arquitectura_Dani_.Editor, asm: Edito.Blueprints}
       data: 
-    - rid: 2622399625196470348
+    - rid: 2622399646585061456
       type: {class: UserNodeModelImp, ns: Unity.GraphToolkit.Editor.Implementation, asm: UnityEditor.GraphToolkitModule}
       data:
         m_Guid:
-          m_Value0: 1869901308523983654
-          m_Value1: 15930636718413056370
+          m_Value0: 15072097481450474167
+          m_Value1: 18188283632209071056
         m_HashGuid:
           serializedVersion: 2
-          Hash: 26339c3b5539f3197209cef6b0fd14dd
+          Hash: b74aead1cdd82ad1d08bdf0b99c369fc
         m_Version: 2
-        m_Position: {x: -5998.9175, y: 70.21884}
+        m_Position: {x: -5666.4, y: 114.08003}
         m_Title: 
         m_Tooltip: 
         m_NodePreviewModel:
@@ -346,39 +346,39 @@ MonoBehaviour:
           m_Color: {r: 0, g: 0, b: 0, a: 0}
           m_HasUserColor: 0
         m_Node:
-          rid: 2622399625196470349
-    - rid: 2622399625196470349
-      type: {class: OnTriggerEnter_GameObject, ns: Blueprints_arquitectura_Dani_.Editor, asm: Edito.Blueprints}
-      data: 
-    - rid: 2622399625196470350
+          rid: 2622399646585061458
+    - rid: 2622399646585061457
       type: {class: WireModel, ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
       data:
         m_Guid:
-          m_Value0: 3451717365384338608
-          m_Value1: 401536923542055817
+          m_Value0: 15049471510403156329
+          m_Value1: 4492941226790182127
         m_HashGuid:
           serializedVersion: 2
-          Hash: b0dcc7e4a7f6e62f896bed5bb48b9205
+          Hash: 6909f16a9a76dad0ef5c89bb3d225a3e
         m_Version: 2
         m_FromPortReference:
           m_NodeModelGuid:
-            m_Value0: 1869901308523983654
-            m_Value1: 15930636718413056370
+            m_Value0: 16895201290642918887
+            m_Value1: 11895362744399923404
           m_NodeModelHashGuid:
             serializedVersion: 2
-            Hash: 26339c3b5539f3197209cef6b0fd14dd
+            Hash: e70d7e290fd077eacc885f4664d114a5
           m_UniqueId: Out
           m_PortDirection: 2
           m_PortOrientation: 0
           m_Title: Out
         m_ToPortReference:
           m_NodeModelGuid:
-            m_Value0: 1059445313632616897
-            m_Value1: 7636407137665256412
+            m_Value0: 15072097481450474167
+            m_Value1: 18188283632209071056
           m_NodeModelHashGuid:
             serializedVersion: 2
-            Hash: c141064ae6e7b30edc8bcb10d5f7f969
+            Hash: b74aead1cdd82ad1d08bdf0b99c369fc
           m_UniqueId: Execution Port
           m_PortDirection: 1
           m_PortOrientation: 0
           m_Title: 
+    - rid: 2622399646585061458
+      type: {class: ConditionNode, ns: Blueprints_arquitectura_Dani_.Editor.Nodes, asm: Edito.Blueprints}
+      data: 
