@@ -1,3 +1,4 @@
+using Assets.Scripts.Camera;
 using Assets.Scripts.EventBuses;
 using EventBuses;
 using System.Collections;
@@ -25,7 +26,7 @@ public class DialogueUI : MonoBehaviour
     private Vector3 defaultAnchoredPosition;
 
     private bool isDialogueMode;
-    private Dictionary<string, Transform> currentSpeakers;
+    private Dictionary<string, SpeakerData> currentSpeakers;
     private Transform activeSpeakerTransform;
 
     private void OnEnable()
@@ -87,11 +88,6 @@ public class DialogueUI : MonoBehaviour
 
         isDialogueMode = data.isDialogue;
         currentSpeakers = data.speakers;
-
-        if (data.textColor.a == 0)
-            dialogueText.color = Color.white;
-        else
-            dialogueText.color = data.textColor;
     }
 
     private void OnNodeDisplayed(OnNodeDisplayedEvent ev)
@@ -102,13 +98,15 @@ public class DialogueUI : MonoBehaviour
         currentNode = ev.Node;
         speakerText.text = ev.Node.SpeakerName;
 
-        if (currentSpeakers != null && currentSpeakers.TryGetValue(ev.Node.SpeakerName, out Transform speakerTransform))
+        if (currentSpeakers != null && currentSpeakers.TryGetValue(ev.Node.SpeakerName, out SpeakerData speakerData))
         {
-            activeSpeakerTransform = speakerTransform;
+            activeSpeakerTransform = speakerData.transform;
+            dialogueText.color = speakerData.textColor;
         }
         else
         {
             activeSpeakerTransform = null;
+            dialogueText.color = Color.white;
         }
 
         ClearChoices();
@@ -148,7 +146,7 @@ public class DialogueUI : MonoBehaviour
 
         if (sprite != null)
         {
-            return new Vector3(speakerTransform.position.x, sprite.bounds.max.y, speakerTransform.position.z);
+            return new Vector3(speakerTransform.position.x, sprite.bounds.max.y + 0.8f, speakerTransform.position.z);
         }
 
         return speakerTransform.position + Vector3.up * 2f;

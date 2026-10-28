@@ -3503,6 +3503,54 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2553169642083303933, guid: e7afb3b40cc5e7c4080751ae063c8387, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3587750198974348866, guid: e7afb3b40cc5e7c4080751ae063c8387, type: 3}
+      propertyPath: m_fontSize
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3587750198974348866, guid: e7afb3b40cc5e7c4080751ae063c8387, type: 3}
+      propertyPath: m_fontSizeMax
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3587750198974348866, guid: e7afb3b40cc5e7c4080751ae063c8387, type: 3}
+      propertyPath: m_fontSizeMin
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3587750198974348866, guid: e7afb3b40cc5e7c4080751ae063c8387, type: 3}
+      propertyPath: m_VerticalAlignment
+      value: 512
+      objectReference: {fileID: 0}
+    - target: {fileID: 3587750198974348866, guid: e7afb3b40cc5e7c4080751ae063c8387, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3862950372509009547, guid: e7afb3b40cc5e7c4080751ae063c8387, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3873797393830848235, guid: e7afb3b40cc5e7c4080751ae063c8387, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 403.6236
+      objectReference: {fileID: 0}
+    - target: {fileID: 3873797393830848235, guid: e7afb3b40cc5e7c4080751ae063c8387, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 77.2255
+      objectReference: {fileID: 0}
+    - target: {fileID: 4308537504579557152, guid: e7afb3b40cc5e7c4080751ae063c8387, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 403.62
+      objectReference: {fileID: 0}
+    - target: {fileID: 4308537504579557152, guid: e7afb3b40cc5e7c4080751ae063c8387, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 77.225
+      objectReference: {fileID: 0}
+    - target: {fileID: 4308537504579557152, guid: e7afb3b40cc5e7c4080751ae063c8387, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.000015258789
+      objectReference: {fileID: 0}
     - target: {fileID: 6933648029135960108, guid: e7afb3b40cc5e7c4080751ae063c8387, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -3585,7 +3633,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7221204262310958930, guid: e7afb3b40cc5e7c4080751ae063c8387, type: 3}
       propertyPath: m_Name
-      value: Canvas (1)
+      value: DialogueUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 9027980238069775757, guid: e7afb3b40cc5e7c4080751ae063c8387, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5811,8 +5863,8 @@ SceneRoots:
   - {fileID: 2101573023}
   - {fileID: 2124073563}
   - {fileID: 1760750165}
-  - {fileID: 1111250212}
   - {fileID: 1463542587}
+  - {fileID: 1111250212}
   - {fileID: 2984788145907895898}
   - {fileID: 6724583006774733039}
   - {fileID: 8341070053477018924}

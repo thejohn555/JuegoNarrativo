@@ -73,10 +73,10 @@ namespace Interactives
             data.isDialogue = true;
             data.textColor = npcTextColor;
 
-            data.speakers = new Dictionary<string, Transform>
+            data.speakers = new Dictionary<string, SpeakerData>
             {
-                {"Conan", interactor.transform },
-                { npcID, this.transform }
+                { "Conan", new SpeakerData { transform = interactor.transform, textColor = Color.white } },
+                { npcID, new SpeakerData { transform = this.transform, textColor = npcTextColor } }
             };
 
 

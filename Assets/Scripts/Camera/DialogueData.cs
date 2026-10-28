@@ -1,13 +1,21 @@
 ﻿using JetBrains.Annotations;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.Scripts.Camera
 {
+    public struct SpeakerData
+    {
+        public Transform transform;
+        public Color textColor;
+    }
+
+    [Serializable]
     public struct DialogueData
     {
-        public Dictionary<string, Transform> speakers;
+        public Dictionary<string, SpeakerData> speakers;
         public Transform targetPosition;
         public Vector3 cameraOffset;
         public float zoom;
@@ -18,7 +26,7 @@ namespace Assets.Scripts.Camera
         public Color textColor;
 
         public DialogueData(
-        Dictionary<string, Transform> speakers,
+        Dictionary<string, SpeakerData> speakers,
         Transform targetPosition,
         Vector3 cameraOffset,
         float zoom = 5f,
@@ -26,7 +34,7 @@ namespace Assets.Scripts.Camera
         bool moveCamera = true,
         bool zoomCamera = true,
         bool isDialogue = true,
-        Color textColor = default(Color) )
+        Color textColor = default )
         {
             this.speakers = speakers;
             this.targetPosition = targetPosition;
