@@ -33,6 +33,8 @@ public class InventoryManager : MonoBehaviour
     private Transform panelTransform;
     private List<Image> slotIconImages = new List<Image>();
 
+    public int HeldSlotIndex { get; set; } = -1;
+    
     private void Awake()
     {
         if (Instance == null)
@@ -136,7 +138,7 @@ public class InventoryManager : MonoBehaviour
     {
         for (int i = 0; i < slotIconImages.Count; i++)
         {
-            if (i < inventorySlots.Length && inventorySlots[i].icon != null)
+            if (i < inventorySlots.Length && inventorySlots[i].icon != null && i != HeldSlotIndex)
             {
                 slotIconImages[i].sprite = inventorySlots[i].icon;
                 slotIconImages[i].enabled = true;
@@ -147,6 +149,34 @@ public class InventoryManager : MonoBehaviour
                 slotIconImages[i].enabled = false;
             }
         }
+    }
+    
+    // Devuelve los datos de un slot (false si está vacío o el índice no es válido)
+    public bool TryGetItem(int index, out string itemName, out Sprite icon)
+    {
+        itemName = null;
+        icon = null;
+
+        if (inventorySlots == null || index < 0 || index >= inventorySlots.Length || inventorySlots[index].icon == null)
+        {
+            return false;
+        }
+
+        itemName = inventorySlots[index].itemName;
+        icon = inventorySlots[index].icon;
+        return true;
+    }
+
+    // Vacía un slot (por ejemplo, al gastar un objeto)
+    public void ClearSlot(int index)
+    {
+        if (inventorySlots == null || index < 0 || index >= inventorySlots.Length)
+        {
+            return;
+        }
+
+        inventorySlots[index] = new InventoryItem();
+        UpdateUI();
     }
     
     // Mueve o intercambia un objeto de un slot a otro
@@ -167,7 +197,9 @@ public class InventoryManager : MonoBehaviour
     public void TryCraftOrMove(int fromIndex, int toIndex)
     {
         if (fromIndex < 0 || fromIndex >= inventorySlots.Length || toIndex < 0 || toIndex >= inventorySlots.Length)
+        {
             return;
+        }
 
         string itemA = inventorySlots[fromIndex].itemName;
         string itemB = inventorySlots[toIndex].itemName;
