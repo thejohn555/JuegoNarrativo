@@ -2,30 +2,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Assets.CodingTools
 {
-    internal class Timer : MonoBehaviour
+    internal class Timer 
     {
-        public static Timer Instance;
-
-        private void Awake()
-        {
-            if (Instance == null)
-            {
-                Instance = this;
-            }
-                //    else
-                //    {
-                //        Destroy(gameObject);
-                //    }
-        }
-
-        public IEnumerator Countdown(float time, bool check)
+        public async Task Cooldown(float waitTime, bool check)
         {
             check = false;
-            yield return new WaitForSeconds(time);
+            float currentTime = Time.time;
+            while(Time.time - currentTime < waitTime)
+            {
+                await Task.Yield();
+            }
             check = true;
         }
     }

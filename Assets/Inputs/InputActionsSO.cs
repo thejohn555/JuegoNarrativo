@@ -9,9 +9,7 @@ using Assets.CodingTools;
 public class InputActionsSO : ScriptableObject, NewInputActions.IGamePlayActions, NewInputActions.IUIActions, NewInputActions.IInventoryActions
 {
     [field: SerializeField] public EventBusSO EventBus { get; private set; }
-    [Header("Inventory Cooldown")]
-    [SerializeField]private float cooldownTime;
-    private bool cooldown;
+    //input maps
     private NewInputActions inputActions;
     private InputActionMap currentMap;
     //Map refs
@@ -23,10 +21,6 @@ public class InputActionsSO : ScriptableObject, NewInputActions.IGamePlayActions
     
     private void OnEnable()
     {
-        //cooldown var
-        cooldown = true;
-
-
         inputActions = new NewInputActions();
         inputActions.Enable();
         gameplayMap = inputActions.GamePlay;
@@ -105,11 +99,10 @@ public class InputActionsSO : ScriptableObject, NewInputActions.IGamePlayActions
 
     public void OnInventory(InputAction.CallbackContext context)
     {
-        if (context.started && currentMap == gameplayMap && cooldown)
+        if (context.started && currentMap == gameplayMap)
         {
             SwitchMap(inputActions.Inventory);
             EventBus.Publish(onScrollWheelPressed);
-            //Timer.Instance.StartCoroutine(Timer.Instance.Countdown(cooldownTime, cooldown));
            
         }  
     }
