@@ -8711,7 +8711,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44653eee72f244fbafd305135f814e74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player.PlayerMovementSystem
-  Velocity: 3
+  minVelocity: 1
+  maxVelocity: 3
+  distanceForMinVelocity: 3
+  distanceForMaxVelocity: 10
   pathfinding: {fileID: 1836895566}
 --- !u!114 &1675450512
 MonoBehaviour:
