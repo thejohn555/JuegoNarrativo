@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class InventoryController : MonoBehaviour
 {
-    [Header("Configuración")]
+    [Header("Configuration")]
     [SerializeField] private GameObject inventoryPanel;
 
     [Header("Inputs")]
@@ -33,12 +33,37 @@ public class InventoryController : MonoBehaviour
             isOpen = false;
             inventoryPanel.SetActive(false);
         }
+        
+        if(HeldItemController.Instance != null)
+        {
+            HeldItemController.Instance.OnItemHeld += HandleItemHeld;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (HeldItemController.Instance != null)
+        {
+            HeldItemController.Instance.OnItemHeld -= HandleItemHeld;
+        }
+    }
+
+    private void HandleItemHeld(string itemName)
+    {
+        isOpen = false;
+        inventoryPanel.SetActive(false);
+        inputs.Publish(new OnInventoryCloseEvent()); // el SO vuelve al mapa GamePlay
     }
 
     public void ToggleInventory(OnScrollWheelPressed eventArgs)
     {
-        // Alternamos el estado
         isOpen = !isOpen;
+
+        if (isOpen)
+        {
+            HeldItemController.Instance.Release(); // al abrir, el objeto sale de la mano
+        }
+
         inventoryPanel.SetActive(isOpen);
     }
 }

@@ -36,9 +36,16 @@ namespace Blueprints_arquitectura_Dani_.Runtime
             }
         }
 
+        private void OnDisable()
+        {
+            if (BlueprintsEventManager.Instance != null)
+                BlueprintsEventManager.Instance.OnEvent -= HandleEvent;
+        }
+
         private void Start()
         {
-            
+            if (BlueprintsEventManager.Instance != null)
+                BlueprintsEventManager.Instance.OnEvent += HandleEvent;
             if (RuntimeGraph == null)
             {
                 Debug.LogError("No hay ningun grafo asignado");
@@ -72,7 +79,6 @@ namespace Blueprints_arquitectura_Dani_.Runtime
                 }
                 idx++;
             }
-            SuscribeToEnvents();
         }
 
         private void RunFrom(RuntimeNodeGroup group,int startIndex = 0)
@@ -99,22 +105,25 @@ namespace Blueprints_arquitectura_Dani_.Runtime
                 }
             }
         }
-
-        public void SuscribeToEnvents()
+        
+        private void HandleEvent(NodeTypes type, GameObject obj)
         {
-           BlueprintsEventManager.Instance.OnTrigger += HandelTrigger;
-        }
-
-        private void HandelTrigger(GameObject obj)
-        {
-            if (BlueprintDictionaryManager.Instance.triggerDictionary.ContainsKey(obj.name))
+            switch (type)
             {
-                RunFrom(BlueprintDictionaryManager.Instance.triggerDictionary[obj.name]);
-            }
-            else
-            {
-                Debug.LogError(
-                    $"No hay ningun trigger {obj}");
+                case NodeTypes.Trigger:
+                    if (BlueprintDictionaryManager.Instance.triggerDictionary.ContainsKey(obj.name))
+                    {
+                        RunFrom(BlueprintDictionaryManager.Instance.triggerDictionary[obj.name]);
+                    }
+                    else
+                    {
+                        Debug.LogError(
+                            $"No hay ningun trigger {obj}");
+                    }
+                    break;
+                case NodeTypes.Interactuable:
+                    // idem para interactuables
+                    break;
             }
         }
     }

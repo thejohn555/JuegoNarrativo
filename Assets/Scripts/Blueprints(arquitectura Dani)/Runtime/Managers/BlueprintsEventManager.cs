@@ -7,23 +7,17 @@ namespace Blueprints_arquitectura_Dani_.Runtime
     {
         public static BlueprintsEventManager Instance { get; private set; }
 
-        public event Action<GameObject> OnTrigger;
+        public event Action<NodeTypes, GameObject> OnEvent;
+
         private void Awake()
         {
-            if (Instance == null)
-            {
-                Instance = this;
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
+            if (Instance != null) { Destroy(gameObject); return; }
+            Instance = this;
         }
 
-        public void TriggerInvoque(GameObject gameObject)
+        public void Raise(NodeTypes type, GameObject source)
         {
-            Debug.Log("Evento");
-            OnTrigger?.Invoke(gameObject);
+            OnEvent?.Invoke(type, source);
         }
     }
 }

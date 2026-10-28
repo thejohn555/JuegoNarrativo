@@ -52,9 +52,7 @@ public class InventoryWindown : EditorWindow
 
         if (settings == null)
         {
-            EditorGUILayout.HelpBox(
-                $"No hay un asset de InventorySettings asignado. Asignalo arriba o crea uno en {settingsFolder}.",
-                MessageType.Warning);
+            EditorGUILayout.HelpBox($"No InventorySettings asset is assigned. Assign one above or create one in {settingsFolder}.", MessageType.Warning);
             using (new EditorGUI.DisabledScope(true))
             {
                 GUILayout.Button("Create", GUILayout.Height(30));

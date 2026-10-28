@@ -8,7 +8,7 @@ namespace Blueprints_arquitectura_Dani_.Editor
     public abstract class OnTriggerEnterNode : BlueprintNode,IStartNode
     {
         public const string targetPort= "Target";
-        public abstract string TriggerKey { get; }
+        public abstract string Key { get; }
 
         protected override void OnDefinePorts(IPortDefinitionContext context)
         {   

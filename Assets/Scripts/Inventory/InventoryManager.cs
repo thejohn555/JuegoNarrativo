@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -32,7 +33,10 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private InventoryItem[] inventorySlots;
     private Transform panelTransform;
     private List<Image> slotIconImages = new List<Image>();
+    private List<TextMeshProUGUI> slotIconNames = new List<TextMeshProUGUI>();
 
+    public int HeldSlotIndex { get; set; } = -1;
+    
     private void Awake()
     {
         if (Instance == null)
@@ -69,30 +73,11 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    // Vincula las referencias del panel que ya está dibujado en la escena
-    public void BindExistingPanel(GameObject panel)
-    {
-        panelTransform = panel.transform;
-        slotIconImages.Clear();
-
-        // Recorremos los slots hijos para capturar sus imágenes "Icon"
-        foreach (Transform slotChild in panelTransform)
-        {
-            Transform iconTransform = slotChild.Find("Icon");
-            if (iconTransform != null)
-            {
-                slotIconImages.Add(iconTransform.GetComponent<Image>());
-            }
-        }
-
-        UpdateUI();
-    }
-
     public void InitializeInventory()
     {
         if (settings == null)
         {
-            Debug.LogWarning("InventoryManager: Faltan los InventorySettings.");
+            Debug.LogWarning("InventoryManager: InventorySettings are missing.");
             return;
         }
 
@@ -113,7 +98,7 @@ public class InventoryManager : MonoBehaviour
             }
             else
             {
-                Debug.LogError("InventoryManager no tiene InventorySettings asignados.");
+                Debug.LogError("InventoryManager has no InventorySettings assigned.");
                 return false;
             }
         }
@@ -128,7 +113,7 @@ public class InventoryManager : MonoBehaviour
             }
         }
         
-        Debug.LogWarning("¡El inventario está lleno!");
+        Debug.LogWarning("The inventory is full!");
         return false;
     }
 
@@ -136,7 +121,10 @@ public class InventoryManager : MonoBehaviour
     {
         for (int i = 0; i < slotIconImages.Count; i++)
         {
-            if (i < inventorySlots.Length && inventorySlots[i].icon != null)
+            
+            bool hasItem = i < inventorySlots.Length && inventorySlots[i].icon != null && i != HeldSlotIndex;
+            
+            if (hasItem)
             {
                 slotIconImages[i].sprite = inventorySlots[i].icon;
                 slotIconImages[i].enabled = true;
@@ -146,7 +134,40 @@ public class InventoryManager : MonoBehaviour
                 slotIconImages[i].sprite = null;
                 slotIconImages[i].enabled = false;
             }
+            
+            if (i < slotIconNames.Count && slotIconNames[i] != null)
+            {
+                slotIconNames[i].text = hasItem ? inventorySlots[i].itemName : ""; 
+            }
         }
+    }
+    
+    // Devuelve los datos de un slot (false si está vacío o el índice no es válido)
+    public bool TryGetItem(int index, out string itemName, out Sprite icon)
+    {
+        itemName = null;
+        icon = null;
+
+        if (inventorySlots == null || index < 0 || index >= inventorySlots.Length || inventorySlots[index].icon == null)
+        {
+            return false;
+        }
+
+        itemName = inventorySlots[index].itemName;
+        icon = inventorySlots[index].icon;
+        return true;
+    }
+
+    // Vacía un slot (por ejemplo, al gastar un objeto)
+    public void ClearSlot(int index)
+    {
+        if (inventorySlots == null || index < 0 || index >= inventorySlots.Length)
+        {
+            return;
+        }
+
+        inventorySlots[index] = new InventoryItem();
+        UpdateUI();
     }
     
     // Mueve o intercambia un objeto de un slot a otro
@@ -167,7 +188,9 @@ public class InventoryManager : MonoBehaviour
     public void TryCraftOrMove(int fromIndex, int toIndex)
     {
         if (fromIndex < 0 || fromIndex >= inventorySlots.Length || toIndex < 0 || toIndex >= inventorySlots.Length)
+        {
             return;
+        }
 
         string itemA = inventorySlots[fromIndex].itemName;
         string itemB = inventorySlots[toIndex].itemName;
@@ -187,7 +210,7 @@ public class InventoryManager : MonoBehaviour
             inventorySlots[fromIndex] = new InventoryItem { itemName = null, icon = null };
             inventorySlots[toIndex] = new InventoryItem { itemName = matchedRecipe.resultName, icon = matchedRecipe.resultIcon };
             
-            Debug.Log($"¡Crafteo exitoso! Se creó: {matchedRecipe.resultName}");
+            Debug.Log($"Successful crafting! Created:{matchedRecipe.resultName}");
             UpdateUI();
         }
         else
@@ -211,5 +234,38 @@ public class InventoryManager : MonoBehaviour
             }
         }
         return new CraftingRecipe(); // Devuelve una receta vacía si no encuentra coincidencia
+    }
+    
+    // Vincula las referencias del panel que ya está dibujado en la escena
+    public void BindExistingPanel(GameObject panel)
+    {
+        panelTransform = panel.transform;
+        slotIconImages.Clear();
+        slotIconNames.Clear();
+
+        foreach (Transform slotChild in panelTransform)
+        {
+            Transform iconTransform = slotChild.Find("Icon");
+            if (iconTransform != null)
+            {
+                slotIconImages.Add(iconTransform.GetComponent<Image>());
+
+                Transform textTransform = slotChild.Find("Text");
+                TextMeshProUGUI text = textTransform != null ? textTransform.GetComponent<TextMeshProUGUI>() : null;
+                slotIconNames.Add(text);
+
+                if (text != null)
+                {
+                    SlotTextMouseTracker hover = slotChild.GetComponent<SlotTextMouseTracker>();
+                    if (hover == null)
+                    {
+                        hover = slotChild.gameObject.AddComponent<SlotTextMouseTracker>();
+                    }
+                    hover.Init(text);
+                }
+            }
+        }
+
+        UpdateUI();
     }
 }

@@ -101,12 +101,18 @@ namespace Player
         {
             Interactive target = currentInteractuable;
             if (target == null) yield break;
+            bool isFirstDestination = true;
             do
             {
                 if (target == null) yield break;
 
                 currentDestination = target.transform.position;
-                main.MovementSystem.SetNewDestination(currentDestination,currentStoppingDistance);
+                main.MovementSystem.SetNewDestination(
+                    currentDestination,
+                    currentStoppingDistance,
+                    recalculateVelocity: isFirstDestination
+                );
+                isFirstDestination = false;
                 yield return new WaitForSeconds(0.2f);
             } while (!main.MovementSystem.ReacheDestination());
 

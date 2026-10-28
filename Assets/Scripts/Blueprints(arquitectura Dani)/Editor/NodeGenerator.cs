@@ -1,18 +1,28 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using Blueprints_arquitectura_Dani_.Runtime;
 using Blueprints_arquitectura_Dani_.Runtime.Managers;
 using UnityEditor;
 using UnityEngine;
 
+
+//-------------IMPORTANTE--------------------
+//Para crear un nodo base de inicio que requiera un objeto de la esecena
+//Seguir esta base
+// [Serializable];
+// public class {prefix}{id} : {baseClass}
+// public override string Key => \"{name}\";
 namespace Blueprints_arquitectura_Dani_.Editor.Blueprints_arquitectura_Dani_.Editor
 {
-    public class TriggerNodeGenerator
-    {
-      public const string outPutPath = "Assets/Scripts/Blueprints(arquitectura Dani)/Editor/Nodes/Generated/TriggerNodes.cs";
 
-      [MenuItem("Blueprints/Generar nodos de trigger")]
-      static void GenerateFromScene()
+    
+    public class NodeGenerator
+    { 
+        public static NodeGenerator Instance { get; } = new NodeGenerator();
+      private const string outputFolder = "Assets/Scripts/Blueprints(arquitectura Dani)/Editor/Nodes/Generated";
+      
+      static void GenerateFromScene(NodeTypes type)
       {
           var dictionaryManager = Object.FindFirstObjectByType<BlueprintDictionaryManager>();
 
@@ -21,7 +31,7 @@ namespace Blueprints_arquitectura_Dani_.Editor.Blueprints_arquitectura_Dani_.Edi
               Debug.LogError("No se ha encontrado BlueprintDictionaryManager");
               return;
           }
-          var obj = dictionaryManager.triggerList;
+          var obj = dictionaryManager.nodeDictionary[type].list;
           List<string> names = new List<string>();
           foreach (var gameObj in obj)
           {
@@ -30,11 +40,14 @@ namespace Blueprints_arquitectura_Dani_.Editor.Blueprints_arquitectura_Dani_.Edi
                   names.Add(gameObj.name);
               }
           }
-          Generate(names);
+          Generate(type,names);
       }
 
-      private static void Generate(List<string> names)
+      private static void Generate(NodeTypes type,List<string> names)
       {
+          var (prefix, baseClass, file) = NodeGenTemplate.Map[type];
+          string path = $"{outputFolder}/{file}";
+          
           var sb = new StringBuilder();
           sb.AppendLine("//(auto generado) No editar a mano.");
           sb.AppendLine("using System;");
@@ -58,23 +71,23 @@ namespace Blueprints_arquitectura_Dani_.Editor.Blueprints_arquitectura_Dani_.Edi
                   }
 
                   sb.AppendLine("    [Serializable]");
-                  sb.AppendLine($"    public class OnTriggerEnter_{id} : OnTriggerEnterNode");
-                  sb.AppendLine($"    {{ public override string TriggerKey => \"{name}\"; }}");
+                  sb.AppendLine($"    public class {prefix}{id} : {baseClass}");
+                  sb.AppendLine($"    {{ public override string Key => \"{name}\"; }}");
                   used.Add(id);
               }
           }
               sb.AppendLine("}");
               string content = sb.ToString();
-              if (File.Exists(outPutPath) && File.ReadAllText(outPutPath) == content)
+              if (File.Exists(path) && File.ReadAllText(path) == content)
               {
                   Debug.Log("[TriggerNodes] Sin cambios");
                   return;
               }
 
-              Directory.CreateDirectory(Path.GetDirectoryName(outPutPath));
-              File.WriteAllText(outPutPath, content);
+              Directory.CreateDirectory(outputFolder);
+              File.WriteAllText(path, content);
               AssetDatabase.Refresh();
-              Debug.Log($"[TriggerNodes] Generadas {used.Count} clases");
+              Debug.Log($"[NodeGenerator] {type}: {used.Count} clases");
           
       }
       
@@ -93,6 +106,11 @@ namespace Blueprints_arquitectura_Dani_.Editor.Blueprints_arquitectura_Dani_.Edi
               }
           }
           return sb.ToString();
+      }
+      public static void GenerateAll()
+      {
+          foreach (var type in NodeGenTemplate.Map.Keys)
+              GenerateFromScene(type);
       }
     }
 }
