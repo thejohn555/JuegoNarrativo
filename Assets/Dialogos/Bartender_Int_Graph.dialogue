@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 12501, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: BartenderGraph
+  m_Name: Bartender_Int_Graph
   m_EditorClassIdentifier: UnityEditor.dll::Unity.GraphToolkit.Editor.Implementation.GraphObjectImp
   m_GraphModel:
     rid: 5438168638866063436
@@ -29,7 +29,7 @@ MonoBehaviour:
           serializedVersion: 2
           Hash: 57c1bd06b1731ddb231d1f88456f266f
         m_Version: 2
-        m_Position: {x: 886.3769, y: 74.782616}
+        m_Position: {x: 945.8894, y: 68.17011}
         m_Title: 
         m_Tooltip: 
         m_NodePreviewModel:
@@ -86,11 +86,11 @@ MonoBehaviour:
     - rid: 1425812137612410961
       type: {class: 'Constant`1[[System.String, mscorlib]]', ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
       data:
-        m_Value: "Estoy buscando informaci\xF3n sobre cierto tesoro"
+        m_Value: I'm seeking information about a certain treasure.
     - rid: 1425812137612410962
       type: {class: 'Constant`1[[System.String, mscorlib]]', ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
       data:
-        m_Value: "\xBFA qu\xE9 viene tanto alboroto?"
+        m_Value: What's all this commotion about?
     - rid: 1425812137612410963
       type: {class: ChoiceNode, ns: DialogueGraph.Editor, asm: Assembly-CSharp-Editor}
       data: 
@@ -129,7 +129,7 @@ MonoBehaviour:
     - rid: 1425812137612410965
       type: {class: 'Constant`1[[System.String, mscorlib]]', ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
       data:
-        m_Value: "\xBFQu\xE9 tienes para beber?"
+        m_Value: What have you got to drink?
     - rid: 1425812137612410966
       type: {class: UserNodeModelImp, ns: Unity.GraphToolkit.Editor.Implementation, asm: UnityEditor.GraphToolkitModule}
       data:
@@ -177,7 +177,7 @@ MonoBehaviour:
     - rid: 1425812137612410968
       type: {class: 'Constant`1[[System.String, mscorlib]]', ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
       data:
-        m_Value: Yo no te puedo ayudar en esa tarea
+        m_Value: I'm afraid I can't help you there, stranger.
     - rid: 1425812137612410969
       type: {class: 'Constant`1[[System.Single, mscorlib]]', ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
       data:
@@ -232,7 +232,7 @@ MonoBehaviour:
     - rid: 1425812137612410977
       type: {class: 'Constant`1[[System.String, mscorlib]]', ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
       data:
-        m_Value: "\xA1Ja! \xBFAcaso necesitas una excusa para beber, forastero?"
+        m_Value: Ha! Since when does a man need an excuse to drink, stranger?
     - rid: 1425812137612410978
       type: {class: 'Constant`1[[System.Single, mscorlib]]', ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
       data:
@@ -287,7 +287,7 @@ MonoBehaviour:
     - rid: 1425812137612410986
       type: {class: 'Constant`1[[System.String, mscorlib]]', ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
       data:
-        m_Value: "\xA1Cerveza de barril, forastero! La mejor que encontrar\xE1s en todo el Maul."
+        m_Value: Ale, straight from the barrel, stranger! The finest you'll find in all the Maul!
     - rid: 1425812137612410987
       type: {class: 'Constant`1[[System.Single, mscorlib]]', ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
       data:
@@ -438,7 +438,7 @@ MonoBehaviour:
     - rid: 1425812137612410995
       type: {class: 'Constant`1[[System.String, mscorlib]]', ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
       data:
-        m_Value: "Pero estoy seguro que le podr\xE1s sonsacar informaci\xF3n a alguien de por aqu\xED."
+        m_Value: But there are plenty of loose tongues in the Maul. Listen to the drunkards, and you might hear something worth your while.
     - rid: 1425812137612410996
       type: {class: 'Constant`1[[System.Single, mscorlib]]', ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
       data:
@@ -493,7 +493,7 @@ MonoBehaviour:
     - rid: 1425812137612411004
       type: {class: 'Constant`1[[System.String, mscorlib]]', ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
       data:
-        m_Value: "\xA1Aqu\xED, en el Maul, cualquier noche es buena para vaciar una jarra y perder unas cuantas monedas!"
+        m_Value: This is the Maul! Every night's a good night to drain a tankard and lose a few coins!
     - rid: 1425812137612411005
       type: {class: 'Constant`1[[System.Single, mscorlib]]', ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
       data:
@@ -548,7 +548,7 @@ MonoBehaviour:
     - rid: 1425812137612411013
       type: {class: 'Constant`1[[System.String, mscorlib]]', ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
       data:
-        m_Value: "\xA1Siempre que tengas unas monedas con las que pagar, claro!"
+        m_Value: That is, if you've got the coin to pay for it, of course!
     - rid: 1425812137612411014
       type: {class: 'Constant`1[[System.Single, mscorlib]]', ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
       data:
@@ -731,7 +731,7 @@ MonoBehaviour:
     - rid: 1425812137612411022
       type: {class: 'Constant`1[[System.String, mscorlib]]', ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
       data:
-        m_Value: "Eso s\xED, vigila tus pertenencias. En estas calles hay m\xE1s ladrones que ratas."
+        m_Value: Just keep a hand on your stuff. There are more thieves than rats in these streets!
     - rid: 1425812137612411023
       type: {class: 'Constant`1[[System.Single, mscorlib]]', ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
       data:
@@ -803,111 +803,6 @@ MonoBehaviour:
           m_PortDirection: 1
           m_PortOrientation: 0
           m_Title: In
-    - rid: 1425812137612411027
-      type: {class: UserNodeModelImp, ns: Unity.GraphToolkit.Editor.Implementation, asm: UnityEditor.GraphToolkitModule}
-      data:
-        m_Guid:
-          m_Value0: 16834239023307271483
-          m_Value1: 9247297058613383605
-        m_HashGuid:
-          serializedVersion: 2
-          Hash: 3bad3f38333b9fe9b5512a37aeff5480
-        m_Version: 2
-        m_Position: {x: 2189.7556, y: 360.2953}
-        m_Title: 
-        m_Tooltip: 
-        m_NodePreviewModel:
-          rid: -2
-        m_State: 0
-        m_InputConstantsById:
-          m_KeyList:
-          - __option_portCount
-          - Speaker
-          - Dialogue Text
-          - Text Speed
-          - Choice Text  0
-          - Choice Text  1
-          m_ValueList:
-          - rid: 1425812137612411028
-          - rid: 1425812137612411029
-          - rid: 1425812137612411030
-          - rid: 1425812137612411031
-          - rid: 1425812137612411032
-          - rid: 1425812137612411033
-        m_InputPortInfos:
-          expandedPortsById:
-            m_KeyList: []
-            m_ValueList: 
-        m_OutputPortInfos:
-          expandedPortsById:
-            m_KeyList: []
-            m_ValueList: 
-        m_Collapsed: 0
-        m_CurrentModeIndex: 0
-        m_ElementColor:
-          m_Color: {r: 0, g: 0, b: 0, a: 0}
-          m_HasUserColor: 0
-        m_Node:
-          rid: 1425812137612411034
-    - rid: 1425812137612411028
-      type: {class: 'Constant`1[[System.Int32, mscorlib]]', ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
-      data:
-        m_Value: 2
-    - rid: 1425812137612411029
-      type: {class: 'Constant`1[[System.String, mscorlib]]', ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
-      data:
-        m_Value: Conan
-    - rid: 1425812137612411030
-      type: {class: 'Constant`1[[System.String, mscorlib]]', ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
-      data:
-        m_Value: 
-    - rid: 1425812137612411031
-      type: {class: 'Constant`1[[System.Single, mscorlib]]', ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
-      data:
-        m_Value: 0
-    - rid: 1425812137612411032
-      type: {class: 'Constant`1[[System.String, mscorlib]]', ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
-      data:
-        m_Value: '*Pagar*'
-    - rid: 1425812137612411033
-      type: {class: 'Constant`1[[System.String, mscorlib]]', ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
-      data:
-        m_Value: "Quiz\xE1s luego"
-    - rid: 1425812137612411034
-      type: {class: ChoiceNode, ns: DialogueGraph.Editor, asm: Assembly-CSharp-Editor}
-      data: 
-    - rid: 1425812137612411035
-      type: {class: WireModel, ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
-      data:
-        m_Guid:
-          m_Value0: 13652614446472387072
-          m_Value1: 8755418334590923046
-        m_HashGuid:
-          serializedVersion: 2
-          Hash: 005a5a2181d477bd26f13b4d967e8179
-        m_Version: 2
-        m_FromPortReference:
-          m_NodeModelGuid:
-            m_Value0: 17396942219841735729
-            m_Value1: 7137874349364717565
-          m_NodeModelHashGuid:
-            serializedVersion: 2
-            Hash: 318ca9a7c65a6ef1fda74115e7d20e63
-          m_UniqueId: Out
-          m_PortDirection: 2
-          m_PortOrientation: 0
-          m_Title: Out
-        m_ToPortReference:
-          m_NodeModelGuid:
-            m_Value0: 16834239023307271483
-            m_Value1: 9247297058613383605
-          m_NodeModelHashGuid:
-            serializedVersion: 2
-            Hash: 3bad3f38333b9fe9b5512a37aeff5480
-          m_UniqueId: In
-          m_PortDirection: 1
-          m_PortOrientation: 0
-          m_Title: In
     - rid: 1425812137612411036
       type: {class: UserNodeModelImp, ns: Unity.GraphToolkit.Editor.Implementation, asm: UnityEditor.GraphToolkitModule}
       data:
@@ -918,7 +813,7 @@ MonoBehaviour:
           serializedVersion: 2
           Hash: 4a2afe44d6d462ce8f4e20e182ce77d0
         m_Version: 2
-        m_Position: {x: 2650.5999, y: 331.09988}
+        m_Position: {x: 2351.5198, y: 345.09192}
         m_Title: 
         m_Tooltip: 
         m_NodePreviewModel:
@@ -948,38 +843,6 @@ MonoBehaviour:
           m_HasUserColor: 0
         m_Node:
           rid: 1425812137612411041
-    - rid: 1425812137612411037
-      type: {class: WireModel, ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
-      data:
-        m_Guid:
-          m_Value0: 11495539768684982388
-          m_Value1: 2476591998610298897
-        m_HashGuid:
-          serializedVersion: 2
-          Hash: 7430d87d835c889f11d8bd1a4d9f5e22
-        m_Version: 2
-        m_FromPortReference:
-          m_NodeModelGuid:
-            m_Value0: 16834239023307271483
-            m_Value1: 9247297058613383605
-          m_NodeModelHashGuid:
-            serializedVersion: 2
-            Hash: 3bad3f38333b9fe9b5512a37aeff5480
-          m_UniqueId: Choice  0
-          m_PortDirection: 2
-          m_PortOrientation: 0
-          m_Title: Choice  0
-        m_ToPortReference:
-          m_NodeModelGuid:
-            m_Value0: 14871682936276396618
-            m_Value1: 15021702143635639951
-          m_NodeModelHashGuid:
-            serializedVersion: 2
-            Hash: 4a2afe44d6d462ce8f4e20e182ce77d0
-          m_UniqueId: In
-          m_PortDirection: 1
-          m_PortOrientation: 0
-          m_Title: In
     - rid: 1425812137612411038
       type: {class: 'Constant`1[[System.String, mscorlib]]', ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
       data:
@@ -987,7 +850,7 @@ MonoBehaviour:
     - rid: 1425812137612411039
       type: {class: 'Constant`1[[System.String, mscorlib]]', ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
       data:
-        m_Value: "Aqu\xED tienes, \xA1qu\xE9 aproveche!"
+        m_Value: Here's your ale, stranger! Drink up!
     - rid: 1425812137612411040
       type: {class: 'Constant`1[[System.Single, mscorlib]]', ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
       data:
@@ -995,93 +858,38 @@ MonoBehaviour:
     - rid: 1425812137612411041
       type: {class: DialogueNode, ns: DialogueGraph.Editor, asm: Assembly-CSharp-Editor}
       data: 
-    - rid: 1425812137612411042
-      type: {class: UserNodeModelImp, ns: Unity.GraphToolkit.Editor.Implementation, asm: UnityEditor.GraphToolkitModule}
-      data:
-        m_Guid:
-          m_Value0: 194416674431001960
-          m_Value1: 7491553376586251931
-        m_HashGuid:
-          serializedVersion: 2
-          Hash: 6865df71efb4b2029b3e4da31a58f767
-        m_Version: 2
-        m_Position: {x: 2645.5667, y: 508.10004}
-        m_Title: 
-        m_Tooltip: 
-        m_NodePreviewModel:
-          rid: -2
-        m_State: 0
-        m_InputConstantsById:
-          m_KeyList:
-          - Speaker
-          - Dialogue Text
-          - Text Speed
-          m_ValueList:
-          - rid: 1425812137612411044
-          - rid: 1425812137612411045
-          - rid: 1425812137612411046
-        m_InputPortInfos:
-          expandedPortsById:
-            m_KeyList: []
-            m_ValueList: 
-        m_OutputPortInfos:
-          expandedPortsById:
-            m_KeyList: []
-            m_ValueList: 
-        m_Collapsed: 0
-        m_CurrentModeIndex: 0
-        m_ElementColor:
-          m_Color: {r: 0, g: 0, b: 0, a: 0}
-          m_HasUserColor: 0
-        m_Node:
-          rid: 1425812137612411047
-    - rid: 1425812137612411043
+    - rid: 1425812148546174976
       type: {class: WireModel, ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
       data:
         m_Guid:
-          m_Value0: 615219006338676845
-          m_Value1: 6603969909679590678
+          m_Value0: 12086212655604351456
+          m_Value1: 6410103422955402855
         m_HashGuid:
           serializedVersion: 2
-          Hash: 6db8e23b6db28908160dd2bda403a65b
+          Hash: e0c120f15fdabaa767b6c5da1943f558
         m_Version: 2
         m_FromPortReference:
           m_NodeModelGuid:
-            m_Value0: 16834239023307271483
-            m_Value1: 9247297058613383605
+            m_Value0: 17396942219841735729
+            m_Value1: 7137874349364717565
           m_NodeModelHashGuid:
             serializedVersion: 2
-            Hash: 3bad3f38333b9fe9b5512a37aeff5480
-          m_UniqueId: Choice  1
+            Hash: 318ca9a7c65a6ef1fda74115e7d20e63
+          m_UniqueId: Out
           m_PortDirection: 2
           m_PortOrientation: 0
-          m_Title: Choice  1
+          m_Title: Out
         m_ToPortReference:
           m_NodeModelGuid:
-            m_Value0: 194416674431001960
-            m_Value1: 7491553376586251931
+            m_Value0: 12827740819027562479
+            m_Value1: 15076107421101029706
           m_NodeModelHashGuid:
             serializedVersion: 2
-            Hash: 6865df71efb4b2029b3e4da31a58f767
+            Hash: ef8fea844f4a05b24a795ba6d21739d1
           m_UniqueId: In
           m_PortDirection: 1
           m_PortOrientation: 0
           m_Title: In
-    - rid: 1425812137612411044
-      type: {class: 'Constant`1[[System.String, mscorlib]]', ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
-      data:
-        m_Value: Bartender
-    - rid: 1425812137612411045
-      type: {class: 'Constant`1[[System.String, mscorlib]]', ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
-      data:
-        m_Value: "\xA1Como quieras! \xA1Ya volver\xE1s cuando te apriete la sed!"
-    - rid: 1425812137612411046
-      type: {class: 'Constant`1[[System.Single, mscorlib]]', ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
-      data:
-        m_Value: 0
-    - rid: 1425812137612411047
-      type: {class: DialogueNode, ns: DialogueGraph.Editor, asm: Assembly-CSharp-Editor}
-      data: 
     - rid: 5438168638866063436
       type: {class: GraphModelImp, ns: Unity.GraphToolkit.Editor.Implementation, asm: UnityEditor.GraphToolkitModule}
       data:
@@ -1104,9 +912,7 @@ MonoBehaviour:
         - rid: 1425812137612411002
         - rid: 1425812137612411011
         - rid: 1425812137612411019
-        - rid: 1425812137612411027
         - rid: 1425812137612411036
-        - rid: 1425812137612411042
         m_GraphWireModels:
         - rid: 5438168638866063451
         - rid: 1425812137612410964
@@ -1119,9 +925,7 @@ MonoBehaviour:
         - rid: 1425812137612411020
         - rid: 1425812137612411025
         - rid: 1425812137612411026
-        - rid: 1425812137612411035
-        - rid: 1425812137612411037
-        - rid: 1425812137612411043
+        - rid: 1425812148546174976
         m_GraphStickyNoteModels: []
         m_GraphPlacematModels: []
         m_GraphVariableModels: []
@@ -1132,9 +936,9 @@ MonoBehaviour:
         m_LastKnownBounds:
           serializedVersion: 2
           x: 368
-          y: -36.666668
-          width: 2566
-          height: 710.00006
+          y: -36
+          width: 2330
+          height: 547
         m_GraphElementMetaData:
         - m_Guid:
             m_Value0: 10683282544891767945
@@ -1313,53 +1117,21 @@ MonoBehaviour:
           m_Category: 2
           m_Index: 10
         - m_Guid:
-            m_Value0: 16834239023307271483
-            m_Value1: 9247297058613383605
-          m_HashGuid:
-            serializedVersion: 2
-            Hash: 3bad3f38333b9fe9b5512a37aeff5480
-          m_Category: 0
-          m_Index: 11
-        - m_Guid:
-            m_Value0: 13652614446472387072
-            m_Value1: 8755418334590923046
-          m_HashGuid:
-            serializedVersion: 2
-            Hash: 005a5a2181d477bd26f13b4d967e8179
-          m_Category: 2
-          m_Index: 11
-        - m_Guid:
             m_Value0: 14871682936276396618
             m_Value1: 15021702143635639951
           m_HashGuid:
             serializedVersion: 2
             Hash: 4a2afe44d6d462ce8f4e20e182ce77d0
           m_Category: 0
-          m_Index: 12
+          m_Index: 11
         - m_Guid:
-            m_Value0: 11495539768684982388
-            m_Value1: 2476591998610298897
+            m_Value0: 12086212655604351456
+            m_Value1: 6410103422955402855
           m_HashGuid:
             serializedVersion: 2
-            Hash: 7430d87d835c889f11d8bd1a4d9f5e22
+            Hash: e0c120f15fdabaa767b6c5da1943f558
           m_Category: 2
-          m_Index: 12
-        - m_Guid:
-            m_Value0: 194416674431001960
-            m_Value1: 7491553376586251931
-          m_HashGuid:
-            serializedVersion: 2
-            Hash: 6865df71efb4b2029b3e4da31a58f767
-          m_Category: 0
-          m_Index: 13
-        - m_Guid:
-            m_Value0: 615219006338676845
-            m_Value1: 6603969909679590678
-          m_HashGuid:
-            serializedVersion: 2
-            Hash: 6db8e23b6db28908160dd2bda403a65b
-          m_Category: 2
-          m_Index: 13
+          m_Index: 11
         m_EntryPoint:
           rid: 5438168638866063439
         m_Graph:
@@ -1495,7 +1267,7 @@ MonoBehaviour:
     - rid: 5438168638866063453
       type: {class: 'Constant`1[[System.String, mscorlib]]', ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
       data:
-        m_Value: Hola,
+        m_Value: Hello,
     - rid: 5438168638866063454
       type: {class: 'Constant`1[[System.Single, mscorlib]]', ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
       data:
