@@ -156,7 +156,7 @@ MonoBehaviour:
     - rid: 1425812137612411156
       type: {class: 'Constant`1[[System.String, mscorlib]]', ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
       data:
-        m_Value: "Un viejo clavo de hierro. Aunque es peque\xF1o, tiene cierto peso."
+        m_Value: "Un viejo clavo de hierro. Aunque es peque\xF1o, tiene cierto peso en la cabeza."
     - rid: 1425812137612411157
       type: {class: 'Constant`1[[System.Single, mscorlib]]', ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
       data:
