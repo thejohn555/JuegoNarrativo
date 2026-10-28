@@ -974,6 +974,7 @@ GameObject:
   - component: {fileID: 413055241}
   - component: {fileID: 413055240}
   - component: {fileID: 413055244}
+  - component: {fileID: 413055245}
   m_Layer: 0
   m_Name: bartender
   m_TagString: Untagged
@@ -1055,8 +1056,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Interactives.NPC
   <InteractionDistance>k__BackingField: 2
   showInteractionGizmo: 1
-  description: {fileID: 3965311268370046156, guid: d5dde4f164902424fa264115875f328b, type: 3}
-  textOffsetAbovePlayer: {x: 0, y: 3.5, z: 0}
+  description: {fileID: 0}
   interactionCursor: {fileID: 0}
   npcID: 
   currentGraph: {fileID: 3965311268370046156, guid: d5dde4f164902424fa264115875f328b, type: 3}
@@ -1145,6 +1145,23 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.16, y: 0.16}
   m_EdgeRadius: 0
+--- !u!114 &413055245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 413055239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8f2615b05a85f141a6c390822e24902, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Assets.Scripts.FridayCode.GamblingTable
+  eventBus: {fileID: 11400000, guid: 12dd33ac5088a19498397bad87f52e37, type: 2}
+  coinSprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  entryObjectName: Coins
+  resultObjectName: Beer
+  playerMovementSystem: {fileID: 1675450511}
 --- !u!1 &467401063
 GameObject:
   m_ObjectHideFlags: 0
@@ -4355,7 +4372,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Assets.Scripts.FridayCode.GamblingTable
   eventBus: {fileID: 11400000, guid: 12dd33ac5088a19498397bad87f52e37, type: 2}
   coinSprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  desiredObjectName: Dado trucado
+  entryObjectName: Dado trucado
+  resultObjectName: Coins
+  playerMovementSystem: {fileID: 1675450511}
 --- !u!212 &1741269651
 SpriteRenderer:
   serializedVersion: 3
@@ -5848,11 +5867,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2648072650128671512, guid: 6b3fb1c12978eeb43bfa9c093286b2d3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.02
+      value: 1.86
       objectReference: {fileID: 0}
     - target: {fileID: 2648072650128671512, guid: 6b3fb1c12978eeb43bfa9c093286b2d3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.75
+      value: -2.13
       objectReference: {fileID: 0}
     - target: {fileID: 2648072650128671512, guid: 6b3fb1c12978eeb43bfa9c093286b2d3, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5937,11 +5956,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3779503778972270616, guid: 85699bffd616e3a4a8ecb4d0e930ff79, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.66
+      value: -2.65
       objectReference: {fileID: 0}
     - target: {fileID: 3779503778972270616, guid: 85699bffd616e3a4a8ecb4d0e930ff79, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.85
+      value: 1.11
       objectReference: {fileID: 0}
     - target: {fileID: 3779503778972270616, guid: 85699bffd616e3a4a8ecb4d0e930ff79, type: 3}
       propertyPath: m_LocalPosition.z

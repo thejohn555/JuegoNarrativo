@@ -1,9 +1,6 @@
-﻿using Assets.Scripts.EventBuses;
-using EventBuses;
+﻿using EventBuses;
 using System;
-using System.Collections.Generic;
-using System.Text;
-using UnityEditor;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -13,7 +10,12 @@ namespace Assets.Scripts.FridayCode
     {
         [SerializeField] private EventBusSO eventBus;
         [SerializeField] private Sprite coinSprite;
-        [SerializeField] private String desiredObjectName;
+        [Header("item you need to craft name and result item name")]
+        [SerializeField] private String entryObjectName;
+        [SerializeField] private String resultObjectName;
+        [SerializeField] private PlayerMovementSystem playerMovementSystem;
+
+        private String itemName;
 
         private bool isOver;
 
@@ -42,13 +44,29 @@ namespace Assets.Scripts.FridayCode
         {
             if (isOver)
             {
-                ObjectDropped(CoinSpawn, desiredObjectName, itemName);
+                this.itemName = itemName;
+                StopAllCoroutines();
+                playerMovementSystem.SetNewDestination(gameObject.transform.position,1.5f);
+                StartCoroutine(randomShit());
+                
             }
+        }
+
+        
+
+        private IEnumerator randomShit()
+        {
+            while (!playerMovementSystem.ReacheDestination())
+            {
+                yield return null;
+            }
+            ObjectDropped(CoinSpawn, entryObjectName, itemName);
         }
 
         private void CoinSpawn()
         {
-            InventoryManager.Instance.AddItem(desiredObjectName, coinSprite);
+            InventoryManager.Instance.AddItem(resultObjectName, coinSprite);
+            Debug.Log($"the object is {resultObjectName}");
         }
 
     }
