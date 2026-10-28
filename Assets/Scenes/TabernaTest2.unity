@@ -3952,7 +3952,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44653eee72f244fbafd305135f814e74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player.PlayerMovementSystem
-  Velocity: 3
+  minVelocity: 2
+  maxVelocity: 3
+  distanceForMinVelocity: 3
+  distanceForMaxVelocity: 5
   pathfinding: {fileID: 1836895566}
 --- !u!114 &1675450512
 MonoBehaviour:
@@ -5652,6 +5655,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 895444681816236210, guid: 582ff43c318c0af40a62a6638f0db87c, type: 3}
+      propertyPath: cameraMove
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 895444681816236210, guid: 582ff43c318c0af40a62a6638f0db87c, type: 3}
+      propertyPath: zoomCamera
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 895444681816236210, guid: 582ff43c318c0af40a62a6638f0db87c, type: 3}
+      propertyPath: cameraOffset.x
+      value: -2.42
+      objectReference: {fileID: 0}
+    - target: {fileID: 895444681816236210, guid: 582ff43c318c0af40a62a6638f0db87c, type: 3}
+      propertyPath: cameraOffset.y
+      value: -1.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 895444681816236210, guid: 582ff43c318c0af40a62a6638f0db87c, type: 3}
+      propertyPath: dialogueTextOffset.x
+      value: 141.1
+      objectReference: {fileID: 0}
     - target: {fileID: 7150970697093948969, guid: 582ff43c318c0af40a62a6638f0db87c, type: 3}
       propertyPath: m_Name
       value: Bartender
@@ -5712,6 +5735,10 @@ PrefabInstance:
     - target: {fileID: 3815016529511061325, guid: f09af88ee15aa074d9acfa3a12e49799, type: 3}
       propertyPath: m_Name
       value: Kidnapper
+      objectReference: {fileID: 0}
+    - target: {fileID: 5795471778566972492, guid: f09af88ee15aa074d9acfa3a12e49799, type: 3}
+      propertyPath: showInteractionGizmo
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7314385344189085478, guid: f09af88ee15aa074d9acfa3a12e49799, type: 3}
       propertyPath: m_LocalPosition.x

@@ -40,7 +40,7 @@ namespace Interactives
         {
             if (description == null || interactor == null) return;
 
-            DialogueCameraData monologueCameraData = new DialogueCameraData
+            DialogueData monologueCameraData = new DialogueData
             {
                 targetPosition = interactor.transform,
                 cameraOffset = Vector3.zero,

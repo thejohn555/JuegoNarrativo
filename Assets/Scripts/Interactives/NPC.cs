@@ -62,7 +62,7 @@ namespace Interactives
 
         public override void Interact(GameObject interactor)
         {
-            DialogueCameraData testData = new DialogueCameraData();
+            DialogueData testData = new DialogueData();
             testData.targetPosition = transform;
 
             testData.cameraOffset = cameraOffset;

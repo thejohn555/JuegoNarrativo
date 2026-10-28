@@ -29,7 +29,7 @@ public class DialogueTestTrigger : MonoBehaviour
     {
         if (testDialogueGraph != null)
         {
-            DialogueCameraData testData = new DialogueCameraData();
+            DialogueData testData = new DialogueData();
             testData.targetPosition = testDialogueTarget;
 
             // Ahora leemos los valores que diseño ponga en el Inspector

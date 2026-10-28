@@ -20,9 +20,9 @@ namespace Assets.Scripts.EventBuses
     }
     public struct OnDialogueCameraDataEvent : IEvent 
     { 
-        public DialogueCameraData DialogueCameraData { get; private set; }
+        public DialogueData DialogueCameraData { get; private set; }
 
-        public OnDialogueCameraDataEvent(DialogueCameraData data)
+        public OnDialogueCameraDataEvent(DialogueData data)
         {
             DialogueCameraData = data;
         }

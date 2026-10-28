@@ -113,7 +113,7 @@ public class CameraController : MonoBehaviour
         ExitDialogueState();
     }
 
-    private void EnterDialogueState(DialogueCameraData data)
+    private void EnterDialogueState(DialogueData data)
     {
         isDialogue = true;
         stateBeforeDialogue = currentCameraState;

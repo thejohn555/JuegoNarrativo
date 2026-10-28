@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.Camera
 {
-    public struct DialogueCameraData
+    public struct DialogueData
     {
         public Transform targetPosition;
         public Vector3 cameraOffset;
@@ -16,7 +16,7 @@ namespace Assets.Scripts.Camera
         public bool isDialogue;
         public Color textColor;
 
-        public DialogueCameraData(
+        public DialogueData(
         Transform targetPosition,
         Vector3 cameraOffset,
         Vector3 dialogueTextOffset,

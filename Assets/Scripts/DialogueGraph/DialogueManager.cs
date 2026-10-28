@@ -20,7 +20,7 @@ public class DialogueManager : Singleton<DialogueManager>
         EventBus.UnSubscribe<OnDialogueStartedEvent>(DisplayFirstNode);
     }
 
-    public void StartDialogue(RuntimeDialogueGraph graph, DialogueCameraData data)
+    public void StartDialogue(RuntimeDialogueGraph graph, DialogueData data)
     {
         if (graph == null) return;
 
