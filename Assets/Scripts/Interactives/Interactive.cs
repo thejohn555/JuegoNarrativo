@@ -10,6 +10,7 @@ namespace Interactives
     public abstract class Interactive:MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
     {
         [field: SerializeField] public float InteractionDistance { get; private set; } = 1.5f;
+        [SerializeField] private bool showInteractionGizmo = true;
         public RuntimeDialogueGraph description;
         [SerializeField] protected Vector3 textOffsetAbovePlayer = new Vector3(0f, 2.5f, 0f);
         [SerializeField] protected Texture2D interactionCursor;
@@ -23,6 +24,14 @@ namespace Interactives
         {
             outline = GetComponent<Outliner>();
             outline.SwapOutline();
+        }
+
+        private void OnDrawGizmos()
+        {
+            if (!showInteractionGizmo) return;
+
+            Gizmos.color = Color.cyan;
+            Gizmos.DrawWireSphere(transform.position, InteractionDistance);
         }
 
         public abstract void Interact(GameObject interactor);
