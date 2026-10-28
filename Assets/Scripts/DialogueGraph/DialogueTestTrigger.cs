@@ -36,7 +36,6 @@ public class DialogueTestTrigger : MonoBehaviour
             testData.cameraOffset = cameraOffset;
             testData.zoom = zoom;
             testData.smoothTime = smoothTime;
-            testData.dialogueTextOffset = dialogueTextOffset;
 
             DialogueManager.Instance.StartDialogue(testDialogueGraph, testData);
         }

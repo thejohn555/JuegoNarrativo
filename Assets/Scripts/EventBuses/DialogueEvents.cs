@@ -18,11 +18,11 @@ namespace Assets.Scripts.EventBuses
             Node = node;
         }
     }
-    public struct OnDialogueCameraDataEvent : IEvent 
+    public struct OnDialogueDataEvent : IEvent 
     { 
         public DialogueData DialogueCameraData { get; private set; }
 
-        public OnDialogueCameraDataEvent(DialogueData data)
+        public OnDialogueDataEvent(DialogueData data)
         {
             DialogueCameraData = data;
         }

@@ -25,7 +25,7 @@ public class DialogueManager : Singleton<DialogueManager>
         if (graph == null) return;
 
         currentGraph = graph;
-        EventBus.Publish(new OnDialogueCameraDataEvent(data));
+        EventBus.Publish(new OnDialogueDataEvent(data));
     }
 
     private void DisplayFirstNode(OnDialogueStartedEvent ev)

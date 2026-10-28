@@ -47,13 +47,13 @@ public class CameraController : MonoBehaviour
 
     private void OnEnable()
     {
-        EventBus.Subscribe<OnDialogueCameraDataEvent>(DialogueStarted);
+        EventBus.Subscribe<OnDialogueDataEvent>(DialogueStarted);
         EventBus.Subscribe<OnDialogueEndedEvent>(DialogueEnded);
     }
 
     private void OnDisable()
     {
-        EventBus.UnSubscribe<OnDialogueCameraDataEvent>(DialogueStarted);
+        EventBus.UnSubscribe<OnDialogueDataEvent>(DialogueStarted);
         EventBus.UnSubscribe<OnDialogueEndedEvent>(DialogueEnded);
     }
 
@@ -103,7 +103,7 @@ public class CameraController : MonoBehaviour
         currentStateBehavior?.Invoke();
     }
 
-    private void DialogueStarted(OnDialogueCameraDataEvent ev)
+    private void DialogueStarted(OnDialogueDataEvent ev)
     {
         EnterDialogueState(ev.DialogueCameraData);
     }

@@ -5656,6 +5656,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 895444681816236210, guid: 582ff43c318c0af40a62a6638f0db87c, type: 3}
+      propertyPath: npcID
+      value: Bartender
+      objectReference: {fileID: 0}
+    - target: {fileID: 895444681816236210, guid: 582ff43c318c0af40a62a6638f0db87c, type: 3}
       propertyPath: cameraMove
       value: 1
       objectReference: {fileID: 0}
@@ -5665,15 +5669,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 895444681816236210, guid: 582ff43c318c0af40a62a6638f0db87c, type: 3}
       propertyPath: cameraOffset.x
-      value: -2.42
+      value: -1.94
       objectReference: {fileID: 0}
     - target: {fileID: 895444681816236210, guid: 582ff43c318c0af40a62a6638f0db87c, type: 3}
       propertyPath: cameraOffset.y
-      value: -1.07
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 895444681816236210, guid: 582ff43c318c0af40a62a6638f0db87c, type: 3}
       propertyPath: dialogueTextOffset.x
       value: 141.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 895444681816236210, guid: 582ff43c318c0af40a62a6638f0db87c, type: 3}
+      propertyPath: dialogueTextOffset.y
+      value: -9.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 895444681816236210, guid: 582ff43c318c0af40a62a6638f0db87c, type: 3}
+      propertyPath: alternativeStates.Array.size
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7150970697093948969, guid: 582ff43c318c0af40a62a6638f0db87c, type: 3}
       propertyPath: m_Name

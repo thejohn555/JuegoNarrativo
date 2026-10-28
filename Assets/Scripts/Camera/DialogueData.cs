@@ -1,14 +1,15 @@
 ﻿using JetBrains.Annotations;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.Scripts.Camera
 {
     public struct DialogueData
     {
+        public Dictionary<string, Transform> speakers;
         public Transform targetPosition;
         public Vector3 cameraOffset;
-        public Vector3 dialogueTextOffset;
         public float zoom;
         public float smoothTime;
         public bool moveCamera;
@@ -17,9 +18,9 @@ namespace Assets.Scripts.Camera
         public Color textColor;
 
         public DialogueData(
+        Dictionary<string, Transform> speakers,
         Transform targetPosition,
         Vector3 cameraOffset,
-        Vector3 dialogueTextOffset,
         float zoom = 5f,
         float smoothTime = 0.2f,
         bool moveCamera = true,
@@ -27,15 +28,15 @@ namespace Assets.Scripts.Camera
         bool isDialogue = true,
         Color textColor = default(Color) )
         {
+            this.speakers = speakers;
             this.targetPosition = targetPosition;
             this.cameraOffset = cameraOffset;
-            this.dialogueTextOffset = dialogueTextOffset;
             this.zoom = zoom;
             this.smoothTime = smoothTime;
             this.moveCamera = moveCamera;
             this.zoomCamera = zoomCamera;
-            this.isDialogue = true;
-            this.textColor = textColor;
+            this.isDialogue = isDialogue;
+            this.textColor = textColor == default ? Color.white : textColor;
         }
     }
 }

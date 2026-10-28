@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts.Camera;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -12,7 +13,6 @@ namespace Interactives
         [field: SerializeField] public float InteractionDistance { get; private set; } = 1.5f;
         [SerializeField] private bool showInteractionGizmo = true;
         public RuntimeDialogueGraph description;
-        [SerializeField] protected Vector3 textOffsetAbovePlayer = new Vector3(0f, 2.5f, 0f);
         [SerializeField] protected Texture2D interactionCursor;
         protected Outliner outline;
 
@@ -44,14 +44,17 @@ namespace Interactives
             {
                 targetPosition = interactor.transform,
                 cameraOffset = Vector3.zero,
-                dialogueTextOffset = textOffsetAbovePlayer,
                 zoom = Camera.main.orthographicSize,
                 smoothTime = 0.2f,
                 moveCamera = false,
                 zoomCamera = false,
-                isDialogue = false
+                isDialogue = false,
+                speakers = new Dictionary<string, Transform>
+                {
+                    { "Conan", interactor.transform } 
+                }
             };
-            Debug.Log($"Player Pos:{interactor.transform.position}");
+
             DialogueManager.Instance.StartDialogue(description, monologueCameraData);
         }
 

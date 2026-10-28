@@ -57,24 +57,30 @@ namespace Interactives
                 }
             }
 
-            Debug.LogWarning($"[{npcID}] State not found: {ev.NewStateID}");
+            Debug.Log($"[{npcID}] State not found: {ev.NewStateID}");
         }
 
         public override void Interact(GameObject interactor)
         {
-            DialogueData testData = new DialogueData();
-            testData.targetPosition = transform;
+            DialogueData data = new DialogueData();
+            data.targetPosition = transform;
 
-            testData.cameraOffset = cameraOffset;
-            testData.zoom = zoom;
-            testData.smoothTime = smoothTime;
-            testData.dialogueTextOffset = dialogueTextOffset;
-            testData.moveCamera = cameraMove;
-            testData.zoomCamera = zoomCamera;
-            testData.isDialogue = true;
-            testData.textColor = npcTextColor;
+            data.cameraOffset = cameraOffset;
+            data.zoom = zoom;
+            data.smoothTime = smoothTime;
+            data.moveCamera = cameraMove;
+            data.zoomCamera = zoomCamera;
+            data.isDialogue = true;
+            data.textColor = npcTextColor;
 
-            DialogueManager.Instance.StartDialogue(currentGraph, testData);
+            data.speakers = new Dictionary<string, Transform>
+            {
+                {"Conan", interactor.transform },
+                { npcID, this.transform }
+            };
+
+
+            DialogueManager.Instance.StartDialogue(currentGraph, data);
         }
 
         protected override void OnDrawGizmosSelected()
