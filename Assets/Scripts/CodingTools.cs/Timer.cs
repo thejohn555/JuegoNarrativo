@@ -7,6 +7,7 @@ using UnityEngine;
 
 namespace Assets.CodingTools
 {
+    //Not finished
     internal class Timer 
     {
         public async Task Cooldown(float waitTime, bool check)
