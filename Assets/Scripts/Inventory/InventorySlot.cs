@@ -129,7 +129,7 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        Debug.Log($"Click en slot {slotIndex} | botón: {eventData.button} | dragging: {eventData.dragging}");
+        Debug.Log($"Slot clicked {slotIndex} | button: {eventData.button} | dragging: {eventData.dragging}");
 
         if (eventData.button != PointerEventData.InputButton.Left || eventData.dragging)
         {
@@ -138,7 +138,7 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
         if (HeldItemController.Instance == null)
         {
-            Debug.LogError("No hay HeldItemController en la escena.");
+            Debug.LogError("There is no HeldItemController in the scene.");
             return;
         }
 

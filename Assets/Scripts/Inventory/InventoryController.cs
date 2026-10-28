@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class InventoryController : MonoBehaviour
 {
-    [Header("Configuración")]
+    [Header("Configuration")]
     [SerializeField] private GameObject inventoryPanel;
 
     [Header("Inputs")]

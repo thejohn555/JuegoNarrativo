@@ -26,11 +26,13 @@ public class InventorySettings : ScriptableObject
     [SerializeField] public Color panelColor;
     [Tooltip("If a panel with that name already exists, it replaces it.")]
     public bool replaceExisting = true;
+    
     public int SlotCount => rows * columns;
     
     public Vector2 panelSize => new Vector2 (
         padding * 2 + columns * slotSize.x + (columns - 1) * spacing.x,
         padding * 2 + rows * slotSize.y + (rows - 1) * spacing.y);
+    
     
     void OnValidate() //Evita que se pongan valores erroneos. Sirve para poner default
     {

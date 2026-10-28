@@ -72,21 +72,23 @@ public static class InventoryBuilder
                 iconImage.preserveAspect = true;
                 iconImage.raycastTarget = false;
                 iconImage.enabled = false;
-
-                slotComponent.iconImage = iconImage; // <-- Vinculamos la imagen del icono al slot
+                slotComponent.iconImage = iconImage; 
                 
-                GameObject textObj = NewUI("Text", slot.transform, typeof(TextMeshPro));
+                GameObject textObj = NewUI("Text", slot.transform, typeof(TextMeshProUGUI));
                 RectTransform textRectangle = (RectTransform)textObj.transform;
                 textRectangle.anchorMin = Vector2.zero;
                 textRectangle.anchorMax = Vector2.one;
                 textRectangle.offsetMin = Vector2.zero;
                 textRectangle.offsetMax = Vector2.zero;
 
-                TextMeshPro slotText = textObj.GetComponent<TextMeshPro>(); // O TextMeshProUGUI si aplica
+                TextMeshProUGUI slotText = textObj.GetComponent<TextMeshProUGUI>(); 
                 slotText.text = ""; // Inicialmente vacío
-                slotText.color = Color.white;
+                slotText.color = Color.black;
                 slotText.raycastTarget = false;
-                slotText.fontSize = 12;
+                slotText.fontStyle = FontStyles.UpperCase | FontStyles.Bold;
+                slotText.fontSize = 20;
+                slotText.alignment = TextAlignmentOptions.Center;
+                slotText.alignment = TextAlignmentOptions.Top;
                 
                 currentSlotIndex++;
             }
