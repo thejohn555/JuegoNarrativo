@@ -9,12 +9,13 @@ namespace Assets.Scripts.FridayCode
     internal class GamblingTable : ObjectTrigger, IPointerEnterHandler, IPointerExitHandler
     {
         [SerializeField] private EventBusSO eventBus;
-        [SerializeField] private Sprite coinSprite;
+        [SerializeField] private Sprite sprite;
         [Header("item you need to craft name and result item name")]
         [SerializeField] private String entryObjectName;
         [SerializeField] private String resultObjectName;
         [SerializeField] private PlayerMovementSystem playerMovementSystem;
 
+        int counter = 0;
         private String itemName;
 
         private bool isOver;
@@ -31,13 +32,11 @@ namespace Assets.Scripts.FridayCode
         public void OnPointerEnter(PointerEventData eventData)
         {
             isOver = true;
-            Debug.Log("You can drop the object");
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
             isOver = false;
-            Debug.Log("You can no longer drop the object");
         }
 
         private void Action(string itemName)
@@ -47,14 +46,24 @@ namespace Assets.Scripts.FridayCode
                 this.itemName = itemName;
                 StopAllCoroutines();
                 playerMovementSystem.SetNewDestination(gameObject.transform.position,1.5f);
-                StartCoroutine(randomShit());
+                StartCoroutine(RandomShit());
+                
+            }
+            else
+            {
+                counter++;
+                if(counter == 2)
+                {
+                    HeldItemController.Instance.ClearState();
+                    counter = 0;
+                }
                 
             }
         }
 
         
 
-        private IEnumerator randomShit()
+        private IEnumerator RandomShit()
         {
             while (!playerMovementSystem.ReacheDestination())
             {
@@ -65,7 +74,7 @@ namespace Assets.Scripts.FridayCode
 
         private void CoinSpawn()
         {
-            InventoryManager.Instance.AddItem(resultObjectName, coinSprite);
+            InventoryManager.Instance.AddItem(resultObjectName, sprite);
             Debug.Log($"the object is {resultObjectName}");
         }
 

@@ -70,7 +70,7 @@ public class HeldItemController : MonoBehaviour
         }
 
         OnItemReleased?.Invoke(heldItemName);
-        ClearState();
+        //ClearState();
     }
 
     // Gasta el objeto (ej. la llave abre la puerta)
@@ -88,7 +88,7 @@ public class HeldItemController : MonoBehaviour
         return true;
     }
 
-    private void ClearState()
+    public void ClearState()
     {
         heldSlotIndex = -1;
         heldItemName = null;
