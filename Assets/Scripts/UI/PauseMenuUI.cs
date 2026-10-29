@@ -1,7 +1,10 @@
+using Assets.Scripts.EventBuses;
+using EventBuses;
 using UnityEngine;
 
-public class PauseMenuUI : MonoBehaviour
+public class PauseMenuUI : Singleton<PauseMenuUI>
 {
+    [SerializeField] private EventBusSO EventBus;
     [SerializeField] private GameObject container;
 
     [Header("Configuración de la Espada")]
@@ -10,6 +13,16 @@ public class PauseMenuUI : MonoBehaviour
     [SerializeField] private float transitionSpeed = 15f;
 
     private PauseMenuOptionButtons currentButton;
+
+    private void OnEnable()
+    {
+        EventBus.Subscribe<OnEscPressedEvent>(PauseMenu);
+    }
+
+    private void OnDisable()
+    {
+        EventBus.UnSubscribe<OnEscPressedEvent>(PauseMenu);
+    }
 
     private void Start()
     {
@@ -40,7 +53,7 @@ public class PauseMenuUI : MonoBehaviour
         }
     }
 
-    public void PauseMenu()
+    public void PauseMenu(OnEscPressedEvent ev)
     {
         container.SetActive(true);
 
@@ -53,5 +66,10 @@ public class PauseMenuUI : MonoBehaviour
     public void UnPauseMenu()
     {
         container.SetActive(false);
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
     }
 }
