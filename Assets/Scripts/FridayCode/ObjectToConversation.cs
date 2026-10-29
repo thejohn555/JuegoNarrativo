@@ -35,7 +35,7 @@ namespace Assets.Scripts.FridayCode
             }
             else
             {
-                Delay();
+                
             }
             
         }
