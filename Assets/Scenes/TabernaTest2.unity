@@ -5732,6 +5732,14 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 895444681816236210, guid: 582ff43c318c0af40a62a6638f0db87c, type: 3}
+      propertyPath: description
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 895444681816236210, guid: 582ff43c318c0af40a62a6638f0db87c, type: 3}
+      propertyPath: currentGraph
+      value: 
+      objectReference: {fileID: 3965311268370046156, guid: 90689aa7def82764bbd6057193c8bf4d, type: 3}
+    - target: {fileID: 895444681816236210, guid: 582ff43c318c0af40a62a6638f0db87c, type: 3}
       propertyPath: cameraOffset.x
       value: -0.16
       objectReference: {fileID: 0}
