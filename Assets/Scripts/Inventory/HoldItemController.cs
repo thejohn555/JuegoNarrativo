@@ -88,7 +88,7 @@ public class HeldItemController : MonoBehaviour
         return true;
     }
 
-    private void ClearState()
+    public void ClearState()
     {
         heldSlotIndex = -1;
         heldItemName = null;

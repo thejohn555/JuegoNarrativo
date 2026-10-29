@@ -2,6 +2,7 @@
 using EventBuses;
 using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Text;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -22,6 +23,7 @@ namespace Assets.Scripts.FridayCode
             else
             {
                 Debug.Log("item erroneo");
+                HeldItemController.Instance.ClearState();
             }
         }
     }

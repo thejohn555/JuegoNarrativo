@@ -45,14 +45,18 @@ namespace Assets.Scripts.FridayCode
                 this.itemName = itemName;
                 StopAllCoroutines();
                 playerMovementSystem.SetNewDestination(gameObject.transform.position,1.5f);
-                StartCoroutine(randomShit());
+                StartCoroutine(RandomShit());
                 
             }
+            //else
+            //{
+            //    HeldItemController.Instance.ClearState();
+            //}
         }
 
         
 
-        private IEnumerator randomShit()
+        private IEnumerator RandomShit()
         {
             while (!playerMovementSystem.ReacheDestination())
             {
