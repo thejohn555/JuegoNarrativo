@@ -29,10 +29,9 @@ namespace Interactives
         [SerializeField] private EventBusSO EventBus;
 
         [Header("Camera Data")]
-        [SerializeField] private Vector3 cameraOffset = new Vector3(0f, 1f, 0f); // Offset de la cámara
-        [SerializeField] private float zoom = 3f; // Tamaño de la cámara
+        [SerializeField] private Vector3 cameraOffset = new Vector3(0f, 1f, 0f);
+        [SerializeField] private float zoom = 3f; 
         [SerializeField] private float smoothTime = 0.5f;
-        [SerializeField] private Vector2 dialogueTextOffset = new Vector2(0f, -200f); // Posición UI
 
         private void OnEnable()
         {
@@ -85,6 +84,7 @@ namespace Interactives
 
         protected override void OnDrawGizmosSelected()
         {
+            base.OnDrawGizmosSelected();
             if (transform == null) return;
 
             Vector3 cameraCenter = transform.position + cameraOffset;
@@ -97,16 +97,6 @@ namespace Interactives
 
             Gizmos.color = Color.cyan;
             Gizmos.DrawWireCube(cameraCenter, new Vector3(camWidth, camHeight, 0.1f));
-
-            float pixelsToUnits = camHeight / Screen.height;
-            Vector3 uiWorldOffset = new Vector3(dialogueTextOffset.x * pixelsToUnits, dialogueTextOffset.y * pixelsToUnits, 0f);
-
-            Vector3 uiCenter = cameraCenter + uiWorldOffset;
-            Gizmos.color = Color.yellow;
-            Gizmos.DrawWireCube(uiCenter, new Vector3(camWidth * 0.4f, camHeight * 0.2f, 0.1f));
-
-            Gizmos.color = new Color(1f, 0.9f, 0f, 0.5f);
-            Gizmos.DrawLine(transform.position, uiCenter);
         }
     }
 }

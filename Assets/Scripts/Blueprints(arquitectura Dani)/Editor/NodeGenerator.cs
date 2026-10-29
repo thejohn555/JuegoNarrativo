@@ -45,12 +45,13 @@ namespace Blueprints_arquitectura_Dani_.Editor.Blueprints_arquitectura_Dani_.Edi
 
       private static void Generate(NodeTypes type,List<string> names)
       {
-          var (prefix, baseClass, file) = NodeGenTemplate.Map[type];
+          var (prefix, baseClass, file,category) = NodeGenTemplate.Map[type];
           string path = $"{outputFolder}/{file}";
           
           var sb = new StringBuilder();
           sb.AppendLine("//(auto generado) No editar a mano.");
           sb.AppendLine("using System;");
+          sb.AppendLine("using Unity.GraphToolkit.Editor;");
           sb.AppendLine("namespace Blueprints_arquitectura_Dani_.Editor");
           sb.AppendLine("{");
           
@@ -71,6 +72,7 @@ namespace Blueprints_arquitectura_Dani_.Editor.Blueprints_arquitectura_Dani_.Edi
                   }
 
                   sb.AppendLine("    [Serializable]");
+                  sb.AppendLine($"    [Node(categoryPath:\"{category}\")]");
                   sb.AppendLine($"    public class {prefix}{id} : {baseClass}");
                   sb.AppendLine($"    {{ public override string Key => \"{name}\"; }}");
                   used.Add(id);
