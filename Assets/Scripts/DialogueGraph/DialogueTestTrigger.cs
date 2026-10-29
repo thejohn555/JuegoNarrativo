@@ -29,14 +29,13 @@ public class DialogueTestTrigger : MonoBehaviour
     {
         if (testDialogueGraph != null)
         {
-            DialogueCameraData testData = new DialogueCameraData();
+            DialogueData testData = new DialogueData();
             testData.targetPosition = testDialogueTarget;
 
             // Ahora leemos los valores que diseño ponga en el Inspector
             testData.cameraOffset = cameraOffset;
             testData.zoom = zoom;
             testData.smoothTime = smoothTime;
-            testData.dialogueTextOffset = dialogueTextOffset;
 
             DialogueManager.Instance.StartDialogue(testDialogueGraph, testData);
         }

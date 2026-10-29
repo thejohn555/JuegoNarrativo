@@ -255,7 +255,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44653eee72f244fbafd305135f814e74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player.PlayerMovementSystem
-  Velocity: 3
+  minVelocity: 1
+  maxVelocity: 3
+  distanceForMinVelocity: 3
+  distanceForMaxVelocity: 5
   pathfinding: {fileID: 966186972}
 --- !u!114 &412788781
 MonoBehaviour:
@@ -532,6 +535,7 @@ GameObject:
   - component: {fileID: 966186970}
   - component: {fileID: 966186971}
   - component: {fileID: 966186972}
+  - component: {fileID: 966186973}
   m_Layer: 0
   m_Name: NavegationGrid
   m_TagString: Untagged
@@ -566,14 +570,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fb3c64e5da94c1193dd787b14f637e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Grid2D
-  gridWorldSize: {x: 20, y: 10}
   cellSize: 0.3
+  areaCollider: {fileID: 966186973}
   floorMask:
     serializedVersion: 2
     m_Bits: 8
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 64
   lineCheckSpacing: 0.1
   walkableMargin: 1
-  showGrid: 0
+  showGrid: 1
 --- !u!114 &966186972
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -590,6 +597,52 @@ MonoBehaviour:
   targetPoint: {fileID: 1456010945}
   showPath: 1
   grid: {fileID: 966186971}
+--- !u!61 &966186973
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 966186969}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 4.3378525, y: -0.375391}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 26.693432, y: 9.633993}
+  m_EdgeRadius: 0
 --- !u!1 &989816493
 GameObject:
   m_ObjectHideFlags: 0
@@ -677,8 +730,8 @@ Transform:
   m_GameObject: {fileID: 989816493}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.13, y: -0.48, z: 0}
-  m_LocalScale: {x: 17.667004, y: 4.35406, z: 1}
+  m_LocalPosition: {x: 4.2593, y: -0.3549, z: 0}
+  m_LocalScale: {x: 25.926327, y: 4.6044188, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1505,8 +1558,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Interactives.NPC
   <InteractionDistance>k__BackingField: 2
+  showInteractionGizmo: 1
+  description: {fileID: 0}
+  textOffsetAbovePlayer: {x: 0, y: 2.5, z: 0}
   interactionCursor: {fileID: 0}
-  Dialogue: {fileID: 3965311268370046156, guid: 3a13d3d9cc957f04a92db2d896aad449, type: 3}
+  npcID: 
+  currentGraph: {fileID: 0}
+  npcTextColor: {r: 1, g: 1, b: 1, a: 1}
+  alternativeStates: []
+  cameraMove: 0
+  zoomCamera: 0
+  EventBus: {fileID: 0}
+  cameraOffset: {x: 0, y: 1, z: 0}
+  zoom: 3
+  smoothTime: 0.5
+  dialogueTextOffset: {x: 0, y: -200}
 --- !u!114 &1951596831
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts.Camera;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -12,7 +13,6 @@ namespace Interactives
         [field: SerializeField] public float InteractionDistance { get; private set; } = 1.5f;
         [SerializeField] private bool showInteractionGizmo = true;
         public RuntimeDialogueGraph description;
-        [SerializeField] protected Vector3 textOffsetAbovePlayer = new Vector3(0f, 2.5f, 0f);
         [SerializeField] protected Texture2D interactionCursor;
         protected Outliner outline;
 
@@ -26,7 +26,7 @@ namespace Interactives
             outline.SwapOutline();
         }
 
-        private void OnDrawGizmos()
+        protected virtual void OnDrawGizmosSelected()
         {
             if (!showInteractionGizmo) return;
 
@@ -40,18 +40,21 @@ namespace Interactives
         {
             if (description == null || interactor == null) return;
 
-            DialogueCameraData monologueCameraData = new DialogueCameraData
+            DialogueData monologueCameraData = new DialogueData
             {
                 targetPosition = interactor.transform,
                 cameraOffset = Vector3.zero,
-                dialogueTextOffset = textOffsetAbovePlayer,
                 zoom = Camera.main.orthographicSize,
                 smoothTime = 0.2f,
                 moveCamera = false,
                 zoomCamera = false,
-                isDialogue = false
+                isDialogue = false,
+                speakers = new Dictionary<string, SpeakerData>
+                {
+                    { "Conan", new SpeakerData { transform = interactor.transform, textColor = Color.white } }
+                }
             };
-            Debug.Log($"Player Pos:{interactor.transform.position}");
+
             DialogueManager.Instance.StartDialogue(description, monologueCameraData);
         }
 
@@ -67,19 +70,6 @@ namespace Interactives
             //Cambio del cursor
             // Cursor.SetCursor(null, new Vector2(0.5f,0.5f), CursorMode.Auto);
             outline.SwapOutline();
-        }
-
-        protected virtual void OnDrawGizmosSelected()
-        {
-            //Vector3 textPosition = transform.position + textOffsetAbovePlayer;
-
-            //Gizmos.color = Color.yellow;
-            //Gizmos.DrawLine(transform.position, textPosition);
-
-            //Gizmos.DrawWireSphere(textPosition, 0.2f);
-
-            //Gizmos.color = new Color(1f, 0.92f, 0.016f, 0.35f);
-            //Gizmos.DrawCube(textPosition, new Vector3(2f, 0.8f, 0.01f));
         }
     }
 }

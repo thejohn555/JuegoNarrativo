@@ -1,6 +1,8 @@
+using Assets.Scripts.Camera;
 using Assets.Scripts.EventBuses;
-using System.Collections;
 using EventBuses;
+using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,12 +17,17 @@ public class DialogueUI : MonoBehaviour
     [SerializeField] private GameObject choiceContainer;
     [SerializeField] private Transform buttonContainer;
     [SerializeField] private Image choiceBackground;
+
     private RuntimeDialogueNode currentNode;
     private bool isWritingText;
     private string currentFullText;
     private Coroutine typeWritingCoroutine;
-    private Vector3 defaultDialoguePanelPos;
+    private Coroutine autoCloseCoroutine;
     private Vector3 defaultAnchoredPosition;
+
+    private bool isDialogueMode;
+    private Dictionary<string, SpeakerData> currentSpeakers;
+    private Transform activeSpeakerTransform;
 
     private void OnEnable()
     {
@@ -28,7 +35,7 @@ public class DialogueUI : MonoBehaviour
         EventBus.Subscribe<OnDialogueStartedEvent>(ShowPanel);
         EventBus.Subscribe<OnDialogueEndedEvent>(HidePanel);
         EventBus.Subscribe<OnSkipDialogueEvent>(NextNode);
-        EventBus.Subscribe<OnDialogueCameraDataEvent>(RecieveDialoguePositionData);
+        EventBus.Subscribe<OnDialogueDataEvent>(RecieveDialoguePositionData);
     }
 
     private void OnDisable()
@@ -37,13 +44,12 @@ public class DialogueUI : MonoBehaviour
         EventBus.UnSubscribe<OnDialogueStartedEvent>(ShowPanel);
         EventBus.UnSubscribe<OnDialogueEndedEvent>(HidePanel);
         EventBus.UnSubscribe<OnSkipDialogueEvent>(NextNode);
-        EventBus.UnSubscribe<OnDialogueCameraDataEvent>(RecieveDialoguePositionData);
+        EventBus.UnSubscribe<OnDialogueDataEvent>(RecieveDialoguePositionData);
     }
 
     private void Awake()
     {
         defaultAnchoredPosition = dialoguePanel.GetComponent<RectTransform>().anchoredPosition;
-        //defaultDialoguePanelPos = dialoguePanel.transform.position;
     }
 
     private void ShowPanel(OnDialogueStartedEvent ev)
@@ -65,8 +71,6 @@ public class DialogueUI : MonoBehaviour
             if (typeWritingCoroutine != null) StopCoroutine(typeWritingCoroutine);
             dialogueText.maxVisibleCharacters = dialogueText.textInfo.characterCount;
             isWritingText = false;
-
-            // si el jugador skipea la animación, mostramos los botones de golpe
             GenerateChoices();
         }
         else
@@ -78,54 +82,74 @@ public class DialogueUI : MonoBehaviour
         }
     }
 
-    private void RecieveDialoguePositionData(OnDialogueCameraDataEvent ev)
+    private void RecieveDialoguePositionData(OnDialogueDataEvent ev)
     {
-        RectTransform rect = dialoguePanel.GetComponent<RectTransform>();
         var data = ev.DialogueCameraData;
 
-        if (data.textColor.a == 0)
-            dialogueText.color = Color.white;
-        else
-            dialogueText.color = data.textColor;
-
-        if (data.isDialogue)
-        {
-            Vector3 offset = new Vector3(
-                data.dialogueTextOffset.x,
-                data.dialogueTextOffset.y,
-                0
-            );
-            rect.anchoredPosition = defaultAnchoredPosition + offset;
-        }
-        else
-        {
-            if (data.targetPosition != null)
-            {
-                Vector3 worldTargetPos = data.targetPosition.position + data.dialogueTextOffset;
-                Vector2 screenPos = Camera.main.WorldToScreenPoint(worldTargetPos);
-                RectTransform parentRect = rect.parent.GetComponent<RectTransform>();
-
-                RectTransformUtility.ScreenPointToLocalPointInRectangle(
-                    parentRect,
-                    screenPos,
-                    null,
-                    out Vector2 canvasLocalPos
-                );
-
-                rect.localPosition = canvasLocalPos;
-            }
-        }
+        isDialogueMode = data.isDialogue;
+        currentSpeakers = data.speakers;
     }
 
     private void OnNodeDisplayed(OnNodeDisplayedEvent ev)
     {
         if (typeWritingCoroutine != null) StopCoroutine(typeWritingCoroutine);
+        if (autoCloseCoroutine != null) StopCoroutine(autoCloseCoroutine);
+
         currentNode = ev.Node;
         speakerText.text = ev.Node.SpeakerName;
 
-        ClearChoices();
+        if (currentSpeakers != null && currentSpeakers.TryGetValue(ev.Node.SpeakerName, out SpeakerData speakerData))
+        {
+            activeSpeakerTransform = speakerData.transform;
+            dialogueText.color = speakerData.textColor;
+        }
+        else
+        {
+            activeSpeakerTransform = null;
+            dialogueText.color = Color.white;
+        }
 
+        ClearChoices();
         typeWritingCoroutine = StartCoroutine(TypeWrittingText(ev.Node.DialogueText, ev.Node.TextSpeed));
+    }
+
+    private void Update()
+    {
+        if (!dialoguePanel.activeSelf) return;
+
+        RectTransform rect = dialoguePanel.GetComponent<RectTransform>();
+
+        if (activeSpeakerTransform != null)
+        {
+            Vector3 worldTargetPos = GetSpeakerTopPosition(activeSpeakerTransform);
+            Vector2 screenPos = Camera.main.WorldToScreenPoint(worldTargetPos);
+            RectTransform parentRect = rect.parent.GetComponent<RectTransform>();
+
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                parentRect,
+                screenPos,
+                null,
+                out Vector2 canvasLocalPos
+            );
+
+            rect.localPosition = canvasLocalPos;
+        }
+        else
+        {
+            rect.anchoredPosition = defaultAnchoredPosition;
+        }
+    }
+
+    private Vector3 GetSpeakerTopPosition(Transform speakerTransform)
+    {
+        SpriteRenderer sprite = speakerTransform.GetComponentInChildren<SpriteRenderer>();
+
+        if (sprite != null)
+        {
+            return new Vector3(speakerTransform.position.x, sprite.bounds.max.y + 0.8f, speakerTransform.position.z);
+        }
+
+        return speakerTransform.position + Vector3.up * 2f;
     }
 
     private void ClearChoices()
@@ -150,10 +174,9 @@ public class DialogueUI : MonoBehaviour
         foreach (var choice in currentNode.Choices)
         {
             Button btn = Instantiate(choiceButtonPrefab, buttonContainer);
-
             TMP_Text btnText = btn.GetComponentInChildren<TMP_Text>();
 
-            if (btnText != null) btnText.SetText(choice.ChoiceText); 
+            if (btnText != null) btnText.SetText(choice.ChoiceText);
 
             btn.onClick.AddListener(() =>
             {
@@ -169,7 +192,6 @@ public class DialogueUI : MonoBehaviour
         currentFullText = fullText;
 
         dialogueText.SetText(fullText);
-
         dialogueText.maxVisibleCharacters = 0;
 
         yield return null;
@@ -185,5 +207,16 @@ public class DialogueUI : MonoBehaviour
 
         isWritingText = false;
         GenerateChoices();
+
+        if (!isDialogueMode && (currentNode.Choices == null || currentNode.Choices.Count == 0))
+        {
+            autoCloseCoroutine = StartCoroutine(AutoCloseMonologue());
+        }
+    }
+
+    private IEnumerator AutoCloseMonologue()
+    {
+        yield return new WaitForSeconds(2.5f);
+        DialogueManager.Instance.AdvanceToNextNode();
     }
 }

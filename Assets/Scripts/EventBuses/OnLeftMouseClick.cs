@@ -1,5 +1,5 @@
 using EventBuses;
 
-public class OnLeftMouseClick : IEvent
+public struct OnLeftMouseClick : IEvent
 {
 }

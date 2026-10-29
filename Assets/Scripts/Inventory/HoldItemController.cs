@@ -11,7 +11,7 @@ public class HeldItemController : MonoBehaviour
     [SerializeField] private Vector2 iconSize = new Vector2(64, 64);
 
     public event Action<string> OnItemHeld;
-    public event Action OnItemReleased;
+    public event Action<string> OnItemReleased;
 
     private int heldSlotIndex = -1;
     private int pickupFrame = -1;
@@ -69,8 +69,8 @@ public class HeldItemController : MonoBehaviour
             return;
         }
 
+        OnItemReleased?.Invoke(heldItemName);
         ClearState();
-        OnItemReleased?.Invoke();
     }
 
     // Gasta el objeto (ej. la llave abre la puerta)
@@ -84,11 +84,11 @@ public class HeldItemController : MonoBehaviour
         int index = heldSlotIndex;
         ClearState();
         InventoryManager.Instance.ClearSlot(index);
-        OnItemReleased?.Invoke();
+        //OnItemReleased?.Invoke("");
         return true;
     }
 
-    private void ClearState()
+    public void ClearState()
     {
         heldSlotIndex = -1;
         heldItemName = null;
@@ -159,6 +159,11 @@ public class HeldItemController : MonoBehaviour
         {
             MoveIcon();
         }
+        if (Mouse.current != null && Mouse.current.rightButton.wasPressedThisFrame)
+        {
+            OnItemReleased?.Invoke(heldItemName);
+            //Release();
+        }
     }
 
     // LateUpdate: así la puerta puede consumir el objeto en su Update antes de que el click lo suelte
@@ -169,9 +174,6 @@ public class HeldItemController : MonoBehaviour
             return;
         }
 
-        if (Mouse.current != null && Mouse.current.rightButton.wasPressedThisFrame)
-        {
-            Release();
-        }
+        
     }
 }

@@ -1,5 +1,6 @@
 #if UNITY_EDITOR
 using System;
+using ItemFactory;
 using UnityEditor;
 using UnityEngine;
 
