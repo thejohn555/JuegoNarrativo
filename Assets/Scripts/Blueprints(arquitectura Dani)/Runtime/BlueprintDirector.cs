@@ -45,8 +45,7 @@ namespace Blueprints_arquitectura_Dani_.Runtime
 
         private void Start()
         {
-            if (BlueprintsEventManager.Instance != null)
-                BlueprintsEventManager.Instance.OnEvent += HandleEvent;
+            
             if (RuntimeGraph == null)
             {
                 Debug.LogError("No hay ningun grafo asignado");
@@ -58,6 +57,8 @@ namespace Blueprints_arquitectura_Dani_.Runtime
                 Debug.LogError("El nivel asignado y el actual son distintos");
                 return;
             }
+            if (BlueprintsEventManager.Instance != null)
+                BlueprintsEventManager.Instance.OnEvent += HandleEvent;
             foreach (var node in RuntimeGraph.RuntimeNodes)
             {
                 if (node.Nodes.Count == 0)
