@@ -42,7 +42,7 @@ public sealed class InteractObjectFactoryTypeOptions : FactoryTypeOptions
             return;
         }
 
-        manager.AddToList(target,NodeTypes.Trigger);
+        manager.AddToList(target,NodeTypes.Interactuable);
         UnityEditor.SceneManagement.EditorSceneManager.MarkSceneDirty(target.scene);
     }
 }

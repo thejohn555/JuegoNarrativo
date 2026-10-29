@@ -3,6 +3,7 @@ using Blueprints_arquitectura_Dani_.Runtime;
 using System.Collections.Generic;
 using Blueprints_arquitectura_Dani_.Editor;
 using Blueprints_arquitectura_Dani_.Editor.Blueprints_arquitectura_Dani_.Editor.Nodes;
+using Blueprints_arquitectura_Dani_.Runtime.InteractNode;
 using Blueprints_arquitectura_Dani_.Runtime.LevelNode;
 using Blueprints_arquitectura_Dani_.Runtime.TriggerNode;
 using Unity.GraphToolkit.Editor;
@@ -48,6 +49,9 @@ public static class NodeTranslator
                 return true;
             case OnTriggerEnterNode triggerNode:
                 list.Add(new TriggerEnterRuntimeNode(triggerNode.Key));
+                return true;
+            case OnInteractNode onInteractNode:
+                list.Add(new InteractRuntimeNode(onInteractNode.Key));
                 return true;
                 
         }
