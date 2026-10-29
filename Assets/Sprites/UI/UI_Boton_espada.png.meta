@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: ddaa50fbe05668947baa310089f639a7
+guid: 6eb66698f86f15d44916e83149e7b45e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8831165360549089681
-    second: UI_Boton_espada_0
+      213: -8677345861114930273
+    second: UI_Boton_espada 1_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -102,11 +102,11 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: UI_Boton_espada_0
+      name: UI_Boton_espada 1_0
       rect:
         serializedVersion: 2
-        x: 43
-        y: 33
+        x: 61
+        y: 69
         width: 840
         height: 181
       alignment: 0
@@ -117,8 +117,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 191534c1b1a9e8a70800000000000000
-      internalID: 8831165360549089681
+      spriteID: f9bd903f9efd39780800000000000000
+      internalID: -8677345861114930273
       vertices: []
       indices: 
       edges: []
@@ -137,7 +137,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      UI_Boton_espada_0: 8831165360549089681
+      UI_Boton_espada 1_0: -8677345861114930273
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
