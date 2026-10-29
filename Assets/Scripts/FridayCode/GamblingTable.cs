@@ -15,6 +15,7 @@ namespace Assets.Scripts.FridayCode
         [SerializeField] private String resultObjectName;
         [SerializeField] private PlayerMovementSystem playerMovementSystem;
 
+        int counter = 0;
         private String itemName;
 
         private bool isOver;
@@ -48,10 +49,16 @@ namespace Assets.Scripts.FridayCode
                 StartCoroutine(RandomShit());
                 
             }
-            //else
-            //{
-            //    HeldItemController.Instance.ClearState();
-            //}
+            else
+            {
+                counter++;
+                if(counter == 2)
+                {
+                    HeldItemController.Instance.ClearState();
+                    counter = 0;
+                }
+                
+            }
         }
 
         
