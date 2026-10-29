@@ -27,6 +27,8 @@ public class FactoryWindow : EditorWindow
     private readonly NpcFactoryTypeOptions npcOptions = new NpcFactoryTypeOptions();
     private readonly CollectableObjectFactoryTypeOptions collectableObjectOptions = new CollectableObjectFactoryTypeOptions();
     private readonly InteractObjectFactoryTypeOptions interactObjectOptions = new InteractObjectFactoryTypeOptions();
+    private readonly TriggerFactoryTypeOptions triggerOptions = new TriggerFactoryTypeOptions();
+    private readonly DecorationFactoryTypeOptions decorationOptions = new DecorationFactoryTypeOptions();
     private readonly EmptyFactoryTypeOptions emptyOptions = new EmptyFactoryTypeOptions();
 
     private bool addCollider = true;
@@ -40,6 +42,7 @@ public class FactoryWindow : EditorWindow
     private float outlineScale = 1.1f;
     private float outlineinteractionDistane = 2f;
     private RuntimeDialogueGraph interactiveDescription;
+    private bool includeInNodeGraph;
 
     private bool savePrefab;
     private string prefabFolder = "Assets/Prefabs/Generated";
@@ -103,7 +106,7 @@ public class FactoryWindow : EditorWindow
     private void DrawTypeSection()
     {
         EditorGUILayout.LabelField("Object type", EditorStyles.boldLabel);
-        string[] typeLabels = { "Interact Object", "Collectible Object", "NPC", "Button" };
+        string[] typeLabels = { "Interact Object", "Collectible Object", "NPC", "Button", "Trigger", "Decoration" };
         int selectedIndex = Mathf.Max(0, Array.IndexOf(
             (FactoryConfiguration.TypeInteractive[])Enum.GetValues(typeof(FactoryConfiguration.TypeInteractive)),
             selectedType));
@@ -216,9 +219,21 @@ public class FactoryWindow : EditorWindow
     private void DrawComponentsSection()
     {
         EditorGUILayout.LabelField("Components", EditorStyles.boldLabel);
-        addCollider = EditorGUILayout.Toggle("Add Collider2D", addCollider);
-        if (addCollider)
-            colliderIsTrigger = EditorGUILayout.Toggle("Is trigger", colliderIsTrigger);
+        if (selectedType == FactoryConfiguration.TypeInteractive.Decoration)
+            includeInNodeGraph = EditorGUILayout.Toggle("Include in NodeGraph", includeInNodeGraph);
+
+        bool isTriggerType = selectedType == FactoryConfiguration.TypeInteractive.Trigger;
+        if (isTriggerType)
+        {
+            EditorGUILayout.HelpBox("A trigger collider and its event relay will be added automatically.",
+                MessageType.Info);
+        }
+        else
+        {
+            addCollider = EditorGUILayout.Toggle("Add Collider2D", addCollider);
+            if (addCollider)
+                colliderIsTrigger = EditorGUILayout.Toggle("Is trigger", colliderIsTrigger);
+        }
 
         addRigidbody = EditorGUILayout.Toggle("Add Rigidbody2D", addRigidbody);
         if (addRigidbody)
@@ -316,8 +331,8 @@ public class FactoryWindow : EditorWindow
             spriteTint = spriteTint,
             sortingLayerName = sortingLayerName,
             sortingOrder = sortingOrder,
-            addCollider = addCollider,
-            colliderIsTrigger = colliderIsTrigger,
+            addCollider = selectedType == FactoryConfiguration.TypeInteractive.Trigger || addCollider,
+            colliderIsTrigger = selectedType == FactoryConfiguration.TypeInteractive.Trigger || colliderIsTrigger,
             addRigidbody = addRigidbody,
             bodyType = bodyType,
             addOutliner = addOutliner,
@@ -325,6 +340,7 @@ public class FactoryWindow : EditorWindow
             outlineScale = outlineScale,
             outlineinteractionDistane = outlineinteractionDistane,
             interactiveDescription = interactiveDescription,
+            includeInNodeGraph = includeInNodeGraph,
             componentType = typeOptions != null ? typeOptions.ComponentType : null,
             savePrefab = savePrefab,
             prefabFolder = prefabFolder
@@ -353,6 +369,12 @@ public class FactoryWindow : EditorWindow
 
             case FactoryConfiguration.TypeInteractive.Buton:
                 return emptyOptions;
+
+            case FactoryConfiguration.TypeInteractive.Trigger:
+                return triggerOptions;
+
+            case FactoryConfiguration.TypeInteractive.Decoration:
+                return decorationOptions;
 
             default:
                 return null;

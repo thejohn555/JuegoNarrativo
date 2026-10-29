@@ -3994,7 +3994,10 @@ MonoBehaviour:
   interactionCursor: {fileID: 0}
   npcID: 
   currentGraph: {fileID: 0}
+  npcTextColor: {r: 1, g: 1, b: 1, a: 1}
   alternativeStates: []
+  cameraMove: 0
+  zoomCamera: 0
   EventBus: {fileID: 0}
   cameraOffset: {x: 0, y: 1, z: 0}
   zoom: 3
@@ -9302,9 +9305,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Grid2D
   gridWorldSize: {x: 20, y: 10}
   cellSize: 0.3
+  areaCollider: {fileID: 0}
   floorMask:
     serializedVersion: 2
     m_Bits: 8
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 0
   lineCheckSpacing: 0.1
   walkableMargin: 1
   showGrid: 0
