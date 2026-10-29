@@ -5,6 +5,7 @@ using Unity.GraphToolkit.Editor;
 namespace Blueprints_arquitectura_Dani_.Editor.Nodes
 {
     [Serializable]
+    [Node(categoryPath:"Nodes/StartNodes")]
     public class StartNode : BlueprintNode,IStartNode
     {
         protected override void OnDefinePorts(IPortDefinitionContext context)

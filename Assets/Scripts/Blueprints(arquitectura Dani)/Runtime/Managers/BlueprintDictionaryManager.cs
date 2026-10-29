@@ -17,12 +17,17 @@ namespace Blueprints_arquitectura_Dani_.Runtime.Managers
         [SerializeField] private List<GameObject> interactObjects = new();
         
         private void OnEnable() => RebuildDictionary();
-        //[SerializeField] private DictionarySO dictionarySo;          
-        public Dictionary <string, RuntimeNodeGroup> triggerDictionary = new ();
+        //[SerializeField] private DictionarySO dictionarySo; 
         public Dictionary<NodeTypes, (List<GameObject>list, Type eventRelayType)> nodeDictionary = new();
+        
+        //Diccionarios
+        public Dictionary <string, RuntimeNodeGroup> triggerDictionary = new ();
+        public Dictionary <string, RuntimeNodeGroup> interactDictionary = new ();
+        
         void RebuildDictionary()
         {
             nodeDictionary[NodeTypes.Trigger] = (triggerObjects, typeof(TriggerEnterRelay));
+            nodeDictionary[NodeTypes.Interactuable] = (interactObjects, null);
         }
         private void Awake()
         {
@@ -48,15 +53,20 @@ namespace Blueprints_arquitectura_Dani_.Runtime.Managers
                 Debug.LogWarning($"[Manager] Tipo {type} no registrado");
                 return;
             }
-            var col = go.GetComponentInChildren<Collider2D>();
-            if (col == null)
+
+            if (nodeDictionary[type].eventRelayType != null)
             {
-                Debug.LogWarning($"[Manager] '{go.name}' no tiene Collider2D", go);
+                var col = go.GetComponentInChildren<Collider2D>();
+                if (col == null)
+                {
+                    Debug.LogWarning($"[Manager] '{go.name}' no tiene Collider2D", go);
+                }
+                else if (!col.TryGetComponent(entry.eventRelayType, out _))
+                {
+                    col.gameObject.AddComponent(entry.eventRelayType);
+                }
             }
-            else if (!col.TryGetComponent(entry.eventRelayType, out _))
-            {
-                col.gameObject.AddComponent(entry.eventRelayType);
-            }
+
             CleanNullsFromList(entry.list);
             if (!entry.list.Contains(go))
                 entry.list.Add(go);
@@ -70,21 +80,26 @@ namespace Blueprints_arquitectura_Dani_.Runtime.Managers
 // #endif
         }
 
-        public void AddTriggerToDictionary(string trigger, RuntimeNodeGroup group)
+        public void AddToDictionary(NodeTypes type,string name, RuntimeNodeGroup group)
         {
-            triggerDictionary.Add(trigger, group);
+            switch (type)
+            {
+                case NodeTypes.Trigger:
+                    triggerDictionary.Add(name, group);
+                    break;
+                case NodeTypes.Interactuable:
+                    interactDictionary.Add(name, group);
+                    break;
+            }
+            
         }
 
-        public void CleanNullsFromList(List<GameObject> List)
-        {
-            foreach (var g in List)
-            {
-                if (g == null)
-                {
-                    List.Remove(g);
-                }
-            }
+        public void CleanNullsFromList(List<GameObject> list)
+        { 
+            list.RemoveAll(g => g == null);
         }
+        
+            
 
         public bool HasTrigger(string key)
         {

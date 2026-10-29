@@ -5,7 +5,7 @@ namespace Blueprints_arquitectura_Dani_.Runtime.TriggerNode
 {
     public class TriggerNodeExecutor:BlueprintNodeExecutor<TriggerEnterRuntimeNode>
     {
-        protected override int OnExecute(TriggerEnterRuntimeNode node, BlueprintDirector ctx)
+        protected override int OnExecute(TriggerEnterRuntimeNode node, BlueprintDirector ctx,GameObject obj)
         {
             Debug.Log($"On Trigger Enter ");
             return 0; 

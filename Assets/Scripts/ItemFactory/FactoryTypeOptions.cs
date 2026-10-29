@@ -18,41 +18,13 @@ public abstract class FactoryTypeOptions
 
     public virtual void ConfigureCreatedObject(GameObject target)
     {
-
+        
     }
 }
 
 public sealed class EmptyFactoryTypeOptions : FactoryTypeOptions
 {
     public override Type ComponentType => null;
-}
-
-public sealed class TriggerFactoryTypeOptions : FactoryTypeOptions
-{
-    public override Type ComponentType => typeof(Interactives.Trigger);
-
-    public override void ConfigureCreatedObject(GameObject target)
-    {
-        BlueprintDictionaryManager manager = UnityEngine.Object.FindFirstObjectByType<BlueprintDictionaryManager>();
-        if (manager == null)
-        {
-            Debug.LogWarning("Factory: no BlueprintDictionaryManager was found in the scene.", target);
-            return;
-        }
-
-        manager.AddToList(target, NodeTypes.Trigger);
-        UnityEditor.SceneManagement.EditorSceneManager.MarkSceneDirty(target.scene);
-    }
-}
-
-public sealed class DecorationFactoryTypeOptions : FactoryTypeOptions
-{
-    public override Type ComponentType => typeof(Interactives.Decoration);
-
-    public override void ConfigureCreatedObject(GameObject target)
-    {
-        // puto nacho
-    }
 }
 
 public sealed class InteractObjectFactoryTypeOptions : FactoryTypeOptions
@@ -70,6 +42,7 @@ public sealed class InteractObjectFactoryTypeOptions : FactoryTypeOptions
             return;
         }
 
+        manager.AddToList(target,NodeTypes.Interactuable);
         UnityEditor.SceneManagement.EditorSceneManager.MarkSceneDirty(target.scene);
     }
 }

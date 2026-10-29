@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 namespace Assets.Scripts.EventBuses
 {
-    public class OnSpaceBarClick:IEvent
+    public struct OnSpaceBarClick:IEvent
     {
         private InputAction.CallbackContext context;
 

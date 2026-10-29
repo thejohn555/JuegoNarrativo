@@ -1,0 +1,82 @@
+﻿using EventBuses;
+using System;
+using System.Collections;
+using UnityEngine;
+using UnityEngine.EventSystems;
+
+namespace Assets.Scripts.FridayCode
+{
+    internal class GamblingTable : ObjectTrigger, IPointerEnterHandler, IPointerExitHandler
+    {
+        [SerializeField] private EventBusSO eventBus;
+        [SerializeField] private Sprite sprite;
+        [Header("item you need to craft name and result item name")]
+        [SerializeField] private String entryObjectName;
+        [SerializeField] private String resultObjectName;
+        [SerializeField] private PlayerMovementSystem playerMovementSystem;
+
+        int counter = 0;
+        private String itemName;
+
+        private bool isOver;
+
+        private void OnEnable()
+        {
+            HeldItemController.Instance.OnItemReleased += Action;
+        }
+        private void OnDisable()
+        {
+            HeldItemController.Instance.OnItemReleased -= Action;
+        }
+
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            isOver = true;
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            isOver = false;
+        }
+
+        private void Action(string itemName)
+        {
+            if (isOver)
+            {
+                this.itemName = itemName;
+                StopAllCoroutines();
+                playerMovementSystem.SetNewDestination(gameObject.transform.position,1.5f);
+                StartCoroutine(RandomShit());
+                
+            }
+            else
+            {
+                counter++;
+                if(counter == 2)
+                {
+                    HeldItemController.Instance.ClearState();
+                    counter = 0;
+                }
+                
+            }
+        }
+
+        
+
+        private IEnumerator RandomShit()
+        {
+            while (!playerMovementSystem.ReacheDestination())
+            {
+                yield return null;
+            }
+            ObjectDropped(CoinSpawn, entryObjectName, itemName);
+        }
+
+        private void CoinSpawn()
+        {
+            InventoryManager.Instance.AddItem(resultObjectName, sprite);
+            Debug.Log($"the object is {resultObjectName}");
+        }
+
+    }
+}

@@ -45,10 +45,10 @@ MonoBehaviour:
         m_LocalSubgraphs: []
         m_LastKnownBounds:
           serializedVersion: 2
-          x: 278.66666
-          y: 157.33333
-          width: 760
-          height: 164.66667
+          x: 279
+          y: 157
+          width: 759
+          height: 164
         m_GraphElementMetaData:
         - m_Guid:
             m_Value0: 10274896194142469250
@@ -230,7 +230,7 @@ MonoBehaviour:
     - rid: 1425812137612411194
       type: {class: 'Constant`1[[System.String, mscorlib]]', ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
       data:
-        m_Value: "Un pu\xF1ado de monedas de oro, desgastadas por el uso"
+        m_Value: A handful of gold coins, worn smooth from passing through countless hands.
     - rid: 1425812137612411195
       type: {class: 'Constant`1[[System.Single, mscorlib]]', ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
       data:
