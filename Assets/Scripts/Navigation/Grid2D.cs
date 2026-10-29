@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class Grid2D : MonoBehaviour
 {
-    [Header("Grid Bounds")]
-    [SerializeField] private Vector2 gridWorldSize = new Vector2(20f, 10f);
-
     [Header("Cell Settings")]
     [Min(0.1f)]
     [SerializeField] private float cellSize = 0.5f;
 
     [Header("Floor Detection")]
+    [SerializeField] private Collider2D areaCollider;
     [SerializeField] private LayerMask floorMask;
+    [SerializeField] private LayerMask obstacleMask;
 
     [Header("Path Validation")]
     [Min(0.01f)]
@@ -26,10 +25,12 @@ public class Grid2D : MonoBehaviour
     [SerializeField] private bool showGrid = true;
 
     private NodeGrid[,] grid;
-    private Collider2D[] floorColliders;
+    private readonly List<Collider2D> floorColliders = new List<Collider2D>();
 
     private int gridSizeX;
     private int gridSizeY;
+    private Vector2 gridBottomLeft;
+    private Vector2 gridWorldSize;
 
     public NodeGrid[,] Grid => grid;
 
@@ -40,6 +41,16 @@ public class Grid2D : MonoBehaviour
 
     private void CreateGrid()
     {
+        if (areaCollider == null)
+        {
+            Debug.LogError("Grid2D necesita un collider principal asignado en Area Collider.", this);
+            return;
+        }
+
+        Bounds colliderBounds = areaCollider.bounds;
+        gridWorldSize = colliderBounds.size;
+        gridBottomLeft = colliderBounds.min;
+
         gridSizeX = Mathf.Max(
             1,
             Mathf.CeilToInt(gridWorldSize.x / cellSize)
@@ -52,36 +63,20 @@ public class Grid2D : MonoBehaviour
 
         grid = new NodeGrid[gridSizeX, gridSizeY];
 
-        Collider2D[] allColliders =
-            FindObjectsByType<Collider2D>(
-                FindObjectsSortMode.None
-            );
-
-        List<Collider2D> validColliders =
-            new List<Collider2D>();
-
-        foreach (Collider2D col in allColliders)
+        floorColliders.Clear();
+        if (areaCollider != null && areaCollider.enabled)
         {
-            int layerBit = 1 << col.gameObject.layer;
-
-            if ((floorMask.value & layerBit) != 0
-                && col.enabled
-                && col.gameObject.activeInHierarchy)
-            {
-                validColliders.Add(col);
-            }
+            ContactFilter2D filter = new ContactFilter2D();
+            filter.SetLayerMask(floorMask);
+            filter.useTriggers = true;
+            areaCollider.Overlap(filter, floorColliders);
         }
-
-        floorColliders = validColliders.ToArray();
-
-        Vector2 bottomLeft = (Vector2)transform.position
-            - gridWorldSize / 2f;
 
         for (int x = 0; x < gridSizeX; x++)
         {
             for (int y = 0; y < gridSizeY; y++)
             {
-                Vector2 worldPoint = bottomLeft
+                Vector2 worldPoint = gridBottomLeft
                     + new Vector2(
                         x * cellSize + cellSize / 2f,
                         y * cellSize + cellSize / 2f
@@ -166,6 +161,10 @@ public class Grid2D : MonoBehaviour
 
     private bool IsCellInsideFloor(Vector2 center)
     {
+        if (areaCollider == null || !areaCollider.OverlapPoint(center)
+            || Physics2D.OverlapPoint(center, obstacleMask) != null)
+            return false;
+
         float halfSize = cellSize / 2f;
 
         Vector2[] samplePoints =
@@ -194,7 +193,9 @@ public class Grid2D : MonoBehaviour
 
             foreach (Vector2 point in samplePoints)
             {
-                if (!floor.OverlapPoint(point))
+                if (!areaCollider.OverlapPoint(point)
+                    || Physics2D.OverlapPoint(point, obstacleMask) != null
+                    || !floor.OverlapPoint(point))
                 {
                     allPointsInside = false;
                     break;
@@ -210,6 +211,10 @@ public class Grid2D : MonoBehaviour
 
     public bool IsPositionWalkable(Vector2 worldPosition)
     {
+        if (areaCollider == null || !areaCollider.OverlapPoint(worldPosition)
+            || Physics2D.OverlapPoint(worldPosition, obstacleMask) != null)
+            return false;
+
         foreach (Collider2D floor in floorColliders)
         {
             if (floor != null
@@ -258,15 +263,12 @@ public class Grid2D : MonoBehaviour
     
     public NodeGrid NodeFromWorldPosition(Vector2 worldPosition)
     {
-        Vector2 bottomLeft = (Vector2)transform.position
-                             - gridWorldSize / 2f;
-
         int x = Mathf.FloorToInt(
-            (worldPosition.x - bottomLeft.x) / cellSize
+            (worldPosition.x - gridBottomLeft.x) / cellSize
         );
 
         int y = Mathf.FloorToInt(
-            (worldPosition.y - bottomLeft.y) / cellSize
+            (worldPosition.y - gridBottomLeft.y) / cellSize
         );
 
         // Evitamos salirnos de los límites de la cuadrícula.
@@ -311,16 +313,12 @@ public class Grid2D : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.white;
+        Bounds bounds = areaCollider != null
+            ? areaCollider.bounds
+            : new Bounds(transform.position, Vector3.zero);
 
-        Gizmos.DrawWireCube(
-            transform.position,
-            new Vector3(
-                gridWorldSize.x,
-                gridWorldSize.y,
-                0f
-            )
-        );
+        Gizmos.color = Color.white;
+        Gizmos.DrawWireCube(bounds.center, bounds.size);
 
         if (!showGrid || grid == null)
             return;

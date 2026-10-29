@@ -9,7 +9,9 @@ public class FactoryConfiguration
         InteractObject,
         collectableObject,
         NPC,
-        Buton
+        Buton,
+        Trigger,
+        Decoration
     }
     
     public TypeInteractive typeName;
@@ -34,6 +36,7 @@ public class FactoryConfiguration
     public float outlineScale = 1.1f;
     public float outlineinteractionDistane = 2f;
     public RuntimeDialogueGraph interactiveDescription;
+    public bool includeInNodeGraph;
 
     public Type componentType;
     public bool savePrefab;
