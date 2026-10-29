@@ -17,6 +17,7 @@ namespace Assets.Scripts.FridayCode
             {
                 HeldItemController.Instance.Consume();
                 method.Invoke();
+                Debug.Log("Something was crafted");
             }
             else
             {

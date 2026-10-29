@@ -510,6 +510,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 108085762}
   m_CullTransparentMesh: 1
+--- !u!1 &194907090
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 194907091}
+  m_Layer: 0
+  m_Name: ------------------Personajes---------------------
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &194907091
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 194907090}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.36293, y: -0.13533, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &206616663
 GameObject:
   m_ObjectHideFlags: 0
@@ -1158,7 +1189,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Assets.Scripts.FridayCode.GamblingTable
   eventBus: {fileID: 11400000, guid: 12dd33ac5088a19498397bad87f52e37, type: 2}
-  coinSprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  sprite: {fileID: 21300000, guid: 092761c7478bc8841853452b653cdddd, type: 3}
   entryObjectName: Coins
   resultObjectName: Beer
   playerMovementSystem: {fileID: 1675450511}
@@ -2130,6 +2161,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 881793652}
   m_CullTransparentMesh: 1
+--- !u!1 &888916168
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 888916169}
+  m_Layer: 0
+  m_Name: ------------------Props---------------------------
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &888916169
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 888916168}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.36293, y: -0.13533, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &942008192
 GameObject:
   m_ObjectHideFlags: 0
@@ -2415,7 +2477,7 @@ GameObject:
   - component: {fileID: 1054294563}
   - component: {fileID: 1054294562}
   m_Layer: 3
-  m_Name: Square
+  m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4339,6 +4401,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1675811233}
   m_CullTransparentMesh: 1
+--- !u!1 &1731805364
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1731805365}
+  m_Layer: 0
+  m_Name: -----------------Objetos---------------------------
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1731805365
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1731805364}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.36293, y: -0.13533, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1741269649
 GameObject:
   m_ObjectHideFlags: 0
@@ -4371,7 +4464,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Assets.Scripts.FridayCode.GamblingTable
   eventBus: {fileID: 11400000, guid: 12dd33ac5088a19498397bad87f52e37, type: 2}
-  coinSprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   entryObjectName: Dado trucado
   resultObjectName: Coins
   playerMovementSystem: {fileID: 1675450511}
@@ -6033,16 +6126,19 @@ SceneRoots:
   m_Roots:
   - {fileID: 333743474}
   - {fileID: 778836795}
-  - {fileID: 1054294564}
-  - {fileID: 1675450513}
-  - {fileID: 1836895568}
-  - {fileID: 413055243}
   - {fileID: 2068592876}
   - {fileID: 2101573023}
   - {fileID: 2124073563}
+  - {fileID: 1836895568}
   - {fileID: 1760750165}
   - {fileID: 1111250212}
   - {fileID: 1463542587}
-  - {fileID: 2984788145907895898}
+  - {fileID: 194907091}
+  - {fileID: 1675450513}
+  - {fileID: 413055243}
+  - {fileID: 1731805365}
   - {fileID: 6724583006774733039}
+  - {fileID: 2984788145907895898}
+  - {fileID: 888916169}
   - {fileID: 1741269652}
+  - {fileID: 1054294564}
