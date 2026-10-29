@@ -13,12 +13,13 @@ namespace Assets.Scripts.FridayCode
         [Header("item you need to craft name and result item name")]
         [SerializeField] private String entryObjectName;
         [SerializeField] private String resultObjectName;
-        [SerializeField] private PlayerMovementSystem playerMovementSystem;
+        [SerializeField] protected PlayerMovementSystem playerMovementSystem;
 
-        int counter = 0;
+       
+        
         private String itemName;
 
-        private bool isOver;
+        protected bool isOver;
 
         private void OnEnable()
         {
@@ -39,37 +40,31 @@ namespace Assets.Scripts.FridayCode
             isOver = false;
         }
 
-        private void Action(string itemName)
+        protected virtual void Action(string itemName)
         {
             if (isOver)
             {
                 this.itemName = itemName;
                 StopAllCoroutines();
                 playerMovementSystem.SetNewDestination(gameObject.transform.position,1.5f);
-                StartCoroutine(RandomShit());
+                StartCoroutine(RandomShit(CoinSpawn));
                 
             }
             else
             {
-                counter++;
-                if(counter == 2)
-                {
-                    HeldItemController.Instance.ClearState();
-                    counter = 0;
-                }
-                
+                HeldItemController.Instance.ClearState();
             }
         }
 
         
 
-        private IEnumerator RandomShit()
+        protected IEnumerator RandomShit(Action method)
         {
             while (!playerMovementSystem.ReacheDestination())
             {
                 yield return null;
             }
-            ObjectDropped(CoinSpawn, entryObjectName, itemName);
+            ObjectDropped(method, entryObjectName, itemName);
         }
 
         private void CoinSpawn()
@@ -77,6 +72,7 @@ namespace Assets.Scripts.FridayCode
             InventoryManager.Instance.AddItem(resultObjectName, sprite);
             Debug.Log($"the object is {resultObjectName}");
         }
+        
 
     }
 }

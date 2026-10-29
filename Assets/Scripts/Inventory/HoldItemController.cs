@@ -70,7 +70,7 @@ public class HeldItemController : MonoBehaviour
         }
 
         OnItemReleased?.Invoke(heldItemName);
-        //ClearState();
+        ClearState();
     }
 
     // Gasta el objeto (ej. la llave abre la puerta)
@@ -159,6 +159,11 @@ public class HeldItemController : MonoBehaviour
         {
             MoveIcon();
         }
+        if (Mouse.current != null && Mouse.current.rightButton.wasPressedThisFrame)
+        {
+            OnItemReleased?.Invoke(heldItemName);
+            //Release();
+        }
     }
 
     // LateUpdate: así la puerta puede consumir el objeto en su Update antes de que el click lo suelte
@@ -169,10 +174,6 @@ public class HeldItemController : MonoBehaviour
             return;
         }
 
-        if (Mouse.current != null && Mouse.current.rightButton.wasPressedThisFrame)
-        {
-
-            Release();
-        }
+        
     }
 }
