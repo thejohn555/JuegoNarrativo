@@ -5586,7 +5586,7 @@ PrefabInstance:
       objectReference: {fileID: 3965311268370046156, guid: 17cb17a81ff095f41b4360eac41add65, type: 3}
     - target: {fileID: 8520369407981150369, guid: 6b3fb1c12978eeb43bfa9c093286b2d3, type: 3}
       propertyPath: m_Name
-      value: Dado
+      value: Die
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5704,7 +5704,7 @@ PrefabInstance:
       objectReference: {fileID: 3965311268370046156, guid: d148f02ba2a487644844242fc1fd5647, type: 3}
     - target: {fileID: 9207451370440653793, guid: 85699bffd616e3a4a8ecb4d0e930ff79, type: 3}
       propertyPath: m_Name
-      value: Clavo
+      value: Nail
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
