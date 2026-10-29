@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: InventorySettings
   m_EditorClassIdentifier: Assembly-CSharp::InventorySettings
   inventoryName: Inventario1
-  rows: 5
-  columns: 5
-  slotSize: {x: 100, y: 100}
+  rows: 2
+  columns: 4
+  slotSize: {x: 10, y: 10}
   spacing: {x: 10, y: 10}
   padding: 12
-  slotSprite: {fileID: 0}
+  slotSprite: {fileID: -4730871500570717558, guid: e944bfd62a927e04e8430d9e6d74dc52, type: 3}
   slotColor: {r: 1, g: 1, b: 1, a: 1}
-  panelSprite: {fileID: 21300000, guid: 092761c7478bc8841853452b653cdddd, type: 3}
-  panelColor: {r: 0, g: 0, b: 0, a: 1}
+  panelSprite: {fileID: -6498193371724539457, guid: 83028acc192920d44a8be7583fdb12fc, type: 3}
+  panelColor: {r: 1, g: 1, b: 1, a: 1}
   replaceExisting: 1
