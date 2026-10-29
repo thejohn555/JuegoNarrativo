@@ -5485,7 +5485,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5264258802465068465, guid: 5c7f96cf3fa816e47a31c04028cf2aa4, type: 3}
       propertyPath: m_Name
-      value: Beer
+      value: Ale
       objectReference: {fileID: 0}
     - target: {fileID: 6469979426144552181, guid: 5c7f96cf3fa816e47a31c04028cf2aa4, type: 3}
       propertyPath: m_LocalPosition.x
