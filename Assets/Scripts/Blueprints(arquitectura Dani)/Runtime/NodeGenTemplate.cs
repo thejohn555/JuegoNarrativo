@@ -11,7 +11,7 @@ namespace Blueprints_arquitectura_Dani_.Runtime
 {
     public static class NodeGenTemplate
     {
-        // tipo -> (prefijo de la clase generada, clase base, nombre del archivo)
+        // tipo -> (prefijo de la clase generada, clase base, nombre del archivo,categoria para ordenalo visualmente)
         public static readonly Dictionary<NodeTypes, (string prefix, string baseClass, string file,string category)> Map = new()
         {
             { NodeTypes.Trigger,       ("OnTriggerEnter_", "OnTriggerEnterNode", "TriggerNodes.cs",  "Nodes/StartNodes/Triggers") },
