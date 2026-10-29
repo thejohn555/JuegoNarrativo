@@ -1,3 +1,4 @@
+using Blueprints_arquitectura_Dani_.Runtime;
 using UnityEngine;
 
 namespace Interactives
@@ -7,7 +8,8 @@ namespace Interactives
 
         public override void Interact(GameObject interactor)
         {
-            //EventBus.Publish(new OnInteract(interactor));
+            if (BlueprintsEventManager.Instance != null)
+                BlueprintsEventManager.Instance.Raise(NodeTypes.Interactuable, gameObject);
         }
     }
 }

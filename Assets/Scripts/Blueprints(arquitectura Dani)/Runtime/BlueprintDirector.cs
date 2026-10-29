@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Blueprints_arquitectura_Dani_.Runtime.InteractNode;
 using Blueprints_arquitectura_Dani_.Runtime.Managers;
 using Blueprints_arquitectura_Dani_.Runtime.TriggerNode;
 using Unity.GraphToolkit.Editor;
@@ -73,15 +74,18 @@ namespace Blueprints_arquitectura_Dani_.Runtime
                            Debug.LogWarning($"[Director] No existe el trigger '{trigger.trigger}' en la escena");
                            break;
                        }
-                       BlueprintDictionaryManager.Instance.AddTriggerToDictionary(trigger.trigger, node);
+                       BlueprintDictionaryManager.Instance.AddToDictionary(NodeTypes.Trigger,trigger.trigger, node);
                        Debug.Log($"[Director] Registrado trigger '{trigger.trigger}'");
+                       break;
+                   case InteractRuntimeNode  interact:
+                       BlueprintDictionaryManager.Instance.AddToDictionary(NodeTypes.Interactuable, interact.interact, node);
                        break;
                 }
                 idx++;
-            }
+            }   
         }
 
-        private void RunFrom(RuntimeNodeGroup group,int startIndex = 0)
+        private void RunFrom(RuntimeNodeGroup group,GameObject source = null,int startIndex = 0)
         {
             int index = startIndex;
             
@@ -96,7 +100,7 @@ namespace Blueprints_arquitectura_Dani_.Runtime
                 }
                 else
                 {
-                    int output = executor.Execute(currentNode, this);
+                    int output = executor.Execute(currentNode, this,source);
 
                     if (output < 0 || output >= currentNode.NextNodeIndex.Count)
                         return;                              // fin de la cadena
@@ -108,23 +112,23 @@ namespace Blueprints_arquitectura_Dani_.Runtime
         
         private void HandleEvent(NodeTypes type, GameObject obj)
         {
+            var manager = BlueprintDictionaryManager.Instance;
             switch (type)
             {
                 case NodeTypes.Trigger:
-                    if (BlueprintDictionaryManager.Instance.triggerDictionary.ContainsKey(obj.name))
-                    {
-                        RunFrom(BlueprintDictionaryManager.Instance.triggerDictionary[obj.name]);
-                    }
-                    else
-                    {
-                        Debug.LogError(
-                            $"No hay ningun trigger {obj}");
-                    }
+                    Run(manager.triggerDictionary, obj, "trigger");
                     break;
                 case NodeTypes.Interactuable:
-                    // idem para interactuables
+                    Run(manager.interactDictionary, obj, "interactuable");
                     break;
             }
+        }
+        private void Run(Dictionary<string, RuntimeNodeGroup> dict, GameObject obj, string kind)
+        {
+            if (dict.TryGetValue(obj.name, out var group))
+                RunFrom(group, obj);
+            else
+                Debug.LogError($"No hay ningún {kind} '{obj.name}'");
         }
     }
 }
