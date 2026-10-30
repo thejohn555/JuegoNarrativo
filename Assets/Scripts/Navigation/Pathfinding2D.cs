@@ -13,6 +13,43 @@ public class Pathfinding2D : MonoBehaviour
     
     [SerializeField] private Grid2D grid;
 
+    public List<NodeGrid> FindPathToInteractionRange(
+        Vector2 startPosition,
+        Vector2 targetPosition,
+        float interactionDistance,
+        out Vector2 reachablePosition)
+    {
+        reachablePosition = targetPosition;
+        if (grid == null || grid.Grid == null)
+            return null;
+
+        List<NodeGrid> candidates = new List<NodeGrid>();
+        NodeGrid[,] nodes = grid.Grid;
+        for (int x = 0; x < nodes.GetLength(0); x++)
+        for (int y = 0; y < nodes.GetLength(1); y++)
+        {
+            NodeGrid node = nodes[x, y];
+            if (node.Walkable && Vector2.Distance(node.WorldPosition, targetPosition) <= interactionDistance)
+                candidates.Add(node);
+        }
+
+        candidates.Sort((a, b) =>
+            Vector2.Distance(a.WorldPosition, startPosition).CompareTo(
+                Vector2.Distance(b.WorldPosition, startPosition)));
+
+        foreach (NodeGrid candidate in candidates)
+        {
+            List<NodeGrid> path = FindPath(startPosition, candidate.WorldPosition);
+            if (path == null || path.Count == 0)
+                continue;
+
+            reachablePosition = candidate.WorldPosition;
+            return path;
+        }
+
+        return null;
+    }
+
     public List<NodeGrid> FindPath(
         Vector2 startPosition,
         Vector2 targetPosition)

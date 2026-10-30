@@ -23,8 +23,10 @@ public class PlayerMovementSystem : PlayerSystem
     private List<NodeGrid> currentPath;
     private int currentWaypointIndex;
     private bool isMoving;
+    private bool destinationReached;
 
     public bool IsMoving => isMoving;
+    public bool DestinationReached => destinationReached;
 
     public void SetNewDestination(
         Vector3 destination,
@@ -33,6 +35,7 @@ public class PlayerMovementSystem : PlayerSystem
     {
         // Cancelamos la ruta anterior.
         isMoving = false;
+        destinationReached = false;
         currentPath = null;
 
         this.stoppingDistance = stoppingDistance;
@@ -48,9 +51,11 @@ public class PlayerMovementSystem : PlayerSystem
         }
 
         // Calculamos la ruta desde la posición actual.
-        currentPath = pathfinding.FindPath(
+        currentPath = pathfinding.FindPathToInteractionRange(
             transform.position,
-            destinationPoint
+            destinationPoint,
+            stoppingDistance,
+            out _
         );
 
         // No existe una ruta válida.
@@ -98,8 +103,7 @@ public class PlayerMovementSystem : PlayerSystem
         if (Vector2.Distance(currentPosition, destinationPoint)
             <= stoppingDistance)
         {
-            Debug.Log(Vector2.Distance(currentPosition, destinationPoint));
-            FinishMovement();
+            FinishMovement(reached: true);
             return;
         }
 
@@ -122,13 +126,13 @@ public class PlayerMovementSystem : PlayerSystem
             if (Vector2.Distance(currentPosition, destinationPoint)
                 <= stoppingDistance)
             {
-                FinishMovement();
+                FinishMovement(reached: true);
                 return;
             }
 
             // El último nodo puede no coincidir con el clic exacto.
             // Por ahora, no continuamos fuera de la ruta calculada.
-            FinishMovement();
+            FinishMovement(reached: false);
             return;
         }
 
@@ -148,9 +152,10 @@ public class PlayerMovementSystem : PlayerSystem
         );
     }
 
-    private void FinishMovement()
+    private void FinishMovement(bool reached)
     {
         isMoving = false;
+        destinationReached = reached;
         currentPath = null;
     }
 

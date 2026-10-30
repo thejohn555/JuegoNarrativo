@@ -117,6 +117,8 @@ namespace Player
             } while (!main.MovementSystem.ReacheDestination());
 
             if (target == null) yield break;
+            if (!main.MovementSystem.DestinationReached)
+                yield break;
 
             if (showDescriptionOnArrival)
             {

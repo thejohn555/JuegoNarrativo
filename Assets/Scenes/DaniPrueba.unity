@@ -2651,7 +2651,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Pathfinding2D
   startPoint: {fileID: 0}
   targetPoint: {fileID: 0}
-  showPath: 1
+  showPath: 0
   grid: {fileID: 1836895567}
 --- !u!114 &1836895567
 MonoBehaviour:
@@ -2675,7 +2675,7 @@ MonoBehaviour:
     m_Bits: 0
   lineCheckSpacing: 0.1
   walkableMargin: 1
-  showGrid: 1
+  showGrid: 0
 --- !u!4 &1836895568
 Transform:
   m_ObjectHideFlags: 0
@@ -3016,6 +3016,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 604056899063691305, guid: 6b3fb1c12978eeb43bfa9c093286b2d3, type: 3}
+      propertyPath: m_Name
+      value: Taberna_capa_8_objeto dado
+      objectReference: {fileID: 0}
     - target: {fileID: 2648072650128671512, guid: 6b3fb1c12978eeb43bfa9c093286b2d3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -10.86
@@ -3055,6 +3059,10 @@ PrefabInstance:
     - target: {fileID: 2648072650128671512, guid: 6b3fb1c12978eeb43bfa9c093286b2d3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3147943750855510661, guid: 6b3fb1c12978eeb43bfa9c093286b2d3, type: 3}
+      propertyPath: m_SortingOrder
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8520369407981150369, guid: 6b3fb1c12978eeb43bfa9c093286b2d3, type: 3}
       propertyPath: m_Name
@@ -3211,7 +3219,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8738536837254363268, guid: 85699bffd616e3a4a8ecb4d0e930ff79, type: 3}
       propertyPath: <InteractionDistance>k__BackingField
-      value: 1.5
+      value: 2.9
       objectReference: {fileID: 0}
     - target: {fileID: 9207451370440653793, guid: 85699bffd616e3a4a8ecb4d0e930ff79, type: 3}
       propertyPath: m_Name
