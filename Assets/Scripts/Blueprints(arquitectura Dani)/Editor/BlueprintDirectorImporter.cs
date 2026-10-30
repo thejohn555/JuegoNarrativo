@@ -60,7 +60,7 @@ namespace Blueprints_arquitectura_Dani_.Editor.Blueprints_arquitectura_Dani_.Edi
             List<Dictionary<INode, int>> nodeMaps = new();
             
             //First pass: Create all runtime nodes (without conections)
-            CreateRuntimeNodes(roots,runtimeAsset, nodeMaps,levelName);
+            CreateRuntimeNodes(roots,runtimeAsset, nodeMaps);
             //Second pass: Set up connections using the index;
             SetUpConnections(roots,runtimeAsset, nodeMaps);
             
@@ -72,22 +72,14 @@ namespace Blueprints_arquitectura_Dani_.Editor.Blueprints_arquitectura_Dani_.Edi
             {
                 Debug.Log($"[importer] root : {VARIABLE}");
             }
-           
             Debug.Log("\"<color=green>[Importer] Todo correcto</color>\"");
         }
 
-        void CreateRuntimeNodes(List<INode> roots, BlueprintRuntimeGraph runtimeGraph, List<Dictionary<INode, int>> nodeMaps,string graphLevel)
+        void CreateRuntimeNodes(List<INode> roots, BlueprintRuntimeGraph runtimeGraph, List<Dictionary<INode, int>> nodeMaps)
         {
             var nodesToProcess = new Queue<INode>();
             foreach (var node in roots)
             {
-                if (node is GeneratedBaseClass t && t.Level != graphLevel)
-                {
-                    Debug.LogError($"[Importer] El nodo '{t.Key}' es del nivel '{t.Level}', " +
-                                   $"pero este grafo es de '{graphLevel}'");
-                    continue;
-                }
-
                 RuntimeNodeGroup NodePack = new RuntimeNodeGroup();
                 Dictionary<INode, int> nodeMap = new();
                 nodesToProcess.Enqueue(node);
