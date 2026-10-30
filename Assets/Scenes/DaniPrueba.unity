@@ -155,6 +155,46 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5451523184992264114, guid: e7afb3b40cc5e7c4080751ae063c8387, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 343114eeb6d2cdd4d8f977e37edcf04b, type: 3}
+    - target: {fileID: 5451523184992264114, guid: e7afb3b40cc5e7c4080751ae063c8387, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5451523184992264114, guid: e7afb3b40cc5e7c4080751ae063c8387, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5451523184992264114, guid: e7afb3b40cc5e7c4080751ae063c8387, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5451523184992264114, guid: e7afb3b40cc5e7c4080751ae063c8387, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5554421091405497002, guid: e7afb3b40cc5e7c4080751ae063c8387, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 343114eeb6d2cdd4d8f977e37edcf04b, type: 3}
+    - target: {fileID: 5554421091405497002, guid: e7afb3b40cc5e7c4080751ae063c8387, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5554421091405497002, guid: e7afb3b40cc5e7c4080751ae063c8387, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5554421091405497002, guid: e7afb3b40cc5e7c4080751ae063c8387, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5554421091405497002, guid: e7afb3b40cc5e7c4080751ae063c8387, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6933648029135960108, guid: e7afb3b40cc5e7c4080751ae063c8387, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -238,6 +278,14 @@ PrefabInstance:
     - target: {fileID: 7221204262310958930, guid: e7afb3b40cc5e7c4080751ae063c8387, type: 3}
       propertyPath: m_Name
       value: DialogueUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 7246021941664940269, guid: e7afb3b40cc5e7c4080751ae063c8387, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 269.7368
+      objectReference: {fileID: 0}
+    - target: {fileID: 7246021941664940269, guid: e7afb3b40cc5e7c4080751ae063c8387, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 141.12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -335,6 +383,10 @@ PrefabInstance:
     - target: {fileID: 7221204262310958930, guid: e7afb3b40cc5e7c4080751ae063c8387, type: 3}
       propertyPath: m_Name
       value: Canvas (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7221204262310958930, guid: e7afb3b40cc5e7c4080751ae063c8387, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -950,7 +1002,7 @@ MonoBehaviour:
   interactionCursor: {fileID: 2800000, guid: 79afe8cc60f842a47930fd91a12b7616, type: 3}
   npcID: Bartender
   currentGraph: {fileID: 3965311268370046156, guid: 90689aa7def82764bbd6057193c8bf4d, type: 3}
-  npcTextColor: {r: 1, g: 0.50775915, b: 0, a: 1}
+  npcTextColor: {r: 0.18035007, g: 1, b: 0, a: 1}
   alternativeStates: []
   cameraMove: 0
   zoomCamera: 0
@@ -1743,7 +1795,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 5
+  m_SortingOrder: 3
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: d5f6c0ea7db8ad24aaadcc30cc27d39c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1974,6 +2026,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: af14434f120ad9a4687c18afe2643c14, type: 3}
+    - target: {fileID: 1392573157981920959, guid: 95f604d8a6b3a81439e2e09092fcd4a0, type: 3}
+      propertyPath: m_SortingOrder
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 4026787330613230292, guid: 95f604d8a6b3a81439e2e09092fcd4a0, type: 3}
       propertyPath: pathfinding
       value: 
@@ -2491,9 +2547,9 @@ MonoBehaviour:
   showInteractionGizmo: 1
   description: {fileID: 0}
   interactionCursor: {fileID: 0}
-  npcID: 123
+  npcID: Players
   currentGraph: {fileID: 3965311268370046156, guid: c2e400154645cb84eb209e898a7df579, type: 3}
-  npcTextColor: {r: 1, g: 1, b: 1, a: 1}
+  npcTextColor: {r: 1, g: 0.51856637, b: 0, a: 1}
   alternativeStates: []
   cameraMove: 0
   zoomCamera: 0
@@ -3327,6 +3383,18 @@ PrefabInstance:
     - target: {fileID: 568119125937162284, guid: b2c503b2dc933a34db371e1d1d07cc7b, type: 3}
       propertyPath: npcID
       value: Kidnapper
+      objectReference: {fileID: 0}
+    - target: {fileID: 568119125937162284, guid: b2c503b2dc933a34db371e1d1d07cc7b, type: 3}
+      propertyPath: npcTextColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 568119125937162284, guid: b2c503b2dc933a34db371e1d1d07cc7b, type: 3}
+      propertyPath: npcTextColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 568119125937162284, guid: b2c503b2dc933a34db371e1d1d07cc7b, type: 3}
+      propertyPath: npcTextColor.r
+      value: 0.72327036
       objectReference: {fileID: 0}
     - target: {fileID: 568119125937162284, guid: b2c503b2dc933a34db371e1d1d07cc7b, type: 3}
       propertyPath: interactionCursor
