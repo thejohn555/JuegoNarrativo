@@ -108,6 +108,14 @@ namespace Blueprints_arquitectura_Dani_.Runtime.Managers
                 if (g != null && g.name == key) return true;
             return false;
         }
+        
+        public List<GameObject> GetObjects(NodeTypes type)
+        {
+            RebuildDictionary();
+            return nodeDictionary.TryGetValue(type, out var entry)
+                ? entry.list
+                : new List<GameObject>();
+        }
            
     }
 }

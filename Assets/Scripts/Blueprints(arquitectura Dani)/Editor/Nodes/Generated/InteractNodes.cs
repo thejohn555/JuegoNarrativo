@@ -11,4 +11,8 @@ namespace Blueprints_arquitectura_Dani_.Editor
     [Node(categoryPath:"Nodes/StartNodes/Interactable")]
     public class OnInteract_Nacho : OnInteractNode
     { public override string Key => "Nacho"; }
+    [Serializable]
+    [Node(categoryPath:"Nodes/StartNodes/Interactable")]
+    public class OnInteract_Nacho_1_ : OnInteractNode
+    { public override string Key => "Nacho(1)"; }
 }
