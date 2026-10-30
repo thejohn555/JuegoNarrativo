@@ -1,6 +1,8 @@
-﻿using EventBuses;
+﻿using Assets.Scripts.EventBuses;
+using EventBuses;
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Assets.Scripts.FridayCode
@@ -8,6 +10,7 @@ namespace Assets.Scripts.FridayCode
     internal class ObjectToConversation : GamblingTable
     {
         [SerializeField] private RuntimeDialogueGraph graph;
+        
         Camera.DialogueData dialogueData;
         Camera.SpeakerData kidnapperData;
         Camera.SpeakerData conanData;
@@ -24,20 +27,21 @@ namespace Assets.Scripts.FridayCode
             
 
         }
-        protected override void Action(string itemName)
+        protected override void RightClickAction(string itemName)
         {
             if (isOver)
             {
-                
+                this.itemName = itemName;
                 StopAllCoroutines();
                 playerMovementSystem.SetNewDestination(gameObject.transform.position, 1.5f);
                 StartCoroutine(RandomShit(DialogueWrapperMethod));
             }
             else
             {
-                
+                eventBus.Publish(onNotOver);
             }
-            
+
+
         }
         private void DialogueWrapperMethod()
         {
