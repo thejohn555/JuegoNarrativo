@@ -2389,18 +2389,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1392573157981920959, guid: 95f604d8a6b3a81439e2e09092fcd4a0, type: 3}
-      propertyPath: m_SortingOrder
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4026787330613230292, guid: 95f604d8a6b3a81439e2e09092fcd4a0, type: 3}
-      propertyPath: maxVelocity
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4026787330613230292, guid: 95f604d8a6b3a81439e2e09092fcd4a0, type: 3}
-      propertyPath: minVelocity
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 4026787330613230292, guid: 95f604d8a6b3a81439e2e09092fcd4a0, type: 3}
       propertyPath: pathfinding
       value: 
@@ -2799,7 +2787,7 @@ MonoBehaviour:
     m_Bits: 0
   lineCheckSpacing: 0.1
   walkableMargin: 1
-  showGrid: 1
+  showGrid: 0
 --- !u!4 &1836895568
 Transform:
   m_ObjectHideFlags: 0
@@ -3185,14 +3173,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3147943750855510661, guid: 6b3fb1c12978eeb43bfa9c093286b2d3, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 58c96680d35af724bb6e2a89d030bb16, type: 3}
-    - target: {fileID: 3147943750855510661, guid: 6b3fb1c12978eeb43bfa9c093286b2d3, type: 3}
-      propertyPath: m_WasSpriteAssigned
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8520369407981150369, guid: 6b3fb1c12978eeb43bfa9c093286b2d3, type: 3}
       propertyPath: m_Name
       value: Dice
@@ -3329,26 +3309,6 @@ PrefabInstance:
     - target: {fileID: 3779503778972270616, guid: 85699bffd616e3a4a8ecb4d0e930ff79, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5251556879064907430, guid: 85699bffd616e3a4a8ecb4d0e930ff79, type: 3}
-      propertyPath: outlineColor.b
-      value: 0.52156866
-      objectReference: {fileID: 0}
-    - target: {fileID: 5251556879064907430, guid: 85699bffd616e3a4a8ecb4d0e930ff79, type: 3}
-      propertyPath: outlineColor.g
-      value: 0.03529412
-      objectReference: {fileID: 0}
-    - target: {fileID: 5251556879064907430, guid: 85699bffd616e3a4a8ecb4d0e930ff79, type: 3}
-      propertyPath: outlineColor.r
-      value: 0.85490197
-      objectReference: {fileID: 0}
-    - target: {fileID: 8738536837254363268, guid: 85699bffd616e3a4a8ecb4d0e930ff79, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8738536837254363268, guid: 85699bffd616e3a4a8ecb4d0e930ff79, type: 3}
-      propertyPath: <InteractionDistance>k__BackingField
-      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 9207451370440653793, guid: 85699bffd616e3a4a8ecb4d0e930ff79, type: 3}
       propertyPath: m_Name
