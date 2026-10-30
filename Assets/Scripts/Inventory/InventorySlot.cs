@@ -52,11 +52,7 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         tempImg.color = iconImage.color;
         tempImg.raycastTarget = false;
         tempImg.preserveAspect = true;
-
-        RectTransform rt = (RectTransform)draggedIconObject.transform;
-        rt.sizeDelta = iconImage.rectTransform.rect.size;   
-        rt.anchorMin = rt.anchorMax = rt.pivot = new Vector2(0.5f, 0.5f);
-
+        
         MoveGhost(eventData);
         iconImage.enabled = false;
     }
@@ -79,19 +75,17 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         {
             return;
         }
-
+        
         RectTransform canvasRect = (RectTransform)draggedIconObject.transform.parent;
         if (RectTransformUtility.ScreenPointToWorldPointInRectangle(canvasRect, eventData.position, eventData.pressEventCamera, out Vector3 worldPos))
         {
+            draggedIconObject.transform.localScale = new Vector3(0.4f, 0.4f);
             draggedIconObject.transform.position = worldPos;
         }
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        // Aquí puedes añadir en el futuro el método que compruebe la interacción con NPCs / escena:
-        // if (!EventSystem.current.IsPointerOverGameObject()) { CheckWorldInteraction(); }
-
         EndDragCleanup();
     }
 
@@ -129,7 +123,7 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        Debug.Log($"Slot clicked {slotIndex} | button: {eventData.button} | dragging: {eventData.dragging}");
+        Debug.Log($"Slot clicked {slotIndex} | button: {eventData.button} | dragging: {eventData.dragging} ");
 
         if (eventData.button != PointerEventData.InputButton.Left || eventData.dragging)
         {
