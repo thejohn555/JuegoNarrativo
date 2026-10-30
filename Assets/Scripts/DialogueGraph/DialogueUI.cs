@@ -202,6 +202,7 @@ public class DialogueUI : MonoBehaviour
         for (int i = 0; i <= totalCharacters; i++)
         {
             dialogueText.maxVisibleCharacters = i;
+            AudioManager.Instance.PlayDialogueSound();
             yield return new WaitForSeconds(delay);
         }
 
