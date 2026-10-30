@@ -188,6 +188,7 @@ public class DialogueUI : MonoBehaviour
 
     private IEnumerator TypeWrittingText(string fullText, float lettersPerSecond)
     {
+        int contador = 0;
         isWritingText = true;
         currentFullText = fullText;
 
@@ -201,8 +202,13 @@ public class DialogueUI : MonoBehaviour
 
         for (int i = 0; i <= totalCharacters; i++)
         {
+            contador++;
             dialogueText.maxVisibleCharacters = i;
-            AudioManager.Instance.PlayDialogueSound();
+            if (contador % 3 == 0)
+            {
+                AudioManager.Instance.PlayDialogueSound();
+                contador = 0;
+            }
             yield return new WaitForSeconds(delay);
         }
 

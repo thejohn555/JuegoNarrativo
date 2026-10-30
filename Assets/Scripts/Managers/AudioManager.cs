@@ -32,6 +32,6 @@ public class AudioManager : Singleton<AudioManager>
     public void PlayDialogueSound()
     {
         SFXSource.pitch = UnityEngine.Random.Range(0.8f, 1.2f);
-        SFXSource.PlayOneShot(dialogueSound);
+        SFXSource.PlayOneShot(dialogueSound, 0.4f);
     }
 }
