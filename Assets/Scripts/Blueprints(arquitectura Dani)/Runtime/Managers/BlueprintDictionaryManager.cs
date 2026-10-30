@@ -12,12 +12,11 @@ namespace Blueprints_arquitectura_Dani_.Runtime.Managers
     {
         
         public static BlueprintDictionaryManager Instance { get; private set; }
-        //Listas
-        [SerializeField] private List<GameObject> triggerObjects = new();      // persiste en la escena
-        [SerializeField] private List<GameObject> interactObjects = new();
+        //Listas: Dentro del So
+        [SerializeField] private DictionarySO dictionarySo; 
         
         private void OnEnable() => RebuildDictionary();
-        //[SerializeField] private DictionarySO dictionarySo; 
+        //
         public Dictionary<NodeTypes, (List<GameObject>list, Type eventRelayType)> nodeDictionary = new();
         
         //Diccionarios
@@ -26,8 +25,8 @@ namespace Blueprints_arquitectura_Dani_.Runtime.Managers
         
         void RebuildDictionary()
         {
-            nodeDictionary[NodeTypes.Trigger] = (triggerObjects, typeof(TriggerEnterRelay));
-            nodeDictionary[NodeTypes.Interactuable] = (interactObjects, null);
+            nodeDictionary[NodeTypes.Trigger] = (dictionarySo.triggerObjects, typeof(TriggerEnterRelay));
+            nodeDictionary[NodeTypes.Interactuable] = (dictionarySo.interactObjects, null);
         }
         private void Awake()
         {

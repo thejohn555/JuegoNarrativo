@@ -32,6 +32,7 @@ namespace Blueprints_arquitectura_Dani_.Editor.Blueprints_arquitectura_Dani_.Edi
               return;
           }
           var obj = dictionaryManager.nodeDictionary[type].list;
+          string scene = dictionaryManager.gameObject.scene.name;
           List<string> names = new List<string>();
           foreach (var gameObj in obj)
           {
@@ -40,12 +41,13 @@ namespace Blueprints_arquitectura_Dani_.Editor.Blueprints_arquitectura_Dani_.Edi
                   names.Add(gameObj.name);
               }
           }
-          Generate(type,names);
+          Generate(type,scene,names);
       }
 
-      private static void Generate(NodeTypes type,List<string> names)
+      private static void Generate(NodeTypes type,string scene,List<string> names)
       {
           var (prefix, baseClass, file,category) = NodeGenTemplate.Map[type];
+          string sceneId = ToIdentifier(scene);
           string path = $"{outputFolder}/{file}";
           
           var sb = new StringBuilder();
@@ -72,24 +74,23 @@ namespace Blueprints_arquitectura_Dani_.Editor.Blueprints_arquitectura_Dani_.Edi
                   }
 
                   sb.AppendLine("    [Serializable]");
-                  sb.AppendLine($"    [Node(categoryPath:\"{category}\")]");
-                  sb.AppendLine($"    public class {prefix}{id} : {baseClass}");
-                  sb.AppendLine($"    {{ public override string Key => \"{name}\"; }}");
-                  used.Add(id);
+                  sb.AppendLine($"    [Node(categoryPath:\"{category}/{scene}\")]");
+                  sb.AppendLine($"    public class {prefix}{sceneId}_{id} : {baseClass}");
+                  sb.AppendLine($"    {{ public override string Key => \"{name}\"; public override string Level => \"{scene}\"; }}");
               }
           }
-              sb.AppendLine("}");
-              string content = sb.ToString();
-              if (File.Exists(path) && File.ReadAllText(path) == content)
-              {
-                  Debug.Log("[TriggerNodes] Sin cambios");
-                  return;
-              }
+          sb.AppendLine("}");
+          string content = sb.ToString();
+          if (File.Exists(path) && File.ReadAllText(path) == content)
+          {
+              Debug.Log("[TriggerNodes] Sin cambios");
+              return;
+          }
 
-              Directory.CreateDirectory(outputFolder);
-              File.WriteAllText(path, content);
-              AssetDatabase.Refresh();
-              Debug.Log($"[NodeGenerator] {type}: {used.Count} clases");
+          Directory.CreateDirectory(outputFolder);
+          File.WriteAllText(path, content);
+          AssetDatabase.Refresh();
+          Debug.Log($"[NodeGenerator] {type}: {used.Count} clases");
           
       }
       
