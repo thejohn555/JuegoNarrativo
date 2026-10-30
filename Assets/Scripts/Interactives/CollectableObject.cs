@@ -26,6 +26,7 @@ namespace Interactives
                 {
                     // Si se añadió correctamente al inventario, desaparece de la escena
                     Destroy(gameObject);
+                    AudioManager.Instance.PlaySFX(AudioManager.Instance.collectObjectSound, 0.7f);
                 }
                 else
                 {

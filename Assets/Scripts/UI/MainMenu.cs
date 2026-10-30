@@ -4,10 +4,13 @@ using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
-    [SerializeField] private Image background;
-    [SerializeField] private TMP_Text title;
-    [SerializeField] private Button playBtn;
-    [SerializeField] private Button exitBtn;
+    public void Play()
+    {
+        UIManager.Instance.LoadScene("Taberna");
+    }
 
-
+    public void Quit()
+    {
+        Application.Quit();
+    }
 }
