@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts.EventBuses;
 using EventBuses;
+using Interactives;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -15,6 +16,7 @@ namespace Assets.Scripts.FridayCode
         [SerializeField] private String entryObjectName;
         [SerializeField] private String resultObjectName;
         [SerializeField] protected PlayerMovementSystem playerMovementSystem;
+        [SerializeField] protected float interactionDistance = 1.5f;
         protected OnNotOver onNotOver;
         
 
@@ -49,7 +51,7 @@ namespace Assets.Scripts.FridayCode
             {
                 this.itemName = itemName;
                 StopAllCoroutines();
-                playerMovementSystem.SetNewDestination(gameObject.transform.position,1.5f);
+                playerMovementSystem.SetNewDestination(gameObject.transform.position,interactionDistance);
                 StartCoroutine(RandomShit(CoinSpawn));
                 
             }
