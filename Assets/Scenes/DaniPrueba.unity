@@ -1043,7 +1043,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 870c1451166640689cd9bf9fc9ce2d02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Interactives.NPC
-  <InteractionDistance>k__BackingField: 2.7
+  <InteractionDistance>k__BackingField: 3
   showInteractionGizmo: 1
   description: {fileID: 0}
   interactionCursor: {fileID: 2800000, guid: 79afe8cc60f842a47930fd91a12b7616, type: 3}
