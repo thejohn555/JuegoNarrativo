@@ -11,7 +11,8 @@ namespace Assets.Scripts.FridayCode
 {
     internal class ObjectTrigger : MonoBehaviour
     {
-
+        [SerializeField] protected EventBusSO eventBus;
+        private OnObjectCrafted onObjectCrafted;
         protected void ObjectDropped(Action method, string desiredName, string itemName)
         {
             if (desiredName == itemName)
@@ -25,6 +26,7 @@ namespace Assets.Scripts.FridayCode
                 Debug.Log("item erroneo");
                 HeldItemController.Instance.ClearState();
             }
+            eventBus.Publish(onObjectCrafted);
         }
     }
 }

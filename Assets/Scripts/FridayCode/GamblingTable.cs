@@ -1,4 +1,5 @@
-﻿using EventBuses;
+﻿using Assets.Scripts.EventBuses;
+using EventBuses;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -8,26 +9,28 @@ namespace Assets.Scripts.FridayCode
 {
     internal class GamblingTable : ObjectTrigger, IPointerEnterHandler, IPointerExitHandler
     {
-        [SerializeField] private EventBusSO eventBus;
+        
         [SerializeField] private Sprite sprite;
         [Header("item you need to craft name and result item name")]
         [SerializeField] private String entryObjectName;
         [SerializeField] private String resultObjectName;
         [SerializeField] protected PlayerMovementSystem playerMovementSystem;
-
-       
+        protected OnNotOver onNotOver;
         
-        private String itemName;
+
+
+
+        protected String itemName;
 
         protected bool isOver;
 
         private void OnEnable()
         {
-            HeldItemController.Instance.OnItemReleased += Action;
+            HeldItemController.Instance.OnItemReleased += RightClickAction;
         }
         private void OnDisable()
         {
-            HeldItemController.Instance.OnItemReleased -= Action;
+            HeldItemController.Instance.OnItemReleased -= RightClickAction;
         }
 
         public void OnPointerEnter(PointerEventData eventData)
@@ -40,7 +43,7 @@ namespace Assets.Scripts.FridayCode
             isOver = false;
         }
 
-        protected virtual void Action(string itemName)
+        protected virtual void RightClickAction(string itemName)
         {
             if (isOver)
             {
@@ -52,8 +55,9 @@ namespace Assets.Scripts.FridayCode
             }
             else
             {
-                HeldItemController.Instance.ClearState();
+                eventBus.Publish(onNotOver);
             }
+            
         }
 
         
