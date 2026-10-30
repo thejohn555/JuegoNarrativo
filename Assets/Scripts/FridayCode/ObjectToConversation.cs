@@ -62,7 +62,7 @@ namespace Assets.Scripts.FridayCode
             {
                 this.itemName = itemName;
                 StopAllCoroutines();
-                playerMovementSystem.SetNewDestination(gameObject.transform.position, 1.5f);
+                playerMovementSystem.SetNewDestination(gameObject.transform.position, interactionDistance);
                 StartCoroutine(RandomShit(DialogueWrapperMethod));
             }
             else
