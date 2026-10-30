@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 using Assets.CodingTools;
 
 [CreateAssetMenu(fileName = "InputActionsSO", menuName = "Scriptable Objects/InputActionsSO")]
-public class InputActionsSO : ScriptableObject, NewInputActions.IGamePlayActions, NewInputActions.IUIActions, NewInputActions.IInventoryActions
+public class InputActionsSO : ScriptableObject, NewInputActions.IGamePlayActions, NewInputActions.IUIActions, NewInputActions.IInventoryActions, NewInputActions.IGlobalActions
 {
     [field: SerializeField] public EventBusSO EventBus { get; private set; }
     //input maps
@@ -29,6 +29,7 @@ public class InputActionsSO : ScriptableObject, NewInputActions.IGamePlayActions
         inputActions.GamePlay.SetCallbacks(this);
         inputActions.UI.SetCallbacks(this);
         inputActions.Inventory.SetCallbacks(this);
+        inputActions.Global.SetCallbacks(this);
 
         EventBus.Subscribe<OnDialogueDataEvent>(OnDialogueStarted);
         EventBus.Subscribe<OnDialogueEndedEvent>(OnDialogueEnded);
@@ -52,6 +53,7 @@ public class InputActionsSO : ScriptableObject, NewInputActions.IGamePlayActions
         currentMap?.Disable();
         currentMap = newMap;
         currentMap?.Enable();
+        inputActions.Global.Enable();
         //Debug.Log($"Mapa cambiado, actual: {currentMap}");
         Debug.Log(currentMap?.ToString());
     }
@@ -117,8 +119,14 @@ public class InputActionsSO : ScriptableObject, NewInputActions.IGamePlayActions
         }
     }
 
+    public void OnPause(InputAction.CallbackContext context)
+    {
+        if (context.started)
+            EventBus.Publish(new OnEscPressedEvent());
+    }
+
     #region inventoryInputMap
-    
+
     public void OnCloseInventory(InputAction.CallbackContext context)
     {
         if (context.started && currentMap == inventoryMap)

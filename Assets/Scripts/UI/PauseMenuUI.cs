@@ -13,15 +13,16 @@ public class PauseMenuUI : Singleton<PauseMenuUI>
     [SerializeField] private float transitionSpeed = 15f;
 
     private PauseMenuOptionButtons currentButton;
+    private bool isPaused;
 
     private void OnEnable()
     {
-        EventBus.Subscribe<OnEscPressedEvent>(PauseMenu);
+        EventBus.Subscribe<OnEscPressedEvent>(HandleMenu);
     }
 
     private void OnDisable()
     {
-        EventBus.UnSubscribe<OnEscPressedEvent>(PauseMenu);
+        EventBus.UnSubscribe<OnEscPressedEvent>(HandleMenu);
     }
 
     private void Start()
@@ -53,10 +54,24 @@ public class PauseMenuUI : Singleton<PauseMenuUI>
         }
     }
 
-    public void PauseMenu(OnEscPressedEvent ev)
+    public void HandleMenu(OnEscPressedEvent ev)
     {
-        container.SetActive(true);
+        if (!isPaused)
+        {
+            isPaused = true;
+            PauseMenu();
+        }
+        else
+        {
+            isPaused = false;
+        }
+        
 
+        container.SetActive(isPaused);
+    }
+
+    public void PauseMenu()
+    {
         if (defaultButton != null)
         {
             SetSwordTarget(defaultButton);
@@ -65,6 +80,7 @@ public class PauseMenuUI : Singleton<PauseMenuUI>
 
     public void UnPauseMenu()
     {
+        isPaused = false;
         container.SetActive(false);
     }
 
