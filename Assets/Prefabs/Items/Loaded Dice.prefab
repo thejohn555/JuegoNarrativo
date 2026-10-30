@@ -182,7 +182,7 @@ GameObject:
   - component: {fileID: 1076587612654836129}
   - component: {fileID: 3155616694993673391}
   m_Layer: 0
-  m_Name: LoadedDice
+  m_Name: Loaded Dice
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
