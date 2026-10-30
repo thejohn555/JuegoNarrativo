@@ -2996,6 +2996,7 @@ GameObject:
   - component: {fileID: 2101573022}
   - component: {fileID: 2101573024}
   - component: {fileID: 2101573025}
+  - component: {fileID: 2101573026}
   m_Layer: 0
   m_Name: InventoryManager
   m_TagString: Untagged
@@ -3049,7 +3050,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62a8ed14b8c891047a109305d3030931, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InventoryController
-  inventoryPanel: {fileID: 0}
+  inventoryPanel: {fileID: 590490973}
   inputs: {fileID: 11400000, guid: 12dd33ac5088a19498397bad87f52e37, type: 2}
 --- !u!114 &2101573025
 MonoBehaviour:
@@ -3063,8 +3064,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cbbb5a36d5faee46a64b389c330452f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HeldItemController
-  canvas: {fileID: 0}
+  canvas: {fileID: 590490978}
   iconSize: {x: 64, y: 64}
+--- !u!114 &2101573026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2101573021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f0d49451f6d98b41a4fb496914bc97b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Assets.Scripts.FridayCode.ObjectClear
+  eventBus: {fileID: 11400000, guid: 12dd33ac5088a19498397bad87f52e37, type: 2}
+  totalInteractuables: 3
 --- !u!1 &2124073561
 GameObject:
   m_ObjectHideFlags: 0
