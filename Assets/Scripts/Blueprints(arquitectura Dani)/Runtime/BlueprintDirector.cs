@@ -25,7 +25,8 @@ namespace Blueprints_arquitectura_Dani_.Runtime
             {
                 {typeof(StartRuntimeNode),new StartNodeExecutor()},
                 {typeof(ConditionRuntimeNode),new ConditionNodeExecutor()},
-                {typeof(TriggerEnterRuntimeNode),new TriggerNodeExecutor()}
+                {typeof(TriggerEnterRuntimeNode),new TriggerNodeExecutor()},
+                {typeof(InteractRuntimeNode),new InteractNodeExecutor()},
             };
             if (Instance == null)
             {
