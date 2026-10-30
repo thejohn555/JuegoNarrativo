@@ -3180,6 +3180,10 @@ PrefabInstance:
       value: -0.8036705
       objectReference: {fileID: 0}
     - target: {fileID: 2101305474211530399, guid: c2c41873f96b7d64aafad0d54ee4bd87, type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: -2625022825004175944, guid: 90025f302439b35478acc587ca187e74, type: 3}
+    - target: {fileID: 2101305474211530399, guid: c2c41873f96b7d64aafad0d54ee4bd87, type: 3}
       propertyPath: interactionDistance
       value: 1.5
       objectReference: {fileID: 0}
