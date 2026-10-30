@@ -1051,6 +1051,7 @@ MonoBehaviour:
   entryObjectName: Coins
   resultObjectName: Ale
   playerMovementSystem: {fileID: 48978553}
+  interactionDistance: 2.7
 --- !u!1 &634410677 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 310697994997330669, guid: b2c503b2dc933a34db371e1d1d07cc7b, type: 3}
@@ -2946,6 +2947,10 @@ PrefabInstance:
       value: -0.8036705
       objectReference: {fileID: 0}
     - target: {fileID: 2101305474211530399, guid: c2c41873f96b7d64aafad0d54ee4bd87, type: 3}
+      propertyPath: interactionDistance
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2101305474211530399, guid: c2c41873f96b7d64aafad0d54ee4bd87, type: 3}
       propertyPath: playerMovementSystem
       value: 
       objectReference: {fileID: 48978553}
@@ -3199,6 +3204,7 @@ MonoBehaviour:
   entryObjectName: Ale
   resultObjectName: 
   playerMovementSystem: {fileID: 48978553}
+  interactionDistance: 1.5
   graph: {fileID: 3965311268370046156, guid: fff80e05cde8bc44a903da95a17180cf, type: 3}
   smoothTime: 0
   cameraMove: 0
