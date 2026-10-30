@@ -27,7 +27,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6243710347231855246}
@@ -81,7 +81,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: 092761c7478bc8841853452b653cdddd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 944041a4bde963d4bad8e3ccfc1d0353, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -232,6 +232,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Interactives.CollectableObject
   <InteractionDistance>k__BackingField: 1.5
+  showInteractionGizmo: 1
+  description: {fileID: 0}
   interactionCursor: {fileID: 0}
   ingredientA: {fileID: 9207451370440653793, guid: 85699bffd616e3a4a8ecb4d0e930ff79, type: 3}
   ingredientB: {fileID: 8520369407981150369, guid: 6b3fb1c12978eeb43bfa9c093286b2d3, type: 3}
