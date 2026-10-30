@@ -61,14 +61,14 @@ namespace Interactives
         public void OnPointerEnter(PointerEventData eventData)
         {
             //Cambio del cursor
-            // Cursor.SetCursor(interactionCursor, new Vector2(0.5f,0.5f), CursorMode.Auto);
+             Cursor.SetCursor(interactionCursor, new Vector2(0.5f, 0.5f), CursorMode.Auto);
             outline.SwapOutline();
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
             //Cambio del cursor
-            // Cursor.SetCursor(null, new Vector2(0.5f,0.5f), CursorMode.Auto);
+            Cursor.SetCursor(null, new Vector2(0.5f,0.5f), CursorMode.Auto);
             outline.SwapOutline();
         }
     }

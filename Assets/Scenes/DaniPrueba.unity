@@ -337,10 +337,11 @@ PrefabInstance:
       value: Canvas (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 8315890967601798382, guid: e7afb3b40cc5e7c4080751ae063c8387, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 6933648029135960108, guid: e7afb3b40cc5e7c4080751ae063c8387, type: 3}
-      insertIndex: 0
+      insertIndex: -1
       addedObject: {fileID: 2057463941}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e7afb3b40cc5e7c4080751ae063c8387, type: 3}
@@ -946,7 +947,7 @@ MonoBehaviour:
   <InteractionDistance>k__BackingField: 2.7
   showInteractionGizmo: 1
   description: {fileID: 0}
-  interactionCursor: {fileID: 0}
+  interactionCursor: {fileID: 2800000, guid: 79afe8cc60f842a47930fd91a12b7616, type: 3}
   npcID: Bartender
   currentGraph: {fileID: 3965311268370046156, guid: 90689aa7def82764bbd6057193c8bf4d, type: 3}
   npcTextColor: {r: 1, g: 0.50775915, b: 0, a: 1}
@@ -2907,6 +2908,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3681975026779506111, guid: 6b3fb1c12978eeb43bfa9c093286b2d3, type: 3}
+      propertyPath: interactionCursor
+      value: 
+      objectReference: {fileID: 2800000, guid: c7c8fa24357b30c4196407e7d380231d, type: 3}
     - target: {fileID: 8520369407981150369, guid: 6b3fb1c12978eeb43bfa9c093286b2d3, type: 3}
       propertyPath: m_Name
       value: Dice
@@ -3044,6 +3049,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8738536837254363268, guid: 85699bffd616e3a4a8ecb4d0e930ff79, type: 3}
+      propertyPath: interactionCursor
+      value: 
+      objectReference: {fileID: 2800000, guid: c7c8fa24357b30c4196407e7d380231d, type: 3}
     - target: {fileID: 9207451370440653793, guid: 85699bffd616e3a4a8ecb4d0e930ff79, type: 3}
       propertyPath: m_Name
       value: Nail
@@ -3070,12 +3079,28 @@ PrefabInstance:
       value: Kidnapper
       objectReference: {fileID: 0}
     - target: {fileID: 568119125937162284, guid: b2c503b2dc933a34db371e1d1d07cc7b, type: 3}
+      propertyPath: interactionCursor
+      value: 
+      objectReference: {fileID: 2800000, guid: 79afe8cc60f842a47930fd91a12b7616, type: 3}
+    - target: {fileID: 568119125937162284, guid: b2c503b2dc933a34db371e1d1d07cc7b, type: 3}
       propertyPath: alternativeStates.Array.size
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 568119125937162284, guid: b2c503b2dc933a34db371e1d1d07cc7b, type: 3}
       propertyPath: alternativeStates.Array.data[0].StateID
       value: 333
+      objectReference: {fileID: 0}
+    - target: {fileID: 680780247899029342, guid: b2c503b2dc933a34db371e1d1d07cc7b, type: 3}
+      propertyPath: outlineColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 680780247899029342, guid: b2c503b2dc933a34db371e1d1d07cc7b, type: 3}
+      propertyPath: outlineColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 680780247899029342, guid: b2c503b2dc933a34db371e1d1d07cc7b, type: 3}
+      propertyPath: outlineColor.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2044255064766295679, guid: b2c503b2dc933a34db371e1d1d07cc7b, type: 3}
       propertyPath: m_Size.x
