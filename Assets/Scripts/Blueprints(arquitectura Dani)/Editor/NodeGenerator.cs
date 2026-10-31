@@ -8,6 +8,9 @@ using UnityEngine;
 
 
 //-------------IMPORTANTE--------------------
+//NO SE GENERARAN NODOS CON EL MISMO NOMBRE
+
+
 //Para crear un nodo base de inicio que requiera un objeto de la esecena
 //Seguir esta base
 // [Serializable];
@@ -31,15 +34,9 @@ namespace Blueprints_arquitectura_Dani_.Editor.Blueprints_arquitectura_Dani_.Edi
               Debug.LogError("No se ha encontrado BlueprintDictionaryManager");
               return;
           }
-          var obj = dictionaryManager.nodeDictionary[type].list;
-          List<string> names = new List<string>();
-          foreach (var gameObj in obj)
-          {
-              if (gameObj != null)
-              {
-                  names.Add(gameObj.name);
-              }
-          }
+          var names = new List<string>();
+          foreach (var go in dictionaryManager.GetObjects(type))
+              if (go != null) names.Add(go.name);
           Generate(type,names);
       }
 

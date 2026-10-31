@@ -10,7 +10,7 @@ namespace Blueprints_arquitectura_Dani_.Runtime.InteractNode
         protected override int OnExecute(InteractRuntimeNode node, BlueprintDirector ctx, GameObject obj)
         {
             Debug.Log("InteractNodeExecutor");
-            return 1;
+            return 0;
         }
     }
 }

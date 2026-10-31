@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Blueprints_arquitectura_Dani_.EventRelay;
-using Codice.Client.Common.TreeGrouper;
-using Codice.CM.WorkspaceServer.DataStore;
 using UnityEngine;
 
 namespace Blueprints_arquitectura_Dani_.Runtime.Managers
@@ -107,6 +105,14 @@ namespace Blueprints_arquitectura_Dani_.Runtime.Managers
             foreach (var g in entry.list)
                 if (g != null && g.name == key) return true;
             return false;
+        }
+        
+        public List<GameObject> GetObjects(NodeTypes type)
+        {
+            RebuildDictionary();
+            return nodeDictionary.TryGetValue(type, out var entry)
+                ? entry.list
+                : new List<GameObject>();
         }
            
     }
