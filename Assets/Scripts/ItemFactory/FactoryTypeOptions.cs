@@ -36,15 +36,7 @@ namespace ItemFactory
 
         public override void ConfigureCreatedObject(GameObject target)
         {
-            BlueprintDictionaryManager manager = UnityEngine.Object.FindFirstObjectByType<BlueprintDictionaryManager>();
-            if (manager == null)
-            {
-                Debug.LogWarning("Factory: no BlueprintDictionaryManager was found in the scene.", target);
-                return;
-            }
-
-            manager.AddToList(target, NodeTypes.Trigger);
-            UnityEditor.SceneManagement.EditorSceneManager.MarkSceneDirty(target.scene);
+            DicitionaryFuntions.AddToDictionary(NodeTypes.Trigger,target);
         }
     }
 
@@ -54,7 +46,7 @@ namespace ItemFactory
 
         public override void ConfigureCreatedObject(GameObject target)
         {
-            // puto nacho
+            DicitionaryFuntions.AddToDictionary(NodeTypes.Reference,target);
         }
     }
 
@@ -65,17 +57,7 @@ namespace ItemFactory
         // Temporary location until trigger creation has its own factory option.
         public override void ConfigureCreatedObject(GameObject target)
         {
-            var manager = UnityEngine.Object.FindFirstObjectByType<
-                Blueprints_arquitectura_Dani_.Runtime.Managers.BlueprintDictionaryManager>();
-
-            if (manager == null)
-            {
-                Debug.LogWarning("Factory: no BlueprintDictionaryManager was found in the scene.", target);
-                return;
-            }
-
-            manager.AddToList(target,NodeTypes.Interactuable);
-            UnityEditor.SceneManagement.EditorSceneManager.MarkSceneDirty(target.scene);
+            DicitionaryFuntions.AddToDictionary(NodeTypes.Interactable,target);
         }
     }
 
@@ -245,4 +227,21 @@ namespace ItemFactory
         }
     }
 #endif
+    public static class DicitionaryFuntions
+    {
+        public static void AddToDictionary(NodeTypes type,GameObject target)
+        {
+            var manager = UnityEngine.Object.FindFirstObjectByType<BlueprintDictionaryManager>();
+
+            if (manager == null)
+            {
+                Debug.LogWarning("Factory: no BlueprintDictionaryManager was found in the scene.", target);
+                return;
+            }
+
+            manager.AddToList(target,type);
+            UnityEditor.SceneManagement.EditorSceneManager.MarkSceneDirty(target.scene);
+        }
+    }
+    
 }

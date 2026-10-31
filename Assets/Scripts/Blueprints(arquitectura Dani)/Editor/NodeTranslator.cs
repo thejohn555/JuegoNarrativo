@@ -5,6 +5,7 @@ using Blueprints_arquitectura_Dani_.Editor;
 using Blueprints_arquitectura_Dani_.Editor.Blueprints_arquitectura_Dani_.Editor.Nodes;
 using Blueprints_arquitectura_Dani_.Runtime.InteractNode;
 using Blueprints_arquitectura_Dani_.Runtime.LevelNode;
+using Blueprints_arquitectura_Dani_.Runtime.RuntimeNodes.GetObjectNode_Temporal_;
 using Blueprints_arquitectura_Dani_.Runtime.TriggerNode;
 using Unity.GraphToolkit.Editor;
 using UnityEngine;
@@ -51,7 +52,25 @@ public static class NodeTranslator
                 list.Add(new TriggerEnterRuntimeNode(triggerNode.Key));
                 return true;
             case OnInteractNode onInteractNode:
-                list.Add(new InteractRuntimeNode(onInteractNode.Key));
+                GameObject required = null;
+                onInteractNode.GetNodeOptionByName(OnInteractNode.RequiredObjectOption)?.TryGetValue(out required);
+
+                list.Add(new InteractRuntimeNode(onInteractNode.Key, required));
+                return true;
+            case GetObjectNode_Temporal getObjectNode:
+                var port = getObjectNode.GetInputPortByName(GetObjectNode_Temporal.ObjectPort);
+                string key = null;
+                if (port != null && port.IsConnected &&
+                    port.FirstConnectedPort.GetNode() is ReferenceNode refNode)   
+                {
+                    key = refNode.Key;
+                }
+                if (string.IsNullOrEmpty(key))
+                {
+                    Debug.LogWarning("[Translator] GetObject sin nodo objeto conectado");
+                    return false;
+                }
+                list.Add(new GetObjectNodeRuntime(key));
                 return true;
                 
         }

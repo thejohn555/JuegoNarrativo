@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using Blueprints_arquitectura_Dani_.Runtime.InteractNode;
 using Blueprints_arquitectura_Dani_.Runtime.Managers;
+using Blueprints_arquitectura_Dani_.Runtime.RuntimeNodes.GetObjectNode_Temporal_;
+using Blueprints_arquitectura_Dani_.Runtime.RuntimeNodes.OnUseItem;
 using Blueprints_arquitectura_Dani_.Runtime.TriggerNode;
 using Unity.GraphToolkit.Editor;
 using UnityEditor.Experimental.GraphView;
@@ -16,6 +18,7 @@ namespace Blueprints_arquitectura_Dani_.Runtime
         [Header("Graph")]
         [SerializeField]private BlueprintRuntimeGraph RuntimeGraph;
         private Dictionary<System.Type, IBlueprintNodeExecutor> executors;
+        private Dictionary<(string item, string target), RuntimeNodeGroup> useItemGroups = new();
 
         public BlueprintDirector Instance { get; private set; }
         private void Awake()
@@ -27,6 +30,7 @@ namespace Blueprints_arquitectura_Dani_.Runtime
                 {typeof(ConditionRuntimeNode),new ConditionNodeExecutor()},
                 {typeof(TriggerEnterRuntimeNode),new TriggerNodeExecutor()},
                 {typeof(InteractRuntimeNode),new InteractNodeExecutor()},
+                {typeof(GetObjectNodeRuntime),new GetObjectExecutor()}
             };
             if (Instance == null)
             {
@@ -80,7 +84,10 @@ namespace Blueprints_arquitectura_Dani_.Runtime
                        Debug.Log($"[Director] Registrado trigger '{trigger.trigger}'");
                        break;
                    case InteractRuntimeNode  interact:
-                       BlueprintDictionaryManager.Instance.AddToDictionary(NodeTypes.Interactuable, interact.interact, node);
+                       BlueprintDictionaryManager.Instance.AddToDictionary(NodeTypes.Interactable, interact.interact, node);
+                       break;
+                   case OnUseItemRuntime useItem:
+                       useItemGroups.Add((useItem.itemName,useItem.targetName),node);
                        break;
                 }
                 idx++;
@@ -120,7 +127,7 @@ namespace Blueprints_arquitectura_Dani_.Runtime
                 case NodeTypes.Trigger:
                     Run(manager.triggerDictionary, obj, "trigger");
                     break;
-                case NodeTypes.Interactuable:
+                case NodeTypes.Interactable:
                     Run(manager.interactDictionary, obj, "interactuable");
                     break;
             }
@@ -132,5 +139,14 @@ namespace Blueprints_arquitectura_Dani_.Runtime
             else
                 Debug.LogError($"No hay ningún {kind} '{obj.name}'");
         }
+        public bool TryUseItem(string itemName, GameObject target)
+        {
+            if (!useItemGroups.TryGetValue((itemName, target.name), out var group))
+                return false;       // no hay ningún nodo para esta pareja
+
+            RunFrom(group, target); // hay nodo: ejecuta su cadena
+            return true;
+        }
+        
     }
 }

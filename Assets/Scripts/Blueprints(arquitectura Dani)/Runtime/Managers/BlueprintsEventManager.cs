@@ -8,7 +8,7 @@ namespace Blueprints_arquitectura_Dani_.Runtime
         public static BlueprintsEventManager Instance { get; private set; }
 
         public event Action<NodeTypes, GameObject> OnEvent;
-
+        public Func<GameObject, bool> IsHoldingPrefab;
         private void Awake()
         {
             if (Instance != null) { Destroy(gameObject); return; }
@@ -19,5 +19,7 @@ namespace Blueprints_arquitectura_Dani_.Runtime
         {
             OnEvent?.Invoke(type, source);
         }
+
+       
     }
 }

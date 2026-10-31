@@ -8,8 +8,8 @@ namespace Interactives
 
         public override void Interact(GameObject interactor)
         {
-            if (BlueprintsEventManager.Instance != null)
-                BlueprintsEventManager.Instance.Raise(NodeTypes.Interactuable, gameObject);
+            if (BlueprintsEventManager.Instance == null) return;
+                BlueprintsEventManager.Instance.Raise(NodeTypes.Interactable, gameObject);
         }
     }
 }

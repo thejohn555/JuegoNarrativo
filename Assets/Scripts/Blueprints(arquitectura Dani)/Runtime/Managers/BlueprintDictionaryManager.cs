@@ -13,6 +13,7 @@ namespace Blueprints_arquitectura_Dani_.Runtime.Managers
         //Listas
         [SerializeField] private List<GameObject> triggerObjects = new();      // persiste en la escena
         [SerializeField] private List<GameObject> interactObjects = new();
+        [SerializeField] private List<GameObject> referenceObjects = new();
         
         private void OnEnable() => RebuildDictionary();
         //[SerializeField] private DictionarySO dictionarySo; 
@@ -25,7 +26,8 @@ namespace Blueprints_arquitectura_Dani_.Runtime.Managers
         void RebuildDictionary()
         {
             nodeDictionary[NodeTypes.Trigger] = (triggerObjects, typeof(TriggerEnterRelay));
-            nodeDictionary[NodeTypes.Interactuable] = (interactObjects, null);
+            nodeDictionary[NodeTypes.Interactable] = (interactObjects, null);
+            nodeDictionary[NodeTypes.Reference] = (referenceObjects, null);
         }
         private void Awake()
         {
@@ -85,7 +87,7 @@ namespace Blueprints_arquitectura_Dani_.Runtime.Managers
                 case NodeTypes.Trigger:
                     triggerDictionary.Add(name, group);
                     break;
-                case NodeTypes.Interactuable:
+                case NodeTypes.Interactable:
                     interactDictionary.Add(name, group);
                     break;
             }
@@ -113,6 +115,17 @@ namespace Blueprints_arquitectura_Dani_.Runtime.Managers
             return nodeDictionary.TryGetValue(type, out var entry)
                 ? entry.list
                 : new List<GameObject>();
+        }
+        
+        public GameObject Resolve(NodeTypes type, string key)
+        {
+            if (!nodeDictionary.TryGetValue(type, out var entry)) return null;
+
+            foreach (var go in entry.list)
+                if (go != null && go.name == key)
+                    return go;
+
+            return null;
         }
            
     }

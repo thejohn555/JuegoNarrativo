@@ -1,10 +1,10 @@
 //(auto generado) No editar a mano.
 using System;
 using Unity.GraphToolkit.Editor;
-namespace Blueprints_arquitectura_Dani_.Editor
+namespace Blueprints_arquitectura_Dani_.Editor.Blueprints_arquitectura_Dani_.Editor.Nodes.Generated
 {
     [Serializable]
     [Node(categoryPath:"Nodes/StartNodes/Interactable")]
-    public class OnInteract_Interactuable : OnInteractNode
-    { public override string Key => "Interactuable"; }
+    public class OnInteract_Interact : OnInteractNode
+    { public override string Key => "Interact"; }
 }

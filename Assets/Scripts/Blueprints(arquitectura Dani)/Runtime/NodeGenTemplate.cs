@@ -4,7 +4,8 @@ using System.Collections.Generic;
 public enum NodeTypes
 {
     Trigger,
-    Interactuable
+    Interactable,
+    Reference
 }
 
 namespace Blueprints_arquitectura_Dani_.Runtime
@@ -15,7 +16,8 @@ namespace Blueprints_arquitectura_Dani_.Runtime
         public static readonly Dictionary<NodeTypes, (string prefix, string baseClass, string file,string category)> Map = new()
         {
             { NodeTypes.Trigger,       ("OnTriggerEnter_", "OnTriggerEnterNode", "TriggerNodes.cs",  "Nodes/StartNodes/Triggers") },
-            { NodeTypes.Interactuable, ("OnInteract_",     "OnInteractNode",     "InteractNodes.cs", "Nodes/StartNodes/Interactable") },
+            { NodeTypes.Interactable, ("OnInteract_",     "OnInteractNode",     "InteractNodes.cs", "Nodes/StartNodes/Interactable") },
+            { NodeTypes.Reference, ("Ref_", "ReferenceNode", "ReferenceNodes.cs", "Nodes/References") },
         };
     }
 }

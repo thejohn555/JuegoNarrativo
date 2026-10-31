@@ -49,7 +49,7 @@ namespace Blueprints_arquitectura_Dani_.Editor.Blueprints_arquitectura_Dani_.Edi
           sb.AppendLine("//(auto generado) No editar a mano.");
           sb.AppendLine("using System;");
           sb.AppendLine("using Unity.GraphToolkit.Editor;");
-          sb.AppendLine("namespace Blueprints_arquitectura_Dani_.Editor");
+          sb.AppendLine("namespace Blueprints_arquitectura_Dani_.Editor.Blueprints_arquitectura_Dani_.Editor.Nodes.Generated");
           sb.AppendLine("{");
           
           var used = new HashSet<string>();
