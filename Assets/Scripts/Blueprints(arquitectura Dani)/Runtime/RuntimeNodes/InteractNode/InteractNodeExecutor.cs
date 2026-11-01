@@ -7,13 +7,13 @@ namespace Blueprints_arquitectura_Dani_.Runtime.InteractNode
     {
         protected override int OnExecute(InteractRuntimeNode node, BlueprintDirector ctx, GameObject obj)
         {
-            Debug.Log(node.gameObject);
+            
             if (node.gameObject == null)
             {
                 Debug.Log("Sin gameobject asignado");
                 return 0;
             }
-            else if (BlueprintsEventManager.Instance.IsHoldingPrefab?.Invoke(node.gameObject) == true)
+            else if (BlueprintsEventManager.Instance.IsHoldingPrefab?.Invoke(node.gameObject.name) == true)
             {
                 Debug.Log("IsHoldingPrefab true");
                 return 0;

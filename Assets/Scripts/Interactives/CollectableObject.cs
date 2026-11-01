@@ -1,4 +1,5 @@
-﻿using UnityEditor.Timeline.Actions;
+﻿using Unity.VisualScripting;
+using UnityEditor.Timeline.Actions;
 using UnityEngine;
 
 namespace Interactives
@@ -8,7 +9,7 @@ namespace Interactives
         [Header("Crafting Ingredients (Opcional)")]
         public GameObject ingredientA;
         public GameObject ingredientB;
-
+        
         public override void Interact(GameObject interactor)
         {
             Debug.Log("Se ha interactuado con el objeto");

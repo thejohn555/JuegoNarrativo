@@ -25,13 +25,13 @@ public class HeldItemController : MonoBehaviour
     public string HeldItemName => heldItemName;
     public GameObject HeldItemPrefab => heldItemPrefab; //Nuevo
 
-    public bool IsHolding(GameObject prefab)
-    {
-        Debug.Log($"Prefab: {prefab}");
-        Debug.Log($"HasheldItem: {HasHeldItem}");
-        Debug.Log($"heldItemPrefab: {heldItemPrefab}");
-         return HasHeldItem && prefab != null && heldItemPrefab == prefab; //Nuevo
-    }
+    // public bool IsHolding(GameObject prefab)//Nuevo
+    // {
+    //     Debug.Log($"Prefab: {prefab}");
+    //     Debug.Log($"HasheldItem: {HasHeldItem}");
+    //     Debug.Log($"heldItemPrefab: {heldItemPrefab}");
+    //      return HasHeldItem && prefab != null && heldItemPrefab == prefab; //Nuevo
+    // }
 
     public bool IsHolding(string itemName) => HasHeldItem && heldItemName == itemName;
 

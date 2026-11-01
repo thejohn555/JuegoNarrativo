@@ -5,7 +5,9 @@ using Blueprints_arquitectura_Dani_.Editor;
 using Blueprints_arquitectura_Dani_.Editor.Blueprints_arquitectura_Dani_.Editor.Nodes;
 using Blueprints_arquitectura_Dani_.Runtime.InteractNode;
 using Blueprints_arquitectura_Dani_.Runtime.LevelNode;
-using Blueprints_arquitectura_Dani_.Runtime.RuntimeNodes.GetObjectNode_Temporal_;
+using Blueprints_arquitectura_Dani_.Runtime.RuntimeNodes.DelayNode;
+using Blueprints_arquitectura_Dani_.Runtime.RuntimeNodes.MoveToNode;
+using Blueprints_arquitectura_Dani_.Runtime.RuntimeNodes.SetActive;
 using Blueprints_arquitectura_Dani_.Runtime.TriggerNode;
 using Unity.GraphToolkit.Editor;
 using UnityEngine;
@@ -57,21 +59,45 @@ public static class NodeTranslator
 
                 list.Add(new InteractRuntimeNode(onInteractNode.Key, required));
                 return true;
-            case GetObjectNode_Temporal getObjectNode:
-                var port = getObjectNode.GetInputPortByName(GetObjectNode_Temporal.ObjectPort);
+            case SetActiveNode setActiveNode:
+            {
+                var port = setActiveNode.GetInputPortByName(SetActiveNode.ObjectPort);
                 string key = null;
                 if (port != null && port.IsConnected &&
-                    port.FirstConnectedPort.GetNode() is ReferenceNode refNode)   
+                    port.FirstConnectedPort.GetNode() is ReferenceNode refNode)
                 {
                     key = refNode.Key;
                 }
-                if (string.IsNullOrEmpty(key))
-                {
-                    Debug.LogWarning("[Translator] GetObject sin nodo objeto conectado");
-                    return false;
-                }
-                list.Add(new GetObjectNodeRuntime(key));
+
+                bool active;
+                setActiveNode.GetNodeOptionByName(SetActiveNode.BoolOption).TryGetValue(out active);
+                list.Add(new SetActiveRuntimeNode(key, active));
                 return true;
+            }
+
+            case DelayNode delayNode:
+                float delay = 0;
+                delayNode.GetNodeOptionByName(DelayNode.TimeOption)?.TryGetValue(out delay);
+                list.Add(new DelayNodeRuntime(delay));
+                return true;
+            case MoveToNode moveToNode:
+            {
+                var port = moveToNode.GetInputPortByName(MoveToNode.ObjectPort);
+                string key = null;
+                if (port != null && port.IsConnected &&
+                    port.FirstConnectedPort.GetNode() is ReferenceNode refNode)
+                {
+                    key = refNode.Key;
+                }
+
+                float time;
+                moveToNode.GetNodeOptionByName(MoveToNode.TimeOption).TryGetValue(out time);
+                Vector2 pos;
+                moveToNode.GetNodeOptionByName(MoveToNode.PositionOption).TryGetValue(out pos);
+                list.Add(new MoveToRuntimeNode(key, pos,time));
+                return true; 
+            }
+                
                 
         }
         return false;

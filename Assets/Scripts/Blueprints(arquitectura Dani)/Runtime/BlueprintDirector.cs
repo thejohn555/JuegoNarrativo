@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Blueprints_arquitectura_Dani_.Runtime.InteractNode;
 using Blueprints_arquitectura_Dani_.Runtime.Managers;
-using Blueprints_arquitectura_Dani_.Runtime.RuntimeNodes.GetObjectNode_Temporal_;
+using Blueprints_arquitectura_Dani_.Runtime.RuntimeNodes.DelayNode;
+using Blueprints_arquitectura_Dani_.Runtime.RuntimeNodes.MoveToNode;
 using Blueprints_arquitectura_Dani_.Runtime.RuntimeNodes.OnUseItem;
+using Blueprints_arquitectura_Dani_.Runtime.RuntimeNodes.SetActive;
 using Blueprints_arquitectura_Dani_.Runtime.TriggerNode;
 using Unity.GraphToolkit.Editor;
 using UnityEditor.Experimental.GraphView;
@@ -21,6 +24,7 @@ namespace Blueprints_arquitectura_Dani_.Runtime
         private Dictionary<(string item, string target), RuntimeNodeGroup> useItemGroups = new();
 
         public BlueprintDirector Instance { get; private set; }
+        public float PendingWait { get; set; }
         private void Awake()
         {
             //Inicializamos el dicionario con el tipo y el ejecutor
@@ -30,7 +34,9 @@ namespace Blueprints_arquitectura_Dani_.Runtime
                 {typeof(ConditionRuntimeNode),new ConditionNodeExecutor()},
                 {typeof(TriggerEnterRuntimeNode),new TriggerNodeExecutor()},
                 {typeof(InteractRuntimeNode),new InteractNodeExecutor()},
-                {typeof(GetObjectNodeRuntime),new GetObjectExecutor()}
+                {typeof(DelayNodeRuntime),new DelayNodeExecutor()},
+                {typeof(SetActiveRuntimeNode),new SetActiveExecutor()},
+                {typeof(MoveToRuntimeNode),new MoveToExecutor()},
             };
             if (Instance == null)
             {
@@ -72,7 +78,7 @@ namespace Blueprints_arquitectura_Dani_.Runtime
                 switch (node.Nodes[idx])
                 {
                    case StartRuntimeNode:
-                       RunFrom(node);
+                       StartCoroutine(RunFrom(node));
                        break;
                    case TriggerEnterRuntimeNode trigger:
                        if (!BlueprintDictionaryManager.Instance.HasTrigger(trigger.trigger))
@@ -94,7 +100,7 @@ namespace Blueprints_arquitectura_Dani_.Runtime
             }   
         }
 
-        private void RunFrom(RuntimeNodeGroup group,GameObject source = null,int startIndex = 0)
+        private IEnumerator RunFrom(RuntimeNodeGroup group,GameObject source = null,int startIndex = 0)
         {
             int index = startIndex;
             
@@ -105,14 +111,21 @@ namespace Blueprints_arquitectura_Dani_.Runtime
                 {
                     Debug.LogError(
                         $"No executor found for this type: {currentNode.GetType()}");
-                    return;
+                    yield break;
                 }
                 else
                 {
                     int output = executor.Execute(currentNode, this,source);
 
+                    if (PendingWait > 0f)
+                    {
+                        float wait = PendingWait;
+                        PendingWait = 0f;                    
+                        yield return new WaitForSeconds(wait);
+                    }
+                    
                     if (output < 0 || output >= currentNode.NextNodeIndex.Count)
-                        return;                              // fin de la cadena
+                        yield break;                              // fin de la cadena
 
                     index = currentNode.NextNodeIndex[output]; 
                 }
@@ -135,18 +148,11 @@ namespace Blueprints_arquitectura_Dani_.Runtime
         private void Run(Dictionary<string, RuntimeNodeGroup> dict, GameObject obj, string kind)
         {
             if (dict.TryGetValue(obj.name, out var group))
-                RunFrom(group, obj);
+                StartCoroutine(RunFrom(group, obj));
             else
                 Debug.LogError($"No hay ningún {kind} '{obj.name}'");
         }
-        public bool TryUseItem(string itemName, GameObject target)
-        {
-            if (!useItemGroups.TryGetValue((itemName, target.name), out var group))
-                return false;       // no hay ningún nodo para esta pareja
-
-            RunFrom(group, target); // hay nodo: ejecuta su cadena
-            return true;
-        }
+        
         
     }
 }
