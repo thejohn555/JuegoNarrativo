@@ -1,4 +1,5 @@
-﻿using Unity.VisualScripting;
+﻿using Blueprints_arquitectura_Dani_.Runtime;
+using Unity.VisualScripting;
 using UnityEditor.Timeline.Actions;
 using UnityEngine;
 
@@ -21,7 +22,10 @@ namespace Interactives
             if (InventoryManager.Instance != null)
             {
                 Debug.Log("Añadido");
-                bool added = InventoryManager.Instance.AddItem(itemName, itemSprite);
+                string guid = GetComponent<BlueprintItemId>()?.Guid;//Nuevo
+                if (string.IsNullOrEmpty(guid))//Nuevo
+                    Debug.LogWarning($"'{name}' no tiene BlueprintItemId, no funcionará en los blueprints", this);//Nuevo
+                bool added = InventoryManager.Instance.AddItem(itemName, itemSprite,guid);
                 
                 if (added)
                 {

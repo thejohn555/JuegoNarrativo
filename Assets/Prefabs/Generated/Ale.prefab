@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 9088203832590913457}
   - component: {fileID: 6783741266122290594}
   - component: {fileID: 6896974088443409508}
+  - component: {fileID: 7249881504021017036}
   m_Layer: 0
   m_Name: Ale
   m_TagString: Untagged
@@ -66,6 +67,19 @@ MonoBehaviour:
   interactionCursor: {fileID: 0}
   ingredientA: {fileID: 0}
   ingredientB: {fileID: 0}
+--- !u!114 &7249881504021017036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1668242782450994064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40e431c3475c4e22ae9538d3eaede62a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Blueprints.Runtime::Blueprints_arquitectura_Dani_.Runtime.BlueprintItemId
+  guid: 45d1c602aeb642d40b094daaf5f78baf
 --- !u!1 &4423877708886551293
 GameObject:
   m_ObjectHideFlags: 0

@@ -181,6 +181,7 @@ GameObject:
   - component: {fileID: 6243710347231855246}
   - component: {fileID: 1076587612654836129}
   - component: {fileID: 3155616694993673391}
+  - component: {fileID: 4050898291245332841}
   m_Layer: 0
   m_Name: Loaded Dice
   m_TagString: Untagged
@@ -237,3 +238,16 @@ MonoBehaviour:
   interactionCursor: {fileID: 0}
   ingredientA: {fileID: 9207451370440653793, guid: 85699bffd616e3a4a8ecb4d0e930ff79, type: 3}
   ingredientB: {fileID: 8520369407981150369, guid: 6b3fb1c12978eeb43bfa9c093286b2d3, type: 3}
+--- !u!114 &4050898291245332841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6433144946823108048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40e431c3475c4e22ae9538d3eaede62a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Blueprints.Runtime::Blueprints_arquitectura_Dani_.Runtime.BlueprintItemId
+  guid: 9999f8eb15226a54e9a6afa481d638b8

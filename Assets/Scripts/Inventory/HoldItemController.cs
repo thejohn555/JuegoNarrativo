@@ -17,22 +17,20 @@ public class HeldItemController : MonoBehaviour
     private int heldSlotIndex = -1;
     private int pickupFrame = -1;
     private string heldItemName;
-    private GameObject heldItemPrefab; //Nuevo
+    private string heldItemGuid; //Nuevo
     private GameObject iconObject;
     private RectTransform iconRect;
 
     public bool HasHeldItem => heldSlotIndex != -1;
     public string HeldItemName => heldItemName;
-    public GameObject HeldItemPrefab => heldItemPrefab; //Nuevo
+    public string HeldItemGuid => heldItemGuid; //Nuevo
 
-    // public bool IsHolding(GameObject prefab)//Nuevo
-    // {
-    //     Debug.Log($"Prefab: {prefab}");
-    //     Debug.Log($"HasheldItem: {HasHeldItem}");
-    //     Debug.Log($"heldItemPrefab: {heldItemPrefab}");
-    //      return HasHeldItem && prefab != null && heldItemPrefab == prefab; //Nuevo
-    // }
-
+    public bool IsHoldingGuid(string guid)
+    {
+        Debug.Log($"[IsHoldingGuid] HasHeldItem={HasHeldItem} | mano='{heldItemGuid}' | nodo='{guid}'");
+       return HasHeldItem && !string.IsNullOrEmpty(guid) && heldItemGuid == guid;
+    }//Nuevo
+        
     public bool IsHolding(string itemName) => HasHeldItem && heldItemName == itemName;
 
     private void Awake()
@@ -50,7 +48,7 @@ public class HeldItemController : MonoBehaviour
     private void Start() //Nuevo
     {
         if (BlueprintsEventManager.Instance != null)
-            BlueprintsEventManager.Instance.IsHoldingPrefab = IsHolding;
+            BlueprintsEventManager.Instance.IsHoldingItem = IsHoldingGuid;
     }
 
     // Coge el objeto del slot con el cursor
@@ -59,7 +57,7 @@ public class HeldItemController : MonoBehaviour
         InventoryManager inventory = InventoryManager.Instance;
 
         if (inventory == null || !inventory.TryGetItem(slotIndex, out string itemName,
-                out Sprite icon,out GameObject prefab)) //Nuevo
+                out Sprite icon, out string guid)) //Nuevo
         {
             return;
         }
@@ -71,7 +69,7 @@ public class HeldItemController : MonoBehaviour
 
         heldSlotIndex = slotIndex;
         heldItemName = itemName;
-        heldItemPrefab = prefab;
+        heldItemGuid = guid;
         pickupFrame = Time.frameCount;
 
         inventory.HeldSlotIndex = slotIndex;
@@ -110,7 +108,7 @@ public class HeldItemController : MonoBehaviour
     {
         heldSlotIndex = -1;
         heldItemName = null;
-        heldItemPrefab = null; //Nuevo
+        heldItemGuid = null; //Nuevo
 
         if (iconObject != null)
         {

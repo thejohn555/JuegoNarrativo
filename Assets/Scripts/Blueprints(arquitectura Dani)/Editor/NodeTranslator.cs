@@ -10,6 +10,7 @@ using Blueprints_arquitectura_Dani_.Runtime.RuntimeNodes.MoveToNode;
 using Blueprints_arquitectura_Dani_.Runtime.RuntimeNodes.SetActive;
 using Blueprints_arquitectura_Dani_.Runtime.TriggerNode;
 using Unity.GraphToolkit.Editor;
+using UnityEditor;
 using UnityEngine;
 
 public static class NodeTranslator
@@ -54,10 +55,17 @@ public static class NodeTranslator
                 list.Add(new TriggerEnterRuntimeNode(triggerNode.Key));
                 return true;
             case OnInteractNode onInteractNode:
-                GameObject required = null;
-                onInteractNode.GetNodeOptionByName(OnInteractNode.RequiredObjectOption)?.TryGetValue(out required);
+                GameObject prefab = null;
+                onInteractNode.GetNodeOptionByName(OnInteractNode.RequiredObjectOption)?.TryGetValue(out prefab);
 
-                list.Add(new InteractRuntimeNode(onInteractNode.Key, required));
+                string requiredGuid = null;
+
+                if (prefab != null)
+                {
+                    string path = AssetDatabase.GetAssetPath(prefab);
+                    requiredGuid = AssetDatabase.AssetPathToGUID(path);
+                }
+                list.Add(new InteractRuntimeNode(onInteractNode.Key, requiredGuid));
                 return true;
             case SetActiveNode setActiveNode:
             {

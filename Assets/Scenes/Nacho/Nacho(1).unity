@@ -1970,7 +1970,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5297139691341167357, guid: f49fc54804ccc4646991f8b9664e785c, type: 3}
       propertyPath: m_Name
-      value: Metal
+      value: uehfsuhfoshfuesoh
       objectReference: {fileID: 0}
     - target: {fileID: 5519712329914600783, guid: f49fc54804ccc4646991f8b9664e785c, type: 3}
       propertyPath: m_LocalPosition.x

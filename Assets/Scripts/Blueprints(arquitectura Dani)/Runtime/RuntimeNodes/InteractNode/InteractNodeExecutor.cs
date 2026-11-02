@@ -7,20 +7,23 @@ namespace Blueprints_arquitectura_Dani_.Runtime.InteractNode
     {
         protected override int OnExecute(InteractRuntimeNode node, BlueprintDirector ctx, GameObject obj)
         {
+            var mgr = BlueprintsEventManager.Instance;
+            Debug.Log($"[InteractExec] requiredGuid del nodo: '{node.requiredGuid}'");
+            Debug.Log($"[InteractExec] ¿IsHoldingItem conectado? {mgr.IsHoldingItem != null}");
             
-            if (node.gameObject == null)
+            if (string.IsNullOrEmpty(node.requiredGuid))
             {
-                Debug.Log("Sin gameobject asignado");
+                Debug.Log("Sin item requerido");
                 return 0;
             }
-            else if (BlueprintsEventManager.Instance.IsHoldingPrefab?.Invoke(node.gameObject.name) == true)
+            else if (BlueprintsEventManager.Instance.IsHoldingItem?.Invoke(node.requiredGuid) == true)
             {
-                Debug.Log("IsHoldingPrefab true");
+                Debug.Log("IsHoldingItem true");
                 return 0;
             }
             else
             {
-                Debug.Log("IsHoldingPrefab false");
+                Debug.Log("IsHoldingItem false");
                 return -1;
             }
             

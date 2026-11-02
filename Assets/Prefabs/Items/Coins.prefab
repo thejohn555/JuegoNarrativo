@@ -150,6 +150,7 @@ GameObject:
   - component: {fileID: 8648305545364368001}
   - component: {fileID: 3880101358648860917}
   - component: {fileID: 1818742160563480095}
+  - component: {fileID: 3495692493908974106}
   m_Layer: 0
   m_Name: Coins
   m_TagString: Untagged
@@ -205,3 +206,16 @@ MonoBehaviour:
   interactionCursor: {fileID: 0}
   ingredientA: {fileID: 0}
   ingredientB: {fileID: 0}
+--- !u!114 &3495692493908974106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6921513114721556550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40e431c3475c4e22ae9538d3eaede62a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Blueprints.Runtime::Blueprints_arquitectura_Dani_.Runtime.BlueprintItemId
+  guid: b91a0f6b4bbe8c046b08f68de7923c65

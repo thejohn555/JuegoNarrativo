@@ -1,5 +1,6 @@
 #if UNITY_EDITOR
 using System;
+using Blueprints_arquitectura_Dani_.Runtime;
 using ItemFactory;
 using UnityEditor;
 using UnityEngine;
@@ -209,6 +210,13 @@ public static class GameObjectFactory
 
         try
         {
+            BlueprintItemId itemId = null; //Nuevo
+            if (instance.TryGetComponent<Interactives.CollectableObject>(out _))//Nuevo
+            {
+                if (!instance.TryGetComponent(out itemId))
+                    itemId = instance.AddComponent<BlueprintItemId>();
+            }
+            
             GameObject prefab = PrefabUtility.SaveAsPrefabAssetAndConnect(
                 instance, path, InteractionMode.UserAction);
             if (prefab == null)
@@ -217,6 +225,13 @@ public static class GameObjectFactory
                 return;
             }
 
+            if (itemId != null)//Nuevo
+            {
+                itemId.SetGuid(AssetDatabase.AssetPathToGUID(path));
+                EditorUtility.SetDirty(itemId);
+                PrefabUtility.SaveAsPrefabAssetAndConnect(instance, path, InteractionMode.UserAction);
+            }
+            
             AssetDatabase.SaveAssets();
             Debug.Log($"Factory: prefab saved to {path}", instance);
         }

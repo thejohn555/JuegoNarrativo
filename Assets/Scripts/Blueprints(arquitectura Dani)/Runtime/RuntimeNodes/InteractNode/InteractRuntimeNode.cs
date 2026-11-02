@@ -5,12 +5,12 @@ namespace Blueprints_arquitectura_Dani_.Runtime.InteractNode
     public class InteractRuntimeNode : RuntimeNode
     {
         public string interact;
-        public GameObject gameObject;
+        public string requiredGuid;
 
-        public InteractRuntimeNode(string varName, GameObject required)
+        public InteractRuntimeNode(string varName, string requiredGuid)
         {
             interact = varName;
-            gameObject = required;
+            this.requiredGuid = requiredGuid;
         }
     }
 }

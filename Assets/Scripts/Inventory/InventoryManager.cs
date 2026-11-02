@@ -19,6 +19,7 @@ public class InventoryManager : MonoBehaviour
         public string resultName;
         public Sprite resultIcon;
         public GameObject resultPrefab;
+        [HideInInspector] public string resultGuid; //Nuevo
     }
 
     [Header("Crafting Settings")]
@@ -28,7 +29,7 @@ public class InventoryManager : MonoBehaviour
     {
        public string itemName;
        public Sprite icon;
-       public GameObject prefab; //Nuevo
+       public string guid; //Nuevo
     }
 
     [SerializeField] private InventoryItem[] inventorySlots;
@@ -89,7 +90,7 @@ public class InventoryManager : MonoBehaviour
         BindExistingPanel(panel);
     }
    
-    public bool AddItem(string itemName, Sprite icon,GameObject prefab = null) //Nuevo
+    public bool AddItem(string itemName, Sprite icon,string guid = null) //Nuevo
     {
         if (inventorySlots == null || inventorySlots.Length == 0)
         {
@@ -108,7 +109,7 @@ public class InventoryManager : MonoBehaviour
         {
             if (inventorySlots[i].icon == null)
             {
-                inventorySlots[i] = new InventoryItem { itemName = itemName, icon = icon, prefab = prefab };
+                inventorySlots[i] = new InventoryItem { itemName = itemName, icon = icon, guid = guid };
                 UpdateUI();
                 return true;
             }
@@ -158,11 +159,11 @@ public class InventoryManager : MonoBehaviour
         icon = inventorySlots[index].icon;
         return true;
     }
-    public bool TryGetItem(int index, out string itemName, out Sprite icon, out GameObject prefab)//Nuevo
+    public bool TryGetItem(int index, out string itemName, out Sprite icon, out string guid)//Nuevo
     {
-        prefab = null;
+        guid = null;
         if (!TryGetItem(index, out itemName, out icon)) return false;
-        prefab = inventorySlots[index].prefab;
+        guid = inventorySlots[index].guid;
         return true;
     }
 
@@ -220,7 +221,7 @@ public class InventoryManager : MonoBehaviour
             {
                 itemName = matchedRecipe.resultName, 
                 icon = matchedRecipe.resultIcon,
-                prefab = matchedRecipe.resultPrefab,//Nuevo
+                guid = matchedRecipe.resultGuid,//Nuevo
             };
             
             Debug.Log($"Successful crafting! Created:{matchedRecipe.resultName}");
