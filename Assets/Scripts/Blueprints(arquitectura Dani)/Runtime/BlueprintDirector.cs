@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using Blueprints_arquitectura_Dani_.Runtime.InteractNode;
 using Blueprints_arquitectura_Dani_.Runtime.Managers;
+using Blueprints_arquitectura_Dani_.Runtime.RuntimeNodes.AddItemToInventory;
 using Blueprints_arquitectura_Dani_.Runtime.RuntimeNodes.DelayNode;
 using Blueprints_arquitectura_Dani_.Runtime.RuntimeNodes.MoveToNode;
-using Blueprints_arquitectura_Dani_.Runtime.RuntimeNodes.OnUseItem;
 using Blueprints_arquitectura_Dani_.Runtime.RuntimeNodes.SetActive;
 using Blueprints_arquitectura_Dani_.Runtime.TriggerNode;
 using Unity.GraphToolkit.Editor;
@@ -37,6 +37,7 @@ namespace Blueprints_arquitectura_Dani_.Runtime
                 {typeof(DelayNodeRuntime),new DelayNodeExecutor()},
                 {typeof(SetActiveRuntimeNode),new SetActiveExecutor()},
                 {typeof(MoveToRuntimeNode),new MoveToExecutor()},
+                {typeof(AddItemToInventoryRuntime),new AddToiInventoryExecutor()},
             };
             if (Instance == null)
             {
@@ -92,9 +93,6 @@ namespace Blueprints_arquitectura_Dani_.Runtime
                    case InteractRuntimeNode  interact:
                        BlueprintDictionaryManager.Instance.AddToDictionary(NodeTypes.Interactable, interact.interact, node);
                        break;
-                   case OnUseItemRuntime useItem:
-                       useItemGroups.Add((useItem.itemName,useItem.targetName),node);
-                       break;
                 }
                 idx++;
             }   
@@ -123,7 +121,6 @@ namespace Blueprints_arquitectura_Dani_.Runtime
                         PendingWait = 0f;                    
                         yield return new WaitForSeconds(wait);
                     }
-                    
                     if (output < 0 || output >= currentNode.NextNodeIndex.Count)
                         yield break;                              // fin de la cadena
 

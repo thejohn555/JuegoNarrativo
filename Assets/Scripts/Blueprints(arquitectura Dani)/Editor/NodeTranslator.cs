@@ -5,6 +5,8 @@ using Blueprints_arquitectura_Dani_.Editor;
 using Blueprints_arquitectura_Dani_.Editor.Blueprints_arquitectura_Dani_.Editor.Nodes;
 using Blueprints_arquitectura_Dani_.Runtime.InteractNode;
 using Blueprints_arquitectura_Dani_.Runtime.LevelNode;
+using Blueprints_arquitectura_Dani_.Runtime.Managers;
+using Blueprints_arquitectura_Dani_.Runtime.RuntimeNodes.AddItemToInventory;
 using Blueprints_arquitectura_Dani_.Runtime.RuntimeNodes.DelayNode;
 using Blueprints_arquitectura_Dani_.Runtime.RuntimeNodes.MoveToNode;
 using Blueprints_arquitectura_Dani_.Runtime.RuntimeNodes.SetActive;
@@ -55,6 +57,7 @@ public static class NodeTranslator
                 list.Add(new TriggerEnterRuntimeNode(triggerNode.Key));
                 return true;
             case OnInteractNode onInteractNode:
+            {
                 GameObject prefab = null;
                 onInteractNode.GetNodeOptionByName(OnInteractNode.RequiredObjectOption)?.TryGetValue(out prefab);
 
@@ -65,8 +68,26 @@ public static class NodeTranslator
                     string path = AssetDatabase.GetAssetPath(prefab);
                     requiredGuid = AssetDatabase.AssetPathToGUID(path);
                 }
+
                 list.Add(new InteractRuntimeNode(onInteractNode.Key, requiredGuid));
                 return true;
+            }
+            case OnInteractNpcNode onInteractNpcNode:
+            {
+                GameObject prefab = null;
+                onInteractNpcNode.GetNodeOptionByName(OnInteractNpcNode.RequiredObjectOption)?.TryGetValue(out prefab);
+
+                string requiredGuid = null;
+
+                if (prefab != null)
+                {
+                    string path = AssetDatabase.GetAssetPath(prefab);
+                    requiredGuid = AssetDatabase.AssetPathToGUID(path);
+                }
+
+                list.Add(new InteractRuntimeNode(onInteractNpcNode.Key, requiredGuid));
+                return true;
+            }  
             case SetActiveNode setActiveNode:
             {
                 var port = setActiveNode.GetInputPortByName(SetActiveNode.ObjectPort);
@@ -105,6 +126,23 @@ public static class NodeTranslator
                 list.Add(new MoveToRuntimeNode(key, pos,time));
                 return true; 
             }
+            case AddItemToInventoryNode addNode:
+            {
+                GameObject prefab = null;
+                addNode.GetNodeOptionByName(AddItemToInventoryNode.RequiredObjectOption)?.TryGetValue(out prefab);
+                string requiredGuid = null;
+                if (prefab == null)
+                {
+                    Debug.Log("Prefab not found");
+                }
+                SpriteRenderer spriteRenderer = prefab.GetComponentInChildren<SpriteRenderer>();
+                Sprite itemSprite = spriteRenderer != null ? spriteRenderer.sprite : null;
+                string path = AssetDatabase.GetAssetPath(prefab);
+                requiredGuid = AssetDatabase.AssetPathToGUID(path);
+                list.Add(new AddItemToInventoryRuntime(requiredGuid,prefab.name,itemSprite));
+                return true;
+            }
+                
                 
                 
         }

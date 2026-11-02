@@ -10,6 +10,8 @@ namespace Interactives
         [Header("Crafting Ingredients (Opcional)")]
         public GameObject ingredientA;
         public GameObject ingredientB;
+
+        [HideInInspector] public Sprite itemIcon;
         
         public override void Interact(GameObject interactor)
         {
@@ -17,6 +19,7 @@ namespace Interactives
             // Extrae el sprite automáticamente del objeto visual en la escena
             SpriteRenderer spriteRenderer = GetComponentInChildren<SpriteRenderer>();
             Sprite itemSprite = spriteRenderer != null ? spriteRenderer.sprite : null;
+            itemIcon = itemSprite;
             string itemName = gameObject.name;
 
             if (InventoryManager.Instance != null)

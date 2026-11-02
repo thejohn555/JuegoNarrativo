@@ -54,7 +54,6 @@ namespace ItemFactory
     public sealed class InteractObjectFactoryTypeOptions : FactoryTypeOptions
     {
         public override Type ComponentType => typeof(Interactives.InteractObject);
-        // Temporary location until trigger creation has its own factory option.
         public override void ConfigureCreatedObject(GameObject target)
         {
             DicitionaryFuntions.AddToDictionary(NodeTypes.Interactable,target);
@@ -131,6 +130,7 @@ namespace ItemFactory
                 Debug.LogWarning("Factory: the NPC component was not found.", target);
                 return;
             }
+            DicitionaryFuntions.AddToDictionary(NodeTypes.InteractableNpc,target);
 
             SerializedObject serializedNpc = new SerializedObject(npc);
             SerializedProperty npcIdProperty = serializedNpc.FindProperty("npcID");
@@ -155,6 +155,7 @@ namespace ItemFactory
             }
             serializedNpc.ApplyModifiedProperties();
             EditorUtility.SetDirty(npc);
+            
         }
     }
 

@@ -5,6 +5,7 @@ public enum NodeTypes
 {
     Trigger,
     Interactable,
+    InteractableNpc,
     Reference
 }
 
@@ -18,6 +19,7 @@ namespace Blueprints_arquitectura_Dani_.Runtime
             { NodeTypes.Trigger,       ("OnTriggerEnter_", "OnTriggerEnterNode", "TriggerNodes.cs",  "Nodes/StartNodes/Triggers") },
             { NodeTypes.Interactable, ("OnInteract_",     "OnInteractNode",     "InteractNodes.cs", "Nodes/StartNodes/Interactable") },
             { NodeTypes.Reference, ("Ref_", "ReferenceNode", "ReferenceNodes.cs", "Nodes/References") },
+            { NodeTypes.InteractableNpc,("OnInteract_Npc_","OnInteractNpcNode", "InteractNpcNodes.cs", "Nodes/StartNodes/InteractNpcNodes" ) },
         };
     }
 }

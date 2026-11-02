@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Blueprints_arquitectura_Dani_.Runtime;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -73,6 +74,8 @@ public class InventoryManager : MonoBehaviour
             // Si no existe, lo construimos por primera vez
             InitializeInventory();
         }
+        if (BlueprintsEventManager.Instance != null)
+            BlueprintsEventManager.Instance.AddItemToInventory = AddItem;
     }
 
     public void InitializeInventory()

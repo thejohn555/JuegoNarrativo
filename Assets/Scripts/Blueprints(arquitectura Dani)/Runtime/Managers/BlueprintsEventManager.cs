@@ -9,6 +9,7 @@ namespace Blueprints_arquitectura_Dani_.Runtime
 
         public event Action<NodeTypes, GameObject> OnEvent;
         public Func<string, bool> IsHoldingItem;
+        public Func<string,Sprite,string, bool> AddItemToInventory;
         private void Awake()
         {
             if (Instance != null) { Destroy(gameObject); return; }
