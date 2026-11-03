@@ -14,6 +14,7 @@ namespace Blueprints_arquitectura_Dani_.Runtime.Managers
         [SerializeField] private List<GameObject> triggerObjects = new();      // persiste en la escena
         [SerializeField] private List<GameObject> interactObjects = new();
         [SerializeField] private List<GameObject> referenceObjects = new();
+        [SerializeField] private List<GameObject> npcObjects = new();
         
         private void OnEnable() => RebuildDictionary();
         //[SerializeField] private DictionarySO dictionarySo; 
@@ -22,12 +23,14 @@ namespace Blueprints_arquitectura_Dani_.Runtime.Managers
         //Diccionarios
         public Dictionary <string, RuntimeNodeGroup> triggerDictionary = new ();
         public Dictionary <string, RuntimeNodeGroup> interactDictionary = new ();
+        public Dictionary <string,RuntimeNodeGroup> npcDictionary = new ();
         
         void RebuildDictionary()
         {
             nodeDictionary[NodeTypes.Trigger] = (triggerObjects, typeof(TriggerEnterRelay));
             nodeDictionary[NodeTypes.Interactable] = (interactObjects, null);
             nodeDictionary[NodeTypes.Reference] = (referenceObjects, null);
+            nodeDictionary[NodeTypes.InteractableNpc]= (npcObjects, null);
         }
         private void Awake()
         {
@@ -85,10 +88,13 @@ namespace Blueprints_arquitectura_Dani_.Runtime.Managers
             switch (type)
             {
                 case NodeTypes.Trigger:
-                    triggerDictionary.Add(name, group);
+                    triggerDictionary[name] = group;
                     break;
                 case NodeTypes.Interactable:
-                    interactDictionary.Add(name, group);
+                    interactDictionary[name] = group;
+                    break;
+                case NodeTypes.InteractableNpc:
+                    npcDictionary[name] = group;
                     break;
             }
             

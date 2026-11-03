@@ -9,6 +9,7 @@ using Blueprints_arquitectura_Dani_.Runtime.Managers;
 using Blueprints_arquitectura_Dani_.Runtime.RuntimeNodes.AddItemToInventory;
 using Blueprints_arquitectura_Dani_.Runtime.RuntimeNodes.DelayNode;
 using Blueprints_arquitectura_Dani_.Runtime.RuntimeNodes.MoveToNode;
+using Blueprints_arquitectura_Dani_.Runtime.RuntimeNodes.OnInteractNpcNode;
 using Blueprints_arquitectura_Dani_.Runtime.RuntimeNodes.SetActive;
 using Blueprints_arquitectura_Dani_.Runtime.TriggerNode;
 using Unity.GraphToolkit.Editor;
@@ -85,7 +86,7 @@ public static class NodeTranslator
                     requiredGuid = AssetDatabase.AssetPathToGUID(path);
                 }
 
-                list.Add(new InteractRuntimeNode(onInteractNpcNode.Key, requiredGuid));
+                list.Add(new OnInteractNpcRuntime(onInteractNpcNode.Key, requiredGuid));
                 return true;
             }  
             case SetActiveNode setActiveNode:

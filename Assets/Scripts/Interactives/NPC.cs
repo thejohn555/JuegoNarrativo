@@ -1,6 +1,7 @@
 ﻿using Assets.Scripts.Camera;
 using System;
 using System.Collections.Generic;
+using Blueprints_arquitectura_Dani_.Runtime;
 using EventBuses;
 using UnityEngine;
 
@@ -61,6 +62,10 @@ namespace Interactives
 
         public override void Interact(GameObject interactor)
         {
+            //Nuevo para los blueprints
+            BlueprintsEventManager.Instance.Raise(NodeTypes.InteractableNpc,this.gameObject);
+            
+            
             DialogueData data = new DialogueData();
             data.targetPosition = transform;
 

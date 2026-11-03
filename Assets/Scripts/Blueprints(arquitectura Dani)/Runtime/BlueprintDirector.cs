@@ -6,6 +6,7 @@ using Blueprints_arquitectura_Dani_.Runtime.Managers;
 using Blueprints_arquitectura_Dani_.Runtime.RuntimeNodes.AddItemToInventory;
 using Blueprints_arquitectura_Dani_.Runtime.RuntimeNodes.DelayNode;
 using Blueprints_arquitectura_Dani_.Runtime.RuntimeNodes.MoveToNode;
+using Blueprints_arquitectura_Dani_.Runtime.RuntimeNodes.OnInteractNpcNode;
 using Blueprints_arquitectura_Dani_.Runtime.RuntimeNodes.SetActive;
 using Blueprints_arquitectura_Dani_.Runtime.TriggerNode;
 using Unity.GraphToolkit.Editor;
@@ -38,6 +39,8 @@ namespace Blueprints_arquitectura_Dani_.Runtime
                 {typeof(SetActiveRuntimeNode),new SetActiveExecutor()},
                 {typeof(MoveToRuntimeNode),new MoveToExecutor()},
                 {typeof(AddItemToInventoryRuntime),new AddToiInventoryExecutor()},
+                {typeof(OnInteractNpcRuntime),new OnInteractNpcExecutor()},
+                
             };
             if (Instance == null)
             {
@@ -93,6 +96,10 @@ namespace Blueprints_arquitectura_Dani_.Runtime
                    case InteractRuntimeNode  interact:
                        BlueprintDictionaryManager.Instance.AddToDictionary(NodeTypes.Interactable, interact.interact, node);
                        break;
+                   case OnInteractNpcRuntime npc:
+                       Debug.Log($"[Director] Registrando NPC con key '{npc.interact}'");
+                       BlueprintDictionaryManager.Instance.AddToDictionary(NodeTypes.InteractableNpc, npc.interact, node);
+                       break;
                 }
                 idx++;
             }   
@@ -140,6 +147,9 @@ namespace Blueprints_arquitectura_Dani_.Runtime
                 case NodeTypes.Interactable:
                     Run(manager.interactDictionary, obj, "interactuable");
                     break;
+                case NodeTypes.InteractableNpc:
+                    Run(manager.npcDictionary, obj, "npc");
+                    break;
             }
         }
         private void Run(Dictionary<string, RuntimeNodeGroup> dict, GameObject obj, string kind)
@@ -147,7 +157,10 @@ namespace Blueprints_arquitectura_Dani_.Runtime
             if (dict.TryGetValue(obj.name, out var group))
                 StartCoroutine(RunFrom(group, obj));
             else
+            {
+                Debug.LogWarning($"No hay {kind} '{obj.name}'. Registrados: {string.Join(", ", dict.Keys)}");
                 Debug.LogError($"No hay ningún {kind} '{obj.name}'");
+            }
         }
         
         

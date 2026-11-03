@@ -1,9 +1,10 @@
 ﻿using Blueprints_arquitectura_Dani_.Editor.Nodes;
+using Blueprints_arquitectura_Dani_.Runtime;
 using UnityEngine;
 
 namespace Blueprints_arquitectura_Dani_.Editor.Blueprints_arquitectura_Dani_.Editor.Nodes
 {
-    public abstract class OnInteractNpcNode: BlueprintNode
+    public abstract class OnInteractNpcNode: BlueprintNode,IStartNode
     {
         public abstract string Key { get; }
         public const string RequiredObjectOption = "Interact required object";
