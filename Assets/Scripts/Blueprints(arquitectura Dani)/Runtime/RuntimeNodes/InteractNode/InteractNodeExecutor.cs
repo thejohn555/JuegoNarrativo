@@ -19,6 +19,10 @@ namespace Blueprints_arquitectura_Dani_.Runtime.InteractNode
             else if (BlueprintsEventManager.Instance.IsHoldingItem?.Invoke(node.requiredGuid) == true)
             {
                 Debug.Log("IsHoldingItem true");
+                if (node.destroy)
+                {
+                    BlueprintsEventManager.Instance.ConsumeItem();
+                }
                 return 0;
             }
             else

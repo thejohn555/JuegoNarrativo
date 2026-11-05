@@ -4,12 +4,14 @@
     {
         public string interact;
         public string requiredGuid;
+        public bool destroy;
         
 
-        public OnInteractNpcRuntime(string varName, string requiredGuid)
+        public OnInteractNpcRuntime(string varName, string requiredGuid,bool destroy)
         {
             interact = varName;
             this.requiredGuid = requiredGuid;
+            this.destroy = destroy;
         }
     }
 }

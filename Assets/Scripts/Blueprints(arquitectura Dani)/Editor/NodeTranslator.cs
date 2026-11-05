@@ -66,8 +66,9 @@ public static class NodeTranslator
                     string path = AssetDatabase.GetAssetPath(prefab);
                     requiredGuid = AssetDatabase.AssetPathToGUID(path);
                 }
-
-                list.Add(new InteractRuntimeNode(onInteractNode.Key, requiredGuid));
+                bool destroy = false;
+                onInteractNode.GetNodeOptionByName(OnInteractNode.RequiredBoolOption);
+                list.Add(new InteractRuntimeNode(onInteractNode.Key, requiredGuid,destroy));
                 return true;
             }
             case OnInteractNpcNode onInteractNpcNode:
@@ -82,8 +83,9 @@ public static class NodeTranslator
                     string path = AssetDatabase.GetAssetPath(prefab);
                     requiredGuid = AssetDatabase.AssetPathToGUID(path);
                 }
-
-                list.Add(new OnInteractNpcRuntime(onInteractNpcNode.Key, requiredGuid));
+                bool destroy = false;
+                onInteractNpcNode.GetNodeOptionByName(OnInteractNpcNode.RequiredBoolOption);
+                list.Add(new OnInteractNpcRuntime(onInteractNpcNode.Key, requiredGuid,destroy));
                 return true;
             }  
             case SetActiveNode setActiveNode:

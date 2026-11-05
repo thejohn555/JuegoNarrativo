@@ -8,7 +8,7 @@ namespace Blueprints_arquitectura_Dani_.Editor.Blueprints_arquitectura_Dani_.Edi
     {
         public abstract string Key { get; }
         public const string RequiredObjectOption = "Interact required object";
-        
+        public const string RequiredBoolOption = "Use object";
         protected override void OnDefinePorts(IPortDefinitionContext context)
         {   
             context.AddOutputPort("Out").Build();
@@ -16,6 +16,7 @@ namespace Blueprints_arquitectura_Dani_.Editor.Blueprints_arquitectura_Dani_.Edi
 
         protected override void OnDefineOptions(IOptionDefinitionContext context)
         {
+            context.AddOption<bool>(RequiredBoolOption).Build();
             context.AddOption<GameObject>(RequiredObjectOption).Build();
         }
     }

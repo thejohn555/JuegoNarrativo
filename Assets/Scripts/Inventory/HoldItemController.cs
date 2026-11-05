@@ -49,6 +49,7 @@ public class HeldItemController : MonoBehaviour
     {
         if (BlueprintsEventManager.Instance != null)
             BlueprintsEventManager.Instance.IsHoldingItem = IsHoldingGuid;
+        BlueprintsEventManager.Instance.ConsumeItem = Consume;
     }
 
     // Coge el objeto del slot con el cursor
