@@ -360,10 +360,8 @@ MonoBehaviour:
         m_InputConstantsById:
           m_KeyList:
           - __option_Interact required object
-          - __option_Use object
           m_ValueList:
           - rid: 3762293616071409740
-          - rid: 3762293622933291084
         m_InputPortInfos:
           expandedPortsById:
             m_KeyList: []
@@ -455,8 +453,8 @@ MonoBehaviour:
         m_Collapsed: 0
         m_CurrentModeIndex: 0
         m_ElementColor:
-          m_Color: {r: 0.028301716, g: 1, b: 0.028301774, a: 1}
-          m_HasUserColor: 1
+          m_Color: {r: 0, g: 0, b: 0, a: 0}
+          m_HasUserColor: 0
         m_Node:
           rid: 3762293526374645854
     - rid: 3762293526374645854
@@ -912,10 +910,8 @@ MonoBehaviour:
         m_InputConstantsById:
           m_KeyList:
           - __option_Interact required object
-          - __option_Use object
           m_ValueList:
           - rid: 3762293616071409741
-          - rid: 3762293622933291085
         m_InputPortInfos:
           expandedPortsById:
             m_KeyList: []
@@ -1305,11 +1301,3 @@ MonoBehaviour:
           m_PortDirection: 1
           m_PortOrientation: 0
           m_Title: Object
-    - rid: 3762293622933291084
-      type: {class: 'Constant`1[[System.Boolean, mscorlib]]', ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
-      data:
-        m_Value: 0
-    - rid: 3762293622933291085
-      type: {class: 'Constant`1[[System.Boolean, mscorlib]]', ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
-      data:
-        m_Value: 0
