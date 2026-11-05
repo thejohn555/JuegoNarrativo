@@ -11,9 +11,11 @@ namespace Blueprints_arquitectura_Dani_.Runtime.Managers
         
         public static BlueprintDictionaryManager Instance { get; private set; }
         //Listas
-        [SerializeField] private List<GameObject> triggerObjects = new();      // persiste en la escena
+        [SerializeField] private List<GameObject> triggerObjects = new();      
         [SerializeField] private List<GameObject> interactObjects = new();
         [SerializeField] private List<GameObject> referenceObjects = new();
+        [SerializeField] private List<GameObject> referenceInteractable = new();
+        [SerializeField] private List<GameObject> referenceNpc = new();
         [SerializeField] private List<GameObject> npcObjects = new();
         
         private void OnEnable() => RebuildDictionary();
@@ -31,6 +33,8 @@ namespace Blueprints_arquitectura_Dani_.Runtime.Managers
             nodeDictionary[NodeTypes.Interactable] = (interactObjects, null);
             nodeDictionary[NodeTypes.ReferenceGo] = (referenceObjects, null);
             nodeDictionary[NodeTypes.InteractableNpc]= (npcObjects, null);
+            nodeDictionary[NodeTypes.ReferenceInteractable]= (referenceInteractable, null);
+            nodeDictionary[NodeTypes.ReferenceNpc]= (referenceNpc, null);
         }
         private void Awake()
         {
@@ -74,6 +78,7 @@ namespace Blueprints_arquitectura_Dani_.Runtime.Managers
             if (!entry.list.Contains(go))
                 entry.list.Add(go);
 #if UNITY_EDITOR
+            UnityEditor.EditorUtility.SetDirty(this);
             NodesChanged?.Invoke();
 #endif
 
@@ -131,6 +136,15 @@ namespace Blueprints_arquitectura_Dani_.Runtime.Managers
                 if (go != null && go.name == key)
                     return go;
 
+            return null;
+        }
+        public GameObject ResolveReference(string key)
+        {
+            foreach (var type in new[] { NodeTypes.ReferenceGo, NodeTypes.ReferenceInteractable, NodeTypes.ReferenceNpc })
+            {
+                var go = Resolve(type, key);
+                if (go != null) return go;
+            }
             return null;
         }
            

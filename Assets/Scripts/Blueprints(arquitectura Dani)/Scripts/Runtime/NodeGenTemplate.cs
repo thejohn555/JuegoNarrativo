@@ -21,7 +21,7 @@ namespace Blueprints_arquitectura_Dani_.Runtime
             { NodeTypes.Trigger,       ("OnTriggerEnter_", "OnTriggerEnterNode", "TriggerNodes.cs",  "Nodes/StartNodes/Triggers") },
             { NodeTypes.Interactable, ("OnInteract_",     "OnInteractNode",     "InteractNodes.cs", "Nodes/StartNodes/Interactable") },
             { NodeTypes.ReferenceGo, ("Ref_Go_", "ReferenceNode", "ReferenceGoNodes.cs", "Nodes/References/GameObject") },
-            {NodeTypes.ReferenceInteractable,("Ref_Interactable_", "ReferenceInteractableNodes.cs", "ReferenceNodes.cs", "Nodes/References/Interactable")},
+            {NodeTypes.ReferenceInteractable,("Ref_Interactable_","ReferenceNode", "ReferenceInteractableNodes.cs",  "Nodes/References/Interactable")},
             {NodeTypes.ReferenceNpc,("Ref_Npc_", "ReferenceNode", "ReferenceNpcNodes.cs", "Nodes/References/Npc")},
             { NodeTypes.InteractableNpc,("OnInteract_Npc_","OnInteractNpcNode", "InteractNpcNodes.cs", "Nodes/StartNodes/InteractNpcNodes" ) },
         };

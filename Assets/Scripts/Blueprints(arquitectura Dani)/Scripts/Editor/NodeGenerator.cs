@@ -23,7 +23,7 @@ namespace Blueprints_arquitectura_Dani_.Editor.Blueprints_arquitectura_Dani_.Edi
     public class NodeGenerator
     { 
         public static NodeGenerator Instance { get; } = new NodeGenerator();
-      private const string outputFolder = "Assets/Scripts/Blueprints(arquitectura Dani)/Editor/Nodes/Generated";
+      private const string outputFolder = "Assets/Scripts/Blueprints(arquitectura Dani)/Scripts/Editor/Nodes/Generated";
       
       static void GenerateFromScene(NodeTypes type)
       {

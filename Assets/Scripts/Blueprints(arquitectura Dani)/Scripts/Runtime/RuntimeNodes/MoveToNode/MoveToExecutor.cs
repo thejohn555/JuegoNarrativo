@@ -14,7 +14,7 @@ namespace Blueprints_arquitectura_Dani_.Runtime.RuntimeNodes.MoveToNode
             GameObject target = obj;
             if (!string.IsNullOrEmpty(node.goName))
             {
-                target = BlueprintDictionaryManager.Instance.Resolve(NodeTypes.ReferenceGo, node.goName);
+                target = BlueprintDictionaryManager.Instance.ResolveReference(node.goName);;
             }
             if (target == null)
             {

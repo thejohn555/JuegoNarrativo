@@ -32,21 +32,31 @@ namespace ItemFactory
 
     public sealed class TriggerFactoryTypeOptions : FactoryTypeOptions
     {
+        
         public override Type ComponentType => typeof(Interactives.Trigger);
-
+        
         public override void ConfigureCreatedObject(GameObject target)
         {
             DicitionaryFuntions.AddToDictionary(NodeTypes.Trigger,target);
+            
         }
     }
 
     public sealed class DecorationFactoryTypeOptions : FactoryTypeOptions
     {
+        private bool includeInNodeGraph;
+
         public override Type ComponentType => typeof(Interactives.Decoration);
+
+        public override void DrawOptions()
+        {
+            includeInNodeGraph = EditorGUILayout.Toggle("Include in NodeGraph", includeInNodeGraph);
+        }
 
         public override void ConfigureCreatedObject(GameObject target)
         {
-            DicitionaryFuntions.AddToDictionary(NodeTypes.ReferenceGo,target);
+            if (!includeInNodeGraph) return;
+            DicitionaryFuntions.AddToDictionary(NodeTypes.ReferenceGo, target);
         }
     }
 
@@ -54,9 +64,19 @@ namespace ItemFactory
     public sealed class InteractObjectFactoryTypeOptions : FactoryTypeOptions
     {
         public override Type ComponentType => typeof(Interactives.InteractObject);
+        private bool includeInNodeGraph;
+
+        public override void DrawOptions()
+        {
+            includeInNodeGraph = EditorGUILayout.Toggle("Include in NodeGraph", includeInNodeGraph);
+        }
         public override void ConfigureCreatedObject(GameObject target)
         {
             DicitionaryFuntions.AddToDictionary(NodeTypes.Interactable,target);
+            if (includeInNodeGraph)
+            {
+                DicitionaryFuntions.AddToDictionary(NodeTypes.ReferenceInteractable,target);
+            }
         }
     }
 
@@ -69,9 +89,12 @@ namespace ItemFactory
             new System.Collections.Generic.List<Interactives.DialogueState>();
 
         public override Type ComponentType => typeof(Interactives.NPC);
+        private bool includeInNodeGraph;
+        
 
         public override void DrawOptions()
         {
+            includeInNodeGraph = EditorGUILayout.Toggle("Include in NodeGraph", includeInNodeGraph);
             EditorGUILayout.LabelField("NPC Settings", EditorStyles.boldLabel);
             npcID = EditorGUILayout.TextField("NPC ID", npcID);
             hasDialogues = EditorGUILayout.Toggle("Has dialogues", hasDialogues);
@@ -102,6 +125,8 @@ namespace ItemFactory
 
             if (GUILayout.Button("Add alternative state"))
                 alternativeStates.Add(new Interactives.DialogueState());
+            
+            
         }
 
         public override bool Validate(out string error)
@@ -131,6 +156,10 @@ namespace ItemFactory
                 return;
             }
             DicitionaryFuntions.AddToDictionary(NodeTypes.InteractableNpc,target);
+            if (includeInNodeGraph)
+            {
+                DicitionaryFuntions.AddToDictionary(NodeTypes.ReferenceNpc,target);
+            }
 
             SerializedObject serializedNpc = new SerializedObject(npc);
             SerializedProperty npcIdProperty = serializedNpc.FindProperty("npcID");
