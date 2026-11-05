@@ -1,8 +1,10 @@
 ﻿using Blueprints_arquitectura_Dani_.Editor.Nodes;
+using Unity.GraphToolkit.Editor;
 using UnityEngine;
 
 namespace Blueprints_arquitectura_Dani_.Editor.Blueprints_arquitectura_Dani_.Editor.Nodes
 {
+    [Node(categoryPath:"Nodes/Objects")]
     public class SetActiveNode: BlueprintNode
     {
         public const string BoolOption = "Set Active";

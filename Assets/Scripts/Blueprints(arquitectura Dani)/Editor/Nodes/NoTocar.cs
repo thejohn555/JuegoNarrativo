@@ -2,6 +2,7 @@ using System;
 using Unity.GraphToolkit.Editor;
 
 [Serializable]
+[Node(categoryPath:"Nodes/SetUp")]
 public class NoTocar : Node
 {
     protected override void OnDefinePorts(IPortDefinitionContext context)

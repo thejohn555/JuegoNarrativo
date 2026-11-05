@@ -13,7 +13,7 @@ namespace Blueprints_arquitectura_Dani_.Runtime.RuntimeNodes.SetActive
                 obj.SetActive(node.active);
                 return 0;
             }
-            var target = BlueprintDictionaryManager.Instance.Resolve(NodeTypes.Reference, node.goName);
+            var target = BlueprintDictionaryManager.Instance.Resolve(NodeTypes.ReferenceGo, node.goName);
             target.SetActive(node.active);
             return 0;
         }

@@ -1,7 +1,9 @@
 ﻿using Blueprints_arquitectura_Dani_.Editor.Nodes;
+using Unity.GraphToolkit.Editor;
 
 namespace Blueprints_arquitectura_Dani_.Editor.Blueprints_arquitectura_Dani_.Editor.Nodes
 {
+    [Node(categoryPath:"Nodes/Flow")]
     public class DelayNode:BlueprintNode
     {
         public const string TimeOption="Time Option";

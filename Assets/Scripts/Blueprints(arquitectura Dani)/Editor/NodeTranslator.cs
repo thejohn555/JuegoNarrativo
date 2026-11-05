@@ -51,9 +51,6 @@ public static class NodeTranslator
             case StartNode startNode:
                 list.Add(new StartRuntimeNode());
                 return true;
-            case ConditionNode conditionNode:
-                list.Add(new ConditionRuntimeNode());
-                return true;
             case OnTriggerEnterNode triggerNode:
                 list.Add(new TriggerEnterRuntimeNode(triggerNode.Key));
                 return true;

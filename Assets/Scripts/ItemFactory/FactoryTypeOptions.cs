@@ -46,7 +46,7 @@ namespace ItemFactory
 
         public override void ConfigureCreatedObject(GameObject target)
         {
-            DicitionaryFuntions.AddToDictionary(NodeTypes.Reference,target);
+            DicitionaryFuntions.AddToDictionary(NodeTypes.ReferenceGo,target);
         }
     }
 

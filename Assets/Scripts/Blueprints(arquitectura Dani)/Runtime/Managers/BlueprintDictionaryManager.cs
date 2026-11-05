@@ -29,7 +29,7 @@ namespace Blueprints_arquitectura_Dani_.Runtime.Managers
         {
             nodeDictionary[NodeTypes.Trigger] = (triggerObjects, typeof(TriggerEnterRelay));
             nodeDictionary[NodeTypes.Interactable] = (interactObjects, null);
-            nodeDictionary[NodeTypes.Reference] = (referenceObjects, null);
+            nodeDictionary[NodeTypes.ReferenceGo] = (referenceObjects, null);
             nodeDictionary[NodeTypes.InteractableNpc]= (npcObjects, null);
         }
         private void Awake()

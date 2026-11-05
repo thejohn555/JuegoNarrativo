@@ -84,7 +84,11 @@ namespace Interactives
             };
 
 
-            DialogueManager.Instance.StartDialogue(currentGraph, data);
+            if (!HeldItemController.Instance.HasHeldItem)
+            {
+                Debug.Log("Incio dialogo");
+                DialogueManager.Instance.StartDialogue(currentGraph, data);
+            }
         }
 
         protected override void OnDrawGizmosSelected()

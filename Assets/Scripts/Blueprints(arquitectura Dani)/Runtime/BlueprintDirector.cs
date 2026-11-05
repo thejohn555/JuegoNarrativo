@@ -32,7 +32,6 @@ namespace Blueprints_arquitectura_Dani_.Runtime
             executors = new Dictionary<Type, IBlueprintNodeExecutor>
             {
                 {typeof(StartRuntimeNode),new StartNodeExecutor()},
-                {typeof(ConditionRuntimeNode),new ConditionNodeExecutor()},
                 {typeof(TriggerEnterRuntimeNode),new TriggerNodeExecutor()},
                 {typeof(InteractRuntimeNode),new InteractNodeExecutor()},
                 {typeof(DelayNodeRuntime),new DelayNodeExecutor()},
