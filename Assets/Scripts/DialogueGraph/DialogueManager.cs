@@ -15,27 +15,28 @@ public class DialogueManager : Singleton<DialogueManager>
     private void OnEnable()
     {
         EventBus.Subscribe<OnDialogueStartedEvent>(DisplayFirstNode);
+        if (BlueprintsEventManager.Instance != null)// Nuevo hecho por Nacho
+            BlueprintsEventManager.Instance.StartNpcDialogue += StartNpcDialogue;// Nuevo hecho por Nacho
     }
 
     private void OnDisable()
     {
         EventBus.UnSubscribe<OnDialogueStartedEvent>(DisplayFirstNode);
+        if (BlueprintsEventManager.Instance != null)// Nuevo hecho por Nacho
+            BlueprintsEventManager.Instance.StartNpcDialogue -= StartNpcDialogue;// Nuevo hecho por Nacho
     }
-
-    private void Start()
+    
+    private void StartNpcDialogue(GameObject npcObject)// Nuevo hecho por Nacho
     {
-        if (BlueprintsEventManager.Instance == null) return;
-
-        BlueprintsEventManager.Instance.StartDialogue = (graph, data) =>
+        if (!npcObject.TryGetComponent<Interactives.NPC>(out var npc))
         {
-            var dialogueData = data is DialogueData d
-                ? d
-                : new DialogueData(new Dictionary<string, SpeakerData>(), null, Vector3.zero);
+            Debug.LogWarning($"'{npcObject.name}' no tiene componente NPC");
+            return;
+        }
 
-            StartDialogue(graph as RuntimeDialogueGraph, dialogueData);
-        };
+        var player = GameObject.FindGameObjectWithTag("Player");
+        StartDialogue(npc.CurrentGraph, npc.BuildDialogueData(player));
     }
-
     public void StartDialogue(RuntimeDialogueGraph graph, DialogueData data)
     {
         if (graph == null) return;

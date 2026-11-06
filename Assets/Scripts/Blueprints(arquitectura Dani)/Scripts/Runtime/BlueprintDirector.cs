@@ -8,7 +8,9 @@ using Blueprints_arquitectura_Dani_.Runtime.RuntimeNodes.DelayNode;
 using Blueprints_arquitectura_Dani_.Runtime.RuntimeNodes.MoveToNode;
 using Blueprints_arquitectura_Dani_.Runtime.RuntimeNodes.OnInteractNpcNode;
 using Blueprints_arquitectura_Dani_.Runtime.RuntimeNodes.SetActive;
+using Blueprints_arquitectura_Dani_.Runtime.RuntimeNodes.StartDialogue;
 using Blueprints_arquitectura_Dani_.Runtime.TriggerNode;
+using Blueprints_arquitectura_Dani_.Scripts.Runtime.RuntimeNodes.ChangeNpcState;
 using Unity.GraphToolkit.Editor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
@@ -39,6 +41,8 @@ namespace Blueprints_arquitectura_Dani_.Runtime
                 {typeof(MoveToRuntimeNode),new MoveToExecutor()},
                 {typeof(AddItemToInventoryRuntime),new AddToiInventoryExecutor()},
                 {typeof(OnInteractNpcRuntime),new OnInteractNpcExecutor()},
+                {typeof(StartDialogueRuntime),new  StartDialogueExecutor()},
+                {typeof(ChangeNpcStateRuntime),new ChangeNpcStateExecutor()},
                 
             };
             if (Instance == null)

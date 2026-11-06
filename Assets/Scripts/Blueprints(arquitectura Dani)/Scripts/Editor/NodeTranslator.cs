@@ -3,6 +3,7 @@ using Blueprints_arquitectura_Dani_.Runtime;
 using System.Collections.Generic;
 using Blueprints_arquitectura_Dani_.Editor;
 using Blueprints_arquitectura_Dani_.Editor.Blueprints_arquitectura_Dani_.Editor.Nodes;
+using Blueprints_arquitectura_Dani_.Editor.Blueprints_arquitectura_Dani_.Scripts.Editor.Nodes;
 using Blueprints_arquitectura_Dani_.Runtime.InteractNode;
 using Blueprints_arquitectura_Dani_.Runtime.LevelNode;
 using Blueprints_arquitectura_Dani_.Runtime.Managers;
@@ -11,7 +12,9 @@ using Blueprints_arquitectura_Dani_.Runtime.RuntimeNodes.DelayNode;
 using Blueprints_arquitectura_Dani_.Runtime.RuntimeNodes.MoveToNode;
 using Blueprints_arquitectura_Dani_.Runtime.RuntimeNodes.OnInteractNpcNode;
 using Blueprints_arquitectura_Dani_.Runtime.RuntimeNodes.SetActive;
+using Blueprints_arquitectura_Dani_.Runtime.RuntimeNodes.StartDialogue;
 using Blueprints_arquitectura_Dani_.Runtime.TriggerNode;
+using Blueprints_arquitectura_Dani_.Scripts.Runtime.RuntimeNodes.ChangeNpcState;
 using Unity.GraphToolkit.Editor;
 using UnityEditor;
 using UnityEngine;
@@ -126,6 +129,18 @@ public static class NodeTranslator
                 list.Add(new MoveToRuntimeNode(key, pos,time));
                 return true; 
             }
+            case StartDialogueNode dialogueRuntime:
+            {
+                var port = dialogueRuntime.GetInputPortByName(StartDialogueNode.ObjectPort);
+                string key = null;
+                if (port != null && port.IsConnected &&
+                    port.FirstConnectedPort.GetNode() is ReferenceNode refNode)
+                {
+                    key = refNode.Key;
+                }
+                list.Add(new StartDialogueRuntime(key));
+                return true;
+            }
             case AddItemToInventoryNode addNode:
             {
                 GameObject prefab = null;
@@ -142,7 +157,16 @@ public static class NodeTranslator
                 list.Add(new AddItemToInventoryRuntime(requiredGuid,prefab.name,itemSprite));
                 return true;
             }
-                
+            case ChangeNpcState changeNpcState:
+            {
+                string id;
+                changeNpcState.GetNodeOptionByName(ChangeNpcState.NpcId).TryGetValue(out id);
+                string state;
+                changeNpcState.GetNodeOptionByName(ChangeNpcState.NpcStateName).TryGetValue(out state);
+                list.Add(new ChangeNpcStateRuntime(state, id));
+                return true;
+
+            }
                 
                 
         }

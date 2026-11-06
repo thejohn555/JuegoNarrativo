@@ -5,10 +5,6 @@ namespace Blueprints_arquitectura_Dani_.Editor.Blueprints_arquitectura_Dani_.Edi
 {
     [Serializable]
     [Node(categoryPath:"Nodes/StartNodes/InteractNpcNodes")]
-    public class OnInteract_Npc_Npc : OnInteractNpcNode
-    { public override string Key => "Npc"; }
-    [Serializable]
-    [Node(categoryPath:"Nodes/StartNodes/InteractNpcNodes")]
-    public class OnInteract_Npc_NpctRef : OnInteractNpcNode
-    { public override string Key => "NpctRef"; }
+    public class OnInteract_Npc_BartenderTest : OnInteractNpcNode
+    { public override string Key => "BartenderTest"; }
 }

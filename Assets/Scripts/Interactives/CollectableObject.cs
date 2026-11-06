@@ -28,6 +28,7 @@ namespace Interactives
                 string guid = GetComponent<BlueprintItemId>()?.Guid;//Nuevo
                 if (string.IsNullOrEmpty(guid))//Nuevo
                     Debug.LogWarning($"'{name}' no tiene BlueprintItemId, no funcionará en los blueprints", this);//Nuevo
+                
                 bool added = InventoryManager.Instance.AddItem(itemName, itemSprite,guid);
                 
                 if (added)
