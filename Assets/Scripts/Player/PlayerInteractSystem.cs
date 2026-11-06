@@ -25,6 +25,11 @@ namespace Player
             main.EventBus.UnSubscribe<OnRightMouseClick>(RightMouseClicked);
         }
 
+        private void SpaceBarClicked()
+        {
+            
+        }
+        
         private void RightMouseClicked()
         {
             if (!TryGetClickedInteractive(out Interactive interactable) ||

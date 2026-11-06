@@ -33,6 +33,7 @@ public class FactoryConfiguration
 
     public bool addOutliner;
     public Color outlineColor = Color.white;
+    public Color interactionOutlineColor = Color.yellow;
     public float outlineScale = 1.1f;
     public float outlineinteractionDistane = 2f;
     public RuntimeDialogueGraph interactiveDescription;

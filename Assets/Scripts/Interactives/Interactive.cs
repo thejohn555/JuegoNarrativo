@@ -61,7 +61,8 @@ namespace Interactives
         public void OnPointerEnter(PointerEventData eventData)
         {
             //Cambio del cursor
-             Cursor.SetCursor(interactionCursor, new Vector2(0.5f, 0.5f), CursorMode.Auto);
+            Cursor.SetCursor(interactionCursor, new Vector2(0.5f, 0.5f), CursorMode.Auto);
+            outline.SetInteractionHighlight(false);
             outline.SwapOutline();
         }
 
@@ -69,6 +70,7 @@ namespace Interactives
         {
             //Cambio del cursor
             Cursor.SetCursor(null, new Vector2(0.5f,0.5f), CursorMode.Auto);
+            outline.SetInteractionHighlight(false);
             outline.SwapOutline();
         }
     }

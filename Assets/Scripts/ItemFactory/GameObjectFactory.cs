@@ -120,6 +120,7 @@ public static class GameObjectFactory
             if (outliner != null)
             {
                 outliner.OutlineColor = config.outlineColor;
+                outliner.InteractionOutlineColor = config.interactionOutlineColor;
                 outliner.OutlineWidth = config.outlineScale;
                 EditorUtility.SetDirty(outliner);
             }

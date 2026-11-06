@@ -40,6 +40,7 @@ public class FactoryWindow : EditorWindow
     
     
     private Color outlineColor = Color.white;
+    private Color interactionOutlineColor = Color.yellow;
     private float outlineScale = 1.1f;
     private float outlineinteractionDistane = 2f;
     private RuntimeDialogueGraph interactiveDescription;
@@ -244,6 +245,7 @@ public class FactoryWindow : EditorWindow
         if (addOutliner)
         {
             outlineColor = EditorGUILayout.ColorField("Outline color", outlineColor);
+            interactionOutlineColor = EditorGUILayout.ColorField("Interaction outline color", interactionOutlineColor);
             outlineScale = EditorGUILayout.Slider("Outline scale", outlineScale, 1f, 1.5f);
         }
 
@@ -338,6 +340,7 @@ public class FactoryWindow : EditorWindow
             bodyType = bodyType,
             addOutliner = addOutliner,
             outlineColor = outlineColor,
+            interactionOutlineColor = interactionOutlineColor,
             outlineScale = outlineScale,
             outlineinteractionDistane = outlineinteractionDistane,
             interactiveDescription = interactiveDescription,
