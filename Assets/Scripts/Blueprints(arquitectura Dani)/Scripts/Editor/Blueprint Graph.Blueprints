@@ -31,6 +31,7 @@ MonoBehaviour:
         m_Name: 
         m_GraphNodeModels:
         - rid: 2622399446455943168
+<<<<<<< Updated upstream
         - rid: 2622399722322133096
         - rid: 3762293526374645846
         - rid: 3762293526374645853
@@ -65,6 +66,9 @@ MonoBehaviour:
         - rid: 3762293628177743970
         - rid: 3762293628177743985
         - rid: 3762293628177743988
+=======
+        m_GraphWireModels: []
+>>>>>>> Stashed changes
         m_GraphStickyNoteModels: []
         m_GraphPlacematModels: []
         m_GraphVariableModels: []
@@ -74,10 +78,17 @@ MonoBehaviour:
         m_LocalSubgraphs: []
         m_LastKnownBounds:
           serializedVersion: 2
+<<<<<<< Updated upstream
           x: -7456.8
           y: -63.2
           width: 2275.1997
           height: 1161.6
+=======
+          x: -6762.4
+          y: -63.2
+          width: 171.1997
+          height: 93.600006
+>>>>>>> Stashed changes
         m_GraphElementMetaData:
         - m_Guid:
             m_Value0: 276157023579870970
@@ -87,6 +98,7 @@ MonoBehaviour:
             Hash: fa16b58c591bd50377982523296a7d56
           m_Category: 0
           m_Index: 0
+<<<<<<< Updated upstream
         - m_Guid:
             m_Value0: 14287858149784624607
             m_Value1: 14874897327980589648
@@ -351,6 +363,8 @@ MonoBehaviour:
             Hash: 9935d201684e3bf45c4b387eb16064aa
           m_Category: 2
           m_Index: 14
+=======
+>>>>>>> Stashed changes
         m_EntryPoint:
           rid: 2622399446455943168
         m_Graph:
@@ -409,10 +423,11 @@ MonoBehaviour:
     - rid: 2622399446455943169
       type: {class: 'Constant`1[[System.String, mscorlib]]', ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
       data:
-        m_Value: Nacho(1)
+        m_Value: Nacho(2)
     - rid: 2622399446455943170
       type: {class: LevelNode, ns: Blueprints_arquitectura_Dani_.Editor.Blueprints_arquitectura_Dani_.Editor.Nodes, asm: Edito.Blueprints}
       data: 
+<<<<<<< Updated upstream
     - rid: 2622399722322133096
       type: {class: UserNodeModelImp, ns: Unity.GraphToolkit.Editor.Implementation, asm: UnityEditor.GraphToolkitModule}
       data:
@@ -1685,3 +1700,5 @@ MonoBehaviour:
       type: {class: 'Constant`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
       data:
         m_Value: {fileID: 8634090682868175817, guid: 531a4cfa254cc934089e21bd8ce96c17, type: 3}
+=======
+>>>>>>> Stashed changes

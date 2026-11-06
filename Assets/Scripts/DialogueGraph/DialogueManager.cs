@@ -1,6 +1,8 @@
 using Assets.Scripts.Camera;
 using Assets.Scripts.EventBuses;
 using System;
+using System.Collections.Generic;
+using Blueprints_arquitectura_Dani_.Runtime;
 using EventBuses;
 using UnityEngine;
 
@@ -18,6 +20,20 @@ public class DialogueManager : Singleton<DialogueManager>
     private void OnDisable()
     {
         EventBus.UnSubscribe<OnDialogueStartedEvent>(DisplayFirstNode);
+    }
+
+    private void Start()
+    {
+        if (BlueprintsEventManager.Instance == null) return;
+
+        BlueprintsEventManager.Instance.StartDialogue = (graph, data) =>
+        {
+            var dialogueData = data is DialogueData d
+                ? d
+                : new DialogueData(new Dictionary<string, SpeakerData>(), null, Vector3.zero);
+
+            StartDialogue(graph as RuntimeDialogueGraph, dialogueData);
+        };
     }
 
     public void StartDialogue(RuntimeDialogueGraph graph, DialogueData data)
