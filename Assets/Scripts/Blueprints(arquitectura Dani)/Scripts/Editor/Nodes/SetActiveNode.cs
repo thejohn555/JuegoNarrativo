@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Blueprints_arquitectura_Dani_.Editor.Blueprints_arquitectura_Dani_.Editor.Nodes
 {
-    [Node(categoryPath:"Nodes/Objects")]
+    [Node(categoryPath:"Nodes/General/Objects")]
     public class SetActiveNode: BlueprintNode
     {
         public const string BoolOption = "Set Active";

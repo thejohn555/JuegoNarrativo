@@ -563,7 +563,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 389d7c774bab44e884aeff96d9fd5273, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Blueprints.Runtime::Blueprints_arquitectura_Dani_.Runtime.BlueprintDirector
-  RuntimeGraph: {fileID: -1759291010081333320, guid: 7f30057464ba38b4182f477db74bbdb4, type: 3}
+  RuntimeGraph: {fileID: -1759291010081333320, guid: 6a11e39f417a48e4688619963675be41, type: 3}
 --- !u!114 &1125075879
 MonoBehaviour:
   m_ObjectHideFlags: 0

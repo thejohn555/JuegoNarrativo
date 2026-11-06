@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Blueprints_arquitectura_Dani_.Editor.Blueprints_arquitectura_Dani_.Editor.Nodes
 {
-    [Node(categoryPath:"Nodes/Inventory")]
+    [Node(categoryPath:"Nodes/General/Inventory")]
     public class AddItemToInventoryNode:BlueprintNode
     {
         public const string RequiredObjectOption = "Object to Add";
