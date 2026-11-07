@@ -6,7 +6,7 @@ namespace Blueprints_arquitectura_Dani_.EventRelay
     public class MovementSwitch:MonoBehaviour
     {
         [SerializeField] private GameObject player;
-        private void Start()
+        private void OnEnable()
         {
             if (BlueprintsEventManager.Instance != null)
                 BlueprintsEventManager.Instance.SetMovement = Set;
