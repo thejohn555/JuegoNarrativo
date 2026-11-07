@@ -70,6 +70,7 @@ public class HeldItemController : MonoBehaviour
 
         heldSlotIndex = slotIndex;
         heldItemName = itemName;
+        Debug.Log($"[Hold] '{itemName}' | guid recibido: '{guid}' | guardado: '{heldItemGuid}'");
         heldItemGuid = guid;
         pickupFrame = Time.frameCount;
 

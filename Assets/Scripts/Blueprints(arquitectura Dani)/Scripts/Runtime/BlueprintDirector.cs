@@ -185,6 +185,7 @@ namespace Blueprints_arquitectura_Dani_.Runtime
             else
             {
                 Debug.LogWarning($"No hay {kind} '{obj.name}'. Registrados: {string.Join(", ", dict.Keys)}");
+                Debug.LogWarning($"No hay {kind} '{obj.name}'. Registrados: {string.Join(", ", dict.Keys)}");
                 Debug.LogError($"No hay ningún {kind} '{obj.name}'");
             }
         }
