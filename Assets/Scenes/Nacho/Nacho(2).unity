@@ -1698,7 +1698,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5098650879914241608, guid: f8d7f886628289546b13363460367872, type: 3}
       propertyPath: RuntimeGraph.Array.size
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5098650879914241608, guid: f8d7f886628289546b13363460367872, type: 3}
       propertyPath: 'RuntimeGraph.Array.data[0]'
@@ -1707,7 +1707,7 @@ PrefabInstance:
     - target: {fileID: 5098650879914241608, guid: f8d7f886628289546b13363460367872, type: 3}
       propertyPath: 'RuntimeGraph.Array.data[1]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: -1759291010081333320, guid: 27885c4014594334490bae1e7de7776e, type: 3}
     - target: {fileID: 5098650879914241608, guid: f8d7f886628289546b13363460367872, type: 3}
       propertyPath: 'RuntimeGraph.Array.data[2]'
       value: 
