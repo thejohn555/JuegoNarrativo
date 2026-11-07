@@ -1703,11 +1703,11 @@ PrefabInstance:
     - target: {fileID: 5098650879914241608, guid: f8d7f886628289546b13363460367872, type: 3}
       propertyPath: 'RuntimeGraph.Array.data[0]'
       value: 
-      objectReference: {fileID: -1759291010081333320, guid: bcf2634de23e93046b803bae2fe48ca5, type: 3}
+      objectReference: {fileID: -1759291010081333320, guid: abee89038bf6cf44c8809135cf1b395a, type: 3}
     - target: {fileID: 5098650879914241608, guid: f8d7f886628289546b13363460367872, type: 3}
       propertyPath: 'RuntimeGraph.Array.data[1]'
       value: 
-      objectReference: {fileID: -1759291010081333320, guid: abee89038bf6cf44c8809135cf1b395a, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 5098650879914241608, guid: f8d7f886628289546b13363460367872, type: 3}
       propertyPath: 'RuntimeGraph.Array.data[2]'
       value: 
