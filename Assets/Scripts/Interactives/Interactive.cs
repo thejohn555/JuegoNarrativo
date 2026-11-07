@@ -15,7 +15,7 @@ namespace Interactives
         public RuntimeDialogueGraph description;
         [SerializeField] protected Texture2D interactionCursor;
         protected Outliner outline;
-
+        public bool IsInteractable { get; private set; } = true;
         protected virtual void Awake()
         {
         }
@@ -35,6 +35,11 @@ namespace Interactives
         }
 
         public abstract void Interact(GameObject interactor);
+        public void TryInteract(GameObject interactor)//Nuevo
+        {
+            if (!IsInteractable) return;
+            Interact(interactor);
+        }
 
         public void ShowDescription(GameObject interactor)
         {
@@ -61,6 +66,7 @@ namespace Interactives
         public void OnPointerEnter(PointerEventData eventData)
         {
             //Cambio del cursor
+            if (!IsInteractable) return;
              Cursor.SetCursor(interactionCursor, new Vector2(0.5f, 0.5f), CursorMode.Auto);
             outline.SwapOutline();
         }
@@ -68,8 +74,17 @@ namespace Interactives
         public void OnPointerExit(PointerEventData eventData)
         {
             //Cambio del cursor
+            if (!IsInteractable) return;
             Cursor.SetCursor(null, new Vector2(0.5f,0.5f), CursorMode.Auto);
             outline.SwapOutline();
         }
+        public void SetInteractable(bool value)//Nuevo hecho por Nacho
+        {
+            Debug.Log($"[Interactive] {name} enabled = {value}");
+            IsInteractable = value;
+            if (!value)
+                Cursor.SetCursor(null, new Vector2(0.5f, 0.5f), CursorMode.Auto);
+        }
+        
     }
 }

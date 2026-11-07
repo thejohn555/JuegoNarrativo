@@ -21,6 +21,7 @@ namespace Interactives
 
         [Header("Dialogues")]
         [SerializeField] private RuntimeDialogueGraph currentGraph;
+        [HideInInspector]public RuntimeDialogueGraph CurrentGraph => currentGraph;//Nuevo
         [SerializeField] private Color npcTextColor = Color.white;
         [SerializeField] private List<DialogueState> alternativeStates;
         [SerializeField] bool cameraMove;
@@ -29,10 +30,10 @@ namespace Interactives
         [Header("Events")]
         [SerializeField] private EventBusSO EventBus;
 
-        [Header("Camera Data")]
-        [SerializeField] private Vector3 cameraOffset = new Vector3(0f, 1f, 0f);
-        [SerializeField] private float zoom = 3f; 
-        [SerializeField] private float smoothTime = 0.5f;
+        [field: Header("Camera Data")]
+        [SerializeField] private Vector3 cameraOffset  = new Vector3(0f, 1f, 0f);
+        [SerializeField] public float zoom = 3f;
+        [SerializeField] public float smoothTime  = 0.5f;
 
         private void OnEnable()
         {
@@ -45,6 +46,7 @@ namespace Interactives
 
         private void HandleStateChange(OnNPCStateChangedEvent ev)
         {
+            Debug.Log("Handeling");
             if (ev.TargetNpcID != npcID) return;
 
             foreach (var state in alternativeStates)
@@ -106,6 +108,26 @@ namespace Interactives
 
             Gizmos.color = Color.cyan;
             Gizmos.DrawWireCube(cameraCenter, new Vector3(camWidth, camHeight, 0.1f));
+        }
+        
+        public DialogueData BuildDialogueData(GameObject interactor)
+        {
+            DialogueData data = new DialogueData();
+            data.targetPosition = transform;
+            data.cameraOffset = cameraOffset;
+            data.zoom = zoom;
+            data.smoothTime = smoothTime;
+            data.moveCamera = cameraMove;
+            data.zoomCamera = zoomCamera;
+            data.isDialogue = true;
+            data.textColor = npcTextColor;
+
+            data.speakers = new Dictionary<string, SpeakerData>();
+            if (interactor != null)
+                data.speakers["Conan"] = new SpeakerData { transform = interactor.transform, textColor = Color.white };
+            data.speakers[npcID] = new SpeakerData { transform = transform, textColor = npcTextColor };
+
+            return data;
         }
     }
 }

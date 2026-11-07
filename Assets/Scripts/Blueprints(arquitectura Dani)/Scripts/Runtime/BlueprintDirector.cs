@@ -8,10 +8,16 @@ using Blueprints_arquitectura_Dani_.Runtime.RuntimeNodes.DelayNode;
 using Blueprints_arquitectura_Dani_.Runtime.RuntimeNodes.MoveToNode;
 using Blueprints_arquitectura_Dani_.Runtime.RuntimeNodes.OnInteractNpcNode;
 using Blueprints_arquitectura_Dani_.Runtime.RuntimeNodes.SetActive;
+using Blueprints_arquitectura_Dani_.Runtime.RuntimeNodes.StartDialogue;
 using Blueprints_arquitectura_Dani_.Runtime.TriggerNode;
+using Blueprints_arquitectura_Dani_.Scripts.Runtime.RuntimeNodes.ChangeNpcState;
+using Blueprints_arquitectura_Dani_.Scripts.Runtime.RuntimeNodes.OnItemCollected;
+using Blueprints_arquitectura_Dani_.Scripts.Runtime.RuntimeNodes.SetInteractable;
+using Blueprints_arquitectura_Dani_.Scripts.Runtime.RuntimeNodes.SetPlayerMovement;
 using Unity.GraphToolkit.Editor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.Assertions.Must;
 using UnityEngine.SceneManagement;
 
 
@@ -20,7 +26,7 @@ namespace Blueprints_arquitectura_Dani_.Runtime
     public class BlueprintDirector : MonoBehaviour
     {
         [Header("Graph")]
-        [SerializeField]private BlueprintRuntimeGraph RuntimeGraph;
+        [SerializeField]private BlueprintRuntimeGraph[] RuntimeGraph;
         private Dictionary<System.Type, IBlueprintNodeExecutor> executors;
         private Dictionary<(string item, string target), RuntimeNodeGroup> useItemGroups = new();
 
@@ -39,6 +45,11 @@ namespace Blueprints_arquitectura_Dani_.Runtime
                 {typeof(MoveToRuntimeNode),new MoveToExecutor()},
                 {typeof(AddItemToInventoryRuntime),new AddToiInventoryExecutor()},
                 {typeof(OnInteractNpcRuntime),new OnInteractNpcExecutor()},
+                {typeof(StartDialogueRuntime),new  StartDialogueExecutor()},
+                {typeof(ChangeNpcStateRuntime),new ChangeNpcStateExecutor()},
+                {typeof(OnItemCollectedRuntime),new OnitemCollectedExecutor()},
+                {typeof(SetInteractableRuntime),new  SetInteractableExecutor()},
+                {typeof(SetPlayerMovementRuntime),new  SetPlayerMovementExecutor()},
                 
             };
             if (Instance == null)
@@ -65,43 +76,55 @@ namespace Blueprints_arquitectura_Dani_.Runtime
                 Debug.LogError("No hay ningun grafo asignado");
                 return;
             }
-            string actualevel = SceneManager.GetActiveScene().name;
-            if (actualevel != RuntimeGraph.sceneName)
-            {
-                Debug.LogError("El nivel asignado y el actual son distintos");
-                return;
-            }
             if (BlueprintsEventManager.Instance != null)
                 BlueprintsEventManager.Instance.OnEvent += HandleEvent;
-            foreach (var node in RuntimeGraph.RuntimeNodes)
+            string actualevel = SceneManager.GetActiveScene().name;
+            foreach (var RuntimeGraph in RuntimeGraph)
             {
-                if (node.Nodes.Count == 0)
-                    continue;
-                int idx = 0;
-                switch (node.Nodes[idx])
+                if (actualevel != RuntimeGraph.sceneName)
                 {
-                   case StartRuntimeNode:
-                       StartCoroutine(RunFrom(node));
-                       break;
-                   case TriggerEnterRuntimeNode trigger:
-                       if (!BlueprintDictionaryManager.Instance.HasTrigger(trigger.trigger))
-                       {
-                           Debug.LogWarning($"[Director] No existe el trigger '{trigger.trigger}' en la escena");
-                           break;
-                       }
-                       BlueprintDictionaryManager.Instance.AddToDictionary(NodeTypes.Trigger,trigger.trigger, node);
-                       Debug.Log($"[Director] Registrado trigger '{trigger.trigger}'");
-                       break;
-                   case InteractRuntimeNode  interact:
-                       BlueprintDictionaryManager.Instance.AddToDictionary(NodeTypes.Interactable, interact.interact, node);
-                       break;
-                   case OnInteractNpcRuntime npc:
-                       Debug.Log($"[Director] Registrando NPC con key '{npc.interact}'");
-                       BlueprintDictionaryManager.Instance.AddToDictionary(NodeTypes.InteractableNpc, npc.interact, node);
-                       break;
+                    Debug.LogError("El nivel asignado y el actual son distintos");
+                    return;
                 }
-                idx++;
-            }   
+
+                foreach (var node in RuntimeGraph.RuntimeNodes)
+                {
+                    if (node.Nodes.Count == 0)
+                        continue;
+                    int idx = 0;
+                    switch (node.Nodes[idx])
+                    {
+                        case StartRuntimeNode:
+                            StartCoroutine(RunFrom(node));
+                            break;
+                        case TriggerEnterRuntimeNode trigger:
+                            if (!BlueprintDictionaryManager.Instance.HasTrigger(trigger.trigger))
+                            {
+                                Debug.LogWarning($"[Director] No existe el trigger '{trigger.trigger}' en la escena");
+                                break;
+                            }
+
+                            BlueprintDictionaryManager.Instance.AddToDictionary(NodeTypes.Trigger, trigger.trigger,
+                                node);
+                            Debug.Log($"[Director] Registrado trigger '{trigger.trigger}'");
+                            break;
+                        case InteractRuntimeNode interact:
+                            BlueprintDictionaryManager.Instance.AddToDictionary(NodeTypes.Interactable,
+                                interact.interact, node);
+                            break;
+                        case OnInteractNpcRuntime npc:
+                            Debug.Log($"[Director] Registrando NPC con key '{npc.interact}'");
+                            BlueprintDictionaryManager.Instance.AddToDictionary(NodeTypes.InteractableNpc, npc.interact,
+                                node);
+                            break;
+                        case OnItemCollectedRuntime:
+                            BlueprintDictionaryManager.Instance.AddToDictionary(NodeTypes.OnItemColleted, "-", node);
+                            break;
+                    }
+
+                    idx++;
+                }
+            }
         }
 
         private IEnumerator RunFrom(RuntimeNodeGroup group,GameObject source = null,int startIndex = 0)
@@ -148,6 +171,10 @@ namespace Blueprints_arquitectura_Dani_.Runtime
                     break;
                 case NodeTypes.InteractableNpc:
                     Run(manager.npcDictionary, obj, "npc");
+                    break;
+                case  NodeTypes.OnItemColleted:
+                    foreach (var group in manager.itemCollectedGroups)
+                        StartCoroutine(RunFrom(group,obj));
                     break;
             }
         }

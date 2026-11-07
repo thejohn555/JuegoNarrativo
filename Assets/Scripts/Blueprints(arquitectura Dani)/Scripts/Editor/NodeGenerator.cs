@@ -29,7 +29,11 @@ namespace Blueprints_arquitectura_Dani_.Editor.Blueprints_arquitectura_Dani_.Edi
       {
           var dictionaryManager = Object.FindFirstObjectByType<BlueprintDictionaryManager>();
 
+<<<<<<< HEAD
           if (dictionaryManager == null) return;   // escena sin manager (menú, etc.): no es un error
+=======
+          if (dictionaryManager == null) return;   
+>>>>>>> Nacho
 
           string scene = dictionaryManager.gameObject.scene.name;
 
@@ -43,9 +47,15 @@ namespace Blueprints_arquitectura_Dani_.Editor.Blueprints_arquitectura_Dani_.Edi
       private static void Generate(NodeTypes type,string scene,List<string> names)
       {
           var (prefix, baseClass, file, category) = NodeGenTemplate.Map[type];
+<<<<<<< HEAD
           string sceneId = ToIdentifier(scene);
           string path = $"{outputFolder}/{Path.GetFileNameWithoutExtension(file)}_{sceneId}.cs";
           
+=======
+
+          string sceneId = ToIdentifier(scene);
+          string path = $"{outputFolder}/{Path.GetFileNameWithoutExtension(file)}_{sceneId}.cs";
+>>>>>>> Nacho
           
           var sb = new StringBuilder();
           sb.AppendLine("//(auto generado) No editar a mano.");
