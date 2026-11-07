@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace Blueprints_arquitectura_Dani_.Editor.Blueprints_arquitectura_Dani_.Scripts.Editor.Nodes
 {
+    [Node(categoryPath:"Nodes/General/Start")]
     public class OnItemCollected:BlueprintNode,IStartNode
         
     {

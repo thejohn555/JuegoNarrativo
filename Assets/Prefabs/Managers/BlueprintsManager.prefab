@@ -1,5 +1,63 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1870454744130409485
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6507854038104588364}
+  - component: {fileID: 5733363012456426635}
+  - component: {fileID: 1007069045151362929}
+  m_Layer: 0
+  m_Name: Extras
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6507854038104588364
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1870454744130409485}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7200603504630786681}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5733363012456426635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1870454744130409485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9fad74f40f04d7cb9322550ec2f284e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Blueprints_arquitectura_Dani_.EventRelay.InteractableSwitch
+--- !u!114 &1007069045151362929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1870454744130409485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7730bfeadcfd43f6aecb66d21e88c4b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Blueprints_arquitectura_Dani_.EventRelay.MovementSwitch
+  player: {fileID: 8831337603267046458, guid: 95f604d8a6b3a81439e2e09092fcd4a0, type: 3}
 --- !u!1 &4461613810462725945
 GameObject:
   m_ObjectHideFlags: 0
@@ -33,7 +91,8 @@ Transform:
   m_LocalPosition: {x: -0.14099, y: -0.02585, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 6507854038104588364}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5098650879914241608
@@ -48,7 +107,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 389d7c774bab44e884aeff96d9fd5273, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Blueprints.Runtime::Blueprints_arquitectura_Dani_.Runtime.BlueprintDirector
-  RuntimeGraph: {fileID: -1759291010081333320, guid: bcf2634de23e93046b803bae2fe48ca5, type: 3}
+  RuntimeGraph:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &3284176198225476531
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -84,6 +146,10 @@ MonoBehaviour:
   - {fileID: 0}
   npcObjects:
   - {fileID: 0}
+  itemCollectedGroups: []
+  references:
+    version: 2
+    RefIds: []
 --- !u!114 &8499663868146625135
 MonoBehaviour:
   m_ObjectHideFlags: 0

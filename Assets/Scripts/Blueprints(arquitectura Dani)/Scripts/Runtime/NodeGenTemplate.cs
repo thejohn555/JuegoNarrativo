@@ -9,6 +9,7 @@ public enum NodeTypes
     ReferenceGo,
     ReferenceNpc,
     ReferenceInteractable,
+    OnItemColleted, // este no se autogenere
 }
 
 namespace Blueprints_arquitectura_Dani_.Runtime

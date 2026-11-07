@@ -10,11 +10,16 @@ namespace Blueprints_arquitectura_Dani_.Runtime
         public static BlueprintsEventManager Instance { get; private set; }
         
         public event Action<NodeTypes, GameObject> OnEvent;
+        public event Action<string> OnGetLastGuid;
+        
+        
         public Func<string, bool> IsHoldingItem;
         public Func<bool> ConsumeItem;
         public Func<string,Sprite,string, bool> AddItemToInventory;
         public Action<GameObject> StartNpcDialogue;
         public Action<string, string> ChangeNpcState;
+        public Action<GameObject, bool> SetInteractable;
+        public Action<bool> SetMovement;
         private void Awake()
         {
             if (Instance != null) { Destroy(gameObject); return; }
@@ -26,6 +31,10 @@ namespace Blueprints_arquitectura_Dani_.Runtime
             OnEvent?.Invoke(type, source);
         }
 
+        public void GetLastGuid(string guid)
+        {
+            OnGetLastGuid?.Invoke(guid);
+        }
        
     }
 }

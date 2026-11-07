@@ -15,6 +15,9 @@ using Blueprints_arquitectura_Dani_.Runtime.RuntimeNodes.SetActive;
 using Blueprints_arquitectura_Dani_.Runtime.RuntimeNodes.StartDialogue;
 using Blueprints_arquitectura_Dani_.Runtime.TriggerNode;
 using Blueprints_arquitectura_Dani_.Scripts.Runtime.RuntimeNodes.ChangeNpcState;
+using Blueprints_arquitectura_Dani_.Scripts.Runtime.RuntimeNodes.OnItemCollected;
+using Blueprints_arquitectura_Dani_.Scripts.Runtime.RuntimeNodes.SetInteractable;
+using Blueprints_arquitectura_Dani_.Scripts.Runtime.RuntimeNodes.SetPlayerMovement;
 using Unity.GraphToolkit.Editor;
 using UnityEditor;
 using UnityEngine;
@@ -166,6 +169,43 @@ public static class NodeTranslator
                 list.Add(new ChangeNpcStateRuntime(state, id));
                 return true;
 
+            }
+            case SetInteractable setInteractable:
+            {
+                var port = setInteractable.GetInputPortByName(SetInteractable.ObjectPort);
+                string key = null;
+                if (port != null && port.IsConnected &&
+                    port.FirstConnectedPort.GetNode() is ReferenceNode refNode)
+                {
+                    key = refNode.Key;
+                }
+
+                bool active;
+                setInteractable.GetNodeOptionByName(SetInteractable.BoolOption).TryGetValue(out active);
+                list.Add(new SetInteractableRuntime(key, active));
+                return true;
+            }
+            case OnItemCollected itemCollected:
+            {
+                GameObject prefab = null;
+                itemCollected.GetNodeOptionByName(OnItemCollected.RequiredObjectOption)?.TryGetValue(out prefab);
+
+                string requiredGuid = null;
+                if (prefab != null)
+                {
+                    string path = AssetDatabase.GetAssetPath(prefab);
+                    requiredGuid = AssetDatabase.AssetPathToGUID(path);
+                }
+
+                list.Add(new OnItemCollectedRuntime(requiredGuid));
+                return true;
+            }
+            case SetPlayerMovement playermov:
+            {
+                bool state;
+                playermov.GetNodeOptionByName(SetPlayerMovement.BoolOption).TryGetValue(out state);
+                list.Add(new SetPlayerMovementRuntime(state));
+                return true;
             }
                 
                 

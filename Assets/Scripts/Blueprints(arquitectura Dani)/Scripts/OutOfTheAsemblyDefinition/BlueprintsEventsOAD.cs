@@ -19,7 +19,7 @@ public class BlueprintsEventsOAD : MonoBehaviour
         }
     }
 
-    private void OnEnable()
+    private void Start()
     {
         BlueprintsEventManager.Instance.ChangeNpcState += NpcChangeState;
     }

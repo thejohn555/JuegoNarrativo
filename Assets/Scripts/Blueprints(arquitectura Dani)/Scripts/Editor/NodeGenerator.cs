@@ -29,21 +29,23 @@ namespace Blueprints_arquitectura_Dani_.Editor.Blueprints_arquitectura_Dani_.Edi
       {
           var dictionaryManager = Object.FindFirstObjectByType<BlueprintDictionaryManager>();
 
-          if (dictionaryManager == null)
-          {
-              Debug.LogError("No se ha encontrado BlueprintDictionaryManager");
-              return;
-          }
+          if (dictionaryManager == null) return;   
+
+          string scene = dictionaryManager.gameObject.scene.name;
+
           var names = new List<string>();
           foreach (var go in dictionaryManager.GetObjects(type))
               if (go != null) names.Add(go.name);
-          Generate(type,names);
+
+          Generate(type, scene, names);
       }
 
-      private static void Generate(NodeTypes type,List<string> names)
+      private static void Generate(NodeTypes type,string scene,List<string> names)
       {
-          var (prefix, baseClass, file,category) = NodeGenTemplate.Map[type];
-          string path = $"{outputFolder}/{file}";
+          var (prefix, baseClass, file, category) = NodeGenTemplate.Map[type];
+
+          string sceneId = ToIdentifier(scene);
+          string path = $"{outputFolder}/{Path.GetFileNameWithoutExtension(file)}_{sceneId}.cs";
           
           var sb = new StringBuilder();
           sb.AppendLine("//(auto generado) No editar a mano.");
@@ -69,8 +71,8 @@ namespace Blueprints_arquitectura_Dani_.Editor.Blueprints_arquitectura_Dani_.Edi
                   }
 
                   sb.AppendLine("    [Serializable]");
-                  sb.AppendLine($"    [Node(categoryPath:\"{category}\")]");
-                  sb.AppendLine($"    public class {prefix}{id} : {baseClass}");
+                  sb.AppendLine($"    [Node(categoryPath:\"Nodes/{scene}/{category}\")]");
+                  sb.AppendLine($"    public class {prefix}{sceneId}_{id} : {baseClass}");
                   sb.AppendLine($"    {{ public override string Key => \"{name}\"; }}");
                   used.Add(id);
               }
