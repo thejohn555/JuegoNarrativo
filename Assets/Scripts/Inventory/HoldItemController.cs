@@ -1,5 +1,6 @@
 using System;
 using Blueprints_arquitectura_Dani_.Runtime;
+using EventBuses;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -11,9 +12,13 @@ public class HeldItemController : MonoBehaviour
     [SerializeField] private Canvas canvas; // opcional, si no se asigna se busca solo
     [SerializeField] private Vector2 iconSize = new Vector2(64, 64);
 
+    [Header("Inputs")]
+    [SerializeField] private EventBusSO inputs;
+    
     public event Action<string> OnItemHeld;
     public event Action<string> OnItemReleased;
 
+    private bool pendingMapRestore;
     private int heldSlotIndex = -1;
     private int pickupFrame = -1;
     private string heldItemName;
@@ -48,7 +53,9 @@ public class HeldItemController : MonoBehaviour
     private void Start() //Nuevo
     {
         if (BlueprintsEventManager.Instance != null)
+        {
             BlueprintsEventManager.Instance.IsHoldingItem = IsHoldingGuid;
+        }
         BlueprintsEventManager.Instance.ConsumeItem = Consume;
     }
 
@@ -57,8 +64,7 @@ public class HeldItemController : MonoBehaviour
     {
         InventoryManager inventory = InventoryManager.Instance;
 
-        if (inventory == null || !inventory.TryGetItem(slotIndex, out string itemName,
-                out Sprite icon, out string guid)) //Nuevo
+        if (inventory == null || !inventory.TryGetItem(slotIndex, out string itemName, out Sprite icon, out string guid)) //Nuevo
         {
             return;
         }
@@ -123,6 +129,8 @@ public class HeldItemController : MonoBehaviour
             InventoryManager.Instance.HeldSlotIndex = -1;
             InventoryManager.Instance.UpdateUI();
         }
+        
+        pendingMapRestore = true;
     }
 
     private void CreateIcon(Sprite sprite)
@@ -178,21 +186,26 @@ public class HeldItemController : MonoBehaviour
         {
             MoveIcon();
         }
-        if (Mouse.current != null && Mouse.current.rightButton.wasPressedThisFrame)
+        
+        if (HasHeldItem && Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame)
         {
-            OnItemReleased?.Invoke(heldItemName);
-            //Release();
+            Release();
         }
     }
-
-    // LateUpdate: así la puerta puede consumir el objeto en su Update antes de que el click lo suelte
+    
     private void LateUpdate()
     {
-        if (!HasHeldItem || Time.frameCount == pickupFrame)
+        if (pendingMapRestore)
         {
-            return;
+            pendingMapRestore = false;
+            StartCoroutine(RestoreMapNextFrame());
         }
-
-        
+    }
+    
+    private System.Collections.IEnumerator RestoreMapNextFrame()
+    {
+        yield return null; // esperamos a que termine el frame del click
+        Debug.Log("Ya te puedes mover");
+        inputs.Publish(new OnInventoryCloseEvent());
     }
 }

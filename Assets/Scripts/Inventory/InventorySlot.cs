@@ -30,6 +30,7 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         draggedFromIndex = slotIndex;
 
         Canvas mainCanvas = InventoryManager.Instance.GetComponentInParent<Canvas>();
+        
         if (mainCanvas == null)
         {
             mainCanvas = Object.FindFirstObjectByType<Canvas>();
