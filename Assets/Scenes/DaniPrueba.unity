@@ -944,7 +944,7 @@ Transform:
   m_GameObject: {fileID: 358912865}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3526,19 +3526,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2044255064766295679, guid: b2c503b2dc933a34db371e1d1d07cc7b, type: 3}
       propertyPath: m_Size.x
-      value: 1.3786116
+      value: 1.8013072
       objectReference: {fileID: 0}
     - target: {fileID: 2044255064766295679, guid: b2c503b2dc933a34db371e1d1d07cc7b, type: 3}
       propertyPath: m_Size.y
-      value: 3.0823617
+      value: 3.2887123
       objectReference: {fileID: 0}
     - target: {fileID: 2044255064766295679, guid: b2c503b2dc933a34db371e1d1d07cc7b, type: 3}
       propertyPath: m_Offset.x
-      value: 0.02704382
+      value: -0.184304
       objectReference: {fileID: 0}
     - target: {fileID: 2044255064766295679, guid: b2c503b2dc933a34db371e1d1d07cc7b, type: 3}
       propertyPath: m_Offset.y
-      value: -0.013521731
+      value: 0.08965361
       objectReference: {fileID: 0}
     - target: {fileID: 3029910001886362865, guid: b2c503b2dc933a34db371e1d1d07cc7b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3619,7 +3619,7 @@ MonoBehaviour:
   cameraMove: 0
   zoomCamera: 0
   zoom: 0
-  npcTextColor: {r: 0, g: 0, b: 0, a: 0}
+  npcTextColor: {r: 1, g: 0, b: 0, a: 0}
   cameraOffset: {x: 0, y: 0, z: 0}
   npcID: 333
 --- !u!1660057539 &9223372036854775807
