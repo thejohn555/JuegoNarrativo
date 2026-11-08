@@ -118,7 +118,7 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public void OnPointerUp(PointerEventData eventData)
