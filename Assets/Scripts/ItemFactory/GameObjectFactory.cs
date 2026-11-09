@@ -48,6 +48,10 @@ public static class GameObjectFactory
                 visualObject.transform.localPosition = Vector3.zero;
             }
 
+            // The renderer and collider share this child, so both receive the same world-space offset.
+            visualObject.transform.localPosition += go.transform.InverseTransformVector(
+                new Vector3(config.visualOffset.x, config.visualOffset.y, 0f));
+
             visualObject.transform.localRotation = Quaternion.identity;
             visualObject.transform.localScale = Vector3.one;
 
@@ -98,6 +102,7 @@ public static class GameObjectFactory
                     if (go.TryGetComponent(out Interactives.Interactive interactive))
                     {
                         ConfigureInteractionDistance(interactive, config.outlineinteractionDistane);
+                        ConfigureVisualOffset(interactive, config.visualOffset);
                         ConfigureDescription(interactive, config.interactiveDescription);
                     }
                 }
@@ -167,6 +172,29 @@ public static class GameObjectFactory
     {
         Undo.RecordObject(interactive, "Set interactive description");
         interactive.description = description;
+        EditorUtility.SetDirty(interactive);
+    }
+
+    private static void ConfigureVisualOffset(
+        Interactives.Interactive interactive,
+        Vector2 visualOffset)
+    {
+        const string visualOffsetPropertyName = "<VisualOffset>k__BackingField";
+        SerializedObject serializedInteractive = new SerializedObject(interactive);
+        SerializedProperty visualOffsetProperty =
+            serializedInteractive.FindProperty(visualOffsetPropertyName);
+
+        if (visualOffsetProperty == null)
+        {
+            Debug.LogWarning(
+                "Factory: the serialized VisualOffset field was not found on Interactive.",
+                interactive);
+            return;
+        }
+
+        Undo.RecordObject(interactive, "Set visual offset");
+        visualOffsetProperty.vector2Value = visualOffset;
+        serializedInteractive.ApplyModifiedProperties();
         EditorUtility.SetDirty(interactive);
     }
 

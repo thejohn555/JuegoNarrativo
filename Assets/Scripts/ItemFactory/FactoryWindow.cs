@@ -30,6 +30,7 @@ public class FactoryWindow : EditorWindow
     private readonly InteractObjectFactoryTypeOptions interactObjectOptions = new InteractObjectFactoryTypeOptions();
     private readonly TriggerFactoryTypeOptions triggerOptions = new TriggerFactoryTypeOptions();
     private readonly DecorationFactoryTypeOptions decorationOptions = new DecorationFactoryTypeOptions();
+    private readonly DoorFactoryTypeOptions doorOptions = new DoorFactoryTypeOptions();
     private readonly EmptyFactoryTypeOptions emptyOptions = new EmptyFactoryTypeOptions();
 
     private bool addCollider = true;
@@ -43,6 +44,7 @@ public class FactoryWindow : EditorWindow
     private Color interactionOutlineColor = Color.yellow;
     private float outlineScale = 1.1f;
     private float outlineinteractionDistane = 2f;
+    private Vector2 visualOffset = Vector2.zero;
     private RuntimeDialogueGraph interactiveDescription;
     private bool includeInNodeGraph;
 
@@ -108,7 +110,7 @@ public class FactoryWindow : EditorWindow
     private void DrawTypeSection()
     {
         EditorGUILayout.LabelField("Object type", EditorStyles.boldLabel);
-        string[] typeLabels = { "Interact Object", "Collectible Object", "NPC", "Button", "Trigger", "Decoration" };
+        string[] typeLabels = { "Interact Object", "Collectible Object", "NPC", "Button", "Trigger", "Decoration", "Door" };
         int selectedIndex = Mathf.Max(0, Array.IndexOf(
             (FactoryConfiguration.TypeInteractive[])Enum.GetValues(typeof(FactoryConfiguration.TypeInteractive)),
             selectedType));
@@ -253,6 +255,7 @@ public class FactoryWindow : EditorWindow
         if (typeOptions != null &&
             typeof(Interactives.Interactive).IsAssignableFrom(typeOptions.ComponentType))
         {
+            visualOffset = EditorGUILayout.Vector2Field("Visual offset (units)", visualOffset);
             outlineinteractionDistane = EditorGUILayout.FloatField(
                 "Interaction distance", outlineinteractionDistane);
             interactiveDescription = (RuntimeDialogueGraph)EditorGUILayout.ObjectField(
@@ -343,6 +346,7 @@ public class FactoryWindow : EditorWindow
             interactionOutlineColor = interactionOutlineColor,
             outlineScale = outlineScale,
             outlineinteractionDistane = outlineinteractionDistane,
+            visualOffset = visualOffset,
             interactiveDescription = interactiveDescription,
             includeInNodeGraph = includeInNodeGraph,
             componentType = typeOptions != null ? typeOptions.ComponentType : null,
@@ -379,6 +383,9 @@ public class FactoryWindow : EditorWindow
 
             case FactoryConfiguration.TypeInteractive.Decoration:
                 return decorationOptions;
+
+            case FactoryConfiguration.TypeInteractive.Door:
+                return doorOptions;
 
             default:
                 return null;

@@ -1,6 +1,7 @@
 ﻿using Assets.Scripts.Camera;
 using System;
 using System.Collections.Generic;
+using Managers;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -11,6 +12,7 @@ namespace Interactives
     public abstract class Interactive:MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
     {
         [field: SerializeField] public float InteractionDistance { get; private set; } = 1.5f;
+        [field: SerializeField] public Vector2 VisualOffset { get; private set; } = Vector2.zero;
         [SerializeField] private bool showInteractionGizmo = true;
         public RuntimeDialogueGraph description;
         [SerializeField] protected Texture2D interactionCursor;
@@ -20,10 +22,20 @@ namespace Interactives
         {
         }
 
+        protected virtual void OnEnable()
+        {
+            ItemInteractManager.Instance.PublishItem(this);
+        }
+
         protected virtual void Start()
         {
             outline = GetComponent<Outliner>();
             outline.SwapOutline();
+        }
+
+        protected virtual void OnDisable()
+        {
+            ItemInteractManager.Instance.UnPublishItem(this);
         }
 
         protected virtual void OnDrawGizmosSelected()
@@ -62,7 +74,12 @@ namespace Interactives
         {
             //Cambio del cursor
             Cursor.SetCursor(interactionCursor, new Vector2(0.5f, 0.5f), CursorMode.Auto);
-            outline.SetInteractionHighlight(false);
+            UseOutliner(false);
+        }
+
+        public void UseOutliner(bool active)
+        {
+            outline.SetInteractionHighlight(active);
             outline.SwapOutline();
         }
 
@@ -70,8 +87,7 @@ namespace Interactives
         {
             //Cambio del cursor
             Cursor.SetCursor(null, new Vector2(0.5f,0.5f), CursorMode.Auto);
-            outline.SetInteractionHighlight(false);
-            outline.SwapOutline();
+            UseOutliner(false);
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using Managers;
 using Navigation;
 using UnityEngine;
 
@@ -9,7 +11,7 @@ public class Grid2D : MonoBehaviour
     [SerializeField] private float cellSize = 0.5f;
 
     [Header("Floor Detection")]
-    [SerializeField] private Collider2D areaCollider;
+    private Collider2D areaCollider;
     [SerializeField] private LayerMask floorMask;
     [SerializeField] private LayerMask obstacleMask;
 
@@ -36,10 +38,17 @@ public class Grid2D : MonoBehaviour
 
     private void Awake()
     {
-        CreateGrid();
+        areaCollider = GetComponent<Collider2D>();
+        if (areaCollider == null)
+        {
+            Debug.LogError("Grid2D needs a Collider2D on the same GameObject.", this);
+            return;
+        }
+
+        NavigationManager.Instance.InitializeGrid(this);
     }
 
-    private void CreateGrid()
+    public void CreateGrid()
     {
         if (areaCollider == null)
         {

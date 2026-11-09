@@ -89,6 +89,11 @@ public class InputActionsSO : ScriptableObject, NewInputActions.IGamePlayActions
         if (context.started)
         {
             EventBus.Publish(new OnSpaceBarClick(context));
+            Debug.unityLogger.Log("OnSpaceBarClick");
+        }
+        else if(context.canceled)
+        {
+            EventBus.Publish(new OnSpaceBarClick(context));
         }
     }
 

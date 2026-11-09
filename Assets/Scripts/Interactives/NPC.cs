@@ -34,12 +34,14 @@ namespace Interactives
         [SerializeField] private float zoom = 3f; 
         [SerializeField] private float smoothTime = 0.5f;
 
-        private void OnEnable()
+        protected override void OnEnable()
         {
+            base.OnEnable();
             EventBus.Subscribe<OnNPCStateChangedEvent>(HandleStateChange);
         }
-        private void OnDisable()
+        protected override void OnDisable()
         {
+            base.OnDisable();
             EventBus.UnSubscribe<OnNPCStateChangedEvent>(HandleStateChange);
         }
 
