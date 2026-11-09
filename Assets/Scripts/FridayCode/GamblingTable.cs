@@ -19,20 +19,18 @@ namespace Assets.Scripts.FridayCode
         [SerializeField] protected float interactionDistance = 1.5f;
         protected OnNotOver onNotOver;
         
-
-
-
+        
         protected String itemName;
 
         protected bool isOver;
 
         private void OnEnable()
         {
-            HeldItemController.Instance.OnItemReleased += RightClickAction;
+            HeldItemController.Instance.OnItemReleased += LeftClickAction;
         }
         private void OnDisable()
         {
-            HeldItemController.Instance.OnItemReleased -= RightClickAction;
+            HeldItemController.Instance.OnItemReleased -= LeftClickAction;
         }
 
         public void OnPointerEnter(PointerEventData eventData)
@@ -45,7 +43,7 @@ namespace Assets.Scripts.FridayCode
             isOver = false;
         }
 
-        protected virtual void RightClickAction(string itemName)
+        protected virtual void LeftClickAction(string itemName)
         {
             if (isOver)
             {
@@ -53,16 +51,12 @@ namespace Assets.Scripts.FridayCode
                 StopAllCoroutines();
                 playerMovementSystem.SetNewDestination(gameObject.transform.position,interactionDistance);
                 StartCoroutine(RandomShit(CoinSpawn));
-                
             }
             else
             {
                 eventBus.Publish(onNotOver);
             }
-            
         }
-
-        
 
         protected IEnumerator RandomShit(Action method)
         {
@@ -78,7 +72,5 @@ namespace Assets.Scripts.FridayCode
             InventoryManager.Instance.AddItem(resultObjectName, sprite);
             Debug.Log($"the object is {resultObjectName}");
         }
-        
-
     }
 }

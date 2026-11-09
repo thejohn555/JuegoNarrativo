@@ -160,6 +160,7 @@ public class InventoryManager : MonoBehaviour
 
         itemName = inventorySlots[index].itemName;
         icon = inventorySlots[index].icon;
+        Debug.Log($"[TryGetItem] slot {index} | guid: '{inventorySlots[index].guid}'");
         return true;
     }
     public bool TryGetItem(int index, out string itemName, out Sprite icon, out string guid)//Nuevo
@@ -199,6 +200,7 @@ public class InventoryManager : MonoBehaviour
     // Comprueba si se puede craftear o si debe hacer un intercambio normal
     public void TryCraftOrMove(int fromIndex, int toIndex)
     {
+        
         if (fromIndex < 0 || fromIndex >= inventorySlots.Length || toIndex < 0 || toIndex >= inventorySlots.Length)
         {
             return;
@@ -219,12 +221,24 @@ public class InventoryManager : MonoBehaviour
 
         if (matchedRecipe.resultIcon != null)
         {
+            string resultGuid = null;
+            if (matchedRecipe.resultPrefab != null &&
+                matchedRecipe.resultPrefab.TryGetComponent<BlueprintItemId>(out var itemId))
+            {
+                resultGuid = itemId.Guid;
+            }
+
+            if (string.IsNullOrEmpty(resultGuid))
+            {
+                Debug.LogWarning($"La receta '{matchedRecipe.resultName}' no tiene GUID: comprueba que resultPrefab tiene BlueprintItemId");
+            }
+            Debug.Log($"[Craft] '{matchedRecipe.resultName}' | prefab: {(matchedRecipe.resultPrefab == null ? "NULL" : matchedRecipe.resultPrefab.name)} | guid: '{resultGuid}'");
             inventorySlots[fromIndex] = new InventoryItem { itemName = null, icon = null };
             inventorySlots[toIndex] = new InventoryItem
             {
                 itemName = matchedRecipe.resultName, 
                 icon = matchedRecipe.resultIcon,
-                guid = matchedRecipe.resultGuid,//Nuevo
+                guid = resultGuid,//Nuevo
             };
             
             Debug.Log($"Successful crafting! Created:{matchedRecipe.resultName}");

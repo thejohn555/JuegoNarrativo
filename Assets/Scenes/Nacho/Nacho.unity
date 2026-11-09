@@ -596,6 +596,9 @@ MonoBehaviour:
   - {fileID: 0}
   referenceObjects:
   - {fileID: 1444840017}
+  referenceInteractable: []
+  referenceNpc: []
+  npcObjects: []
 --- !u!1 &1134115468
 GameObject:
   m_ObjectHideFlags: 0

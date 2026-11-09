@@ -134,7 +134,7 @@ namespace Player
             }
             else
             {
-                target.Interact(gameObject);
+                target.TryInteract(gameObject);//Nuevo
             }
         }
         

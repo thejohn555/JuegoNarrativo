@@ -52,7 +52,6 @@ public class InventoryController : MonoBehaviour
     {
         isOpen = false;
         inventoryPanel.SetActive(false);
-        inputs.Publish(new OnInventoryCloseEvent()); // el SO vuelve al mapa GamePlay
     }
 
     public void ToggleInventory(OnScrollWheelPressed eventArgs)

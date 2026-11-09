@@ -51,12 +51,8 @@ namespace Assets.Scripts.FridayCode
                { "Conan", new SpeakerData { transform = playerMovementSystem.transform, textColor = Color.white } },
                { npcID, new SpeakerData { transform = this.transform, textColor = npcTextColor } }
             };
-
-
-
-
         }
-        protected override void RightClickAction(string itemName)
+        protected override void LeftClickAction(string itemName)
         {
             if (isOver)
             {
@@ -69,16 +65,10 @@ namespace Assets.Scripts.FridayCode
             {
                 eventBus.Publish(onNotOver);
             }
-
-
         }
         private void DialogueWrapperMethod()
         {
             DialogueManager.Instance.StartDialogue(graph, dialogueData);
         }
-
-        
-
-
     }
 }

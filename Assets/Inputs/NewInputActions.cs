@@ -199,7 +199,7 @@ public partial class @NewInputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""73e54607-eeff-4947-b426-2a8e8598ea74"",
-                    ""path"": ""<Mouse>/rightButton"",
+                    ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
