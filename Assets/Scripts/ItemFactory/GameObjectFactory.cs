@@ -48,10 +48,6 @@ public static class GameObjectFactory
                 visualObject.transform.localPosition = Vector3.zero;
             }
 
-            // The renderer and collider share this child, so both receive the same world-space offset.
-            visualObject.transform.localPosition += go.transform.InverseTransformVector(
-                new Vector3(config.visualOffset.x, config.visualOffset.y, 0f));
-
             visualObject.transform.localRotation = Quaternion.identity;
             visualObject.transform.localScale = Vector3.one;
 
@@ -102,7 +98,7 @@ public static class GameObjectFactory
                     if (go.TryGetComponent(out Interactives.Interactive interactive))
                     {
                         ConfigureInteractionDistance(interactive, config.outlineinteractionDistane);
-                        ConfigureVisualOffset(interactive, config.visualOffset);
+                        ConfigureInteractionOffset(interactive, config.interactionOffset);
                         ConfigureDescription(interactive, config.interactiveDescription);
                     }
                 }
@@ -175,25 +171,25 @@ public static class GameObjectFactory
         EditorUtility.SetDirty(interactive);
     }
 
-    private static void ConfigureVisualOffset(
+    private static void ConfigureInteractionOffset(
         Interactives.Interactive interactive,
-        Vector2 visualOffset)
+        Vector2 interactionOffset)
     {
-        const string visualOffsetPropertyName = "<VisualOffset>k__BackingField";
+        const string interactionOffsetPropertyName = "<InteractionOffset>k__BackingField";
         SerializedObject serializedInteractive = new SerializedObject(interactive);
-        SerializedProperty visualOffsetProperty =
-            serializedInteractive.FindProperty(visualOffsetPropertyName);
+        SerializedProperty interactionOffsetProperty =
+            serializedInteractive.FindProperty(interactionOffsetPropertyName);
 
-        if (visualOffsetProperty == null)
+        if (interactionOffsetProperty == null)
         {
             Debug.LogWarning(
-                "Factory: the serialized VisualOffset field was not found on Interactive.",
+                "Factory: the serialized InteractionOffset field was not found on Interactive.",
                 interactive);
             return;
         }
 
-        Undo.RecordObject(interactive, "Set visual offset");
-        visualOffsetProperty.vector2Value = visualOffset;
+        Undo.RecordObject(interactive, "Set interaction offset");
+        interactionOffsetProperty.vector2Value = interactionOffset;
         serializedInteractive.ApplyModifiedProperties();
         EditorUtility.SetDirty(interactive);
     }

@@ -37,7 +37,7 @@ public class FactoryConfiguration
     public Color interactionOutlineColor = Color.yellow;
     public float outlineScale = 1.1f;
     public float outlineinteractionDistane = 2f;
-    public Vector2 visualOffset = Vector2.zero;
+    public Vector2 interactionOffset = Vector2.zero;
     public RuntimeDialogueGraph interactiveDescription;
     public bool includeInNodeGraph;
 

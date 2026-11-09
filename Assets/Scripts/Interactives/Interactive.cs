@@ -5,6 +5,7 @@ using Managers;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityEngine.Serialization;
 
 namespace Interactives
 {
@@ -12,7 +13,8 @@ namespace Interactives
     public abstract class Interactive:MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
     {
         [field: SerializeField] public float InteractionDistance { get; private set; } = 1.5f;
-        [field: SerializeField] public Vector2 VisualOffset { get; private set; } = Vector2.zero;
+        [field: SerializeField, FormerlySerializedAs("<VisualOffset>k__BackingField")]
+        public Vector2 InteractionOffset { get; private set; } = Vector2.zero;
         [SerializeField] private bool showInteractionGizmo = true;
         public RuntimeDialogueGraph description;
         [SerializeField] protected Texture2D interactionCursor;
@@ -43,7 +45,7 @@ namespace Interactives
             if (!showInteractionGizmo) return;
 
             Gizmos.color = Color.cyan;
-            Gizmos.DrawWireSphere(transform.position, InteractionDistance);
+            Gizmos.DrawWireSphere(transform.position + (Vector3)InteractionOffset, InteractionDistance);
         }
 
         public abstract void Interact(GameObject interactor);

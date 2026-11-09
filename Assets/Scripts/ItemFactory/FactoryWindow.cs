@@ -44,7 +44,7 @@ public class FactoryWindow : EditorWindow
     private Color interactionOutlineColor = Color.yellow;
     private float outlineScale = 1.1f;
     private float outlineinteractionDistane = 2f;
-    private Vector2 visualOffset = Vector2.zero;
+    private Vector2 interactionOffset = Vector2.zero;
     private RuntimeDialogueGraph interactiveDescription;
     private bool includeInNodeGraph;
 
@@ -255,7 +255,7 @@ public class FactoryWindow : EditorWindow
         if (typeOptions != null &&
             typeof(Interactives.Interactive).IsAssignableFrom(typeOptions.ComponentType))
         {
-            visualOffset = EditorGUILayout.Vector2Field("Visual offset (units)", visualOffset);
+            interactionOffset = EditorGUILayout.Vector2Field("Interaction offset (units)", interactionOffset);
             outlineinteractionDistane = EditorGUILayout.FloatField(
                 "Interaction distance", outlineinteractionDistane);
             interactiveDescription = (RuntimeDialogueGraph)EditorGUILayout.ObjectField(
@@ -346,7 +346,7 @@ public class FactoryWindow : EditorWindow
             interactionOutlineColor = interactionOutlineColor,
             outlineScale = outlineScale,
             outlineinteractionDistane = outlineinteractionDistane,
-            visualOffset = visualOffset,
+            interactionOffset = interactionOffset,
             interactiveDescription = interactiveDescription,
             includeInNodeGraph = includeInNodeGraph,
             componentType = typeOptions != null ? typeOptions.ComponentType : null,

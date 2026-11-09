@@ -114,7 +114,7 @@ namespace Player
             {
                 if (target == null) yield break;
 
-                currentDestination = target.transform.position;
+                currentDestination = target.transform.position + (Vector3)target.InteractionOffset;
                 main.MovementSystem.SetNewDestination(
                     currentDestination,
                     currentStoppingDistance,
