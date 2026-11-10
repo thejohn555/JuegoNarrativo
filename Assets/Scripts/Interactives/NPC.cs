@@ -21,6 +21,7 @@ namespace Interactives
 
         [Header("Dialogues")]
         [SerializeField] private RuntimeDialogueGraph currentGraph;
+        [SerializeField] private RuntimeDialogueGraph barkGraph;
         [HideInInspector]public RuntimeDialogueGraph CurrentGraph => currentGraph;//Nuevo
         [SerializeField] private Color npcTextColor = Color.white;
         [SerializeField] private List<DialogueState> alternativeStates;
@@ -93,6 +94,30 @@ namespace Interactives
                 Debug.Log("Incio dialogo");
                 DialogueManager.Instance.StartDialogue(currentGraph, data);
             }
+        }
+
+        [ContextMenu("Testear Bark (Monólogo)")]
+        public void TestBark()
+        {
+            TriggerBark();
+        }
+        public void TriggerBark()
+        {
+            if (barkGraph == null) return;
+
+            DialogueData data = new DialogueData();
+
+            data.isDialogue = false;
+
+            data.moveCamera = false;
+            data.zoomCamera = false;
+
+            data.speakers = new Dictionary<string, SpeakerData>
+            {
+                { npcID, new SpeakerData { transform = this.transform, textColor = npcTextColor } }
+            };
+
+            DialogueManager.Instance.StartDialogue(barkGraph, data);
         }
 
         protected override void OnDrawGizmosSelected()

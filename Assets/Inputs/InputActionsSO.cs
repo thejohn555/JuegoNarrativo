@@ -54,13 +54,15 @@ public class InputActionsSO : ScriptableObject, NewInputActions.IGamePlayActions
         currentMap = newMap;
         currentMap?.Enable();
         inputActions.Global.Enable();
-        //Debug.Log($"Mapa cambiado, actual: {currentMap}");
-        Debug.Log(currentMap?.ToString());
+        Debug.Log($"Mapa cambiado, actual: {currentMap?.ToString()}");
     }
 
     private void OnDialogueStarted(OnDialogueDataEvent ev)
     {
-        SwitchMap(inputActions.UI);
+        if (ev.DialogueData.isDialogue)
+        {
+            SwitchMap(inputActions.UI);
+        }
     }
 
     private void OnDialogueEnded(OnDialogueEndedEvent ev)
@@ -99,7 +101,7 @@ public class InputActionsSO : ScriptableObject, NewInputActions.IGamePlayActions
 
     public void OnNextDialogue(InputAction.CallbackContext context)
     {
-        if (context.action.actionMap.name != "UI") return;
+        //if (context.action.actionMap.name != "UI") return;
         if (context.started)
         {
             EventBus.Publish(new OnSkipDialogueEvent());

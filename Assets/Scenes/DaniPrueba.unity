@@ -485,7 +485,7 @@ GameObject:
   m_Component:
   - component: {fileID: 194907091}
   m_Layer: 0
-  m_Name: '------------------Personajes---------------------'
+  m_Name: ------------------Personajes---------------------
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1163,12 +1163,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Interactives.NPC
   <InteractionDistance>k__BackingField: 3
-  <VisualOffset>k__BackingField: {x: 0, y: 0}
+  <InteractionOffset>k__BackingField: {x: 0, y: 0}
   showInteractionGizmo: 1
   description: {fileID: 0}
   interactionCursor: {fileID: 2800000, guid: 79afe8cc60f842a47930fd91a12b7616, type: 3}
   npcID: Bartender
   currentGraph: {fileID: 3965311268370046156, guid: 90689aa7def82764bbd6057193c8bf4d, type: 3}
+  barkGraph: {fileID: 0}
   npcTextColor: {r: 0.18035007, g: 1, b: 0, a: 1}
   alternativeStates: []
   cameraMove: 0
@@ -1935,7 +1936,7 @@ GameObject:
   m_Component:
   - component: {fileID: 888916169}
   m_Layer: 0
-  m_Name: '------------------Props---------------------------'
+  m_Name: ------------------Props---------------------------
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2508,7 +2509,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1731805365}
   m_Layer: 0
-  m_Name: '-----------------Objetos---------------------------'
+  m_Name: -----------------Objetos---------------------------
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2595,7 +2596,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1760750165}
   m_Layer: 0
-  m_Name: '--------------------Canvas----------------------'
+  m_Name: --------------------Canvas----------------------
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2647,12 +2648,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Interactives.NPC
   <InteractionDistance>k__BackingField: 5
-  <VisualOffset>k__BackingField: {x: 0, y: 0}
+  <InteractionOffset>k__BackingField: {x: 0, y: 0}
   showInteractionGizmo: 1
   description: {fileID: 0}
   interactionCursor: {fileID: 0}
   npcID: Players
   currentGraph: {fileID: 3965311268370046156, guid: c2e400154645cb84eb209e898a7df579, type: 3}
+  barkGraph: {fileID: 0}
   npcTextColor: {r: 1, g: 0.51856637, b: 0, a: 1}
   alternativeStates: []
   cameraMove: 0
@@ -3093,7 +3095,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2068592876}
   m_Layer: 0
-  m_Name: '---------------------Managers------------------'
+  m_Name: ---------------------Managers------------------
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -31,20 +31,20 @@ public class DialogueUI : MonoBehaviour
 
     private void OnEnable()
     {
+        EventBus.Subscribe<OnDialogueDataEvent>(RecieveDialoguePositionData);
         EventBus.Subscribe<OnNodeDisplayedEvent>(OnNodeDisplayed);
         EventBus.Subscribe<OnDialogueStartedEvent>(ShowPanel);
         EventBus.Subscribe<OnDialogueEndedEvent>(HidePanel);
         EventBus.Subscribe<OnSkipDialogueEvent>(NextNode);
-        EventBus.Subscribe<OnDialogueDataEvent>(RecieveDialoguePositionData);
     }
 
     private void OnDisable()
     {
+        EventBus.UnSubscribe<OnDialogueDataEvent>(RecieveDialoguePositionData);
         EventBus.UnSubscribe<OnNodeDisplayedEvent>(OnNodeDisplayed);
         EventBus.UnSubscribe<OnDialogueStartedEvent>(ShowPanel);
         EventBus.UnSubscribe<OnDialogueEndedEvent>(HidePanel);
         EventBus.UnSubscribe<OnSkipDialogueEvent>(NextNode);
-        EventBus.UnSubscribe<OnDialogueDataEvent>(RecieveDialoguePositionData);
     }
 
     private void Awake()
@@ -66,6 +66,8 @@ public class DialogueUI : MonoBehaviour
     {
         if (currentNode == null) return;
 
+        if (!isDialogueMode) return;
+
         if (isWritingText)
         {
             if (typeWritingCoroutine != null) StopCoroutine(typeWritingCoroutine);
@@ -84,10 +86,16 @@ public class DialogueUI : MonoBehaviour
 
     private void RecieveDialoguePositionData(OnDialogueDataEvent ev)
     {
-        var data = ev.DialogueCameraData;
+        var data = ev.DialogueData;
 
         isDialogueMode = data.isDialogue;
         currentSpeakers = data.speakers;
+
+        if (currentNode != null)
+        {
+            UpdateActiveSpeaker(currentNode.SpeakerName);
+            UpdatePosition();
+        }
     }
 
     private void OnNodeDisplayed(OnNodeDisplayedEvent ev)
@@ -98,24 +106,59 @@ public class DialogueUI : MonoBehaviour
         currentNode = ev.Node;
         speakerText.text = ev.Node.SpeakerName;
 
-        if (currentSpeakers != null && currentSpeakers.TryGetValue(ev.Node.SpeakerName, out SpeakerData speakerData))
-        {
-            activeSpeakerTransform = speakerData.transform;
-            dialogueText.color = speakerData.textColor;
-        }
-        else
-        {
-            activeSpeakerTransform = null;
-            dialogueText.color = Color.white;
-        }
+        UpdateActiveSpeaker(ev.Node.SpeakerName);
+        UpdatePosition();
 
         ClearChoices();
         typeWritingCoroutine = StartCoroutine(TypeWrittingText(ev.Node.DialogueText, ev.Node.TextSpeed));
     }
 
+    private void UpdateActiveSpeaker(string speakerName)
+    {
+        if (string.IsNullOrEmpty(speakerName) || currentSpeakers == null)
+        {
+            activeSpeakerTransform = null;
+            dialogueText.color = Color.white;
+            return;
+        }
+
+        if (currentSpeakers.TryGetValue(speakerName, out SpeakerData speakerData))
+        {
+            activeSpeakerTransform = speakerData.transform;
+            dialogueText.color = speakerData.textColor;
+            return;
+        }
+
+        string trimmed = speakerName.Trim();
+        foreach (var pair in currentSpeakers)
+        {
+            if (string.Equals(pair.Key.Trim(), trimmed, System.StringComparison.OrdinalIgnoreCase))
+            {
+                activeSpeakerTransform = pair.Value.transform;
+                dialogueText.color = pair.Value.textColor;
+                return;
+            }
+        }
+
+        activeSpeakerTransform = null;
+        dialogueText.color = Color.white;
+    }
+
     private void Update()
     {
         if (!dialoguePanel.activeSelf) return;
+
+        if (activeSpeakerTransform == null && currentNode != null)
+        {
+            UpdateActiveSpeaker(currentNode.SpeakerName);
+        }
+
+        UpdatePosition();
+    }
+
+    private void UpdatePosition()
+    {
+        if (dialoguePanel == null || !dialoguePanel.activeSelf) return;
 
         RectTransform rect = dialoguePanel.GetComponent<RectTransform>();
 
@@ -125,14 +168,17 @@ public class DialogueUI : MonoBehaviour
             Vector2 screenPos = Camera.main.WorldToScreenPoint(worldTargetPos);
             RectTransform parentRect = rect.parent.GetComponent<RectTransform>();
 
-            RectTransformUtility.ScreenPointToLocalPointInRectangle(
-                parentRect,
-                screenPos,
-                null,
-                out Vector2 canvasLocalPos
-            );
+            if (parentRect != null)
+            {
+                RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                    parentRect,
+                    screenPos,
+                    null,
+                    out Vector2 canvasLocalPos
+                );
 
-            rect.localPosition = canvasLocalPos;
+                rect.localPosition = canvasLocalPos;
+            }
         }
         else
         {

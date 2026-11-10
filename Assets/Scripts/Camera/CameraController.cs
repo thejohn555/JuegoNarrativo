@@ -105,7 +105,7 @@ public class CameraController : MonoBehaviour
 
     private void DialogueStarted(OnDialogueDataEvent ev)
     {
-        EnterDialogueState(ev.DialogueCameraData);
+        EnterDialogueState(ev.DialogueData);
     }
 
     private void DialogueEnded(OnDialogueEndedEvent ev)
@@ -115,6 +115,12 @@ public class CameraController : MonoBehaviour
 
     private void EnterDialogueState(DialogueData data)
     {
+        if (!data.isDialogue)
+        {
+            EventBus.Publish(new OnDialogueStartedEvent());
+            return;
+        }
+
         isDialogue = true;
         stateBeforeDialogue = currentCameraState;
         cameraPosBeforeDialogue = transform.position;
@@ -152,6 +158,7 @@ public class CameraController : MonoBehaviour
 
     public void ExitDialogueState()
     {
+        if (!isDialogue) return;
         isDialogue = false;
 
         if (currentCameraState == CameraState.Dialogue && transform.position == cameraPosBeforeDialogue && cam.orthographicSize == defaultZoom)
