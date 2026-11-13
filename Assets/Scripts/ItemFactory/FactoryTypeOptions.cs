@@ -256,45 +256,31 @@ namespace ItemFactory
         public override Type ComponentType => typeof(Interactives.CollectableObject);
     
         private bool isCrafted;
-        private bool iconOnInventory;
-        private Sprite iconInventory;
         private GameObject ingredientA;
         private GameObject ingredientB;
     
         public override void DrawOptions()
         {
             EditorGUILayout.LabelField("Collectible Settings", EditorStyles.boldLabel);
-            
-            iconOnInventory = EditorGUILayout.Toggle("Change Inventory Icon?", iconOnInventory);
-            
-            if (iconOnInventory)
-            { 
-                EditorGUILayout.Space();
-                iconInventory = (Sprite)EditorGUILayout.ObjectField("Inventory Icon", iconInventory, typeof(Sprite), false);
-            }
-            
             isCrafted = EditorGUILayout.Toggle("Is this a craftable object?", isCrafted);
-            
-            if (isCrafted)
+        
+            if (!isCrafted)
             {
-                EditorGUILayout.Space();
-                ingredientA = (GameObject)EditorGUILayout.ObjectField("Ingredient A", ingredientA, typeof(GameObject), false);
-                ingredientB = (GameObject)EditorGUILayout.ObjectField("Ingredient B", ingredientB, typeof(GameObject), false);
-        
-                if (ingredientA == null)
-                {
-                    EditorGUILayout.HelpBox("Assign Ingredient A to create this crafted item.", MessageType.Warning);
-                }
-        
-                if (ingredientB == null)
-                {
-                    EditorGUILayout.HelpBox("Assign Ingredient B to create this crafted item.", MessageType.Warning);
-                }
-            
-                EditorGUILayout.Space();
+                return;  
             }
-            
-            return;
+
+            ingredientA = (GameObject)EditorGUILayout.ObjectField("Ingredient A", ingredientA, typeof(GameObject), false);
+            ingredientB = (GameObject)EditorGUILayout.ObjectField("Ingredient B", ingredientB, typeof(GameObject), false);
+        
+            if (ingredientA == null)
+            {
+                EditorGUILayout.HelpBox("Assign Ingredient A to create this crafted item.", MessageType.Warning);
+            }
+        
+            if (ingredientB == null)
+            {
+                EditorGUILayout.HelpBox("Assign Ingredient B to create this crafted item.", MessageType.Warning);
+            }
         }
 
         public override bool Validate(out string error)
