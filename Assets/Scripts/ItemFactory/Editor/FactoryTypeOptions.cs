@@ -197,6 +197,7 @@ namespace ItemFactory
 
     public sealed class CollectableObjectFactoryTypeOptions : FactoryTypeOptions
     {
+        private bool includeInNodeGraph;
         public override Type ComponentType => typeof(Interactives.CollectableObject);
 
         private bool isCrafted;
@@ -206,6 +207,7 @@ namespace ItemFactory
         public override void DrawOptions()
         {
             EditorGUILayout.LabelField("Collectible Settings", EditorStyles.boldLabel);
+            includeInNodeGraph = EditorGUILayout.Toggle("Include in NodeGraph", includeInNodeGraph);
             isCrafted = EditorGUILayout.Toggle("Is this a craftable object?", isCrafted);
 
             if (!isCrafted)
@@ -249,7 +251,9 @@ namespace ItemFactory
                 Debug.LogWarning("Factory: the collectible component was not found.", target);
                 return;
             }
-
+            if (!includeInNodeGraph) return;
+            DicitionaryFuntions.AddToDictionary(NodeTypes.ReferenceGo, target);
+        
             if (isCrafted)
             {
                 SerializedObject serializedCollectable = new SerializedObject(collectableObject);
