@@ -262,7 +262,6 @@ public class DialogueUI : MonoBehaviour
             dialogueText.maxVisibleCharacters = i;
             if (contador % 3 == 0)
             {
-                AudioManager.Instance.PlayDialogueSound();
                 contador = 0;
             }
 
