@@ -1,15 +1,8 @@
-using NUnit.Framework;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography;
 using UnityEngine;
 
 
 #region enums 
-public enum Levels
-{
-    Tabern
-}
 
 public enum SFX
 {
@@ -27,36 +20,24 @@ public class AudioManager : Singleton<AudioManager>
 {
     //SoundCompilations
     [Header("Sound Archive")]
-    [SerializeField] private Dictionary<Levels, AudioClip> ambience = new();
     [SerializeField] private Dictionary<Music,  AudioClip> music = new();
-    [SerializeField] private Dictionary<SFX, AudioClip> sfx = new();
+    [SerializeField] private Dictionary<SFX, AudioClip> playerSfx = new();
 
     //sources
-    private AudioSource sfxSource;
-    private AudioSource ambienceSource;
+    private AudioSource playerSfxSource;
     private AudioSource musicSource;
 
     public override void Awake()
     {
         base.Awake();
         musicSource = transform.GetChild (0).GetComponent<AudioSource> ();
-        ambienceSource = transform.GetChild(1).GetComponent<AudioSource> ();
-        sfxSource = transform.GetChild(2).GetComponent<AudioSource>();
+        playerSfxSource = transform.GetChild(1).GetComponent<AudioSource>();
     }
 
     void Start()
     {
-        PlayLevelAmbience(Levels.Tabern);
     }
 
-    public void PlayLevelAmbience(Levels name)
-    {
-        ambienceSource.clip = ambience[name];
-        if (musicSource.clip != null)
-        {
-            ambienceSource.Play();
-        }
-    }
 
     public void PlayMusic(Music name)
     {
@@ -71,7 +52,7 @@ public class AudioManager : Singleton<AudioManager>
     {
         if (musicSource.clip != null)
         {
-            sfxSource.PlayOneShot(sfx[name]);
+            playerSfxSource.PlayOneShot(playerSfx[name]);
         }
     }
     
