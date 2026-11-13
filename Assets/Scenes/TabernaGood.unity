@@ -1290,11 +1290,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e33248d3dc95ce644b3e454b6aeef9a3, type: 3}
---- !u!1 &870142766 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7221204262310958930, guid: e7afb3b40cc5e7c4080751ae063c8387, type: 3}
-  m_PrefabInstance: {fileID: 2118053628}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &884979000
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2701,6 +2696,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1584197028 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6892234697231474279, guid: 19c921ce8fa7d5f4aa789c4e41087ff9, type: 3}
+  m_PrefabInstance: {fileID: 1055405676}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1755926036
 GameObject:
   m_ObjectHideFlags: 0
@@ -3305,7 +3305,7 @@ PrefabInstance:
     - target: {fileID: 1387530801191521277, guid: 6a7aea6e28bbdbe47a20282e2680fd53, type: 3}
       propertyPath: inventoryPanel
       value: 
-      objectReference: {fileID: 870142766}
+      objectReference: {fileID: 1584197028}
     - target: {fileID: 4560181243465429824, guid: 6a7aea6e28bbdbe47a20282e2680fd53, type: 3}
       propertyPath: craftingRecipes.Array.data[0].resultIcon
       value: 
@@ -3789,11 +3789,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8100349546324434923, guid: 2b1c4c4ee9c56a74494212ea44706414, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.75
+      value: -0.1
       objectReference: {fileID: 0}
     - target: {fileID: 8100349546324434923, guid: 2b1c4c4ee9c56a74494212ea44706414, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.75
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8100349546324434923, guid: 2b1c4c4ee9c56a74494212ea44706414, type: 3}
       propertyPath: m_LocalPosition.z
