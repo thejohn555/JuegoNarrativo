@@ -1093,57 +1093,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8100349546324434923, guid: 2b1c4c4ee9c56a74494212ea44706414, type: 3}
   m_PrefabInstance: {fileID: 6691246503484209184}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &777704133 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6147220219749238926, guid: 508086dc3d285d845afebdf09c8b6cca, type: 3}
-  m_PrefabInstance: {fileID: 1448425910}
-  m_PrefabAsset: {fileID: 0}
---- !u!61 &777704137
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 777704133}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: -5.2611866, y: 0.024110794}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 40.97562, y: 10.788853}
-  m_EdgeRadius: 0
 --- !u!4 &809880918 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5823953157644755407, guid: 95f604d8a6b3a81439e2e09092fcd4a0, type: 3}
@@ -2551,10 +2500,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 704958490098690381, guid: 508086dc3d285d845afebdf09c8b6cca, type: 3}
-      propertyPath: showGrid
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6147220219749238926, guid: 508086dc3d285d845afebdf09c8b6cca, type: 3}
       propertyPath: m_Name
       value: NavegationGridManager
@@ -2599,14 +2544,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 2059469090617449330, guid: 508086dc3d285d845afebdf09c8b6cca, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6147220219749238926, guid: 508086dc3d285d845afebdf09c8b6cca, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 777704137}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 508086dc3d285d845afebdf09c8b6cca, type: 3}
 --- !u!1 &1533157867 stripped
 GameObject:
