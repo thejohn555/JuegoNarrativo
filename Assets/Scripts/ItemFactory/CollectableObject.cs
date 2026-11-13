@@ -1,6 +1,4 @@
 ﻿using Blueprints_arquitectura_Dani_.Runtime;
-using Unity.VisualScripting;
-using UnityEditor.Timeline.Actions;
 using UnityEngine;
 
 namespace Interactives
