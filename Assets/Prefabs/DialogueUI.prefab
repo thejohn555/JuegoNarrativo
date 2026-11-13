@@ -70,7 +70,7 @@ MonoBehaviour:
 '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c687f76f9518a7b4ba76fdb86e2e6ce3, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 8774149862743003448, guid: c687f76f9518a7b4ba76fdb86e2e6ce3, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -448,8 +448,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 141.12}
+  m_SizeDelta: {x: 0, y: 269.7368}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &652612342744485821
 CanvasRenderer:
@@ -472,14 +472,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.7176471}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 092761c7478bc8841853452b653cdddd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 343114eeb6d2cdd4d8f977e37edcf04b, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -650,6 +650,8 @@ MonoBehaviour:
   choiceContainer: {fileID: 4117954297087171400}
   buttonContainer: {fileID: 952832366095621154}
   choiceBackground: {fileID: 5554421091405497002}
+  shortPauseDelay: 0.3
+  longPauseDelay: 0.5
 --- !u!1 &9027980238069775757
 GameObject:
   m_ObjectHideFlags: 0
@@ -708,14 +710,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.8235294}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 343114eeb6d2cdd4d8f977e37edcf04b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -747,7 +749,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1739356031569189650, guid: f5273132cbd25cc42b313e3e096f1290, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1739356031569189650, guid: f5273132cbd25cc42b313e3e096f1290, type: 3}
       propertyPath: m_AnchorMin.x
@@ -755,7 +757,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1739356031569189650, guid: f5273132cbd25cc42b313e3e096f1290, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1739356031569189650, guid: f5273132cbd25cc42b313e3e096f1290, type: 3}
       propertyPath: m_SizeDelta.x
@@ -795,11 +797,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1739356031569189650, guid: f5273132cbd25cc42b313e3e096f1290, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 395.13535
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1739356031569189650, guid: f5273132cbd25cc42b313e3e096f1290, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -13.62535
+      value: -48.53755
       objectReference: {fileID: 0}
     - target: {fileID: 1739356031569189650, guid: f5273132cbd25cc42b313e3e096f1290, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

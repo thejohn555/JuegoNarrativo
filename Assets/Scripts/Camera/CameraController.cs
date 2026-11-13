@@ -3,6 +3,7 @@ using Assets.Scripts.EventBuses;
 using System;
 using EventBuses;
 using UnityEngine;
+using System.Collections;
 
 public class CameraController : MonoBehaviour
 {
@@ -38,7 +39,7 @@ public class CameraController : MonoBehaviour
     private float currentTargetZoom;
     private float currentSmoothTime;
     private bool isDialogue;
-
+    private Coroutine enterDialogueCoroutine;
     private void Awake()
     {
         cam = GetComponent<Camera>();
@@ -115,11 +116,40 @@ public class CameraController : MonoBehaviour
 
     private void EnterDialogueState(DialogueData data)
     {
-        if (!data.isDialogue)
+        if (!data.isDialogue) return;
+
+        if (enterDialogueCoroutine != null)
         {
-            EventBus.Publish(new OnDialogueStartedEvent());
-            return;
+            StopCoroutine(enterDialogueCoroutine);
         }
+
+        enterDialogueCoroutine = StartCoroutine(WaitAndApplyDialogueData(data));
+    }
+
+    private IEnumerator WaitAndApplyDialogueData(DialogueData data)
+    {
+        float maxWaitTime = 1.5f;
+        float elapsed = 0f;
+        float stopSpeedThreshold = 0.05f; 
+
+        Vector3 previousPos = transform.position;
+        yield return null;
+
+        while (currentCameraState == CameraState.Follow && elapsed < maxWaitTime)
+        {
+            float currentSpeed = Vector3.Distance(previousPos, transform.position) / Time.deltaTime;
+
+            if (currentSpeed <= stopSpeedThreshold)
+            {
+                break; 
+            }
+
+            previousPos = transform.position;
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        enterDialogueCoroutine = null;
 
         isDialogue = true;
         stateBeforeDialogue = currentCameraState;
@@ -143,6 +173,7 @@ public class CameraController : MonoBehaviour
         {
             currentTargetZoom = cam.orthographicSize;
         }
+
         currentSmoothTime = data.smoothTime;
 
         if (!data.moveCamera && !data.zoomCamera)
