@@ -116,7 +116,11 @@ public class CameraController : MonoBehaviour
 
     private void EnterDialogueState(DialogueData data)
     {
-        if (!data.isDialogue) return;
+        if (!data.isDialogue)
+        {
+            EventBus.Publish(new OnDialogueStartedEvent());
+            return;
+        }
 
         if (enterDialogueCoroutine != null)
         {
