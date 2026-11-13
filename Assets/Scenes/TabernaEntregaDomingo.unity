@@ -1045,7 +1045,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Interactives.NPC
   <InteractionDistance>k__BackingField: 3
   showInteractionGizmo: 1
-  description: {fileID: 0}
+  description: {fileID: 3965311268370046156, guid: d5dde4f164902424fa264115875f328b, type: 3}
   interactionCursor: {fileID: 2800000, guid: 79afe8cc60f842a47930fd91a12b7616, type: 3}
   npcID: Bartender
   currentGraph: {fileID: 3965311268370046156, guid: 90689aa7def82764bbd6057193c8bf4d, type: 3}
@@ -3282,6 +3282,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HeldItemController
   canvas: {fileID: 0}
   iconSize: {x: 64, y: 64}
+  inputs: {fileID: 0}
 --- !u!114 &2101573026
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3564,8 +3565,28 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1702278010567813986, guid: 75b04923cfca6cb49bea05976324d44b, type: 3}
+      propertyPath: npcTextColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1702278010567813986, guid: 75b04923cfca6cb49bea05976324d44b, type: 3}
+      propertyPath: npcTextColor.g
+      value: 0.6627451
+      objectReference: {fileID: 0}
+    - target: {fileID: 1702278010567813986, guid: 75b04923cfca6cb49bea05976324d44b, type: 3}
+      propertyPath: npcTextColor.r
+      value: 0.9607844
+      objectReference: {fileID: 0}
+    - target: {fileID: 1702278010567813986, guid: 75b04923cfca6cb49bea05976324d44b, type: 3}
+      propertyPath: interactionCursor
+      value: 
+      objectReference: {fileID: 2800000, guid: 79afe8cc60f842a47930fd91a12b7616, type: 3}
+    - target: {fileID: 1702278010567813986, guid: 75b04923cfca6cb49bea05976324d44b, type: 3}
       propertyPath: alternativeStates.Array.size
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1702278010567813986, guid: 75b04923cfca6cb49bea05976324d44b, type: 3}
+      propertyPath: <InteractionDistance>k__BackingField
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1702278010567813986, guid: 75b04923cfca6cb49bea05976324d44b, type: 3}
       propertyPath: alternativeStates.Array.data[1].StateID
@@ -3780,19 +3801,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2044255064766295679, guid: b2c503b2dc933a34db371e1d1d07cc7b, type: 3}
       propertyPath: m_Size.x
-      value: 1.3786116
+      value: 1.7972989
       objectReference: {fileID: 0}
     - target: {fileID: 2044255064766295679, guid: b2c503b2dc933a34db371e1d1d07cc7b, type: 3}
       propertyPath: m_Size.y
-      value: 3.0823617
+      value: 3.2917051
       objectReference: {fileID: 0}
     - target: {fileID: 2044255064766295679, guid: b2c503b2dc933a34db371e1d1d07cc7b, type: 3}
       propertyPath: m_Offset.x
-      value: 0.02704382
+      value: -0.18229985
       objectReference: {fileID: 0}
     - target: {fileID: 2044255064766295679, guid: b2c503b2dc933a34db371e1d1d07cc7b, type: 3}
       propertyPath: m_Offset.y
-      value: -0.013521731
+      value: 0.091150045
       objectReference: {fileID: 0}
     - target: {fileID: 3029910001886362865, guid: b2c503b2dc933a34db371e1d1d07cc7b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3873,7 +3894,7 @@ MonoBehaviour:
   cameraMove: 0
   zoomCamera: 0
   zoom: 0
-  npcTextColor: {r: 0, g: 0, b: 0, a: 0}
+  npcTextColor: {r: 1, g: 0, b: 0, a: 0}
   cameraOffset: {x: 0, y: 0, z: 0}
   npcID: KidnapperAle
 --- !u!1660057539 &9223372036854775807
