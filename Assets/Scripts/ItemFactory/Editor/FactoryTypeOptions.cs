@@ -10,7 +10,9 @@ namespace ItemFactory
     {
         public abstract Type ComponentType { get; }
 
-        public virtual void DrawOptions() { }
+        public virtual void DrawOptions()
+        {
+        }
 
         public virtual bool Validate(out string error)
         {
@@ -20,7 +22,7 @@ namespace ItemFactory
 
         public virtual void ConfigureCreatedObject(GameObject target)
         {
-        
+
         }
     }
 
@@ -32,13 +34,13 @@ namespace ItemFactory
 
     public sealed class TriggerFactoryTypeOptions : FactoryTypeOptions
     {
-        
+
         public override Type ComponentType => typeof(Interactives.Trigger);
-        
+
         public override void ConfigureCreatedObject(GameObject target)
         {
-            DicitionaryFuntions.AddToDictionary(NodeTypes.Trigger,target);
-            
+            DicitionaryFuntions.AddToDictionary(NodeTypes.Trigger, target);
+
         }
     }
 
@@ -70,12 +72,13 @@ namespace ItemFactory
         {
             includeInNodeGraph = EditorGUILayout.Toggle("Include in NodeGraph", includeInNodeGraph);
         }
+
         public override void ConfigureCreatedObject(GameObject target)
         {
-            DicitionaryFuntions.AddToDictionary(NodeTypes.Interactable,target);
+            DicitionaryFuntions.AddToDictionary(NodeTypes.Interactable, target);
             if (includeInNodeGraph)
             {
-                DicitionaryFuntions.AddToDictionary(NodeTypes.ReferenceInteractable,target);
+                DicitionaryFuntions.AddToDictionary(NodeTypes.ReferenceInteractable, target);
             }
         }
     }
@@ -85,12 +88,13 @@ namespace ItemFactory
         private string npcID = string.Empty;
         private bool hasDialogues;
         private RuntimeDialogueGraph currentGraph;
+
         private readonly System.Collections.Generic.List<Interactives.DialogueState> alternativeStates =
             new System.Collections.Generic.List<Interactives.DialogueState>();
 
         public override Type ComponentType => typeof(Interactives.NPC);
         private bool includeInNodeGraph;
-        
+
 
         public override void DrawOptions()
         {
@@ -120,13 +124,14 @@ namespace ItemFactory
                     alternativeStates.RemoveAt(i);
                     i--;
                 }
+
                 EditorGUILayout.EndVertical();
             }
 
             if (GUILayout.Button("Add alternative state"))
                 alternativeStates.Add(new Interactives.DialogueState());
-            
-            
+
+
         }
 
         public override bool Validate(out string error)
@@ -155,10 +160,11 @@ namespace ItemFactory
                 Debug.LogWarning("Factory: the NPC component was not found.", target);
                 return;
             }
-            DicitionaryFuntions.AddToDictionary(NodeTypes.InteractableNpc,target);
+
+            DicitionaryFuntions.AddToDictionary(NodeTypes.InteractableNpc, target);
             if (includeInNodeGraph)
             {
-                DicitionaryFuntions.AddToDictionary(NodeTypes.ReferenceNpc,target);
+                DicitionaryFuntions.AddToDictionary(NodeTypes.ReferenceNpc, target);
             }
 
             SerializedObject serializedNpc = new SerializedObject(npc);
@@ -182,38 +188,41 @@ namespace ItemFactory
                 stateProperty.FindPropertyRelative("DialogueGraph").objectReferenceValue =
                     alternativeStates[i].DialogueGraph;
             }
+
             serializedNpc.ApplyModifiedProperties();
             EditorUtility.SetDirty(npc);
-            
+
         }
     }
 
     public sealed class CollectableObjectFactoryTypeOptions : FactoryTypeOptions
     {
         public override Type ComponentType => typeof(Interactives.CollectableObject);
-    
+
         private bool isCrafted;
         private GameObject ingredientA;
         private GameObject ingredientB;
-    
+
         public override void DrawOptions()
         {
             EditorGUILayout.LabelField("Collectible Settings", EditorStyles.boldLabel);
             isCrafted = EditorGUILayout.Toggle("Is this a craftable object?", isCrafted);
-        
+
             if (!isCrafted)
             {
-                return;  
+                return;
             }
 
-            ingredientA = (GameObject)EditorGUILayout.ObjectField("Ingredient A", ingredientA, typeof(GameObject), false);
-            ingredientB = (GameObject)EditorGUILayout.ObjectField("Ingredient B", ingredientB, typeof(GameObject), false);
-        
+            ingredientA =
+                (GameObject)EditorGUILayout.ObjectField("Ingredient A", ingredientA, typeof(GameObject), false);
+            ingredientB =
+                (GameObject)EditorGUILayout.ObjectField("Ingredient B", ingredientB, typeof(GameObject), false);
+
             if (ingredientA == null)
             {
                 EditorGUILayout.HelpBox("Assign Ingredient A to create this crafted item.", MessageType.Warning);
             }
-        
+
             if (ingredientB == null)
             {
                 EditorGUILayout.HelpBox("Assign Ingredient B to create this crafted item.", MessageType.Warning);
@@ -227,7 +236,7 @@ namespace ItemFactory
                 error = "Assign both ingredients for the crafted item or disable this option.";
                 return false;
             }
-        
+
             error = null;
             return true;
         }
@@ -246,7 +255,7 @@ namespace ItemFactory
                 SerializedObject serializedCollectable = new SerializedObject(collectableObject);
                 SerializedProperty propA = serializedCollectable.FindProperty("ingredientA");
                 SerializedProperty propB = serializedCollectable.FindProperty("ingredientB");
-            
+
                 if (propA != null) propA.objectReferenceValue = ingredientA;
                 if (propB != null) propB.objectReferenceValue = ingredientB;
 
@@ -256,10 +265,9 @@ namespace ItemFactory
             }
         }
     }
-#endif
     public static class DicitionaryFuntions
     {
-        public static void AddToDictionary(NodeTypes type,GameObject target)
+        public static void AddToDictionary(NodeTypes type, GameObject target)
         {
             var manager = UnityEngine.Object.FindFirstObjectByType<BlueprintDictionaryManager>();
 
@@ -269,9 +277,9 @@ namespace ItemFactory
                 return;
             }
 
-            manager.AddToList(target,type);
+            manager.AddToList(target, type);
             UnityEditor.SceneManagement.EditorSceneManager.MarkSceneDirty(target.scene);
         }
     }
-    
 }
+#endif
