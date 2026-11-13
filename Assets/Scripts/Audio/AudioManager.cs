@@ -49,10 +49,13 @@ public class AudioManager : Singleton<AudioManager>
         PlayLevelAmbience(Levels.Tabern);
     }
 
-    public void PlayLevelAmbience(Levels level)
+    public void PlayLevelAmbience(Levels name)
     {
-        ambienceSource.clip = ambience[level];
-        ambienceSource.Play();
+        ambienceSource.clip = ambience[name];
+        if (musicSource.clip != null)
+        {
+            ambienceSource.Play();
+        }
     }
 
     public void PlayMusic(Music name)
@@ -66,7 +69,10 @@ public class AudioManager : Singleton<AudioManager>
 
     public void PlaySFX(SFX name)
     {
-        sfxSource.PlayOneShot(sfx[name]);
+        if (musicSource.clip != null)
+        {
+            sfxSource.PlayOneShot(sfx[name]);
+        }
     }
     
 }
