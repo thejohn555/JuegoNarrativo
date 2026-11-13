@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Nacho/Nacho(2).unity
-    guid: a12658232e5e3984ab9d4e6a013699a4
+    path: Assets/Scenes/DaniPrueba.unity
+    guid: 70b40ca1698477c47830accdd4acdd25
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
