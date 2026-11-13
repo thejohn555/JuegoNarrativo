@@ -187,7 +187,7 @@ public class HeldItemController : MonoBehaviour
             MoveIcon();
         }
         
-        if (HasHeldItem && Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame)
+        if (HasHeldItem && Mouse.current != null && Mouse.current.rightButton.wasPressedThisFrame)
         {
             Release();
         }
