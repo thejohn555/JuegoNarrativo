@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using Assets.Scripts.EventBuses;
 using Interactives;
+using Managers;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -17,14 +18,21 @@ namespace Player
         {
             main.EventBus.Subscribe<OnLeftMouseClick>(LeftMouseClicked);
             main.EventBus.Subscribe<OnRightMouseClick>(RightMouseClicked);
+            main.EventBus.Subscribe<OnSpaceBarClick>(SpaceBarClicked);
         }
 
         private void OnDisable()
         {
             main.EventBus.UnSubscribe<OnLeftMouseClick>(LeftMouseClicked);
             main.EventBus.UnSubscribe<OnRightMouseClick>(RightMouseClicked);
+            main.EventBus.UnSubscribe<OnSpaceBarClick>(SpaceBarClicked);
         }
 
+        private void SpaceBarClicked()
+        {
+            ItemInteractManager.Instance.SwapItems();
+        }
+        
         private void RightMouseClicked()
         {
             if (!TryGetClickedInteractive(out Interactive interactable) ||
@@ -106,7 +114,7 @@ namespace Player
             {
                 if (target == null) yield break;
 
-                currentDestination = target.transform.position;
+                currentDestination = target.transform.position + (Vector3)target.InteractionOffset;
                 main.MovementSystem.SetNewDestination(
                     currentDestination,
                     currentStoppingDistance,

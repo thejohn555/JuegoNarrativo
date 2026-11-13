@@ -60,6 +60,69 @@ namespace ItemFactory
         }
     }
 
+    public sealed class DoorFactoryTypeOptions : FactoryTypeOptions
+    {
+        private SceneAsset destinationScene;
+
+        public override Type ComponentType => typeof(Interactives.Door);
+
+        public override void DrawOptions()
+        {
+            EditorGUILayout.LabelField("Door Settings", EditorStyles.boldLabel);
+            destinationScene = (SceneAsset)EditorGUILayout.ObjectField(
+                "Destination scene", destinationScene, typeof(SceneAsset), false);
+
+            if (destinationScene == null)
+                return;
+
+            string path = AssetDatabase.GetAssetPath(destinationScene);
+            bool includedInBuild = Array.Exists(
+                EditorBuildSettings.scenes,
+                scene => scene.enabled && scene.path == path);
+            if (!includedInBuild)
+            {
+                EditorGUILayout.HelpBox(
+                    "This scene is not enabled in Build Settings. Add it there or the door cannot load it in a build.",
+                    MessageType.Warning);
+            }
+        }
+
+        public override bool Validate(out string error)
+        {
+            if (destinationScene == null)
+            {
+                error = "Select a destination scene for this door.";
+                return false;
+            }
+
+            error = null;
+            return true;
+        }
+
+        public override void ConfigureCreatedObject(GameObject target)
+        {
+            Interactives.Door door = target.GetComponent<Interactives.Door>();
+            if (door == null)
+            {
+                Debug.LogWarning("Factory: the Door component was not found.", target);
+                return;
+            }
+
+            SerializedObject serializedDoor = new SerializedObject(door);
+            SerializedProperty scenePathProperty = serializedDoor.FindProperty("destinationScenePath");
+            if (scenePathProperty == null)
+            {
+                Debug.LogWarning("Factory: the destination scene field was not found on Door.", target);
+                return;
+            }
+
+            Undo.RecordObject(door, "Configure Door");
+            scenePathProperty.stringValue = AssetDatabase.GetAssetPath(destinationScene);
+            serializedDoor.ApplyModifiedProperties();
+            EditorUtility.SetDirty(door);
+        }
+    }
+
 
     public sealed class InteractObjectFactoryTypeOptions : FactoryTypeOptions
     {

@@ -1,9 +1,11 @@
 ﻿using Assets.Scripts.Camera;
 using System;
 using System.Collections.Generic;
+using Managers;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityEngine.Serialization;
 
 namespace Interactives
 {
@@ -11,6 +13,8 @@ namespace Interactives
     public abstract class Interactive:MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
     {
         [field: SerializeField] public float InteractionDistance { get; private set; } = 1.5f;
+        [field: SerializeField, FormerlySerializedAs("<VisualOffset>k__BackingField")]
+        public Vector2 InteractionOffset { get; private set; } = Vector2.zero;
         [SerializeField] private bool showInteractionGizmo = true;
         public RuntimeDialogueGraph description;
         [SerializeField] protected Texture2D interactionCursor;
@@ -20,10 +24,20 @@ namespace Interactives
         {
         }
 
+        protected virtual void OnEnable()
+        {
+            ItemInteractManager.Instance.PublishItem(this);
+        }
+
         protected virtual void Start()
         {
             outline = GetComponent<Outliner>();
             outline.SwapOutline();
+        }
+
+        protected virtual void OnDisable()
+        {
+            ItemInteractManager.Instance.UnPublishItem(this);
         }
 
         protected virtual void OnDrawGizmosSelected()
@@ -31,7 +45,7 @@ namespace Interactives
             if (!showInteractionGizmo) return;
 
             Gizmos.color = Color.cyan;
-            Gizmos.DrawWireSphere(transform.position, InteractionDistance);
+            Gizmos.DrawWireSphere(transform.position + (Vector3)InteractionOffset, InteractionDistance);
         }
 
         public abstract void Interact(GameObject interactor);
@@ -67,7 +81,13 @@ namespace Interactives
         {
             //Cambio del cursor
             if (!IsInteractable) return;
-             Cursor.SetCursor(interactionCursor, new Vector2(0.5f, 0.5f), CursorMode.Auto);
+            Cursor.SetCursor(interactionCursor, new Vector2(0.5f, 0.5f), CursorMode.Auto);
+            UseOutliner(false);
+        }
+
+        public void UseOutliner(bool active)
+        {
+            outline.SetInteractionHighlight(active);
             outline.SwapOutline();
         }
 
@@ -76,7 +96,7 @@ namespace Interactives
             //Cambio del cursor
             if (!IsInteractable) return;
             Cursor.SetCursor(null, new Vector2(0.5f,0.5f), CursorMode.Auto);
-            outline.SwapOutline();
+            UseOutliner(false);
         }
         public void SetInteractable(bool value)//Nuevo hecho por Nacho
         {

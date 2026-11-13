@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using Managers;
 using Navigation;
 using Player;
 using UnityEngine;
@@ -14,7 +16,7 @@ public class PlayerMovementSystem : PlayerSystem
     [SerializeField] private float distanceForMaxVelocity = 5f;
 
     [Header("Pathfinding")]
-    [SerializeField] private Pathfinding2D pathfinding;
+    private Pathfinding2D pathfinding;
 
     private float stoppingDistance;
     private float currentVelocity;
@@ -28,6 +30,11 @@ public class PlayerMovementSystem : PlayerSystem
     public bool IsMoving => isMoving;
     public bool DestinationReached => destinationReached;
 
+    private void Start()
+    {
+        CachePathfinding();
+    }
+
     public void SetNewDestination(
         Vector3 destination,
         float stoppingDistance,
@@ -40,6 +47,15 @@ public class PlayerMovementSystem : PlayerSystem
 
         this.stoppingDistance = stoppingDistance;
         destinationPoint = destination;
+
+        if (pathfinding == null || pathfinding.Grid == null || pathfinding.Grid.Grid == null)
+            CachePathfinding();
+
+        if (pathfinding == null || pathfinding.Grid == null || pathfinding.Grid.Grid == null)
+        {
+            Debug.LogError("Cannot set destination because pathfinding or its grid is not initialized.", this);
+            return;
+        }
 
         if (recalculateVelocity)
         {
@@ -67,6 +83,12 @@ public class PlayerMovementSystem : PlayerSystem
 
         currentWaypointIndex = 0;
         isMoving = true;
+    }
+
+    private void CachePathfinding()
+    {
+        NavigationManager manager = NavigationManager.Instance;
+        pathfinding = manager != null ? manager.Pathfinding : null;
     }
 
     private float CalculateVelocity(float distance)

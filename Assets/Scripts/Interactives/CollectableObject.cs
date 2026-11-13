@@ -37,7 +37,6 @@ namespace Interactives
                     BlueprintsEventManager.Instance.GetLastGuid(guid);//Nuevo
                     BlueprintsEventManager.Instance.Raise(NodeTypes.OnItemColleted,this.gameObject);
                     Destroy(gameObject);
-                    AudioManager.Instance.PlaySFX(AudioManager.Instance.collectObjectSound, 0.7f);
                 }
                 else
                 {

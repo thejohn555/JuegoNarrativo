@@ -2,7 +2,7 @@
 using Navigation;
 using UnityEngine;
 
-public class Pathfinding2D : MonoBehaviour
+public class Pathfinding2D
 {
     [Header("Path Test")]
     [SerializeField] private Transform startPoint;
@@ -10,8 +10,8 @@ public class Pathfinding2D : MonoBehaviour
     [SerializeField] private bool showPath = true;
 
     private List<NodeGrid> currentPath;
-    
-    [SerializeField] private Grid2D grid;
+
+    [field: SerializeField] public Grid2D Grid { get; set; }
 
     public List<NodeGrid> FindPathToInteractionRange(
         Vector2 startPosition,
@@ -20,11 +20,11 @@ public class Pathfinding2D : MonoBehaviour
         out Vector2 reachablePosition)
     {
         reachablePosition = targetPosition;
-        if (grid == null || grid.Grid == null)
+        if (Grid == null || Grid.Grid == null)
             return null;
 
         List<NodeGrid> candidates = new List<NodeGrid>();
-        NodeGrid[,] nodes = grid.Grid;
+        NodeGrid[,] nodes = Grid.Grid;
         for (int x = 0; x < nodes.GetLength(0); x++)
         for (int y = 0; y < nodes.GetLength(1); y++)
         {
@@ -54,8 +54,8 @@ public class Pathfinding2D : MonoBehaviour
         Vector2 startPosition,
         Vector2 targetPosition)
     {
-        NodeGrid startNode = grid.NodeFromWorldPosition(startPosition);
-        NodeGrid targetNode = grid.NodeFromWorldPosition(targetPosition);
+        NodeGrid startNode = Grid.NodeFromWorldPosition(startPosition);
+        NodeGrid targetNode = Grid.NodeFromWorldPosition(targetPosition);
 
         // No buscamos rutas hacia celdas no transitables.
         if (!startNode.Walkable || !targetNode.Walkable)
@@ -106,7 +106,7 @@ public class Pathfinding2D : MonoBehaviour
                 return smoothedPath;
             }
 
-            foreach (NodeGrid neighbour in grid.GetNeighbours(currentNode))
+            foreach (NodeGrid neighbour in Grid.GetNeighbours(currentNode))
             {
                 if (closedSet.Contains(neighbour))
                     continue;
@@ -192,7 +192,7 @@ public class Pathfinding2D : MonoBehaviour
             // Buscamos desde el último nodo hacia el primero.
             for (int i = path.Count - 1; i >= currentIndex; i--)
             {
-                if (grid.CanWalkThroughGrid(
+                if (Grid.CanWalkThroughGrid(
                         currentPosition,
                         path[i].WorldPosition))
                 {

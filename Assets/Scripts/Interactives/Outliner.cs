@@ -6,6 +6,10 @@ public class Outliner : MonoBehaviour
     [SerializeField]
     private Color outlineColor = Color.white;
 
+    [SerializeField]
+    private Color interactionOutlineColor = Color.yellow;
+    private bool interactionHighlight;
+
     [SerializeField, Range(1f, 1.5f)]
     private float outlineWidth = 1.1f;
 
@@ -21,6 +25,22 @@ public class Outliner : MonoBehaviour
             outlineColor = value;
             UpdateOutline();
         }
+    }
+
+    public Color InteractionOutlineColor
+    {
+        get => interactionOutlineColor;
+        set
+        {
+            interactionOutlineColor = value;
+            UpdateOutline();
+        }
+    }
+
+    public void SetInteractionHighlight(bool active)
+    {
+        interactionHighlight = active;
+        UpdateOutline();
     }
 
     public float OutlineWidth
@@ -86,7 +106,7 @@ public class Outliner : MonoBehaviour
         if (outlineRenderer == null)
             return;
 
-        outlineRenderer.color = outlineColor;
+        outlineRenderer.color = interactionHighlight ? interactionOutlineColor : outlineColor;
 
         outlineRenderer.transform.localScale =
             Vector3.one * Mathf.Max(1f, outlineWidth);

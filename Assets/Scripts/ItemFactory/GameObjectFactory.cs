@@ -98,6 +98,7 @@ public static class GameObjectFactory
                     if (go.TryGetComponent(out Interactives.Interactive interactive))
                     {
                         ConfigureInteractionDistance(interactive, config.outlineinteractionDistane);
+                        ConfigureInteractionOffset(interactive, config.interactionOffset);
                         ConfigureDescription(interactive, config.interactiveDescription);
                     }
                 }
@@ -120,6 +121,7 @@ public static class GameObjectFactory
             if (outliner != null)
             {
                 outliner.OutlineColor = config.outlineColor;
+                outliner.InteractionOutlineColor = config.interactionOutlineColor;
                 outliner.OutlineWidth = config.outlineScale;
                 EditorUtility.SetDirty(outliner);
             }
@@ -166,6 +168,29 @@ public static class GameObjectFactory
     {
         Undo.RecordObject(interactive, "Set interactive description");
         interactive.description = description;
+        EditorUtility.SetDirty(interactive);
+    }
+
+    private static void ConfigureInteractionOffset(
+        Interactives.Interactive interactive,
+        Vector2 interactionOffset)
+    {
+        const string interactionOffsetPropertyName = "<InteractionOffset>k__BackingField";
+        SerializedObject serializedInteractive = new SerializedObject(interactive);
+        SerializedProperty interactionOffsetProperty =
+            serializedInteractive.FindProperty(interactionOffsetPropertyName);
+
+        if (interactionOffsetProperty == null)
+        {
+            Debug.LogWarning(
+                "Factory: the serialized InteractionOffset field was not found on Interactive.",
+                interactive);
+            return;
+        }
+
+        Undo.RecordObject(interactive, "Set interaction offset");
+        interactionOffsetProperty.vector2Value = interactionOffset;
+        serializedInteractive.ApplyModifiedProperties();
         EditorUtility.SetDirty(interactive);
     }
 
