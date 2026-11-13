@@ -485,7 +485,7 @@ GameObject:
   m_Component:
   - component: {fileID: 194907091}
   m_Layer: 0
-  m_Name: '------------------Personajes---------------------'
+  m_Name: ------------------Personajes---------------------
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1935,7 +1935,7 @@ GameObject:
   m_Component:
   - component: {fileID: 888916169}
   m_Layer: 0
-  m_Name: '------------------Props---------------------------'
+  m_Name: ------------------Props---------------------------
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2508,7 +2508,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1731805365}
   m_Layer: 0
-  m_Name: '-----------------Objetos---------------------------'
+  m_Name: -----------------Objetos---------------------------
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2595,7 +2595,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1760750165}
   m_Layer: 0
-  m_Name: '--------------------Canvas----------------------'
+  m_Name: --------------------Canvas----------------------
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3093,7 +3093,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2068592876}
   m_Layer: 0
-  m_Name: '---------------------Managers------------------'
+  m_Name: ---------------------Managers------------------
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -35,7 +35,8 @@ namespace Interactives
 
         protected virtual void OnDisable()
         {
-            ItemInteractManager.Instance.UnPublishItem(this);
+            if (ItemInteractManager.TryGetInstance(out var manager))
+                manager.UnPublishItem(this);
         }
 
         protected virtual void OnDrawGizmosSelected()

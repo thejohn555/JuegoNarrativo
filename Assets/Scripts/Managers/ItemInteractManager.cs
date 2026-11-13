@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Interactives;
 
 namespace Managers
@@ -23,6 +24,11 @@ namespace Managers
             {
                 obj.UseOutliner(true);
             }
+        }
+
+        private void OnDestroy()
+        {
+            objectsInteractives.Clear();
         }
     }
 }

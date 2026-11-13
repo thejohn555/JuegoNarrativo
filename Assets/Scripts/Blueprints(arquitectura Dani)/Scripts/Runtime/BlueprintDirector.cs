@@ -79,16 +79,33 @@ namespace Blueprints_arquitectura_Dani_.Runtime
             if (BlueprintsEventManager.Instance != null)
                 BlueprintsEventManager.Instance.OnEvent += HandleEvent;
             string actualevel = SceneManager.GetActiveScene().name;
-            foreach (var RuntimeGraph in RuntimeGraph)
+            foreach (var graph in RuntimeGraph)
             {
-                if (actualevel != RuntimeGraph.sceneName)
+                if (graph == null)
+                {
+                    Debug.LogError("Hay un elemento vacío en el array RuntimeGraph del BlueprintDirector.", this);
+                    continue;
+                }
+
+                if (actualevel != graph.sceneName)
                 {
                     Debug.LogError("El nivel asignado y el actual son distintos");
                     return;
                 }
 
-                foreach (var node in RuntimeGraph.RuntimeNodes)
+                if (graph.RuntimeNodes == null)
                 {
+                    Debug.LogError($"El grafo '{graph.name}' no tiene RuntimeNodes inicializado.", graph);
+                    continue;
+                }
+
+                foreach (var node in graph.RuntimeNodes)
+                {
+                    if (node == null || node.Nodes == null)
+                    {
+                        Debug.LogError($"El grafo '{graph.name}' contiene un nodo vacío o sin Nodes.", graph);
+                        continue;
+                    }
                     if (node.Nodes.Count == 0)
                         continue;
                     int idx = 0;
