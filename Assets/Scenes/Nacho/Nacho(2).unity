@@ -1183,11 +1183,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Interactives.NPC
   <InteractionDistance>k__BackingField: 3
+  <InteractionOffset>k__BackingField: {x: 0, y: 0}
   showInteractionGizmo: 1
   description: {fileID: 0}
   interactionCursor: {fileID: 2800000, guid: 79afe8cc60f842a47930fd91a12b7616, type: 3}
   npcID: Bartender
   currentGraph: {fileID: 3965311268370046156, guid: 90689aa7def82764bbd6057193c8bf4d, type: 3}
+  barkGraph: {fileID: 0}
   npcTextColor: {r: 0.18035007, g: 1, b: 0, a: 1}
   alternativeStates: []
   cameraMove: 0
@@ -1209,6 +1211,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Outliner
   outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  interactionOutlineColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   outlineWidth: 1.1
 --- !u!4 &413055243
 Transform:
@@ -1290,63 +1293,6 @@ MonoBehaviour:
   resultObjectName: Ale
   playerMovementSystem: {fileID: 48978553}
   interactionDistance: 2.7
---- !u!1001 &457771799
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 7914966962523142542, guid: fa144ac6287c76248a238e07cdc7ef29, type: 3}
-      propertyPath: m_Name
-      value: AudioManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 9107908841152529552, guid: fa144ac6287c76248a238e07cdc7ef29, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -5.1769
-      objectReference: {fileID: 0}
-    - target: {fileID: 9107908841152529552, guid: fa144ac6287c76248a238e07cdc7ef29, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -5.65218
-      objectReference: {fileID: 0}
-    - target: {fileID: 9107908841152529552, guid: fa144ac6287c76248a238e07cdc7ef29, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9107908841152529552, guid: fa144ac6287c76248a238e07cdc7ef29, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9107908841152529552, guid: fa144ac6287c76248a238e07cdc7ef29, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9107908841152529552, guid: fa144ac6287c76248a238e07cdc7ef29, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9107908841152529552, guid: fa144ac6287c76248a238e07cdc7ef29, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9107908841152529552, guid: fa144ac6287c76248a238e07cdc7ef29, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9107908841152529552, guid: fa144ac6287c76248a238e07cdc7ef29, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9107908841152529552, guid: fa144ac6287c76248a238e07cdc7ef29, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: fa144ac6287c76248a238e07cdc7ef29, type: 3}
 --- !u!1 &634410677 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 310697994997330669, guid: b2c503b2dc933a34db371e1d1d07cc7b, type: 3}
@@ -1698,7 +1644,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5098650879914241608, guid: f8d7f886628289546b13363460367872, type: 3}
       propertyPath: RuntimeGraph.Array.size
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5098650879914241608, guid: f8d7f886628289546b13363460367872, type: 3}
       propertyPath: 'RuntimeGraph.Array.data[0]'
@@ -1707,7 +1653,7 @@ PrefabInstance:
     - target: {fileID: 5098650879914241608, guid: f8d7f886628289546b13363460367872, type: 3}
       propertyPath: 'RuntimeGraph.Array.data[1]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: -1759291010081333320, guid: 27885c4014594334490bae1e7de7776e, type: 3}
     - target: {fileID: 5098650879914241608, guid: f8d7f886628289546b13363460367872, type: 3}
       propertyPath: 'RuntimeGraph.Array.data[2]'
       value: 
@@ -2059,11 +2005,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Interactives.NPC
   <InteractionDistance>k__BackingField: 2
+  <InteractionOffset>k__BackingField: {x: 0, y: 0}
   showInteractionGizmo: 1
   description: {fileID: 0}
   interactionCursor: {fileID: 0}
   npcID: Bartender
   currentGraph: {fileID: 3965311268370046156, guid: 90689aa7def82764bbd6057193c8bf4d, type: 3}
+  barkGraph: {fileID: 0}
   npcTextColor: {r: 1, g: 1, b: 1, a: 1}
   alternativeStates:
   - StateID: 
@@ -2087,6 +2035,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Outliner
   outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  interactionOutlineColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   outlineWidth: 1.1
 --- !u!4 &846977937
 Transform:
@@ -2820,7 +2769,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Grid2D
   cellSize: 0.3
-  areaCollider: {fileID: 1836895569}
   floorMask:
     serializedVersion: 2
     m_Bits: 8
@@ -2929,11 +2877,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Interactives.NPC
   <InteractionDistance>k__BackingField: 5
+  <InteractionOffset>k__BackingField: {x: 0, y: 0}
   showInteractionGizmo: 1
   description: {fileID: 0}
   interactionCursor: {fileID: 0}
   npcID: Players
   currentGraph: {fileID: 3965311268370046156, guid: c2e400154645cb84eb209e898a7df579, type: 3}
+  barkGraph: {fileID: 0}
   npcTextColor: {r: 1, g: 0.51856637, b: 0, a: 1}
   alternativeStates: []
   cameraMove: 0
@@ -2955,6 +2905,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Outliner
   outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  interactionOutlineColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   outlineWidth: 1.1
 --- !u!4 &1956084573
 Transform:
@@ -3477,6 +3428,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HeldItemController
   canvas: {fileID: 0}
   iconSize: {x: 64, y: 64}
+  inputs: {fileID: 0}
 --- !u!114 &2101573026
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3912,7 +3864,6 @@ SceneRoots:
   - {fileID: 778836795}
   - {fileID: 2068592876}
   - {fileID: 715877564}
-  - {fileID: 457771799}
   - {fileID: 2101573023}
   - {fileID: 2124073563}
   - {fileID: 1836895568}

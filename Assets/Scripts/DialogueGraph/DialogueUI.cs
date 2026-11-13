@@ -18,6 +18,9 @@ public class DialogueUI : MonoBehaviour
     [SerializeField] private Transform buttonContainer;
     [SerializeField] private Image choiceBackground;
 
+    [SerializeField] private float shortPauseDelay = 0.3f;
+    [SerializeField] private float longPauseDelay = 0.5f;
+
     private RuntimeDialogueNode currentNode;
     private bool isWritingText;
     private string currentFullText;
@@ -31,20 +34,20 @@ public class DialogueUI : MonoBehaviour
 
     private void OnEnable()
     {
+        EventBus.Subscribe<OnDialogueDataEvent>(RecieveDialoguePositionData);
         EventBus.Subscribe<OnNodeDisplayedEvent>(OnNodeDisplayed);
         EventBus.Subscribe<OnDialogueStartedEvent>(ShowPanel);
         EventBus.Subscribe<OnDialogueEndedEvent>(HidePanel);
         EventBus.Subscribe<OnSkipDialogueEvent>(NextNode);
-        EventBus.Subscribe<OnDialogueDataEvent>(RecieveDialoguePositionData);
     }
 
     private void OnDisable()
     {
+        EventBus.UnSubscribe<OnDialogueDataEvent>(RecieveDialoguePositionData);
         EventBus.UnSubscribe<OnNodeDisplayedEvent>(OnNodeDisplayed);
         EventBus.UnSubscribe<OnDialogueStartedEvent>(ShowPanel);
         EventBus.UnSubscribe<OnDialogueEndedEvent>(HidePanel);
         EventBus.UnSubscribe<OnSkipDialogueEvent>(NextNode);
-        EventBus.UnSubscribe<OnDialogueDataEvent>(RecieveDialoguePositionData);
     }
 
     private void Awake()
@@ -66,6 +69,8 @@ public class DialogueUI : MonoBehaviour
     {
         if (currentNode == null) return;
 
+        if (!isDialogueMode) return;
+
         if (isWritingText)
         {
             if (typeWritingCoroutine != null) StopCoroutine(typeWritingCoroutine);
@@ -84,10 +89,16 @@ public class DialogueUI : MonoBehaviour
 
     private void RecieveDialoguePositionData(OnDialogueDataEvent ev)
     {
-        var data = ev.DialogueCameraData;
+        var data = ev.DialogueData;
 
         isDialogueMode = data.isDialogue;
         currentSpeakers = data.speakers;
+
+        if (currentNode != null)
+        {
+            UpdateActiveSpeaker(currentNode.SpeakerName);
+            UpdatePosition();
+        }
     }
 
     private void OnNodeDisplayed(OnNodeDisplayedEvent ev)
@@ -98,24 +109,59 @@ public class DialogueUI : MonoBehaviour
         currentNode = ev.Node;
         speakerText.text = ev.Node.SpeakerName;
 
-        if (currentSpeakers != null && currentSpeakers.TryGetValue(ev.Node.SpeakerName, out SpeakerData speakerData))
-        {
-            activeSpeakerTransform = speakerData.transform;
-            dialogueText.color = speakerData.textColor;
-        }
-        else
-        {
-            activeSpeakerTransform = null;
-            dialogueText.color = Color.white;
-        }
+        UpdateActiveSpeaker(ev.Node.SpeakerName);
+        UpdatePosition();
 
         ClearChoices();
         typeWritingCoroutine = StartCoroutine(TypeWrittingText(ev.Node.DialogueText, ev.Node.TextSpeed));
     }
 
+    private void UpdateActiveSpeaker(string speakerName)
+    {
+        if (string.IsNullOrEmpty(speakerName) || currentSpeakers == null)
+        {
+            activeSpeakerTransform = null;
+            dialogueText.color = Color.white;
+            return;
+        }
+
+        if (currentSpeakers.TryGetValue(speakerName, out SpeakerData speakerData))
+        {
+            activeSpeakerTransform = speakerData.transform;
+            dialogueText.color = speakerData.textColor;
+            return;
+        }
+
+        string trimmed = speakerName.Trim();
+        foreach (var pair in currentSpeakers)
+        {
+            if (string.Equals(pair.Key.Trim(), trimmed, System.StringComparison.OrdinalIgnoreCase))
+            {
+                activeSpeakerTransform = pair.Value.transform;
+                dialogueText.color = pair.Value.textColor;
+                return;
+            }
+        }
+
+        activeSpeakerTransform = null;
+        dialogueText.color = Color.white;
+    }
+
     private void Update()
     {
         if (!dialoguePanel.activeSelf) return;
+
+        if (activeSpeakerTransform == null && currentNode != null)
+        {
+            UpdateActiveSpeaker(currentNode.SpeakerName);
+        }
+
+        UpdatePosition();
+    }
+
+    private void UpdatePosition()
+    {
+        if (dialoguePanel == null || !dialoguePanel.activeSelf) return;
 
         RectTransform rect = dialoguePanel.GetComponent<RectTransform>();
 
@@ -125,14 +171,17 @@ public class DialogueUI : MonoBehaviour
             Vector2 screenPos = Camera.main.WorldToScreenPoint(worldTargetPos);
             RectTransform parentRect = rect.parent.GetComponent<RectTransform>();
 
-            RectTransformUtility.ScreenPointToLocalPointInRectangle(
-                parentRect,
-                screenPos,
-                null,
-                out Vector2 canvasLocalPos
-            );
+            if (parentRect != null)
+            {
+                RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                    parentRect,
+                    screenPos,
+                    null,
+                    out Vector2 canvasLocalPos
+                );
 
-            rect.localPosition = canvasLocalPos;
+                rect.localPosition = canvasLocalPos;
+            }
         }
         else
         {
@@ -197,6 +246,13 @@ public class DialogueUI : MonoBehaviour
 
         yield return null;
 
+        while (!dialoguePanel.activeInHierarchy)
+        {
+            yield return null;
+        }
+
+        dialogueText.ForceMeshUpdate();
+
         int totalCharacters = dialogueText.textInfo.characterCount;
         float delay = 1f / lettersPerSecond;
 
@@ -208,7 +264,21 @@ public class DialogueUI : MonoBehaviour
             {
                 contador = 0;
             }
-            yield return new WaitForSeconds(delay);
+
+            float currentDelay = delay;
+
+            if (i > 0 && i < totalCharacters)
+            {
+                char currentChar = dialogueText.textInfo.characterInfo[i - 1].character;
+                char nextChar = dialogueText.textInfo.characterInfo[i].character;
+
+                if (!IsPunctuationPause(nextChar))
+                {
+                    currentDelay += GetPunctuationPause(currentChar);
+                }
+            }
+
+            yield return new WaitForSeconds(currentDelay);
         }
 
         isWritingText = false;
@@ -217,6 +287,28 @@ public class DialogueUI : MonoBehaviour
         if (!isDialogueMode && (currentNode.Choices == null || currentNode.Choices.Count == 0))
         {
             autoCloseCoroutine = StartCoroutine(AutoCloseMonologue());
+        }
+    }
+
+    private bool IsPunctuationPause(char c)
+    {
+        return c == ',' || c == ';' || c == ':' || c == '.' || c == '!' || c == '?';
+    }
+
+    private float GetPunctuationPause(char c)
+    {
+        switch (c)
+        {
+            case ',':
+            case ';':
+            case ':':
+                return shortPauseDelay;
+            case '.':
+            case '!':
+            case '?':
+                return longPauseDelay;
+            default:
+                return 0f;
         }
     }
 

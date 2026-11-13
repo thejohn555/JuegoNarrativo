@@ -1,6 +1,5 @@
 ﻿using System;
 using Assets.Scripts.Camera;
-using Codice.Client.Common.Connection;
 using UnityEngine;
 
 namespace Blueprints_arquitectura_Dani_.Runtime
