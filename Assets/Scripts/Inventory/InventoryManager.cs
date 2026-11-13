@@ -87,10 +87,14 @@ public class InventoryManager : MonoBehaviour
         }
 
         inventorySlots = new InventoryItem[settings.rows * settings.columns];
-        
-        // Solo si no existe ya un panel previo, construimos uno nuevo
+
+#if UNITY_EDITOR
+        // Solo en el editor: construir el panel si no existe
         GameObject panel = InventoryBuilder.Build(settings);
         BindExistingPanel(panel);
+#else
+    Debug.LogError("InventoryManager: the inventory panel was not found in the scene. Build it in the editor before making a build.");
+#endif
     }
    
     public bool AddItem(string itemName, Sprite icon,string guid = null) //Nuevo
