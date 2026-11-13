@@ -18,6 +18,9 @@ public class DialogueUI : MonoBehaviour
     [SerializeField] private Transform buttonContainer;
     [SerializeField] private Image choiceBackground;
 
+    [SerializeField] private float shortPauseDelay = 0.3f;
+    [SerializeField] private float longPauseDelay = 0.5f;
+
     private RuntimeDialogueNode currentNode;
     private bool isWritingText;
     private string currentFullText;
@@ -243,6 +246,13 @@ public class DialogueUI : MonoBehaviour
 
         yield return null;
 
+        while (!dialoguePanel.activeInHierarchy)
+        {
+            yield return null;
+        }
+
+        dialogueText.ForceMeshUpdate();
+
         int totalCharacters = dialogueText.textInfo.characterCount;
         float delay = 1f / lettersPerSecond;
 
@@ -255,7 +265,21 @@ public class DialogueUI : MonoBehaviour
                 AudioManager.Instance.PlayDialogueSound();
                 contador = 0;
             }
-            yield return new WaitForSeconds(delay);
+
+            float currentDelay = delay;
+
+            if (i > 0 && i < totalCharacters)
+            {
+                char currentChar = dialogueText.textInfo.characterInfo[i - 1].character;
+                char nextChar = dialogueText.textInfo.characterInfo[i].character;
+
+                if (!IsPunctuationPause(nextChar))
+                {
+                    currentDelay += GetPunctuationPause(currentChar);
+                }
+            }
+
+            yield return new WaitForSeconds(currentDelay);
         }
 
         isWritingText = false;
@@ -264,6 +288,28 @@ public class DialogueUI : MonoBehaviour
         if (!isDialogueMode && (currentNode.Choices == null || currentNode.Choices.Count == 0))
         {
             autoCloseCoroutine = StartCoroutine(AutoCloseMonologue());
+        }
+    }
+
+    private bool IsPunctuationPause(char c)
+    {
+        return c == ',' || c == ';' || c == ':' || c == '.' || c == '!' || c == '?';
+    }
+
+    private float GetPunctuationPause(char c)
+    {
+        switch (c)
+        {
+            case ',':
+            case ';':
+            case ':':
+                return shortPauseDelay;
+            case '.':
+            case '!':
+            case '?':
+                return longPauseDelay;
+            default:
+                return 0f;
         }
     }
 
