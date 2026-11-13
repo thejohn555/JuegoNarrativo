@@ -11,4 +11,8 @@ namespace Blueprints_arquitectura_Dani_.Editor.Blueprints_arquitectura_Dani_.Edi
     [Node(categoryPath:"Nodes/TabernaGood/Nodes/StartNodes/InteractNpcNodes")]
     public class OnInteract_Npc_TabernaGood_Players : OnInteractNpcNode
     { public override string Key => "Players"; }
+    [Serializable]
+    [Node(categoryPath:"Nodes/TabernaGood/Nodes/StartNodes/InteractNpcNodes")]
+    public class OnInteract_Npc_TabernaGood_Kidnapper : OnInteractNpcNode
+    { public override string Key => "Kidnapper"; }
 }
