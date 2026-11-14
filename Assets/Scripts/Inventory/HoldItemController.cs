@@ -88,7 +88,7 @@ public class HeldItemController : MonoBehaviour
     }
 
     // Devuelve el objeto al inventario
-    public void Release()
+    public void Release(bool restoreMap = true)
     {
         if (!HasHeldItem)
         {
@@ -96,7 +96,7 @@ public class HeldItemController : MonoBehaviour
         }
 
         OnItemReleased?.Invoke(heldItemName);
-        ClearState();
+        ClearState(restoreMap);
     }
 
     // Gasta el objeto (ej. la llave abre la puerta)
@@ -106,17 +106,21 @@ public class HeldItemController : MonoBehaviour
         {
             return false;
         }
+
         int index = heldSlotIndex;
+
         ClearState();
+
         InventoryManager.Instance.ClearSlot(index);
-        //OnItemReleased?.Invoke("");
+
         return true;
     }
-    public void ClearState()
+    
+    public void ClearState(bool restoreMap = true)
     {
         heldSlotIndex = -1;
         heldItemName = null;
-        heldItemGuid = null; //Nuevo
+        heldItemGuid = null;
 
         if (iconObject != null)
         {
@@ -129,8 +133,8 @@ public class HeldItemController : MonoBehaviour
             InventoryManager.Instance.HeldSlotIndex = -1;
             InventoryManager.Instance.UpdateUI();
         }
-        
-        pendingMapRestore = true;
+
+        pendingMapRestore = restoreMap;
     }
 
     private void CreateIcon(Sprite sprite)
@@ -187,7 +191,7 @@ public class HeldItemController : MonoBehaviour
             MoveIcon();
         }
         
-        if (HasHeldItem && Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame)
+        if (HasHeldItem && Mouse.current != null && Mouse.current.rightButton.wasPressedThisFrame)
         {
             Release();
         }
