@@ -59,8 +59,8 @@ namespace Interactives
 
         private void HandleStateChange(OnNPCStateChangedEvent ev)
         {
-            Debug.LogError("Handeling");
-            Debug.Log($"Target NpcId: {ev.TargetNpcID}, Npc id:{npcID}");
+            // Debug.Log("Handeling");
+            // Debug.Log($"Target NpcId: {ev.TargetNpcID}, Npc id:{npcID}");
             if (ev.TargetNpcID != npcID) return;
 
             foreach (var state in alternativeStates)
