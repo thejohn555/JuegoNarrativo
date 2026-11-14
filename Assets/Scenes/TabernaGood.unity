@@ -3702,7 +3702,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4578883183671500963, guid: 2b1c4c4ee9c56a74494212ea44706414, type: 3}
       propertyPath: <InteractionOffset>k__BackingField.x
-      value: -1.32
+      value: -1.41
       objectReference: {fileID: 0}
     - target: {fileID: 4578883183671500963, guid: 2b1c4c4ee9c56a74494212ea44706414, type: 3}
       propertyPath: <InteractionOffset>k__BackingField.y
@@ -3738,7 +3738,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8100349546324434923, guid: 2b1c4c4ee9c56a74494212ea44706414, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 8100349546324434923, guid: 2b1c4c4ee9c56a74494212ea44706414, type: 3}
       propertyPath: m_LocalRotation.w
