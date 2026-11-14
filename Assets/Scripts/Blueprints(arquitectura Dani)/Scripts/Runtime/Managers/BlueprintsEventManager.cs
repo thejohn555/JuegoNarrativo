@@ -10,6 +10,7 @@ namespace Blueprints_arquitectura_Dani_.Runtime
         
         public event Action<NodeTypes, GameObject> OnEvent;
         public event Action<string> OnGetLastGuid;
+        public event Action<GameObject> OnStartBark;
         
         
         public Func<string, bool> IsHoldingItem;
@@ -19,6 +20,7 @@ namespace Blueprints_arquitectura_Dani_.Runtime
         public Action<string, string> ChangeNpcState;
         public Action<GameObject, bool> SetInteractable;
         public Action<bool> SetMovement;
+       
         private void Awake()
         {
             if (Instance != null) { Destroy(gameObject); return; }
@@ -34,6 +36,12 @@ namespace Blueprints_arquitectura_Dani_.Runtime
         {
             OnGetLastGuid?.Invoke(guid);
         }
-       
+
+        public void StartBark(GameObject source)
+        {
+            Debug.Log($"[EventManager] Lanzando Bark para: {source.name}");
+            Debug.Log($"[EventManager] Suscriptores: {OnStartBark?.GetInvocationList().Length ?? 0}");
+            OnStartBark?.Invoke(source);
+        }
     }
 }

@@ -847,7 +847,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 333743471}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &333743473
 Camera:
   m_ObjectHideFlags: 0
@@ -1293,6 +1293,79 @@ MonoBehaviour:
   resultObjectName: Ale
   playerMovementSystem: {fileID: 48978553}
   interactionDistance: 2.7
+--- !u!1 &438615547
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 438615548}
+  - component: {fileID: 438615549}
+  m_Layer: 0
+  m_Name: TimelineTest
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &438615548
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 438615547}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -9.8782, y: -0.96366, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!320 &438615549
+PlayableDirector:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 438615547}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_PlayableAsset: {fileID: 11400000, guid: 4a3a759c648e9e043a90c0787e4e3340, type: 2}
+  m_InitialState: 1
+  m_WrapMode: 2
+  m_DirectorUpdateMode: 1
+  m_InitialTime: 0
+  m_SceneBindings:
+  - key: {fileID: -4143759294245758003, guid: 4a3a759c648e9e043a90c0787e4e3340, type: 2}
+    value: {fileID: 1131664265}
+  m_ExposedReferences:
+    m_References:
+    - 06fc8ee3a2617ec40b905e613361c360: {fileID: 1131664264}
+    - a7e8094e2827222429f286e032939eb8: {fileID: 0}
+--- !u!1 &512853041 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1870454744130409485, guid: f8d7f886628289546b13363460367872, type: 3}
+  m_PrefabInstance: {fileID: 715877564}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &512853043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 512853041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28e9bfb5b39b4b0098cfa4dfccfe8700, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Blueprints.Runtime::Blueprints_arquitectura_Dani_.Scripts.Runtime.Managers.TimeLineManager
+  directors:
+  - key: Test
+    value: {fileID: 438615549}
 --- !u!1 &634410677 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 310697994997330669, guid: b2c503b2dc933a34db371e1d1d07cc7b, type: 3}
@@ -1644,7 +1717,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5098650879914241608, guid: f8d7f886628289546b13363460367872, type: 3}
       propertyPath: RuntimeGraph.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5098650879914241608, guid: f8d7f886628289546b13363460367872, type: 3}
       propertyPath: 'RuntimeGraph.Array.data[0]'
@@ -1709,7 +1782,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1870454744130409485, guid: f8d7f886628289546b13363460367872, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 512853043}
   m_SourcePrefab: {fileID: 100100000, guid: f8d7f886628289546b13363460367872, type: 3}
 --- !u!1 &778836792
 GameObject:
@@ -2372,6 +2448,28 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8831337603267046458, guid: 95f604d8a6b3a81439e2e09092fcd4a0, type: 3}
   m_PrefabInstance: {fileID: 1374929209}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &1131664265
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1131664264}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &1374929209
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2431,7 +2529,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8831337603267046458, guid: 95f604d8a6b3a81439e2e09092fcd4a0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1131664265}
   m_SourcePrefab: {fileID: 100100000, guid: 95f604d8a6b3a81439e2e09092fcd4a0, type: 3}
 --- !u!1 &1639435502
 GameObject:
@@ -2752,10 +2853,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f25392a58eb4e0fbd3237a4abc9f2be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Pathfinding2D
-  startPoint: {fileID: 0}
-  targetPoint: {fileID: 0}
-  showPath: 1
-  grid: {fileID: 1836895567}
 --- !u!114 &1836895567
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3862,6 +3959,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 333743474}
   - {fileID: 778836795}
+  - {fileID: 438615548}
   - {fileID: 2068592876}
   - {fileID: 715877564}
   - {fileID: 2101573023}
