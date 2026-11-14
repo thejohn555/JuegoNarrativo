@@ -21,6 +21,7 @@ namespace Interactives
 
         [Header("Dialogues")]
         [SerializeField] private RuntimeDialogueGraph currentGraph;
+        [SerializeField] private RuntimeDialogueGraph barkGraph;
         [HideInInspector]public RuntimeDialogueGraph CurrentGraph => currentGraph;//Nuevo
         [SerializeField] private Color npcTextColor = Color.white;
         [SerializeField] private List<DialogueState> alternativeStates;
@@ -39,16 +40,27 @@ namespace Interactives
         {
             base.OnEnable();
             EventBus.Subscribe<OnNPCStateChangedEvent>(HandleStateChange);
+            BlueprintsEventManager.Instance.OnStartBark += Handelbark;
+            
         }
+
+        private void Handelbark(GameObject obj)
+        {
+            if (obj != this.gameObject) return;
+            TriggerBark();
+        }
+
         protected override void OnDisable()
         {
             base.OnDisable();
             EventBus.UnSubscribe<OnNPCStateChangedEvent>(HandleStateChange);
+            BlueprintsEventManager.Instance.OnStartBark -= Handelbark;
         }
 
         private void HandleStateChange(OnNPCStateChangedEvent ev)
         {
-            Debug.Log("Handeling");
+            // Debug.Log("Handeling");
+            // Debug.Log($"Target NpcId: {ev.TargetNpcID}, Npc id:{npcID}");
             if (ev.TargetNpcID != npcID) return;
 
             foreach (var state in alternativeStates)
@@ -56,7 +68,7 @@ namespace Interactives
                 if (state.StateID == ev.NewStateID)
                 {
                     currentGraph = state.DialogueGraph;
-                    Debug.Log($"[{npcID}] Dialogue graph changed to state: {ev.NewStateID}");
+                    Debug.LogError($"[{npcID}] Dialogue graph changed to state: {ev.NewStateID}");
                     return;
                 }
             }
@@ -66,10 +78,6 @@ namespace Interactives
 
         public override void Interact(GameObject interactor)
         {
-            //Nuevo para los blueprints
-            BlueprintsEventManager.Instance.Raise(NodeTypes.InteractableNpc,this.gameObject);
-            
-            
             DialogueData data = new DialogueData();
             data.targetPosition = transform;
 
@@ -93,6 +101,32 @@ namespace Interactives
                 Debug.Log("Incio dialogo");
                 DialogueManager.Instance.StartDialogue(currentGraph, data);
             }
+            //Nuevo para los blueprints
+            BlueprintsEventManager.Instance.Raise(NodeTypes.InteractableNpc,this.gameObject);
+        }
+
+        [ContextMenu("Testear Bark (Monólogo)")]
+        public void TestBark()
+        {
+            TriggerBark();
+        }
+        public void TriggerBark()
+        {
+            if (barkGraph == null) return;
+
+            DialogueData data = new DialogueData();
+
+            data.isDialogue = false;
+
+            data.moveCamera = false;
+            data.zoomCamera = false;
+
+            data.speakers = new Dictionary<string, SpeakerData>
+            {
+                { npcID, new SpeakerData { transform = this.transform, textColor = npcTextColor } }
+            };
+
+            DialogueManager.Instance.StartDialogue(barkGraph, data);
         }
 
         protected override void OnDrawGizmosSelected()

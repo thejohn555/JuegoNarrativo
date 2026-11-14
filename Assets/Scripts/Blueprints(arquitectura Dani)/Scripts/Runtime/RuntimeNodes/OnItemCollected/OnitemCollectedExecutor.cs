@@ -9,7 +9,10 @@ namespace Blueprints_arquitectura_Dani_.Scripts.Runtime.RuntimeNodes.OnItemColle
     protected override int OnExecute(OnItemCollectedRuntime node, BlueprintDirector ctx, GameObject obj)
     {
         Debug.Log("Executing OnItemCollected");
-        if (string.IsNullOrEmpty(node.requiredGuid)) return 0;
+        if (string.IsNullOrEmpty(node.requiredGuid))
+        {
+            return 0;
+        }
         string last = BlueprintMediator.Instance.LastGuidPick;
         if (last == node.requiredGuid)
         {

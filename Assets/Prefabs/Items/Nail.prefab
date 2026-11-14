@@ -219,7 +219,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Outliner
   outlineColor: {r: 0.85490197, g: 0.03529412, b: 0.52156866, a: 1}
-  outlineWidth: 1.1
+  interactionOutlineColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  outlineWidth: 1.2
 --- !u!114 &8738536837254363268
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -233,11 +234,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Interactives.CollectableObject
   <InteractionDistance>k__BackingField: 2.9
+  <InteractionOffset>k__BackingField: {x: 0, y: 0}
   showInteractionGizmo: 1
   description: {fileID: 3965311268370046156, guid: d148f02ba2a487644844242fc1fd5647, type: 3}
-  interactionCursor: {fileID: 0}
+  interactionCursor: {fileID: 2800000, guid: c7c8fa24357b30c4196407e7d380231d, type: 3}
   ingredientA: {fileID: 0}
   ingredientB: {fileID: 0}
+  itemIcon: {fileID: 0}
 --- !u!114 &4130211453572493152
 MonoBehaviour:
   m_ObjectHideFlags: 0
