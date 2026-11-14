@@ -10,6 +10,7 @@ public class InventoryController : MonoBehaviour
 
     [Header("Inputs")]
     [SerializeField] private EventBusSO inputs;
+    
 
     private bool isOpen = false;
 
@@ -52,6 +53,7 @@ public class InventoryController : MonoBehaviour
     {
         isOpen = false;
         inventoryPanel.SetActive(false);
+        inputs.Publish(new OnInventoryCloseEvent());
     }
 
     public void ToggleInventory(OnScrollWheelPressed eventArgs)
@@ -60,7 +62,10 @@ public class InventoryController : MonoBehaviour
 
         if (isOpen)
         {
-            HeldItemController.Instance.Release(); // al abrir, el objeto sale de la mano
+            if (HeldItemController.Instance != null)
+            {
+                HeldItemController.Instance.Release(false);
+            }
         }
 
         inventoryPanel.SetActive(isOpen);
