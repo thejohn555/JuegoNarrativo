@@ -244,8 +244,10 @@ public class InventoryManager : MonoBehaviour
                 icon = matchedRecipe.resultIcon,
                 guid = resultGuid,//Nuevo
             };
-            
+            BlueprintsEventManager.Instance.GetLastGuid(resultGuid);
             Debug.Log($"Successful crafting! Created:{matchedRecipe.resultName}");
+            
+            BlueprintsEventManager.Instance.Raise(NodeTypes.OnItemColleted,this.gameObject);
             UpdateUI();
         }
         else

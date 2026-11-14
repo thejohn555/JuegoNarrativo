@@ -12,8 +12,10 @@ using Blueprints_arquitectura_Dani_.Runtime.RuntimeNodes.StartDialogue;
 using Blueprints_arquitectura_Dani_.Runtime.TriggerNode;
 using Blueprints_arquitectura_Dani_.Scripts.Runtime.RuntimeNodes.ChangeNpcState;
 using Blueprints_arquitectura_Dani_.Scripts.Runtime.RuntimeNodes.OnItemCollected;
+using Blueprints_arquitectura_Dani_.Scripts.Runtime.RuntimeNodes.PlayTimeLine;
 using Blueprints_arquitectura_Dani_.Scripts.Runtime.RuntimeNodes.SetInteractable;
 using Blueprints_arquitectura_Dani_.Scripts.Runtime.RuntimeNodes.SetPlayerMovement;
+using Blueprints_arquitectura_Dani_.Scripts.Runtime.RuntimeNodes.StartBark;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -47,6 +49,8 @@ namespace Blueprints_arquitectura_Dani_.Runtime
                 {typeof(OnItemCollectedRuntime),new OnitemCollectedExecutor()},
                 {typeof(SetInteractableRuntime),new  SetInteractableExecutor()},
                 {typeof(SetPlayerMovementRuntime),new  SetPlayerMovementExecutor()},
+                {typeof(PlayTimelineRuntime),new PlayTimelineExecutor()},
+                {typeof(StartBarkRuntime),new StartBarkExecutor()},
                 
             };
             if (Instance == null)

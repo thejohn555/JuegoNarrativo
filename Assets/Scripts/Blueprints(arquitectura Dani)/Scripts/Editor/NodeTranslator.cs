@@ -16,8 +16,10 @@ using Blueprints_arquitectura_Dani_.Runtime.RuntimeNodes.StartDialogue;
 using Blueprints_arquitectura_Dani_.Runtime.TriggerNode;
 using Blueprints_arquitectura_Dani_.Scripts.Runtime.RuntimeNodes.ChangeNpcState;
 using Blueprints_arquitectura_Dani_.Scripts.Runtime.RuntimeNodes.OnItemCollected;
+using Blueprints_arquitectura_Dani_.Scripts.Runtime.RuntimeNodes.PlayTimeLine;
 using Blueprints_arquitectura_Dani_.Scripts.Runtime.RuntimeNodes.SetInteractable;
 using Blueprints_arquitectura_Dani_.Scripts.Runtime.RuntimeNodes.SetPlayerMovement;
+using Blueprints_arquitectura_Dani_.Scripts.Runtime.RuntimeNodes.StartBark;
 using Unity.GraphToolkit.Editor;
 using UnityEditor;
 using UnityEngine;
@@ -207,7 +209,36 @@ public static class NodeTranslator
                 list.Add(new SetPlayerMovementRuntime(state));
                 return true;
             }
+            case PlayTimeLineNode playTimeLineNode:
+            {
+                bool state;
+                string directorName;
+                playTimeLineNode.GetNodeOptionByName(PlayTimeLineNode.WaitTime).TryGetValue(out state);
+                playTimeLineNode.GetNodeOptionByName(PlayTimeLineNode.DirectorName).TryGetValue(out directorName);
                 
+                list.Add(new PlayTimelineRuntime(directorName,state));
+                return true;
+            }
+            case StartBark startBark:
+            {
+                var port = startBark.GetInputPortByName(StartBark.ObjectPort);
+
+                string key = null;
+                if (port != null)
+                {
+                    if (port.IsConnected)
+                    {
+                        var connectedPort = port.FirstConnectedPort;
+                        var connectedNode = connectedPort.GetNode();
+                        if (connectedNode is ReferenceNode refNode)
+                        {
+                            key = refNode.Key;
+                        }
+                    }
+                }
+                list.Add(new StartBarkRuntime(key));
+                return true;
+            }
                 
         }
         return false;

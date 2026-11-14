@@ -40,11 +40,22 @@ namespace Interactives
         {
             base.OnEnable();
             EventBus.Subscribe<OnNPCStateChangedEvent>(HandleStateChange);
+            BlueprintsEventManager.Instance.OnStartBark += Handelbark;
+            
         }
+
+        private void Handelbark(GameObject obj)
+        {
+            Debug.LogError("Handelbark");
+            if (obj != this.gameObject) return;
+            TriggerBark();
+        }
+
         protected override void OnDisable()
         {
             base.OnDisable();
             EventBus.UnSubscribe<OnNPCStateChangedEvent>(HandleStateChange);
+            BlueprintsEventManager.Instance.OnStartBark -= Handelbark;
         }
 
         private void HandleStateChange(OnNPCStateChangedEvent ev)
@@ -103,6 +114,7 @@ namespace Interactives
         }
         public void TriggerBark()
         {
+            Debug.LogError("TriggerBark");
             if (barkGraph == null) return;
 
             DialogueData data = new DialogueData();

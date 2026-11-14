@@ -7,7 +7,7 @@ namespace Blueprints_arquitectura_Dani_.EventRelay
     {
         private void Start()
         {
-            Debug.Log($"[Switch] Start. Manager: {(BlueprintsEventManager.Instance == null ? "NULL" : "ok")}");
+            
             if (BlueprintsEventManager.Instance != null)
                 BlueprintsEventManager.Instance.SetInteractable = Set;
         }
