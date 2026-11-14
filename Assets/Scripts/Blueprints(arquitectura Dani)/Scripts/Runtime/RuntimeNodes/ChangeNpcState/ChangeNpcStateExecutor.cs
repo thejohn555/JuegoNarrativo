@@ -10,7 +10,7 @@ namespace Blueprints_arquitectura_Dani_.Scripts.Runtime.RuntimeNodes.ChangeNpcSt
         {
             if (string.IsNullOrEmpty(node.npcState) || string.IsNullOrEmpty(node.npcId)) return-1;
             Debug.Log($"Cmabiado id={node.npcId}, state={node.npcState}");
-            BlueprintsEventManager.Instance.ChangeNpcState(node.npcState, node.npcId);
+            BlueprintsEventManager.Instance.ChangeNpcState(node.npcId, node.npcState);
             return 0;
         }
     }

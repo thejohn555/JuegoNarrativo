@@ -187,10 +187,10 @@ public static class NodeTranslator
                 list.Add(new SetInteractableRuntime(key, active));
                 return true;
             }
-            case OnItemCollected itemCollected:
+            case OnItemAddToInveotory itemCollected:
             {
                 GameObject prefab = null;
-                itemCollected.GetNodeOptionByName(OnItemCollected.RequiredObjectOption)?.TryGetValue(out prefab);
+                itemCollected.GetNodeOptionByName(OnItemAddToInveotory.RequiredObjectOption)?.TryGetValue(out prefab);
 
                 string requiredGuid = null;
                 if (prefab != null)

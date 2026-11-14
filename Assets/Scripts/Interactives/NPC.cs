@@ -46,7 +46,6 @@ namespace Interactives
 
         private void Handelbark(GameObject obj)
         {
-            Debug.LogError("Handelbark");
             if (obj != this.gameObject) return;
             TriggerBark();
         }
@@ -60,7 +59,8 @@ namespace Interactives
 
         private void HandleStateChange(OnNPCStateChangedEvent ev)
         {
-            Debug.Log("Handeling");
+            Debug.LogError("Handeling");
+            Debug.Log($"Target NpcId: {ev.TargetNpcID}, Npc id:{npcID}");
             if (ev.TargetNpcID != npcID) return;
 
             foreach (var state in alternativeStates)
@@ -68,7 +68,7 @@ namespace Interactives
                 if (state.StateID == ev.NewStateID)
                 {
                     currentGraph = state.DialogueGraph;
-                    Debug.Log($"[{npcID}] Dialogue graph changed to state: {ev.NewStateID}");
+                    Debug.LogError($"[{npcID}] Dialogue graph changed to state: {ev.NewStateID}");
                     return;
                 }
             }
@@ -78,10 +78,6 @@ namespace Interactives
 
         public override void Interact(GameObject interactor)
         {
-            //Nuevo para los blueprints
-            BlueprintsEventManager.Instance.Raise(NodeTypes.InteractableNpc,this.gameObject);
-            
-            
             DialogueData data = new DialogueData();
             data.targetPosition = transform;
 
@@ -105,6 +101,8 @@ namespace Interactives
                 Debug.Log("Incio dialogo");
                 DialogueManager.Instance.StartDialogue(currentGraph, data);
             }
+            //Nuevo para los blueprints
+            BlueprintsEventManager.Instance.Raise(NodeTypes.InteractableNpc,this.gameObject);
         }
 
         [ContextMenu("Testear Bark (Monólogo)")]
@@ -114,7 +112,6 @@ namespace Interactives
         }
         public void TriggerBark()
         {
-            Debug.LogError("TriggerBark");
             if (barkGraph == null) return;
 
             DialogueData data = new DialogueData();

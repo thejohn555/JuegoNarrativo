@@ -39,8 +39,6 @@ namespace Blueprints_arquitectura_Dani_.Runtime
 
         public void StartBark(GameObject source)
         {
-            Debug.Log($"[EventManager] Lanzando Bark para: {source.name}");
-            Debug.Log($"[EventManager] Suscriptores: {OnStartBark?.GetInvocationList().Length ?? 0}");
             OnStartBark?.Invoke(source);
         }
     }

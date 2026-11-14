@@ -13,14 +13,15 @@ namespace Blueprints_arquitectura_Dani_.Runtime.RuntimeNodes.OnInteractNpcNode
             
             if (string.IsNullOrEmpty(node.requiredGuid))
             {
-                Debug.Log("Sin item requerido");
+                Debug.LogError("Sin item requerido");
                 return -1;
             }
             else if (BlueprintsEventManager.Instance.IsHoldingItem?.Invoke(node.requiredGuid) == true)
             {
                 Debug.Log("IsHoldingItem true");
-                if (node.destroy)
+                if (!node.destroy)
                 {
+                    Debug.Log("Consume Item");
                     BlueprintsEventManager.Instance.ConsumeItem();
                 }
                 Debug.Log("IsHoldingItem true");
