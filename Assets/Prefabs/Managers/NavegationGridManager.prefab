@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7543933500696153711}
   - component: {fileID: 704958490098690381}
-  - component: {fileID: 2059469090617449330}
+  - component: {fileID: 7347198676722816898}
   m_Layer: 0
   m_Name: NavegationGridManager
   m_TagString: Untagged
@@ -54,9 +54,9 @@ MonoBehaviour:
     m_Bits: 64
   lineCheckSpacing: 0.1
   walkableMargin: 1
-  showGrid: 0
---- !u!60 &2059469090617449330
-PolygonCollider2D:
+  showGrid: 1
+--- !u!61 &7347198676722816898
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -89,7 +89,7 @@ PolygonCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -5.2611866, y: 0.024110794}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -99,12 +99,5 @@ PolygonCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: -17.676592, y: -0.8516437}
-      - {x: -27.060968, y: -5.6135015}
-      - {x: 16.040564, y: -5.8466105}
-      - {x: 14.937971, y: -5.3925066}
-      - {x: 6.649839, y: -0.74910307}
-      - {x: 0.7792444, y: -0.9622841}
-  m_UseDelaunayMesh: 1
+  m_Size: {x: 40.97562, y: 10.788853}
+  m_EdgeRadius: 0
