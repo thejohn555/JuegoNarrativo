@@ -1,3 +1,6 @@
+using Assets.Scripts.EventBuses;
+using Assets.Scripts.EventBuses.Events;
+using EventBuses;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,21 +21,17 @@ public enum Music
 
 public class AudioManager : Singleton<AudioManager>
 {
+    [SerializeField] private EventBusSO eventBus;
     //SoundCompilations
     [Header("Sound Archive")]
     [SerializeField] private Dictionary<Music,  AudioClip> music = new();
-    [SerializeField] private Dictionary<SFX, AudioClip> playerSfx = new();
+    [SerializeField] private Dictionary<SFX, AudioClip> sfx = new();
 
     //sources
     private AudioSource playerSfxSource;
     private AudioSource musicSource;
 
-    public override void Awake()
-    {
-        base.Awake();
-        musicSource = transform.GetChild (0).GetComponent<AudioSource> ();
-        playerSfxSource = transform.GetChild(1).GetComponent<AudioSource>();
-    }
+    
 
     void Start()
     {
@@ -44,7 +43,7 @@ public class AudioManager : Singleton<AudioManager>
         musicSource.clip = music[name];
         if (musicSource.clip != null)
         {
-            musicSource.Play();
+            eventBus.Publish<OnMusicPlay>(new OnMusicPlay(music[name]));
         }
     }
 
@@ -52,7 +51,7 @@ public class AudioManager : Singleton<AudioManager>
     {
         if (musicSource.clip != null)
         {
-            playerSfxSource.PlayOneShot(playerSfx[name]);
+            eventBus.Publish<OnSFXPlay>(new OnSFXPlay(sfx[name]));
         }
     }
     
