@@ -26,7 +26,12 @@ namespace Blueprints_arquitectura_Dani_.Scripts.Runtime.RuntimeNodes.SetInteract
                 return -1;
             }
 
-            BlueprintsEventManager.Instance.SetInteractable?.Invoke(go, node.active);
+            var hook = BlueprintsEventManager.Instance.SetInteractable;
+            Debug.Log($"[SetInteractable] objeto: {go.name} | hook conectado: {hook != null}");
+
+            if (hook == null) return 0;
+
+            hook(go, node.active);
             return 0;
         }
     }
