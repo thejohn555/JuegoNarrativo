@@ -30,7 +30,7 @@ public class AudioManager : Singleton<AudioManager>
 
     public void PlayMusic(AudioBank audioBank)
     {
-
+        eventBus.Publish<OnMusicPlay>(new OnMusicPlay(audioBank));
     }
 
     public void PlaySFX(SFX name)
