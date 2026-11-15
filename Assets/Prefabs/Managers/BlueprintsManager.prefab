@@ -107,10 +107,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 389d7c774bab44e884aeff96d9fd5273, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Blueprints.Runtime::Blueprints_arquitectura_Dani_.Runtime.BlueprintDirector
-  RuntimeGraph:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  RuntimeGraph: []
 --- !u!114 &3284176198225476531
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,10 +138,16 @@ MonoBehaviour:
   - {fileID: 0}
   referenceObjects:
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   referenceInteractable: []
   referenceNpc:
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   npcObjects:
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 0}
   itemCollectedGroups: []
   references:

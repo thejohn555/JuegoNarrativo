@@ -15,7 +15,7 @@ public class InputActionsSO : ScriptableObject, NewInputActions.IGamePlayActions
     //Map refs
     private InputActionMap gameplayMap;
     private InputActionMap inventoryMap;
-    OnScrollWheelPressed onScrollWheelPressed = new OnScrollWheelPressed();
+    OnScrollWheelPressed onScrollWheelPressed = new ();
     
     
     
