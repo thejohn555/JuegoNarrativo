@@ -2292,9 +2292,19 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+<<<<<<< Updated upstream:Assets/Scenes/FelipePrueba.unity
     - target: {fileID: 1392573157981920959, guid: 95f604d8a6b3a81439e2e09092fcd4a0, type: 3}
       propertyPath: m_SortingOrder
       value: 5
+=======
+    - target: {fileID: 704958490098690381, guid: 508086dc3d285d845afebdf09c8b6cca, type: 3}
+      propertyPath: showGrid
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6147220219749238926, guid: 508086dc3d285d845afebdf09c8b6cca, type: 3}
+      propertyPath: m_Name
+      value: NavegationGridManager
+>>>>>>> Stashed changes:Assets/Scenes/TabernaGood.unity
       objectReference: {fileID: 0}
     - target: {fileID: 4026787330613230292, guid: 95f604d8a6b3a81439e2e09092fcd4a0, type: 3}
       propertyPath: maxVelocity

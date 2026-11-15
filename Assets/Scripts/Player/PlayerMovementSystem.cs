@@ -40,6 +40,8 @@ public class PlayerMovementSystem : PlayerSystem
         float stoppingDistance,
         bool recalculateVelocity = true)
     {
+        Debug.Log($"PRUEBA 4: SetNewDestination; grid={pathfinding?.Grid != null}", this);
+
         // Cancelamos la ruta anterior.
         isMoving = false;
         destinationReached = false;
@@ -73,6 +75,8 @@ public class PlayerMovementSystem : PlayerSystem
             stoppingDistance,
             out _
         );
+
+        Debug.Log($"PRUEBA 5: ruta con {currentPath?.Count ?? 0} nodos", this);
 
         // No existe una ruta válida.
         if (currentPath == null || currentPath.Count == 0)

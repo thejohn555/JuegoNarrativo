@@ -22,7 +22,7 @@ public class InputActionsSO : ScriptableObject, NewInputActions.IGamePlayActions
     private void OnEnable()
     {
         inputActions = new NewInputActions();
-        inputActions.Enable();
+        InputSystem.onDeviceChange += OnInputDeviceChange;
         gameplayMap = inputActions.GamePlay;
         inventoryMap = inputActions.Inventory;
 
@@ -36,6 +36,13 @@ public class InputActionsSO : ScriptableObject, NewInputActions.IGamePlayActions
         EventBus.Subscribe<OnInventoryCloseEvent>(OnInventoryClosed);
         
         SwitchMap(inputActions.GamePlay);
+
+        InputAction leftMouseAction = inputActions.GamePlay.LeftMouse;
+        Debug.Log(
+            $"INPUT CONFIG LeftMouse: enabled={leftMouseAction.enabled}, " +
+            $"bindings={leftMouseAction.bindings.Count}, " +
+            $"resolvedControls={leftMouseAction.controls.Count}"
+        );
     }
 
     private void OnDisable()
@@ -46,6 +53,27 @@ public class InputActionsSO : ScriptableObject, NewInputActions.IGamePlayActions
             EventBus.UnSubscribe<OnDialogueEndedEvent>(OnDialogueEnded);
             EventBus.UnSubscribe<OnInventoryCloseEvent>(OnInventoryClosed);
         }
+
+        InputSystem.onDeviceChange -= OnInputDeviceChange;
+    }
+
+    private void OnInputDeviceChange(InputDevice device, InputDeviceChange change)
+    {
+        if (device is not Mouse || currentMap == null)
+            return;
+
+        InputAction leftMouseAction = inputActions.GamePlay.LeftMouse;
+        if (leftMouseAction.controls.Count > 0)
+            return;
+
+        // Mouse can be added after the ScriptableObject enabled its action map.
+        currentMap.Disable();
+        currentMap.Enable();
+
+        Debug.Log(
+            $"INPUT DEVICE Mouse {change}: " +
+            $"LeftMouse controls={leftMouseAction.controls.Count}"
+        );
     }
 
     private void SwitchMap(InputActionMap newMap)
@@ -70,18 +98,15 @@ public class InputActionsSO : ScriptableObject, NewInputActions.IGamePlayActions
 
     public void OnLeftMouse(InputAction.CallbackContext context)
     {
+        Debug.Log($"INPUT CALLBACK LeftMouse: phase={context.phase}, map={context.action.actionMap.enabled}");
         if (context.started)
-        {
             EventBus.Publish(new OnLeftMouseClick());
-        }
     }
 
     public void OnRightMouse(InputAction.CallbackContext context)
     {
         if (context.started)
-        {
             EventBus.Publish(new OnRightMouseClick());
-        }
     }
 
     public void OnSpace(InputAction.CallbackContext context)
@@ -89,7 +114,6 @@ public class InputActionsSO : ScriptableObject, NewInputActions.IGamePlayActions
         if (context.started)
         {
             EventBus.Publish(new OnSpaceBarClick(context));
-            Debug.unityLogger.Log("OnSpaceBarClick");
         }
         else if(context.canceled)
         {
