@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Audio;
 
+[RequireComponent(typeof(AudioSource))]
 public class CustomSpatialVolume : MonoBehaviour
 {
      

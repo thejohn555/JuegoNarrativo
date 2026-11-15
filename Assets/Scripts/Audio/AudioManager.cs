@@ -1,23 +1,9 @@
 using Assets.Scripts.EventBuses;
 using Assets.Scripts.EventBuses.Events;
+using Audio.Enums;
 using EventBuses;
 using System.Collections.Generic;
 using UnityEngine;
-
-
-#region enums 
-
-public enum SFX
-{
-    Dialogue,
-    Object
-}
-
-public enum Music
-{
-
-}
-#endregion
 
 public class AudioManager : Singleton<AudioManager>
 {
@@ -31,11 +17,6 @@ public class AudioManager : Singleton<AudioManager>
     private AudioSource playerSfxSource;
     private AudioSource musicSource;
 
-    
-
-    void Start()
-    {
-    }
 
 
     public void PlayMusic(Music name)
@@ -45,6 +26,11 @@ public class AudioManager : Singleton<AudioManager>
         {
             eventBus.Publish<OnMusicPlay>(new OnMusicPlay(music[name]));
         }
+    }
+
+    public void PlayMusic(AudioBank audioBank)
+    {
+
     }
 
     public void PlaySFX(SFX name)
