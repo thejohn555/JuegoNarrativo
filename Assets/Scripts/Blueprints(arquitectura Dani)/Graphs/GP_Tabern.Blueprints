@@ -203,6 +203,7 @@ MonoBehaviour:
         - rid: 5383461051265188124
         - rid: 5383461051265188132
         - rid: 5383461051265188136
+        - rid: 5383461069423378512
         m_GraphStickyNoteModels:
         - rid: 5383461031663108185
         - rid: 5383461051265188024
@@ -215,10 +216,10 @@ MonoBehaviour:
         m_LocalSubgraphs: []
         m_LastKnownBounds:
           serializedVersion: 2
-          x: -241.6
-          y: -14.4
+          x: -242
+          y: -14
           width: 2744
-          height: 2085.5999
+          height: 2086.6665
         m_GraphElementMetaData:
         - m_Guid:
             m_Value0: 13496333838202742821
@@ -740,6 +741,14 @@ MonoBehaviour:
             Hash: ac922f36898ceb946fa8794a87cbc131
           m_Category: 2
           m_Index: 26
+        - m_Guid:
+            m_Value0: 17731013926121794380
+            m_Value1: 12990193269316166128
+          m_HashGuid:
+            serializedVersion: 2
+            Hash: 4c6bfe0d393711f6f0a14215f46f46b4
+          m_Category: 2
+          m_Index: 27
         m_EntryPoint:
           rid: 5383461031663108175
         m_Graph:
@@ -1650,7 +1659,7 @@ MonoBehaviour:
     - rid: 5383461051265187979
       type: {class: 'Constant`1[[System.Boolean, mscorlib]]', ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
       data:
-        m_Value: 1
+        m_Value: 0
     - rid: 5383461051265187980
       type: {class: SetPlayerMovement, ns: Blueprints_arquitectura_Dani_.Editor.Blueprints_arquitectura_Dani_.Scripts.Editor.Nodes, asm: Edito.Blueprints}
       data: 
@@ -3080,7 +3089,7 @@ MonoBehaviour:
           serializedVersion: 2
           Hash: 7e0cc142f54e44152962181d2e7ba64f
         m_Version: 2
-        m_Position: {x: 50.90164, y: 114.41665}
+        m_Position: {x: 76.81505, y: 135.82333}
         m_Title: 
         m_Tooltip: 
         m_NodePreviewModel:
@@ -3236,7 +3245,39 @@ MonoBehaviour:
         m_TextSizeName: Small
         m_Position:
           serializedVersion: 2
-          x: 1009.3081
-          y: 1833.9941
+          x: 995.31604
+          y: 1795.516
           width: 200
           height: 160
+    - rid: 5383461069423378512
+      type: {class: WireModel, ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
+      data:
+        m_Guid:
+          m_Value0: 17731013926121794380
+          m_Value1: 12990193269316166128
+        m_HashGuid:
+          serializedVersion: 2
+          Hash: 4c6bfe0d393711f6f0a14215f46f46b4
+        m_Version: 2
+        m_FromPortReference:
+          m_NodeModelGuid:
+            m_Value0: 1532436588506713214
+            m_Value1: 5739410213117125161
+          m_NodeModelHashGuid:
+            serializedVersion: 2
+            Hash: 7e0cc142f54e44152962181d2e7ba64f
+          m_UniqueId: Out
+          m_PortDirection: 2
+          m_PortOrientation: 0
+          m_Title: Out
+        m_ToPortReference:
+          m_NodeModelGuid:
+            m_Value0: 6696404214423401449
+            m_Value1: 724125048511530788
+          m_NodeModelHashGuid:
+            serializedVersion: 2
+            Hash: e9b322692768ee5c24077e21e59b0c0a
+          m_UniqueId: In
+          m_PortDirection: 1
+          m_PortOrientation: 0
+          m_Title: In
