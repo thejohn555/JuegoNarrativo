@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using TMPro;
 using UnityEngine;
 using UnityEditor;
@@ -132,3 +133,4 @@ public static class InventoryBuilder
         return canvas;
     }
 }
+#endif

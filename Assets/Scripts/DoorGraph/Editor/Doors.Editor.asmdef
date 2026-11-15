@@ -1,0 +1,21 @@
+﻿{
+  "name": "Doors.Editor",
+  "rootNamespace": "Doors.Editor",
+  "references": [
+    "Doors.Runtime",
+    "Unity.GraphToolkit.Common.Editor",
+    "Unity.GraphToolkit.Utility.Editor",
+    "Unity.GraphToolkit.Editor"
+  ],
+  "includePlatforms": [
+    "Editor"
+  ],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": false,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

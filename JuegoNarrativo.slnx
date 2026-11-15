@@ -1,7 +1,8 @@
 ﻿<Solution>
   <Project Path="Assembly-CSharp.csproj" />
   <Project Path="Edito.Blueprints.csproj" />
+  <Project Path="Doors.Runtime.csproj" />
   <Project Path="Blueprints.Runtime.csproj" />
-  <Project Path="Blackboard.csproj" />
   <Project Path="Assembly-CSharp-Editor.csproj" />
+  <Project Path="Doors.Editor.csproj" />
 </Solution>

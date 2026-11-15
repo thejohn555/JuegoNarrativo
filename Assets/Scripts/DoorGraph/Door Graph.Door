@@ -1,0 +1,93 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &1
+MonoBehaviour:
+  m_ObjectHideFlags: 61
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 12501, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: Door Graph
+  m_EditorClassIdentifier: UnityEditor.dll::Unity.GraphToolkit.Editor.Implementation.GraphObjectImp
+  m_GraphModel:
+    rid: 3762293825650294860
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 3762293825650294860
+      type: {class: GraphModelImp, ns: Unity.GraphToolkit.Editor.Implementation, asm: UnityEditor.GraphToolkitModule}
+      data:
+        m_Guid:
+          m_Value0: 11550085718638131861
+          m_Value1: 9599746930320313062
+        m_HashGuid:
+          serializedVersion: 2
+          Hash: 95fabc20c4254aa0e68a63b3f8263985
+        m_Name: 
+        m_GraphNodeModels:
+        - rid: -2
+        - rid: -2
+        m_GraphWireModels:
+        - rid: -2
+        m_GraphStickyNoteModels: []
+        m_GraphPlacematModels: []
+        m_GraphVariableModels: []
+        m_GraphPortalModels: []
+        m_SectionModels:
+        - rid: 3762293825650294861
+        m_LocalSubgraphs: []
+        m_LastKnownBounds:
+          serializedVersion: 2
+          x: 206.4
+          y: 89.6
+          width: 380.80002
+          height: 112.799995
+        m_GraphElementMetaData:
+        - m_Guid:
+            m_Value0: 13545294200119187869
+            m_Value1: 17696417623701678059
+          m_HashGuid:
+            serializedVersion: 2
+            Hash: 9d5943184f8dfabbeb67b3b1114e96f5
+          m_Category: 0
+          m_Index: 0
+        - m_Guid:
+            m_Value0: 8665313375551366053
+            m_Value1: 1565973259877821570
+          m_HashGuid:
+            serializedVersion: 2
+            Hash: a5232eb19a604178822cc70a6274bb15
+          m_Category: 0
+          m_Index: 1
+        - m_Guid:
+            m_Value0: 14188758807297543940
+            m_Value1: 13761162793997488944
+          m_HashGuid:
+            serializedVersion: 2
+            Hash: 044faac0f598e8c430d38ac0a678f9be
+          m_Category: 2
+          m_Index: 0
+        m_EntryPoint:
+          rid: -2
+        m_Graph:
+          rid: 3762293825650294870
+    - rid: 3762293825650294861
+      type: {class: SectionModel, ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
+      data:
+        m_Guid:
+          m_Value0: 9595577779904932328
+          m_Value1: 175158199885976202
+        m_HashGuid:
+          serializedVersion: 2
+          Hash: e869ddb926572a858a52b36b74496e02
+        m_Version: 2
+        m_Items: []
+        m_Title: 
+    - rid: 3762293825650294870
+      type: {class: DoorGraph, ns: DoorGraph.Editor, asm: DoorAsembly}
+      data: 

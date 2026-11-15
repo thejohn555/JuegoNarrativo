@@ -77,7 +77,7 @@ namespace Blueprints_arquitectura_Dani_.Editor.Blueprints_arquitectura_Dani_.Edi
               string content = sb.ToString();
               if (File.Exists(path) && File.ReadAllText(path) == content)
               {
-                  Debug.Log("[TriggerNodes] Sin cambios");
+                  //Debug.Log("[TriggerNodes] Sin cambios");
                   return;
               }
 

@@ -12,12 +12,11 @@ using Blueprints_arquitectura_Dani_.Runtime.RuntimeNodes.StartDialogue;
 using Blueprints_arquitectura_Dani_.Runtime.TriggerNode;
 using Blueprints_arquitectura_Dani_.Scripts.Runtime.RuntimeNodes.ChangeNpcState;
 using Blueprints_arquitectura_Dani_.Scripts.Runtime.RuntimeNodes.OnItemCollected;
+using Blueprints_arquitectura_Dani_.Scripts.Runtime.RuntimeNodes.PlayTimeLine;
 using Blueprints_arquitectura_Dani_.Scripts.Runtime.RuntimeNodes.SetInteractable;
 using Blueprints_arquitectura_Dani_.Scripts.Runtime.RuntimeNodes.SetPlayerMovement;
-using Unity.GraphToolkit.Editor;
-using UnityEditor.Experimental.GraphView;
+using Blueprints_arquitectura_Dani_.Scripts.Runtime.RuntimeNodes.StartBark;
 using UnityEngine;
-using UnityEngine.Assertions.Must;
 using UnityEngine.SceneManagement;
 
 
@@ -50,6 +49,8 @@ namespace Blueprints_arquitectura_Dani_.Runtime
                 {typeof(OnItemCollectedRuntime),new OnitemCollectedExecutor()},
                 {typeof(SetInteractableRuntime),new  SetInteractableExecutor()},
                 {typeof(SetPlayerMovementRuntime),new  SetPlayerMovementExecutor()},
+                {typeof(PlayTimelineRuntime),new PlayTimelineExecutor()},
+                {typeof(StartBarkRuntime),new StartBarkExecutor()},
                 
             };
             if (Instance == null)
@@ -203,7 +204,7 @@ namespace Blueprints_arquitectura_Dani_.Runtime
             {
                 Debug.LogWarning($"No hay {kind} '{obj.name}'. Registrados: {string.Join(", ", dict.Keys)}");
                 Debug.LogWarning($"No hay {kind} '{obj.name}'. Registrados: {string.Join(", ", dict.Keys)}");
-                Debug.LogError($"No hay ningún {kind} '{obj.name}'");
+                //Debug.LogError($"No hay ningún {kind} '{obj.name}'");
             }
         }
         
