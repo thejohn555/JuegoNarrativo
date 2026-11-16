@@ -504,6 +504,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8738536837254363268, guid: 85699bffd616e3a4a8ecb4d0e930ff79, type: 3}
+      propertyPath: itemPrefab
+      value: 
+      objectReference: {fileID: 9207451370440653793, guid: 85699bffd616e3a4a8ecb4d0e930ff79, type: 3}
+    - target: {fileID: 8738536837254363268, guid: 85699bffd616e3a4a8ecb4d0e930ff79, type: 3}
       propertyPath: <InteractionDistance>k__BackingField
       value: 0.3
       objectReference: {fileID: 0}
@@ -784,7 +788,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8075164085529893166, guid: 6a7aea6e28bbdbe47a20282e2680fd53, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 979260878}
+    - targetCorrespondingSourceObject: {fileID: 8075164085529893166, guid: 6a7aea6e28bbdbe47a20282e2680fd53, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 979260879}
   m_SourcePrefab: {fileID: 100100000, guid: 6a7aea6e28bbdbe47a20282e2680fd53, type: 3}
 --- !u!1001 &661910262
 PrefabInstance:
@@ -896,6 +906,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3681975026779506111, guid: 6b3fb1c12978eeb43bfa9c093286b2d3, type: 3}
+      propertyPath: itemPrefab
+      value: 
+      objectReference: {fileID: 8520369407981150369, guid: 6b3fb1c12978eeb43bfa9c093286b2d3, type: 3}
     - target: {fileID: 3681975026779506111, guid: 6b3fb1c12978eeb43bfa9c093286b2d3, type: 3}
       propertyPath: <InteractionDistance>k__BackingField
       value: 0.5
@@ -1615,6 +1629,39 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &979260872 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8075164085529893166, guid: 6a7aea6e28bbdbe47a20282e2680fd53, type: 3}
+  m_PrefabInstance: {fileID: 436346134}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &979260878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 979260872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8162becc047b5ad498b6f648ea20205d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InventoryStorage
+--- !u!114 &979260879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 979260872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c88890d7ec0b724289b460156f3aa3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InventoryCrafter
+  craftingRecipes:
+  - prefabA: {fileID: 8520369407981150369, guid: 6b3fb1c12978eeb43bfa9c093286b2d3, type: 3}
+    prefabB: {fileID: 9207451370440653793, guid: 85699bffd616e3a4a8ecb4d0e930ff79, type: 3}
+    resultPrefab: {fileID: 6433144946823108048, guid: 9999f8eb15226a54e9a6afa481d638b8, type: 3}
 --- !u!1 &980854763
 GameObject:
   m_ObjectHideFlags: 0
