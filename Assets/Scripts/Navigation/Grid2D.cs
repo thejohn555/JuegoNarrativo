@@ -103,6 +103,23 @@ public class Grid2D : MonoBehaviour
         }
 
         ApplyWalkableMargin();
+
+        int walkableCount = 0;
+        for (int x = 0; x < gridSizeX; x++)
+        {
+            for (int y = 0; y < gridSizeY; y++)
+            {
+                if (grid[x, y].Walkable)
+                    walkableCount++;
+            }
+        }
+
+        Debug.Log(
+            $"PRUEBA GRID: {gridSizeX}x{gridSizeY}, " +
+            $"celdas transitables={walkableCount}, " +
+            $"suelos detectados={floorColliders.Count}",
+            this
+        );
     }
     
     

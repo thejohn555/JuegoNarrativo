@@ -18,6 +18,14 @@ public class Singleton<T> : MonoBehaviour where T : Component
             return instance;
         }
     }
+    public static bool TryGetInstance(out T value)
+    {
+        if (instance == null)
+            instance = FindAnyObjectByType<T>();
+
+        value = instance;
+        return value != null;
+    }
     public virtual void Awake()
     {
         RemoveDuplicates();

@@ -128,7 +128,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 457981738}
-  - component: {fileID: 457981737}
   - component: {fileID: 457981736}
   m_Layer: 0
   m_Name: Pathfinding2D
@@ -150,7 +149,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Grid2D
   cellSize: 0.5
-  areaCollider: {fileID: 1976744067}
   floorMask:
     serializedVersion: 2
     m_Bits: 8
@@ -160,22 +158,6 @@ MonoBehaviour:
   lineCheckSpacing: 0.1
   walkableMargin: 0
   showGrid: 1
---- !u!114 &457981737
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 457981735}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f25392a58eb4e0fbd3237a4abc9f2be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Pathfinding2D
-  startPoint: {fileID: 958548879}
-  targetPoint: {fileID: 546159794}
-  showPath: 0
-  grid: {fileID: 457981736}
 --- !u!4 &457981738
 Transform:
   m_ObjectHideFlags: 0
@@ -222,6 +204,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Interactives.InteractObject
   <InteractionDistance>k__BackingField: 2
+  <InteractionOffset>k__BackingField: {x: 0, y: 0}
   showInteractionGizmo: 1
   description: {fileID: 0}
   interactionCursor: {fileID: 0}
@@ -238,6 +221,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Outliner
   outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  interactionOutlineColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   outlineWidth: 1.1
 --- !u!4 &546159794
 Transform:
@@ -470,7 +454,6 @@ MonoBehaviour:
   maxVelocity: 3
   distanceForMinVelocity: 3
   distanceForMaxVelocity: 5
-  pathfinding: {fileID: 457981737}
 --- !u!114 &958548878
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -563,7 +546,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 389d7c774bab44e884aeff96d9fd5273, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Blueprints.Runtime::Blueprints_arquitectura_Dani_.Runtime.BlueprintDirector
-  RuntimeGraph: {fileID: -1759291010081333320, guid: 6a11e39f417a48e4688619963675be41, type: 3}
+  RuntimeGraph:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &1125075879
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -599,6 +585,10 @@ MonoBehaviour:
   referenceInteractable: []
   referenceNpc: []
   npcObjects: []
+  itemCollectedGroups: []
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &1134115468
 GameObject:
   m_ObjectHideFlags: 0
@@ -906,6 +896,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Interactives.Decoration
   <InteractionDistance>k__BackingField: 2
+  <InteractionOffset>k__BackingField: {x: 0, y: 0}
   showInteractionGizmo: 1
   description: {fileID: 0}
   interactionCursor: {fileID: 0}
@@ -922,6 +913,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Outliner
   outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  interactionOutlineColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   outlineWidth: 1.1
 --- !u!4 &1444840020
 Transform:

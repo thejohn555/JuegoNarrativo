@@ -11,18 +11,16 @@ namespace Interactives
 {
     [RequireComponent(typeof(Outliner))]
     public abstract class Interactive:MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
-    {
+    { 
         [field: SerializeField] public float InteractionDistance { get; private set; } = 1.5f;
         [field: SerializeField, FormerlySerializedAs("<VisualOffset>k__BackingField")]
         public Vector2 InteractionOffset { get; private set; } = Vector2.zero;
         [SerializeField] private bool showInteractionGizmo = true;
         public RuntimeDialogueGraph description;
         [SerializeField] protected Texture2D interactionCursor;
+        [SerializeField] private Vector2 cursorHotspot = Vector2.zero;
         protected Outliner outline;
         public bool IsInteractable { get; private set; } = true;
-        protected virtual void Awake()
-        {
-        }
 
         protected virtual void OnEnable()
         {
@@ -37,7 +35,8 @@ namespace Interactives
 
         protected virtual void OnDisable()
         {
-            ItemInteractManager.Instance.UnPublishItem(this);
+            if (ItemInteractManager.TryGetInstance(out var manager))
+                manager.UnPublishItem(this);
         }
 
         protected virtual void OnDrawGizmosSelected()
@@ -81,7 +80,8 @@ namespace Interactives
         {
             //Cambio del cursor
             if (!IsInteractable) return;
-            Cursor.SetCursor(interactionCursor, new Vector2(0.5f, 0.5f), CursorMode.Auto);
+            if (interactionCursor != null)
+                Cursor.SetCursor(interactionCursor, new Vector2(interactionCursor.width/2f,interactionCursor.height/3), CursorMode.Auto);
             UseOutliner(false);
         }
 
@@ -95,7 +95,7 @@ namespace Interactives
         {
             //Cambio del cursor
             if (!IsInteractable) return;
-            Cursor.SetCursor(null, new Vector2(0.5f,0.5f), CursorMode.Auto);
+            Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
             UseOutliner(false);
         }
         public void SetInteractable(bool value)//Nuevo hecho por Nacho
@@ -103,7 +103,7 @@ namespace Interactives
             Debug.Log($"[Interactive] {name} enabled = {value}");
             IsInteractable = value;
             if (!value)
-                Cursor.SetCursor(null, new Vector2(0.5f, 0.5f), CursorMode.Auto);
+                Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
         }
         
     }
