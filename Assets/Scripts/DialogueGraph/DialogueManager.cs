@@ -10,6 +10,7 @@ public class DialogueManager : Singleton<DialogueManager>
 {
     [SerializeField] private EventBusSO EventBus;
     private RuntimeDialogueGraph currentGraph;
+    private DialogueData currentDialogueData;
     private RuntimeDialogueNode currentNode;
 
     private void OnEnable()
@@ -42,6 +43,7 @@ public class DialogueManager : Singleton<DialogueManager>
         if (graph == null) return;
 
         currentGraph = graph;
+        currentDialogueData = data;
         EventBus.Publish(new OnDialogueDataEvent(data));
     }
 
@@ -79,8 +81,18 @@ public class DialogueManager : Singleton<DialogueManager>
 
     public void EndDialogue()
     {
+        string finishedNpcId = currentDialogueData.npcID ?? string.Empty;
+        RuntimeDialogueGraph finishedGraph = currentGraph;
+
+        currentDialogueData = default;
         currentGraph = null;
         currentNode = null;
-        EventBus.Publish(new OnDialogueEndedEvent());
+
+        EventBus.Publish(new OnDialogueEndedEvent
+        {
+            NpcID = finishedNpcId,
+            FinishedGraph = finishedGraph
+        });
+        
     }
 }
