@@ -2766,6 +2766,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: BlueprintsManager
       objectReference: {fileID: 0}
+    - target: {fileID: 5098650879914241608, guid: f8d7f886628289546b13363460367872, type: 3}
+      propertyPath: RuntimeGraph.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5098650879914241608, guid: f8d7f886628289546b13363460367872, type: 3}
+      propertyPath: 'RuntimeGraph.Array.data[0]'
+      value: 
+      objectReference: {fileID: -1759291010081333320, guid: 05f5aceef5b7021498da11efc202c3bd, type: 3}
     - target: {fileID: 5570564193854283345, guid: f8d7f886628289546b13363460367872, type: 3}
       propertyPath: 'npcObjects.Array.data[0]'
       value: 
