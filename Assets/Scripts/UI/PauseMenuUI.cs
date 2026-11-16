@@ -63,11 +63,12 @@ public class PauseMenuUI : Singleton<PauseMenuUI>
         }
         else
         {
-            isPaused = false;
+            UnPauseMenu();
         }
         
 
         container.SetActive(isPaused);
+        EventBus.Publish(new OnGamePausedEvent(isPaused));
     }
 
     public void PauseMenu()
@@ -76,12 +77,15 @@ public class PauseMenuUI : Singleton<PauseMenuUI>
         {
             SetSwordTarget(defaultButton);
         }
+        Time.timeScale = 0f;
     }
 
     public void UnPauseMenu()
     {
+        Time.timeScale = 1f;
         isPaused = false;
-        container.SetActive(false);
+        container.SetActive(isPaused);
+        EventBus.Publish(new OnGamePausedEvent(isPaused));
     }
 
     public void Quit()
