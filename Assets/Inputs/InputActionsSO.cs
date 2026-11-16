@@ -21,6 +21,10 @@ public class InputActionsSO : ScriptableObject, NewInputActions.IGamePlayActions
     
     private void OnEnable()
     {
+    }
+
+    public void Inicialize()
+    {
         inputActions = new NewInputActions();
         InputSystem.onDeviceChange += OnInputDeviceChange;
         gameplayMap = inputActions.GamePlay;
@@ -36,13 +40,6 @@ public class InputActionsSO : ScriptableObject, NewInputActions.IGamePlayActions
         EventBus.Subscribe<OnInventoryCloseEvent>(OnInventoryClosed);
         
         SwitchMap(inputActions.GamePlay);
-
-        InputAction leftMouseAction = inputActions.GamePlay.LeftMouse;
-        Debug.Log(
-            $"INPUT CONFIG LeftMouse: enabled={leftMouseAction.enabled}, " +
-            $"bindings={leftMouseAction.bindings.Count}, " +
-            $"resolvedControls={leftMouseAction.controls.Count}"
-        );
     }
 
     private void OnDisable()

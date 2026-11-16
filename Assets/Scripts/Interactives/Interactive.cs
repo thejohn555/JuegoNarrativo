@@ -11,7 +11,7 @@ namespace Interactives
 {
     [RequireComponent(typeof(Outliner))]
     public abstract class Interactive:MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
-    {
+    { 
         [field: SerializeField] public float InteractionDistance { get; private set; } = 1.5f;
         [field: SerializeField, FormerlySerializedAs("<VisualOffset>k__BackingField")]
         public Vector2 InteractionOffset { get; private set; } = Vector2.zero;
@@ -21,9 +21,6 @@ namespace Interactives
         [SerializeField] private Vector2 cursorHotspot = Vector2.zero;
         protected Outliner outline;
         public bool IsInteractable { get; private set; } = true;
-        protected virtual void Awake()
-        {
-        }
 
         protected virtual void OnEnable()
         {
@@ -84,7 +81,7 @@ namespace Interactives
             //Cambio del cursor
             if (!IsInteractable) return;
             if (interactionCursor != null)
-                Cursor.SetCursor(interactionCursor, new Vector2(interactionCursor.width/2f,interactionCursor.height/3), CursorMode.ForceSoftware);
+                Cursor.SetCursor(interactionCursor, new Vector2(interactionCursor.width/2f,interactionCursor.height/3), CursorMode.Auto);
             UseOutliner(false);
         }
 
