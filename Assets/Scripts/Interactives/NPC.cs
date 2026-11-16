@@ -88,6 +88,7 @@ namespace Interactives
             data.zoomCamera = zoomCamera;
             data.isDialogue = true;
             data.textColor = npcTextColor;
+            data.npcID = npcID;
 
             data.speakers = new Dictionary<string, SpeakerData>
             {

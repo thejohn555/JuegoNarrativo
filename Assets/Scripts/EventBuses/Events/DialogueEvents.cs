@@ -7,7 +7,11 @@ using UnityEngine.InputSystem;
 namespace Assets.Scripts.EventBuses
 {
     public struct OnDialogueStartedEvent : IEvent { }
-    public struct OnDialogueEndedEvent : IEvent { }
+    public struct OnDialogueEndedEvent : IEvent 
+    {
+        public string NpcID;
+        public RuntimeDialogueGraph FinishedGraph;
+    }
     public struct OnSkipDialogueEvent : IEvent { }
     public struct OnNodeDisplayedEvent : IEvent
     {
