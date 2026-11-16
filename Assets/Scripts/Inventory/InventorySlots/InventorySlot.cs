@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+// Casilla visual del inventario: gestiona el arrastrar y soltar y el clic sobre un slot.
 public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler, IPointerDownHandler, IPointerUpHandler
 {
     public int slotIndex;
@@ -94,7 +95,7 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     {
         if (draggedFromIndex != -1 && draggedFromIndex != slotIndex)
         {
-            InventoryManager.Instance.TryCraftOrMove(draggedFromIndex, slotIndex);
+            InventoryCrafter.Instance.TryCraftOrMove(draggedFromIndex, slotIndex);
         }
 
         EndDragCleanup();

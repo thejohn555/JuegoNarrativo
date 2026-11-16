@@ -160,7 +160,7 @@ public static class NodeTranslator
                 Sprite itemSprite = spriteRenderer != null ? spriteRenderer.sprite : null;
                 string path = AssetDatabase.GetAssetPath(prefab);
                 requiredGuid = AssetDatabase.AssetPathToGUID(path);
-                list.Add(new AddItemToInventoryRuntime(requiredGuid,prefab.name,itemSprite));
+                list.Add(new AddItemToInventoryRuntime(requiredGuid,prefab));
                 return true;
             }
             case ChangeNpcState changeNpcState:
