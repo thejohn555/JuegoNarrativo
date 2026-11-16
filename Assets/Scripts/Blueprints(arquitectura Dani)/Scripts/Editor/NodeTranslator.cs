@@ -15,6 +15,7 @@ using Blueprints_arquitectura_Dani_.Runtime.RuntimeNodes.SetActive;
 using Blueprints_arquitectura_Dani_.Runtime.RuntimeNodes.StartDialogue;
 using Blueprints_arquitectura_Dani_.Runtime.TriggerNode;
 using Blueprints_arquitectura_Dani_.Scripts.Runtime.RuntimeNodes.ChangeNpcState;
+using Blueprints_arquitectura_Dani_.Scripts.Runtime.RuntimeNodes.OnDialogueEnd;
 using Blueprints_arquitectura_Dani_.Scripts.Runtime.RuntimeNodes.OnItemCollected;
 using Blueprints_arquitectura_Dani_.Scripts.Runtime.RuntimeNodes.PlayTimeLine;
 using Blueprints_arquitectura_Dani_.Scripts.Runtime.RuntimeNodes.SetInteractable;
@@ -237,6 +238,26 @@ public static class NodeTranslator
                     }
                 }
                 list.Add(new StartBarkRuntime(key));
+                return true;
+            }
+            case OnDialogueEndNode onDialogueEndNode:
+            {
+                var port = onDialogueEndNode.GetInputPortByName(OnDialogueEndNode.ObjectPort);
+
+                string key = null;
+                if (port != null)
+                {
+                    if (port.IsConnected)
+                    {
+                        var connectedPort = port.FirstConnectedPort;
+                        var connectedNode = connectedPort.GetNode();
+                        if (connectedNode is ReferenceNode refNode)
+                        {
+                            key = refNode.Key;
+                        }
+                    }
+                }
+                list.Add(new OnDialogueEndRuntime(key));
                 return true;
             }
                 

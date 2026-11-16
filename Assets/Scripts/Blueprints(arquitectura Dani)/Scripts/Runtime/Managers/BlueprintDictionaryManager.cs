@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Blueprints_arquitectura_Dani_.EventRelay;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Blueprints_arquitectura_Dani_.Runtime.Managers
 {
@@ -27,6 +28,7 @@ namespace Blueprints_arquitectura_Dani_.Runtime.Managers
         public Dictionary <string, RuntimeNodeGroup> interactDictionary = new ();
         public Dictionary <string,RuntimeNodeGroup> npcDictionary = new ();
         public List<RuntimeNodeGroup> itemCollectedGroups = new();
+        [FormerlySerializedAs("dialogueEndDictionary")] public  List<RuntimeNodeGroup> dialogueEndList = new ();
         void RebuildDictionary()
         {
             nodeDictionary[NodeTypes.Trigger] = (triggerObjects, typeof(TriggerEnterRelay));
@@ -103,6 +105,9 @@ namespace Blueprints_arquitectura_Dani_.Runtime.Managers
                     break;
                 case NodeTypes.OnItemColleted:
                     itemCollectedGroups.Add(group);
+                    break;
+                case NodeTypes.OnDialogueEnd:
+                    dialogueEndList.Add(group);
                     break;
             }
             
