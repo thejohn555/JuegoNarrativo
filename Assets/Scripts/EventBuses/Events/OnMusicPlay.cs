@@ -1,4 +1,5 @@
-﻿using EventBuses;
+﻿using Audio.Enums;
+using EventBuses;
 using System.Collections;
 using UnityEngine;
 
@@ -6,19 +7,19 @@ namespace Assets.Scripts.EventBuses.Events
 {
     public struct OnMusicPlay : IEvent
     {
-        private AudioClip audioClip;
-        private AudioBank audioBank;
+        public MusicID musicClip;
+        public AudioEventsID audioEvent;
 
-        public OnMusicPlay(AudioClip audioClip)
+        public OnMusicPlay(MusicID audioClip)
         {
-            this.audioClip = audioClip;
-            audioBank = null;
+            this.musicClip = audioClip;
+            audioEvent = AudioEventsID.NULL;
         }
 
-        public OnMusicPlay(AudioBank audioBank)
+        public OnMusicPlay(AudioEventsID audioEvent)
         {
-            this.audioBank = audioBank;
-            audioClip = null;
+            this.audioEvent = audioEvent;
+            musicClip = MusicID.NULL;
         }
     }
 }

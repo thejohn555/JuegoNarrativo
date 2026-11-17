@@ -3,22 +3,22 @@ using UnityEditor;
 using UnityEditor.TerrainTools;
 using UnityEngine;
 
-[CustomEditor(typeof(AudioBank))]
-public class AudioBankEditor : Editor
+[CustomEditor(typeof(AudioEvent))]
+public class AudioEventEditor : Editor
 {
     #region SerializedProperties
-    SerializedProperty audios;
+    SerializedProperty eventBus;
+    SerializedProperty sfx;
     SerializedProperty soundOptions;
     SerializedProperty varOptions;
-    SerializedProperty enumOptions;
     SerializedProperty loop;
 
     private void OnEnable()
     {
-        audios = serializedObject.FindProperty("audios");
+        eventBus = serializedObject.FindProperty("eventBus");
+        sfx = serializedObject.FindProperty("sfx");
         soundOptions = serializedObject.FindProperty("soundOptions");
         varOptions = serializedObject.FindProperty("varOptions");
-        enumOptions = serializedObject.FindProperty("enumOptions");
         loop = serializedObject.FindProperty("loop");
     }
 
@@ -29,17 +29,14 @@ public class AudioBankEditor : Editor
         serializedObject.Update();
 
         EditorGUILayout.BeginVertical();
-        EditorGUILayout.PropertyField(audios);
+        EditorGUILayout.PropertyField(eventBus); 
+        EditorGUILayout.PropertyField(sfx);
         EditorGUILayout.PropertyField(soundOptions);
         
 
         if(soundOptions.enumValueIndex == (int)SoundOptions.Variable)
         {
             EditorGUILayout.PropertyField(varOptions);
-            if(varOptions.enumValueIndex == (int)VarOptions.Enum)
-            {
-                EditorGUILayout.PropertyField(enumOptions);
-            }
         }
         EditorGUILayout.EndVertical();
 

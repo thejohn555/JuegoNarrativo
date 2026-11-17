@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace Audio.Enums
 {
+    #region EditorEnums
     public enum SoundOptions
     {
         Sequentially,
@@ -18,20 +19,25 @@ namespace Audio.Enums
         Bool,
         Enum
     }
+    #endregion
 
-    public enum EnumOptions
+    #region ID
+    public enum SFXID
     {
-        Floor,
-        InventoryItem
-    }
-    public enum SFX
-    {
+        NULL,
         Dialogue,
         Object
     }
 
-    public enum Music
+    public enum MusicID
     {
+        NULL,
         Tabern
     }
+
+    public enum AudioEventsID
+    {
+        NULL
+    }
+    #endregion
 }

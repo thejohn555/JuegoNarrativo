@@ -5,40 +5,53 @@ using EventBuses;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class AudioManager : Singleton<AudioManager>
 {
     [SerializeField] private EventBusSO eventBus;
-    //SoundCompilations
-    [Header("Sound Archive")]
-    [SerializeField] private Dictionary<Music,  AudioClip> music = new();
-    [SerializeField] private Dictionary<SFX, AudioClip> sfx = new();
+    [SerializeField] private AudioDB audioDB;
+    [SerializeField] private AudioEventsDB audioEventsDB;
 
-    //sources
-    private AudioSource playerSfxSource;
-    private AudioSource musicSource;
+    //source
+    private AudioSource audioSource;
 
-
-
-    public void PlayMusic(Music name)
+    public override void Awake()
     {
-        musicSource.clip = music[name];
-        if (musicSource.clip != null)
+        base.Awake();
+        audioSource = GetComponent<AudioSource>();
+    }
+
+    private void Start()
+    {
+        eventBus.Subscribe<OnMusicPlay>(PlayMusic);
+        eventBus.Subscribe<OnSFXPlay>(PlaySFX);
+    }
+
+
+    public void PlayMusic(OnMusicPlay args)
+    {
+        if(args.audioEvent == AudioEventsID.NULL)
         {
-            eventBus.Publish<OnMusicPlay>(new OnMusicPlay(music[name]));
+            audioSource.clip = audioDB.MusicList[args.musicClip];
+            audioSource.Play();
+        }
+        else
+        {
+            //args.audioEvent.Play();
         }
     }
 
-    public void PlayMusic(AudioBank audioBank)
+    public void PlaySFX(OnSFXPlay args)
     {
-        eventBus.Publish<OnMusicPlay>(new OnMusicPlay(audioBank));
+        if (args.audioEvent == AudioEventsID.NULL)
+        {
+            audioSource.PlayOneShot(audioDB.SfxList[args.sfxClip]);
+        }
+        else
+        {
+            //args.audioEvent.Play();
+        }
+        
     }
 
-    public void PlaySFX(SFX name)
-    {
-        if (musicSource.clip != null)
-        {
-            eventBus.Publish<OnSFXPlay>(new OnSFXPlay(sfx[name]));
-        }
-    }
-    
 }
