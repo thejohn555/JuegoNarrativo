@@ -1,6 +1,7 @@
 ﻿using Assets.Scripts.Camera;
 using System;
 using System.Collections.Generic;
+using Assets.Scripts.EventBuses;
 using Blueprints_arquitectura_Dani_.Runtime;
 using EventBuses;
 using UnityEngine;
@@ -40,6 +41,7 @@ namespace Interactives
         {
             base.OnEnable();
             EventBus.Subscribe<OnNPCStateChangedEvent>(HandleStateChange);
+            EventBus.Subscribe<OnDialogueEndedEvent>(HandleDialogueEnded);
             BlueprintsEventManager.Instance.OnStartBark += Handelbark;
             
         }
@@ -48,6 +50,11 @@ namespace Interactives
         {
             if (obj != this.gameObject) return;
             TriggerBark();
+        }
+        private void HandleDialogueEnded(OnDialogueEndedEvent ev)
+        {
+            if (ev.NpcID != npcID) return;
+            BlueprintsEventManager.Instance.Raise(NodeTypes.OnDialogueEnd,this.gameObject);
         }
 
         protected override void OnDisable()
@@ -88,6 +95,7 @@ namespace Interactives
             data.zoomCamera = zoomCamera;
             data.isDialogue = true;
             data.textColor = npcTextColor;
+            data.npcID = npcID;
 
             data.speakers = new Dictionary<string, SpeakerData>
             {

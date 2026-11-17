@@ -7,10 +7,6 @@ namespace Managers
     {
         public Pathfinding2D Pathfinding { get; private set; } = new Pathfinding2D();
 
-        private void Start()
-        {
-        }
-
         public void InitializeGrid( Grid2D grid)
         {
             if (grid == null)

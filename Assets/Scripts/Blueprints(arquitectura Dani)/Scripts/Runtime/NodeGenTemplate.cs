@@ -10,6 +10,7 @@ public enum NodeTypes
     ReferenceNpc,
     ReferenceInteractable,
     OnItemColleted, // este no se autogenere
+    OnDialogueEnd, //este tampoco se autogenera
 }
 
 namespace Blueprints_arquitectura_Dani_.Runtime

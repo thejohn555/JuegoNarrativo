@@ -1,0 +1,1939 @@
+fileFormatVersion: 2
+guid: b4a6b3fa3655bec4eaf2de9499f7a7e7
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -2412045531272856381
+    second: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_0
+  - first:
+      213: 9048646878327397126
+    second: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_1
+  - first:
+      213: 285806341079952081
+    second: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_2
+  - first:
+      213: -1125119314563393852
+    second: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_3
+  - first:
+      213: -3928576923016479647
+    second: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_4
+  - first:
+      213: 3471885938666535384
+    second: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_5
+  - first:
+      213: 3743423182722783286
+    second: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_6
+  - first:
+      213: -2279741414571490825
+    second: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_7
+  - first:
+      213: -3518056152978649644
+    second: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_8
+  - first:
+      213: -6701535356679852261
+    second: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_9
+  - first:
+      213: 3682253231992221620
+    second: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_10
+  - first:
+      213: 7897806602794291149
+    second: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_11
+  - first:
+      213: 5361822385593218945
+    second: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_12
+  - first:
+      213: 3633615305302692173
+    second: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_13
+  - first:
+      213: -8081767065044124867
+    second: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_14
+  - first:
+      213: 3860742050933528243
+    second: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_15
+  - first:
+      213: -1383114434022164878
+    second: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_16
+  - first:
+      213: -2627934826480291009
+    second: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_17
+  - first:
+      213: 1195060603739917378
+    second: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_18
+  - first:
+      213: -1118786017127680925
+    second: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_19
+  - first:
+      213: -6066620311111536710
+    second: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_20
+  - first:
+      213: 8680800150752989826
+    second: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_21
+  - first:
+      213: 8650125532146190575
+    second: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_22
+  - first:
+      213: -3293360610279260693
+    second: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_23
+  - first:
+      213: -5940545506907070611
+    second: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_24
+  - first:
+      213: 7633859354965210221
+    second: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_25
+  - first:
+      213: -8166319271010050699
+    second: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_26
+  - first:
+      213: -7495021459703199969
+    second: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_27
+  - first:
+      213: -1052516618778062182
+    second: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_28
+  - first:
+      213: -3635917447908984069
+    second: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_29
+  - first:
+      213: -2984469649953455133
+    second: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_30
+  - first:
+      213: 7372119045182709013
+    second: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_31
+  - first:
+      213: 6217417213095386979
+    second: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_32
+  - first:
+      213: -7535459147932251835
+    second: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_33
+  - first:
+      213: 5208880247367412822
+    second: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_34
+  - first:
+      213: -1353734287953261966
+    second: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_35
+  - first:
+      213: -282789628170811710
+    second: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_36
+  - first:
+      213: 7049235236897331750
+    second: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_37
+  - first:
+      213: 7574562685404945939
+    second: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_38
+  - first:
+      213: 707215614938418074
+    second: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_39
+  - first:
+      213: 4945226315435811865
+    second: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_40
+  - first:
+      213: -7400736458522122617
+    second: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_41
+  - first:
+      213: 7037689507993051631
+    second: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_42
+  - first:
+      213: -4928572504329867777
+    second: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_43
+  - first:
+      213: 2711905065903978466
+    second: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_44
+  - first:
+      213: 19840757995049836
+    second: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_45
+  - first:
+      213: 4058875199422610845
+    second: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_46
+  - first:
+      213: -2330423382793316042
+    second: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_47
+  - first:
+      213: 1789188951255202227
+    second: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_48
+  - first:
+      213: -1806637861478608088
+    second: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_49
+  - first:
+      213: 4673056002385120583
+    second: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_50
+  - first:
+      213: 7559091426653242299
+    second: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_51
+  - first:
+      213: 2685735200166210057
+    second: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_52
+  - first:
+      213: -8413075095035970824
+    second: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_53
+  - first:
+      213: 6969215652694808739
+    second: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_54
+  - first:
+      213: 7215775839403977396
+    second: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_55
+  - first:
+      213: -3047911237243013932
+    second: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_56
+  - first:
+      213: -5180434006360062441
+    second: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_57
+  - first:
+      213: -7560545253745616176
+    second: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_58
+  - first:
+      213: 5577513408719235480
+    second: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_59
+  - first:
+      213: -888625878384160629
+    second: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_60
+  - first:
+      213: -1016920045666465797
+    second: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_61
+  - first:
+      213: 6889296079072301443
+    second: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_62
+  - first:
+      213: 3458828885439723673
+    second: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_63
+  - first:
+      213: 3380332458324887047
+    second: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_64
+  - first:
+      213: 5632735990170783369
+    second: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_65
+  - first:
+      213: 2431632147874114519
+    second: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_66
+  - first:
+      213: -5134200530586883963
+    second: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_67
+  - first:
+      213: 7980480986755017272
+    second: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_68
+  - first:
+      213: 8893066367705753239
+    second: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_69
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_0
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 2246
+        width: 248
+        height: 247
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3ccb96e6e51b68ed0800000000000000
+      internalID: -2412045531272856381
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_1
+      rect:
+        serializedVersion: 2
+        x: 318
+        y: 102
+        width: 1905
+        height: 2391
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 60bd6a0e460439d70800000000000000
+      internalID: 9048646878327397126
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_2
+      rect:
+        serializedVersion: 2
+        x: 2263
+        y: 2365
+        width: 36
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1daef9a5a5367f300800000000000000
+      internalID: 285806341079952081
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_3
+      rect:
+        serializedVersion: 2
+        x: 2288
+        y: 2390
+        width: 35
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4c6948dc1f5c260f0800000000000000
+      internalID: -1125119314563393852
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_4
+      rect:
+        serializedVersion: 2
+        x: 2410
+        y: 2397
+        width: 90
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 16c3ece5a14ea79c0800000000000000
+      internalID: -3928576923016479647
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_5
+      rect:
+        serializedVersion: 2
+        x: 2207
+        y: 2308
+        width: 52
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d974eacddd9e2030800000000000000
+      internalID: 3471885938666535384
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_6
+      rect:
+        serializedVersion: 2
+        x: 2249
+        y: 2345
+        width: 23
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 638572a1d8f43f330800000000000000
+      internalID: 3743423182722783286
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_7
+      rect:
+        serializedVersion: 2
+        x: 263
+        y: 2162
+        width: 74
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f148b4134bbc50e0800000000000000
+      internalID: -2279741414571490825
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_8
+      rect:
+        serializedVersion: 2
+        x: 2135
+        y: 1914
+        width: 255
+        height: 254
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4dd84dd719a5d2fc0800000000000000
+      internalID: -3518056152978649644
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_9
+      rect:
+        serializedVersion: 2
+        x: 181
+        y: 2086
+        width: 35
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b1f606f691d5ff2a0800000000000000
+      internalID: -6701535356679852261
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_10
+      rect:
+        serializedVersion: 2
+        x: 206
+        y: 2110
+        width: 35
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4bf2ee91ecdf91330800000000000000
+      internalID: 3682253231992221620
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_11
+      rect:
+        serializedVersion: 2
+        x: 125
+        y: 2028
+        width: 52
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dcfc948c245aa9d60800000000000000
+      internalID: 7897806602794291149
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_12
+      rect:
+        serializedVersion: 2
+        x: 167
+        y: 2066
+        width: 23
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 18775023d05096a40800000000000000
+      internalID: 5361822385593218945
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_13
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 1968
+        width: 42
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d415df25ed13d6230800000000000000
+      internalID: 3633615305302692173
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_14
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 1999
+        width: 41
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d3bf7926cabc7df80800000000000000
+      internalID: -8081767065044124867
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_15
+      rect:
+        serializedVersion: 2
+        x: 2473
+        y: 1969
+        width: 27
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3b65e43b07c149530800000000000000
+      internalID: 3860742050933528243
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_16
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 1645
+        width: 248
+        height: 247
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 276b46410c03ecce0800000000000000
+      internalID: -1383114434022164878
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_17
+      rect:
+        serializedVersion: 2
+        x: 2263
+        y: 1764
+        width: 36
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f33b3ced233b78bd0800000000000000
+      internalID: -2627934826480291009
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_18
+      rect:
+        serializedVersion: 2
+        x: 2288
+        y: 1789
+        width: 35
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 24c4bf29945b59010800000000000000
+      internalID: 1195060603739917378
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_19
+      rect:
+        serializedVersion: 2
+        x: 2410
+        y: 1796
+        width: 90
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3643e658b064970f0800000000000000
+      internalID: -1118786017127680925
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_20
+      rect:
+        serializedVersion: 2
+        x: 2207
+        y: 1707
+        width: 52
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: abfe60928f80fcba0800000000000000
+      internalID: -6066620311111536710
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_21
+      rect:
+        serializedVersion: 2
+        x: 2249
+        y: 1744
+        width: 23
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2821ac78eb5687870800000000000000
+      internalID: 8680800150752989826
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_22
+      rect:
+        serializedVersion: 2
+        x: 263
+        y: 1561
+        width: 74
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fe84c16575b6b0870800000000000000
+      internalID: 8650125532146190575
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_23
+      rect:
+        serializedVersion: 2
+        x: 2135
+        y: 1313
+        width: 255
+        height: 254
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bed7a0359f1ab42d0800000000000000
+      internalID: -3293360610279260693
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_24
+      rect:
+        serializedVersion: 2
+        x: 181
+        y: 1485
+        width: 35
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d6fd2c8f551fe8da0800000000000000
+      internalID: -5940545506907070611
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_25
+      rect:
+        serializedVersion: 2
+        x: 206
+        y: 1509
+        width: 35
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d647efd23aae0f960800000000000000
+      internalID: 7633859354965210221
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_26
+      rect:
+        serializedVersion: 2
+        x: 125
+        y: 1427
+        width: 52
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 57dd409d3e76bae80800000000000000
+      internalID: -8166319271010050699
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_27
+      rect:
+        serializedVersion: 2
+        x: 167
+        y: 1465
+        width: 23
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f17067651b55cf790800000000000000
+      internalID: -7495021459703199969
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_28
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 1367
+        width: 42
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a92d98136b5b461f0800000000000000
+      internalID: -1052516618778062182
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_29
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 1398
+        width: 41
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bfa7db45850aa8dc0800000000000000
+      internalID: -3635917447908984069
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_30
+      rect:
+        serializedVersion: 2
+        x: 2473
+        y: 1368
+        width: 27
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3e3079f6aa80596d0800000000000000
+      internalID: -2984469649953455133
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_31
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 1044
+        width: 248
+        height: 247
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 51dd10266370f4660800000000000000
+      internalID: 7372119045182709013
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_32
+      rect:
+        serializedVersion: 2
+        x: 2263
+        y: 1163
+        width: 36
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 36f13f69304b84650800000000000000
+      internalID: 6217417213095386979
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_33
+      rect:
+        serializedVersion: 2
+        x: 2288
+        y: 1188
+        width: 35
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 549c70c54dbac6790800000000000000
+      internalID: -7535459147932251835
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_34
+      rect:
+        serializedVersion: 2
+        x: 2410
+        y: 1195
+        width: 90
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 65c22e5bcf8a94840800000000000000
+      internalID: 5208880247367412822
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_35
+      rect:
+        serializedVersion: 2
+        x: 2207
+        y: 1106
+        width: 52
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 27a874666d1963de0800000000000000
+      internalID: -1353734287953261966
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_36
+      rect:
+        serializedVersion: 2
+        x: 2249
+        y: 1143
+        width: 23
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2c6c6bad454531cf0800000000000000
+      internalID: -282789628170811710
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_37
+      rect:
+        serializedVersion: 2
+        x: 263
+        y: 960
+        width: 74
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 62a9e69791ae3d160800000000000000
+      internalID: 7049235236897331750
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_38
+      rect:
+        serializedVersion: 2
+        x: 2135
+        y: 712
+        width: 255
+        height: 254
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 31e9d7071a04e1960800000000000000
+      internalID: 7574562685404945939
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_39
+      rect:
+        serializedVersion: 2
+        x: 181
+        y: 884
+        width: 35
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a9b8304dad880d900800000000000000
+      internalID: 707215614938418074
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_40
+      rect:
+        serializedVersion: 2
+        x: 206
+        y: 908
+        width: 35
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 91427790229f0a440800000000000000
+      internalID: 4945226315435811865
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_41
+      rect:
+        serializedVersion: 2
+        x: 125
+        y: 826
+        width: 52
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 786a189d66d4b4990800000000000000
+      internalID: -7400736458522122617
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_42
+      rect:
+        serializedVersion: 2
+        x: 167
+        y: 864
+        width: 23
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fe16b6bf155eaa160800000000000000
+      internalID: 7037689507993051631
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_43
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 766
+        width: 42
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ffd29a58b613a9bb0800000000000000
+      internalID: -4928572504329867777
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_44
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 797
+        width: 41
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2e7f9c50a4f92a520800000000000000
+      internalID: 2711905065903978466
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_45
+      rect:
+        serializedVersion: 2
+        x: 2473
+        y: 767
+        width: 27
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c639e54701d764000800000000000000
+      internalID: 19840757995049836
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_46
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 443
+        width: 248
+        height: 247
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d9d3a313d75045830800000000000000
+      internalID: 4058875199422610845
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_47
+      rect:
+        serializedVersion: 2
+        x: 2263
+        y: 562
+        width: 36
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 639175cc74ca8afd0800000000000000
+      internalID: -2330423382793316042
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_48
+      rect:
+        serializedVersion: 2
+        x: 2288
+        y: 587
+        width: 35
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3b9be932fd974d810800000000000000
+      internalID: 1789188951255202227
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_49
+      rect:
+        serializedVersion: 2
+        x: 2410
+        y: 594
+        width: 90
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 823dbccdf688de6e0800000000000000
+      internalID: -1806637861478608088
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_50
+      rect:
+        serializedVersion: 2
+        x: 2207
+        y: 505
+        width: 52
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 74d0caddca70ad040800000000000000
+      internalID: 4673056002385120583
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_51
+      rect:
+        serializedVersion: 2
+        x: 2249
+        y: 542
+        width: 23
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bb30e5e4a9947e860800000000000000
+      internalID: 7559091426653242299
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_52
+      rect:
+        serializedVersion: 2
+        x: 263
+        y: 359
+        width: 74
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 90a6ba65fe5a54520800000000000000
+      internalID: 2685735200166210057
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_53
+      rect:
+        serializedVersion: 2
+        x: 2135
+        y: 111
+        width: 255
+        height: 254
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8faf1b386c0ce3b80800000000000000
+      internalID: -8413075095035970824
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_54
+      rect:
+        serializedVersion: 2
+        x: 181
+        y: 283
+        width: 35
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3a857fd26b0a7b060800000000000000
+      internalID: 6969215652694808739
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_55
+      rect:
+        serializedVersion: 2
+        x: 206
+        y: 307
+        width: 35
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4ba258625e5932460800000000000000
+      internalID: 7215775839403977396
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_56
+      rect:
+        serializedVersion: 2
+        x: 125
+        y: 225
+        width: 52
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4d47535d0e4a3b5d0800000000000000
+      internalID: -3047911237243013932
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_57
+      rect:
+        serializedVersion: 2
+        x: 167
+        y: 263
+        width: 23
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7160e84e7b66b18b0800000000000000
+      internalID: -5180434006360062441
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_58
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 165
+        width: 42
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0da1a32362c831790800000000000000
+      internalID: -7560545253745616176
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_59
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 196
+        width: 41
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 89920b0f4ee476d40800000000000000
+      internalID: 5577513408719235480
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_60
+      rect:
+        serializedVersion: 2
+        x: 2473
+        y: 166
+        width: 27
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b8051b4c877faa3f0800000000000000
+      internalID: -888625878384160629
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_61
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 0
+        width: 96
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bf783193b9c23e1f0800000000000000
+      internalID: -1016920045666465797
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_62
+      rect:
+        serializedVersion: 2
+        x: 485
+        y: 0
+        width: 35
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 38198996842bb9f50800000000000000
+      internalID: 6889296079072301443
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_63
+      rect:
+        serializedVersion: 2
+        x: 607
+        y: 0
+        width: 96
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 998be7fab8a300030800000000000000
+      internalID: 3458828885439723673
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_64
+      rect:
+        serializedVersion: 2
+        x: 1086
+        y: 0
+        width: 35
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7068d29067a59ee20800000000000000
+      internalID: 3380332458324887047
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_65
+      rect:
+        serializedVersion: 2
+        x: 1208
+        y: 0
+        width: 96
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 98e00bf1a8f7b2e40800000000000000
+      internalID: 5632735990170783369
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_66
+      rect:
+        serializedVersion: 2
+        x: 1687
+        y: 0
+        width: 35
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7dbe47e1e84eeb120800000000000000
+      internalID: 2431632147874114519
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_67
+      rect:
+        serializedVersion: 2
+        x: 1809
+        y: 0
+        width: 96
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5882fb0d1d7afb8b0800000000000000
+      internalID: -5134200530586883963
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_68
+      rect:
+        serializedVersion: 2
+        x: 2288
+        y: 0
+        width: 35
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 83aaa40dc2d50ce60800000000000000
+      internalID: 7980480986755017272
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_69
+      rect:
+        serializedVersion: 2
+        x: 2410
+        y: 0
+        width: 90
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 79623137eb48a6b70800000000000000
+      internalID: 8893066367705753239
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_0: -2412045531272856381
+      pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_1: 9048646878327397126
+      pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_10: 3682253231992221620
+      pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_11: 7897806602794291149
+      pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_12: 5361822385593218945
+      pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_13: 3633615305302692173
+      pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_14: -8081767065044124867
+      pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_15: 3860742050933528243
+      pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_16: -1383114434022164878
+      pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_17: -2627934826480291009
+      pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_18: 1195060603739917378
+      pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_19: -1118786017127680925
+      pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_2: 285806341079952081
+      pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_20: -6066620311111536710
+      pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_21: 8680800150752989826
+      pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_22: 8650125532146190575
+      pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_23: -3293360610279260693
+      pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_24: -5940545506907070611
+      pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_25: 7633859354965210221
+      pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_26: -8166319271010050699
+      pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_27: -7495021459703199969
+      pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_28: -1052516618778062182
+      pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_29: -3635917447908984069
+      pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_3: -1125119314563393852
+      pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_30: -2984469649953455133
+      pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_31: 7372119045182709013
+      pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_32: 6217417213095386979
+      pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_33: -7535459147932251835
+      pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_34: 5208880247367412822
+      pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_35: -1353734287953261966
+      pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_36: -282789628170811710
+      pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_37: 7049235236897331750
+      pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_38: 7574562685404945939
+      pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_39: 707215614938418074
+      pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_4: -3928576923016479647
+      pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_40: 4945226315435811865
+      pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_41: -7400736458522122617
+      pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_42: 7037689507993051631
+      pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_43: -4928572504329867777
+      pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_44: 2711905065903978466
+      pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_45: 19840757995049836
+      pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_46: 4058875199422610845
+      pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_47: -2330423382793316042
+      pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_48: 1789188951255202227
+      pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_49: -1806637861478608088
+      pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_5: 3471885938666535384
+      pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_50: 4673056002385120583
+      pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_51: 7559091426653242299
+      pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_52: 2685735200166210057
+      pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_53: -8413075095035970824
+      pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_54: 6969215652694808739
+      pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_55: 7215775839403977396
+      pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_56: -3047911237243013932
+      pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_57: -5180434006360062441
+      pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_58: -7560545253745616176
+      pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_59: 5577513408719235480
+      pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_6: 3743423182722783286
+      pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_60: -888625878384160629
+      pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_61: -1016920045666465797
+      pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_62: 6889296079072301443
+      pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_63: 3458828885439723673
+      pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_64: 3380332458324887047
+      pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_65: 5632735990170783369
+      pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_66: 2431632147874114519
+      pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_67: -5134200530586883963
+      pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_68: 7980480986755017272
+      pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_69: 8893066367705753239
+      pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_7: -2279741414571490825
+      pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_8: -3518056152978649644
+      pngtree-natural-wooden-stick-with-rough-textured-surface-png-image_20587416_9: -6701535356679852261
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

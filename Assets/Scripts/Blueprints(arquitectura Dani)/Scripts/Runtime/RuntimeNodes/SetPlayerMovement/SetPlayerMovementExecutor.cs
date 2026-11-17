@@ -8,7 +8,7 @@ namespace Blueprints_arquitectura_Dani_.Scripts.Runtime.RuntimeNodes.SetPlayerMo
     {
         protected override int OnExecute(SetPlayerMovementRuntime node, BlueprintDirector ctx, GameObject obj)
         {
-            BlueprintsEventManager.Instance.SetMovement(node.active);
+            BlueprintsEventManager.Instance.SetMovement(!node.active);
             return 0;
         }
     }
