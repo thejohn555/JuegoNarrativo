@@ -6,10 +6,16 @@ namespace Blueprints_arquitectura_Dani_.Editor.Blueprints_arquitectura_Dani_.Scr
     public class OnDialogueEndNode:BlueprintNode,IStartNode
     {
         public const string ObjectPort= "Object";
+        public const string StatePort= "StateId";
         protected override void OnDefinePorts(IPortDefinitionContext context)
         {
             context.AddOutputPort("Out").Build();
-            context.AddInputPort<string>(ObjectPort);
+            context.AddInputPort<string>(ObjectPort).Build();
+        }
+
+        protected override void OnDefineOptions(IOptionDefinitionContext context)
+        {
+            context.AddOption<string>(StatePort).Build();
         }
     }
 }

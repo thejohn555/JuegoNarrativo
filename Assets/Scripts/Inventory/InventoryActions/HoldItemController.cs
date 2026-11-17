@@ -64,7 +64,7 @@ public class HeldItemController : MonoBehaviour
     {
         InventoryManager inventory = InventoryManager.Instance;
 
-        if (inventory == null || !inventory.TryGetItem(slotIndex, out string itemName, out Sprite icon, out string guid)) //Nuevo
+        if (inventory == null || !inventory.storage.TryGetItem(slotIndex, out InventoryItem item)) //Nuevo
         {
             return;
         }
@@ -75,16 +75,16 @@ public class HeldItemController : MonoBehaviour
         }
 
         heldSlotIndex = slotIndex;
-        heldItemName = itemName;
-        Debug.Log($"[Hold] '{itemName}' | guid recibido: '{guid}' | guardado: '{heldItemGuid}'");
-        heldItemGuid = guid;
+        heldItemName = item.Name;
+        Debug.Log($"[Hold] '{item.Name}' | guid recibido: '{item.guid}' | guardado: '{heldItemGuid}'");
+        heldItemGuid = item.guid;
         pickupFrame = Time.frameCount;
 
         inventory.HeldSlotIndex = slotIndex;
         inventory.UpdateUI();
 
-        CreateIcon(icon);
-        OnItemHeld?.Invoke(itemName);
+        CreateIcon(item.icon);
+        OnItemHeld?.Invoke(item.Name);
     }
 
     // Devuelve el objeto al inventario
@@ -111,7 +111,7 @@ public class HeldItemController : MonoBehaviour
 
         ClearState();
 
-        InventoryManager.Instance.ClearSlot(index);
+        InventoryManager.Instance.storage.ClearSlot(index);
 
         return true;
     }
