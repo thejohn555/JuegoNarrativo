@@ -3429,6 +3429,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9025216357305333629, guid: 6a7aea6e28bbdbe47a20282e2680fd53, type: 3}
+      propertyPath: craftingRecipes.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9025216357305333629, guid: 6a7aea6e28bbdbe47a20282e2680fd53, type: 3}
+      propertyPath: craftingRecipes.Array.data[0].prefabA
+      value: 
+      objectReference: {fileID: 8520369407981150369, guid: 6b3fb1c12978eeb43bfa9c093286b2d3, type: 3}
+    - target: {fileID: 9025216357305333629, guid: 6a7aea6e28bbdbe47a20282e2680fd53, type: 3}
+      propertyPath: craftingRecipes.Array.data[0].prefabB
+      value: 
+      objectReference: {fileID: 9207451370440653793, guid: 85699bffd616e3a4a8ecb4d0e930ff79, type: 3}
+    - target: {fileID: 9025216357305333629, guid: 6a7aea6e28bbdbe47a20282e2680fd53, type: 3}
+      propertyPath: craftingRecipes.Array.data[0].resultPrefab
+      value: 
+      objectReference: {fileID: 6433144946823108048, guid: 9999f8eb15226a54e9a6afa481d638b8, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3889,6 +3905,10 @@ PrefabInstance:
     - target: {fileID: 6750985220364914118, guid: 530bb03191a676e46a47a39bd4cd5351, type: 3}
       propertyPath: cameraOffset.x
       value: -2.58
+      objectReference: {fileID: 0}
+    - target: {fileID: 6750985220364914118, guid: 530bb03191a676e46a47a39bd4cd5351, type: 3}
+      propertyPath: cameraOffset.y
+      value: 0.76
       objectReference: {fileID: 0}
     - target: {fileID: 6750985220364914118, guid: 530bb03191a676e46a47a39bd4cd5351, type: 3}
       propertyPath: npcTextColor.b
