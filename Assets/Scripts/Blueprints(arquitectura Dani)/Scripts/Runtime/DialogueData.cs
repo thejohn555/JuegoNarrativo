@@ -16,6 +16,7 @@ namespace Assets.Scripts.Camera
     public struct DialogueData
     {
         public Dictionary<string, SpeakerData> speakers;
+        public string npcID;
         public Transform targetPosition;
         public Vector3 cameraOffset;
         public float zoom;
@@ -27,6 +28,7 @@ namespace Assets.Scripts.Camera
 
         public DialogueData(
         Dictionary<string, SpeakerData> speakers,
+        string npcID,
         Transform targetPosition,
         Vector3 cameraOffset,
         float zoom = 5f,
@@ -37,6 +39,7 @@ namespace Assets.Scripts.Camera
         Color textColor = default )
         {
             this.speakers = speakers;
+            this.npcID = npcID;
             this.targetPosition = targetPosition;
             this.cameraOffset = cameraOffset;
             this.zoom = zoom;

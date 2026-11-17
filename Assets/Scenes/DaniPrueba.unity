@@ -430,6 +430,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: BlueprintsManager
       objectReference: {fileID: 0}
+    - target: {fileID: 5098650879914241608, guid: f8d7f886628289546b13363460367872, type: 3}
+      propertyPath: RuntimeGraph.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5098650879914241608, guid: f8d7f886628289546b13363460367872, type: 3}
+      propertyPath: 'RuntimeGraph.Array.data[0]'
+      value: 
+      objectReference: {fileID: -1759291010081333320, guid: 27885c4014594334490bae1e7de7776e, type: 3}
     - target: {fileID: 7200603504630786681, guid: f8d7f886628289546b13363460367872, type: 3}
       propertyPath: m_LocalPosition.x
       value: 506.13336
@@ -1158,6 +1166,7 @@ MonoBehaviour:
   showInteractionGizmo: 1
   description: {fileID: 0}
   interactionCursor: {fileID: 2800000, guid: 79afe8cc60f842a47930fd91a12b7616, type: 3}
+  cursorHotspot: {x: 0, y: 0}
   npcID: Bartender
   currentGraph: {fileID: 3965311268370046156, guid: 90689aa7def82764bbd6057193c8bf4d, type: 3}
   barkGraph: {fileID: 0}
@@ -3046,6 +3055,7 @@ MonoBehaviour:
   showInteractionGizmo: 1
   description: {fileID: 0}
   interactionCursor: {fileID: 0}
+  cursorHotspot: {x: 0, y: 0}
   npcID: Players
   currentGraph: {fileID: 3965311268370046156, guid: c2e400154645cb84eb209e898a7df579, type: 3}
   barkGraph: {fileID: 0}

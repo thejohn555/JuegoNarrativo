@@ -12,17 +12,22 @@ public class InputActionsSO : ScriptableObject, NewInputActions.IGamePlayActions
     //input maps
     private NewInputActions inputActions;
     private InputActionMap currentMap;
+    private InputActionMap previousMap;
     //Map refs
     private InputActionMap gameplayMap;
     private InputActionMap inventoryMap;
-    OnScrollWheelPressed onScrollWheelPressed = new OnScrollWheelPressed();
+    OnScrollWheelPressed onScrollWheelPressed = new ();
     
     
     
     private void OnEnable()
     {
+    }
+
+    public void Inicialize()
+    {
         inputActions = new NewInputActions();
-        inputActions.Enable();
+        InputSystem.onDeviceChange += OnInputDeviceChange;
         gameplayMap = inputActions.GamePlay;
         inventoryMap = inputActions.Inventory;
 
@@ -34,6 +39,7 @@ public class InputActionsSO : ScriptableObject, NewInputActions.IGamePlayActions
         EventBus.Subscribe<OnDialogueDataEvent>(OnDialogueStarted);
         EventBus.Subscribe<OnDialogueEndedEvent>(OnDialogueEnded);
         EventBus.Subscribe<OnInventoryCloseEvent>(OnInventoryClosed);
+        EventBus.Subscribe<OnGamePausedEvent>(HandleGamePaused);
         
         SwitchMap(inputActions.GamePlay);
     }
@@ -45,7 +51,29 @@ public class InputActionsSO : ScriptableObject, NewInputActions.IGamePlayActions
             EventBus.UnSubscribe<OnDialogueDataEvent>(OnDialogueStarted);
             EventBus.UnSubscribe<OnDialogueEndedEvent>(OnDialogueEnded);
             EventBus.UnSubscribe<OnInventoryCloseEvent>(OnInventoryClosed);
+            EventBus.UnSubscribe<OnGamePausedEvent>(HandleGamePaused);
         }
+
+        InputSystem.onDeviceChange -= OnInputDeviceChange;
+    }
+
+    private void OnInputDeviceChange(InputDevice device, InputDeviceChange change)
+    {
+        if (device is not Mouse || currentMap == null)
+            return;
+
+        InputAction leftMouseAction = inputActions.GamePlay.LeftMouse;
+        if (leftMouseAction.controls.Count > 0)
+            return;
+
+        // Mouse can be added after the ScriptableObject enabled its action map.
+        currentMap.Disable();
+        currentMap.Enable();
+
+        Debug.Log(
+            $"INPUT DEVICE Mouse {change}: " +
+            $"LeftMouse controls={leftMouseAction.controls.Count}"
+        );
     }
 
     private void SwitchMap(InputActionMap newMap)
@@ -55,6 +83,19 @@ public class InputActionsSO : ScriptableObject, NewInputActions.IGamePlayActions
         currentMap?.Enable();
         inputActions.Global.Enable();
         Debug.Log($"Mapa cambiado, actual: {currentMap?.ToString()}");
+    }
+
+    private void HandleGamePaused(OnGamePausedEvent ev)
+    {
+        if (ev.isPaused)
+        {
+            previousMap = currentMap;
+            SwitchMap(null);
+        }
+        else
+        {
+            SwitchMap(previousMap);
+        }
     }
 
     private void OnDialogueStarted(OnDialogueDataEvent ev)
@@ -72,18 +113,15 @@ public class InputActionsSO : ScriptableObject, NewInputActions.IGamePlayActions
 
     public void OnLeftMouse(InputAction.CallbackContext context)
     {
+        Debug.Log($"INPUT CALLBACK LeftMouse: phase={context.phase}, map={context.action.actionMap.enabled}");
         if (context.started)
-        {
             EventBus.Publish(new OnLeftMouseClick());
-        }
     }
 
     public void OnRightMouse(InputAction.CallbackContext context)
     {
         if (context.started)
-        {
             EventBus.Publish(new OnRightMouseClick());
-        }
     }
 
     public void OnSpace(InputAction.CallbackContext context)
@@ -91,7 +129,6 @@ public class InputActionsSO : ScriptableObject, NewInputActions.IGamePlayActions
         if (context.started)
         {
             EventBus.Publish(new OnSpaceBarClick(context));
-            Debug.unityLogger.Log("OnSpaceBarClick");
         }
         else if(context.canceled)
         {

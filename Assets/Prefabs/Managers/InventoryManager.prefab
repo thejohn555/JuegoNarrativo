@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 1387530801191521277}
   - component: {fileID: 8103105865859351399}
   - component: {fileID: 5713027528563071667}
+  - component: {fileID: 4772621398536489123}
+  - component: {fileID: 9025216357305333629}
   m_Layer: 0
   m_Name: InventoryManager
   m_TagString: Untagged
@@ -48,13 +50,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InventoryManager
   settings: {fileID: 11400000, guid: 0e5a1dd2c5c5bd24597c97c016919c36, type: 2}
-  craftingRecipes:
-  - ingredientA: Dice
-    ingredientB: Nail
-    resultName: Loaded Dice
-    resultIcon: {fileID: 21300000, guid: 944041a4bde963d4bad8e3ccfc1d0353, type: 3}
-    resultPrefab: {fileID: 6433144946823108048, guid: 9999f8eb15226a54e9a6afa481d638b8, type: 3}
-    resultGuid: 
 --- !u!114 &1387530801191521277
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -98,3 +93,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Assets.Scripts.FridayCode.ObjectClear
   eventBus: {fileID: 11400000, guid: 12dd33ac5088a19498397bad87f52e37, type: 2}
   totalInteractuables: 3
+--- !u!114 &4772621398536489123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8075164085529893166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8162becc047b5ad498b6f648ea20205d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InventoryStorage
+--- !u!114 &9025216357305333629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8075164085529893166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c88890d7ec0b724289b460156f3aa3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InventoryCrafter
+  craftingRecipes:
+  - prefabA: {fileID: 8520369407981150369, guid: 6b3fb1c12978eeb43bfa9c093286b2d3, type: 3}
+    prefabB: {fileID: 9207451370440653793, guid: 85699bffd616e3a4a8ecb4d0e930ff79, type: 3}
+    resultPrefab: {fileID: 6433144946823108048, guid: 9999f8eb15226a54e9a6afa481d638b8, type: 3}

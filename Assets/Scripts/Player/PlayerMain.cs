@@ -16,6 +16,7 @@ namespace Player
 
         private void Awake()
         {
+            inputReader.Inicialize();
             EventBus=inputReader.EventBus;
             Cam = Camera.main;
             MovementSystem = GetComponent<PlayerMovementSystem>();
