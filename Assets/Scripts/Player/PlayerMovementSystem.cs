@@ -34,12 +34,19 @@ public class PlayerMovementSystem : PlayerSystem
     {
         CachePathfinding();
     }
-
-    public void SetNewDestination(
-        Vector3 destination,
-        float stoppingDistance,
-        bool recalculateVelocity = true)
+    
+    private void OnDisable() //Nuevo
     {
+        FinishMovement(reached: false);
+    }
+
+    public void SetNewDestination(Vector3 destination, float stoppingDistance, bool recalculateVelocity = true)
+    {
+        if (!enabled) //Nuevo
+        {
+            return;
+        }
+        
         Debug.Log($"PRUEBA 4: SetNewDestination; grid={pathfinding?.Grid != null}", this);
 
         // Cancelamos la ruta anterior.
