@@ -37,6 +37,9 @@ namespace Interactives
         [SerializeField] public float zoom = 3f;
         [SerializeField] public float smoothTime  = 0.5f;
 
+        private string currentStateId = "";
+        
+
         protected override void OnEnable()
         {
             base.OnEnable();
@@ -45,7 +48,7 @@ namespace Interactives
             BlueprintsEventManager.Instance.OnStartBark += Handelbark;
             
         }
-
+        
         private void Handelbark(GameObject obj)
         {
             if (obj != this.gameObject) return;
@@ -54,6 +57,7 @@ namespace Interactives
         private void HandleDialogueEnded(OnDialogueEndedEvent ev)
         {
             if (ev.NpcID != npcID) return;
+            BlueprintMediator.Instance.GetLastNpcState(this.currentStateId);
             BlueprintsEventManager.Instance.Raise(NodeTypes.OnDialogueEnd,this.gameObject);
         }
 
@@ -74,6 +78,7 @@ namespace Interactives
             {
                 if (state.StateID == ev.NewStateID)
                 {
+                    currentStateId= state.StateID;
                     currentGraph = state.DialogueGraph;
                     Debug.LogError($"[{npcID}] Dialogue graph changed to state: {ev.NewStateID}");
                     return;

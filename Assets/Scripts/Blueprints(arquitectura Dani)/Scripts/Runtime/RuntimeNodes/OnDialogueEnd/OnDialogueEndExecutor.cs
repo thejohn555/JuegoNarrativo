@@ -11,14 +11,27 @@ namespace Blueprints_arquitectura_Dani_.Scripts.Runtime.RuntimeNodes.OnDialogueE
         {
             GameObject go = BlueprintDictionaryManager.Instance.ResolveReference(node.goName);
 
-            if (go != obj)
+            if (go != obj )
             {
                 return -1;
             }
-            else
+            else if(!string.IsNullOrEmpty(node.stateId))
+            {
+                if (node.stateId != BlueprintMediator.Instance.LastNpcState)
+                {
+                    return -1;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            else if(string.IsNullOrEmpty(BlueprintMediator.Instance.LastNpcState))
             {
                 return 0;
             }
+            return -1;
+            
         }
     }
 }

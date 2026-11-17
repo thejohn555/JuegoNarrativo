@@ -8,6 +8,7 @@ namespace Blueprints_arquitectura_Dani_.Runtime
         public static BlueprintMediator Instance { get; private set; }
         
         public string LastGuidPick { get; private set; }
+        public string LastNpcState { get;private set; }
         private BlueprintsEventManager subscribedEventManager;
 
         private void Awake()
@@ -29,7 +30,6 @@ namespace Blueprints_arquitectura_Dani_.Runtime
 
         private void Start()
         {
-            // OnEnable can run before BlueprintsEventManager has initialized its singleton.
             TrySubscribe();
         }
 
@@ -54,6 +54,11 @@ namespace Blueprints_arquitectura_Dani_.Runtime
         void InstanceOnOnGetLastGuid(string obj)
         {
             LastGuidPick = obj;
+        }
+
+        public void GetLastNpcState(string state)
+        {
+            LastNpcState = state;
         }
     }
 }
