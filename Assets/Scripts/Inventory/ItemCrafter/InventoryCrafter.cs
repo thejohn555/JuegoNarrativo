@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Blueprints_arquitectura_Dani_.Runtime;
 using UnityEngine;
 
 // Solo craftea: trabaja sobre InventorySlots y no toca nada más del manager.
@@ -51,6 +52,12 @@ public class InventoryCrafter : MonoBehaviour
             storage.SetItem(toIndex, result);
 
             Debug.Log($"Successful crafting! Created: {result.Name}");
+            
+            if (BlueprintsEventManager.Instance != null && !string.IsNullOrEmpty(result.guid)) //<----Si no va quitar
+            {
+                BlueprintsEventManager.Instance.GetLastGuid(result.guid);
+                BlueprintsEventManager.Instance.Raise(NodeTypes.OnItemColleted, gameObject);
+            }
         }
         else
         {
