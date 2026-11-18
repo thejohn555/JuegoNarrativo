@@ -81,7 +81,7 @@ namespace Interactives
                 {
                     currentStateId= state.StateID;
                     currentGraph = state.DialogueGraph;
-                    Debug.Log($"[{npcID}] Dialogue graph changed to state: {ev.NewStateID}");
+                    Debug.LogError($"[{npcID}] Dialogue graph changed to state: {ev.NewStateID}");
                     return;
                 }
             }

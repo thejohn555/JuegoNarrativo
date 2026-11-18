@@ -166,6 +166,13 @@ namespace Blueprints_arquitectura_Dani_.Runtime
                 else
                 {
                     int output = executor.Execute(currentNode, this,source);
+                    // Debug.Log($"[Director] Nodo ejecutado: {currentNode.GetType().Name}");
+                    // Debug.Log($"[Director] Output devuelto: {output}");
+                    // Debug.Log($"[Director] Número de conexiones: {currentNode.NextNodeIndex.Count}");
+                    for (int i = 0; i < currentNode.NextNodeIndex.Count; i++)
+                    {
+                        Debug.Log($"[Director] NextNodeIndex[{i}] = {currentNode.NextNodeIndex[i]}");
+                    }
 
                     if (PendingWait > 0f)
                     {
@@ -176,7 +183,9 @@ namespace Blueprints_arquitectura_Dani_.Runtime
                     if (output < 0 || output >= currentNode.NextNodeIndex.Count)
                         yield break;                              // fin de la cadena
 
-                    index = currentNode.NextNodeIndex[output]; 
+                    index = currentNode.NextNodeIndex[output];
+                    // Debug.Log($"[Director] Siguiente índice: {index}");
+                    // Debug.Log($"[Director] Total nodos del grupo: {group.Nodes.Count}");
                 }
             }
         }
