@@ -69,7 +69,7 @@ namespace Assets.Scripts.FridayCode
 
         private void CoinSpawn()
         {
-            InventoryManager.Instance.AddItem(resultObjectName, sprite);
+            //InventoryManager.Instance.storage.AddItem();
             Debug.Log($"the object is {resultObjectName}");
         }
     }

@@ -1,4 +1,5 @@
 using System;
+using Assets.Scripts.EventBuses;
 using Blueprints_arquitectura_Dani_.Runtime;
 using EventBuses;
 using UnityEngine;
@@ -23,7 +24,7 @@ public class BlueprintsEventsOAD : MonoBehaviour
     {
         BlueprintsEventManager.Instance.ChangeNpcState += NpcChangeState;
     }
-
+    
     private void OnDisable()
     {
         BlueprintsEventManager.Instance.ChangeNpcState -= NpcChangeState;
@@ -34,4 +35,5 @@ public class BlueprintsEventsOAD : MonoBehaviour
         Debug.Log("NpcChangeState");
         eventBus.Publish(new OnNPCStateChangedEvent(npc_id, state));
     }
+    
 }

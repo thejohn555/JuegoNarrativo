@@ -8,8 +8,8 @@ namespace Blueprints_arquitectura_Dani_.Runtime.RuntimeNodes.OnInteractNpcNode
         protected override int OnExecute(OnInteractNpcRuntime node, BlueprintDirector ctx, GameObject obj)
         {
             var mgr = BlueprintsEventManager.Instance;
-            Debug.Log($"[InteractExec] requiredGuid del nodo: '{node.requiredGuid}'");
-            Debug.Log($"[InteractExec] ¿IsHoldingItem conectado? {mgr.IsHoldingItem != null}");
+            Debug.LogError($"[InteractExec] requiredGuid del nodo: '{node.requiredGuid}'");
+            Debug.LogError($"[InteractExec] ¿IsHoldingItem conectado? {mgr.IsHoldingItem != null}");
             
             if (string.IsNullOrEmpty(node.requiredGuid))
             {

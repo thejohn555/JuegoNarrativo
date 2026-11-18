@@ -1,6 +1,7 @@
 ﻿using Assets.Scripts.Camera;
 using System;
 using System.Collections.Generic;
+using Assets.Scripts.EventBuses;
 using Blueprints_arquitectura_Dani_.Runtime;
 using EventBuses;
 using UnityEngine;
@@ -37,18 +38,28 @@ namespace Interactives
         [SerializeField] public float zoom = 3f;
         [SerializeField] public float smoothTime  = 0.5f;
 
+        private string currentStateId = "";
+        
+
         protected override void OnEnable()
         {
             base.OnEnable();
             EventBus.Subscribe<OnNPCStateChangedEvent>(HandleStateChange);
+            EventBus.Subscribe<OnDialogueEndedEvent>(HandleDialogueEnded);
             BlueprintsEventManager.Instance.OnStartBark += Handelbark;
             
         }
-
+        
         private void Handelbark(GameObject obj)
         {
             if (obj != this.gameObject) return;
             TriggerBark();
+        }
+        private void HandleDialogueEnded(OnDialogueEndedEvent ev)
+        {
+            if (ev.NpcID != npcID) return;
+            BlueprintMediator.Instance.GetLastNpcState(this.currentStateId);
+            BlueprintsEventManager.Instance.Raise(NodeTypes.OnDialogueEnd,this.gameObject);
         }
 
         protected override void OnDisable()
@@ -68,8 +79,9 @@ namespace Interactives
             {
                 if (state.StateID == ev.NewStateID)
                 {
+                    currentStateId= state.StateID;
                     currentGraph = state.DialogueGraph;
-                    Debug.LogError($"[{npcID}] Dialogue graph changed to state: {ev.NewStateID}");
+                    Debug.Log($"[{npcID}] Dialogue graph changed to state: {ev.NewStateID}");
                     return;
                 }
             }
@@ -79,6 +91,7 @@ namespace Interactives
 
         public override void Interact(GameObject interactor)
         {
+            Debug.LogError($"[Interact] Interacting with {interactor.name}");
             DialogueData data = new DialogueData();
             data.targetPosition = transform;
 
