@@ -46,6 +46,7 @@ namespace ItemFactory
         {
             if (includeInNodeGraph)
             {
+                Debug.Log("Incluyendo en node Graph");
                 DicitionaryFuntions.AddToDictionary(NodeTypes.ReferenceTrigger, target);
             }
 

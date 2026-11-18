@@ -17,6 +17,7 @@ namespace Blueprints_arquitectura_Dani_.Runtime.Managers
         [SerializeField] private List<GameObject> referenceObjects = new();
         [SerializeField] private List<GameObject> referenceInteractable = new();
         [SerializeField] private List<GameObject> referenceNpc = new();
+        [SerializeField] private List<GameObject> referenceTrigger = new();
         [SerializeField] private List<GameObject> npcObjects = new();
         
         private void OnEnable() => RebuildDictionary();
@@ -37,6 +38,7 @@ namespace Blueprints_arquitectura_Dani_.Runtime.Managers
             nodeDictionary[NodeTypes.InteractableNpc]= (npcObjects, null);
             nodeDictionary[NodeTypes.ReferenceInteractable]= (referenceInteractable, null);
             nodeDictionary[NodeTypes.ReferenceNpc]= (referenceNpc, null);
+            nodeDictionary[NodeTypes.ReferenceTrigger]= (referenceTrigger, null);
         }
         private void Awake()
         {
@@ -148,7 +150,7 @@ namespace Blueprints_arquitectura_Dani_.Runtime.Managers
         }
         public GameObject ResolveReference(string key)
         {
-            foreach (var type in new[] { NodeTypes.ReferenceGo, NodeTypes.ReferenceInteractable, NodeTypes.ReferenceNpc })
+            foreach (var type in new[] { NodeTypes.ReferenceGo, NodeTypes.ReferenceInteractable, NodeTypes.ReferenceNpc,NodeTypes.ReferenceTrigger })
             {
                 var go = Resolve(type, key);
                 if (go != null) return go;
