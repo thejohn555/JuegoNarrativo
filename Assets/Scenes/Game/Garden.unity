@@ -2092,6 +2092,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4026787330613230292, guid: 95f604d8a6b3a81439e2e09092fcd4a0, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5823953157644755407, guid: 95f604d8a6b3a81439e2e09092fcd4a0, type: 3}
       propertyPath: m_LocalPosition.x
       value: -24.36
@@ -2158,6 +2162,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ResinBottle
       objectReference: {fileID: 0}
+    - target: {fileID: 2679364760495210901, guid: 20ed6a6cdb7f01d4e82e4c3564e2fdb2, type: 3}
+      propertyPath: itemPrefab
+      value: 
+      objectReference: {fileID: 68411528038002899, guid: 20ed6a6cdb7f01d4e82e4c3564e2fdb2, type: 3}
     - target: {fileID: 2679364760495210901, guid: 20ed6a6cdb7f01d4e82e4c3564e2fdb2, type: 3}
       propertyPath: <InteractionDistance>k__BackingField
       value: 0.5
@@ -2955,6 +2963,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 35948587029893694, guid: 1175405c35ac98742a5090a32328dadd, type: 3}
+      propertyPath: itemPrefab
+      value: 
+      objectReference: {fileID: 8460750665225893426, guid: 1175405c35ac98742a5090a32328dadd, type: 3}
     - target: {fileID: 3052452654520062551, guid: 1175405c35ac98742a5090a32328dadd, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.82
@@ -3012,6 +3024,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 515639289226321937, guid: a1816e3168265c34bac17e7d3f40e5d3, type: 3}
+      propertyPath: itemPrefab
+      value: 
+      objectReference: {fileID: 6256960041073247025, guid: a1816e3168265c34bac17e7d3f40e5d3, type: 3}
     - target: {fileID: 2304408670486401254, guid: a1816e3168265c34bac17e7d3f40e5d3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -9.34
@@ -3151,6 +3167,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3099599605859802967, guid: 76c4f75eac0f9b345964bd5dfae4a800, type: 3}
+      propertyPath: itemPrefab
+      value: 
+      objectReference: {fileID: 6905244427617548228, guid: 76c4f75eac0f9b345964bd5dfae4a800, type: 3}
     - target: {fileID: 6905244427617548228, guid: 76c4f75eac0f9b345964bd5dfae4a800, type: 3}
       propertyPath: m_Name
       value: Cloth
