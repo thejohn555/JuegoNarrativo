@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Blueprints_arquitectura_Dani_.Runtime;
 using EventBuses;
 using UnityEngine;
+using Assets.Scripts.EventBuses.Events;
 
 namespace Interactives
 {
@@ -115,19 +116,20 @@ namespace Interactives
         {
             if (barkGraph == null) return;
 
-            DialogueData data = new DialogueData();
+            //DialogueData data = new DialogueData();
 
-            data.isDialogue = false;
+            //data.isDialogue = false;
 
-            data.moveCamera = false;
-            data.zoomCamera = false;
+            //data.moveCamera = false;
+            //data.zoomCamera = false;
 
-            data.speakers = new Dictionary<string, SpeakerData>
-            {
-                { npcID, new SpeakerData { transform = this.transform, textColor = npcTextColor } }
-            };
+            //data.speakers = new Dictionary<string, SpeakerData>
+            //{
+            //    { npcID, new SpeakerData { transform = this.transform, textColor = npcTextColor } }
+            //};
 
-            DialogueManager.Instance.StartDialogue(barkGraph, data);
+            //DialogueManager.Instance.StartDialogue(barkGraph, data);
+            EventBus.Publish(new OnBarkEvent(barkGraph, transform, npcID, npcTextColor));
         }
 
         protected override void OnDrawGizmosSelected()
