@@ -128,6 +128,7 @@ public class HeldItemController : MonoBehaviour
     
     public void ClearState(bool restoreMap = true)
     {
+        Debug.Log($"[ClearState] guid='{heldItemGuid}'\n{System.Environment.StackTrace}");
         heldSlotIndex = -1;
         heldItemName = null;
         heldItemGuid = null;

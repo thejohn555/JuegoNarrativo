@@ -34,6 +34,7 @@ namespace Blueprints_arquitectura_Dani_.Runtime
 
         public void GetLastGuid(string guid)
         {
+            Debug.Log($"Lanzado Get LastGuid: {guid}");
             OnGetLastGuid?.Invoke(guid);
         }
 

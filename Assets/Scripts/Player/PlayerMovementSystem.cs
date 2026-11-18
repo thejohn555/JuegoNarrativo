@@ -47,7 +47,7 @@ public class PlayerMovementSystem : PlayerSystem
             return;
         }
         
-        Debug.Log($"PRUEBA 4: SetNewDestination; grid={pathfinding?.Grid != null}", this);
+        //Debug.Log($"PRUEBA 4: SetNewDestination; grid={pathfinding?.Grid != null}", this);
 
         // Cancelamos la ruta anterior.
         isMoving = false;
@@ -62,7 +62,7 @@ public class PlayerMovementSystem : PlayerSystem
 
         if (pathfinding == null || pathfinding.Grid == null || pathfinding.Grid.Grid == null)
         {
-            Debug.LogError("Cannot set destination because pathfinding or its grid is not initialized.", this);
+            //Debug.LogError("Cannot set destination because pathfinding or its grid is not initialized.", this);
             return;
         }
 
@@ -83,7 +83,7 @@ public class PlayerMovementSystem : PlayerSystem
             out _
         );
 
-        Debug.Log($"PRUEBA 5: ruta con {currentPath?.Count ?? 0} nodos", this);
+        //Debug.Log($"PRUEBA 5: ruta con {currentPath?.Count ?? 0} nodos", this);
 
         // No existe una ruta válida.
         if (currentPath == null || currentPath.Count == 0)

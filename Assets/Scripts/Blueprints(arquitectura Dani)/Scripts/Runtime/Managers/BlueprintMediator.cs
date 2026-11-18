@@ -53,6 +53,7 @@ namespace Blueprints_arquitectura_Dani_.Runtime
         }
         void InstanceOnOnGetLastGuid(string obj)
         {
+            Debug.Log($"OnGetLastGuid: {obj}");
             LastGuidPick = obj;
         }
 

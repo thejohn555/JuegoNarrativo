@@ -58,6 +58,10 @@ public class InventoryCrafter : MonoBehaviour
                 BlueprintsEventManager.Instance.GetLastGuid(result.guid);
                 BlueprintsEventManager.Instance.Raise(NodeTypes.OnItemColleted, gameObject);
             }
+            else
+            {
+                Debug.LogError($"No hay blueprintEventManager");
+            }
         }
         else
         {
