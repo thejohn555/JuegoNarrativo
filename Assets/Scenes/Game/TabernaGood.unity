@@ -4055,7 +4055,7 @@ PrefabInstance:
     - target: {fileID: 6750985220364914118, guid: 530bb03191a676e46a47a39bd4cd5351, type: 3}
       propertyPath: alternativeStates.Array.data[1].DialogueGraph
       value: 
-      objectReference: {fileID: 3965311268370046156, guid: 6c42202689585774385c753122e39b56, type: 3}
+      objectReference: {fileID: 3965311268370046156, guid: a19657e6b243f2c4d867ee881738440a, type: 3}
     - target: {fileID: 6750985220364914118, guid: 530bb03191a676e46a47a39bd4cd5351, type: 3}
       propertyPath: alternativeStates.Array.data[2].DialogueGraph
       value: 
