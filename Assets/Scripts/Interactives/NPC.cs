@@ -5,6 +5,7 @@ using Assets.Scripts.EventBuses;
 using Blueprints_arquitectura_Dani_.Runtime;
 using EventBuses;
 using UnityEngine;
+using Assets.Scripts.EventBuses.Events;
 
 namespace Interactives
 {
@@ -37,6 +38,9 @@ namespace Interactives
         [SerializeField] public float zoom = 3f;
         [SerializeField] public float smoothTime  = 0.5f;
 
+        private string currentStateId = "";
+        
+
         protected override void OnEnable()
         {
             base.OnEnable();
@@ -45,7 +49,7 @@ namespace Interactives
             BlueprintsEventManager.Instance.OnStartBark += Handelbark;
             
         }
-
+        
         private void Handelbark(GameObject obj)
         {
             if (obj != this.gameObject) return;
@@ -54,6 +58,7 @@ namespace Interactives
         private void HandleDialogueEnded(OnDialogueEndedEvent ev)
         {
             if (ev.NpcID != npcID) return;
+            BlueprintMediator.Instance.GetLastNpcState(this.currentStateId);
             BlueprintsEventManager.Instance.Raise(NodeTypes.OnDialogueEnd,this.gameObject);
         }
 
@@ -74,6 +79,7 @@ namespace Interactives
             {
                 if (state.StateID == ev.NewStateID)
                 {
+                    currentStateId= state.StateID;
                     currentGraph = state.DialogueGraph;
                     Debug.LogError($"[{npcID}] Dialogue graph changed to state: {ev.NewStateID}");
                     return;
@@ -85,6 +91,7 @@ namespace Interactives
 
         public override void Interact(GameObject interactor)
         {
+            Debug.LogError($"[Interact] Interacting with {interactor.name}");
             DialogueData data = new DialogueData();
             data.targetPosition = transform;
 
@@ -122,19 +129,20 @@ namespace Interactives
         {
             if (barkGraph == null) return;
 
-            DialogueData data = new DialogueData();
+            //DialogueData data = new DialogueData();
 
-            data.isDialogue = false;
+            //data.isDialogue = false;
 
-            data.moveCamera = false;
-            data.zoomCamera = false;
+            //data.moveCamera = false;
+            //data.zoomCamera = false;
 
-            data.speakers = new Dictionary<string, SpeakerData>
-            {
-                { npcID, new SpeakerData { transform = this.transform, textColor = npcTextColor } }
-            };
+            //data.speakers = new Dictionary<string, SpeakerData>
+            //{
+            //    { npcID, new SpeakerData { transform = this.transform, textColor = npcTextColor } }
+            //};
 
-            DialogueManager.Instance.StartDialogue(barkGraph, data);
+            //DialogueManager.Instance.StartDialogue(barkGraph, data);
+            EventBus.Publish(new OnBarkEvent(barkGraph, transform, npcID, npcTextColor));
         }
 
         protected override void OnDrawGizmosSelected()

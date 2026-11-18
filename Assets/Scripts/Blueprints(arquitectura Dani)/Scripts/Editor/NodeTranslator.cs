@@ -237,6 +237,7 @@ public static class NodeTranslator
                         }
                     }
                 }
+                
                 list.Add(new StartBarkRuntime(key));
                 return true;
             }
@@ -257,7 +258,10 @@ public static class NodeTranslator
                         }
                     }
                 }
-                list.Add(new OnDialogueEndRuntime(key));
+
+                string satateId;
+                onDialogueEndNode.GetNodeOptionByName(OnDialogueEndNode.StatePort).TryGetValue(out satateId);
+                list.Add(new OnDialogueEndRuntime(key,satateId));
                 return true;
             }
                 

@@ -45,15 +45,23 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         mainCanvas = mainCanvas.rootCanvas;
 
         draggedIconObject = new GameObject("DraggedIcon", typeof(RectTransform));
+        ((RectTransform)draggedIconObject.transform).sizeDelta = new Vector2(100f, 100f);
         draggedIconObject.layer = mainCanvas.gameObject.layer;
         draggedIconObject.transform.SetParent(mainCanvas.transform, false);
         draggedIconObject.transform.SetAsLastSibling();
 
+        // Siempre por encima del resto de la UI
+        Canvas ghostCanvas = draggedIconObject.AddComponent<Canvas>();
+        ghostCanvas.overrideSorting = true;
+        ghostCanvas.sortingOrder = 100;
+        
         Image tempImg = draggedIconObject.AddComponent<Image>();
         tempImg.sprite = iconImage.sprite;
-        tempImg.color = iconImage.color;
+        tempImg.color =  new Color(iconImage.color.r, iconImage.color.g, iconImage.color.b, 1f);
         tempImg.raycastTarget = false;
         tempImg.preserveAspect = true;
+        
+        Debug.Log($"[Drag] fantasma creado | sprite: {tempImg.sprite?.name} | canvas: {mainCanvas.name}");
         
         MoveGhost(eventData);
         iconImage.enabled = false;

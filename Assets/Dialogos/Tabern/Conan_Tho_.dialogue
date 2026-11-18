@@ -256,7 +256,7 @@ MonoBehaviour:
     - rid: 1425812160581468298
       type: {class: 'Constant`1[[System.String, mscorlib]]', ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
       data:
-        m_Value: Looks like they're wagering on who rolls the highest number.
+        m_Value: Me cago en la puta
     - rid: 1425812160581468299
       type: {class: 'Constant`1[[System.Single, mscorlib]]', ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
       data:

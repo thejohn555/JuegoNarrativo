@@ -3,4 +3,8 @@ using System;
 using Unity.GraphToolkit.Editor;
 namespace Blueprints_arquitectura_Dani_.Editor.Blueprints_arquitectura_Dani_.Editor.Nodes.Generated
 {
+    [Serializable]
+    [Node(categoryPath:"Nodes/Garden/Nodes/StartNodes/InteractNpcNodes")]
+    public class OnInteract_Npc_Garden_Guards : OnInteractNpcNode
+    { public override string Key => "Guards"; }
 }

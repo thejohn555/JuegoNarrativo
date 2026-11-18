@@ -71,7 +71,7 @@ namespace Player
 
         private void LeftMouseClicked()
         {
-            Debug.Log("PRUEBA 2: LeftMouseClicked");
+            //Debug.Log("PRUEBA 2: LeftMouseClicked");
             Vector2 mousePosition = main.Cam.ScreenToWorldPoint(
                 Mouse.current.position.ReadValue()
             );
@@ -99,7 +99,7 @@ namespace Player
                 currentStoppingDistance = DefaultStoppingDistance;
                 currentDestination = hit.point;
 
-                Debug.Log($"PRUEBA 3: destino {currentDestination}");
+               // Debug.Log($"PRUEBA 3: destino {currentDestination}");
                     main.MovementSystem.SetNewDestination(
                     currentDestination,
                     currentStoppingDistance

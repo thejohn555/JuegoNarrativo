@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &68411528038002899
+--- !u!1 &302423315928202336
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,39 +8,39 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7576442741318365879}
-  - component: {fileID: 714655190182127453}
-  - component: {fileID: 2679364760495210901}
+  - component: {fileID: 6008157236824627956}
+  - component: {fileID: 601736552511742051}
+  - component: {fileID: 1005958542439269062}
   m_Layer: 0
-  m_Name: ResinBottle
+  m_Name: Kidnapper 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7576442741318365879
+--- !u!4 &6008157236824627956
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 68411528038002899}
+  m_GameObject: {fileID: 302423315928202336}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.048828125, y: 0.048828125, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2501133519763946117}
+  - {fileID: 8744936377354581586}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &714655190182127453
+--- !u!114 &601736552511742051
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 68411528038002899}
+  m_GameObject: {fileID: 302423315928202336}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b365683af13f52645ad6dfcc9068d566, type: 3}
@@ -49,28 +49,38 @@ MonoBehaviour:
   outlineColor: {r: 1, g: 1, b: 1, a: 1}
   interactionOutlineColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   outlineWidth: 1.1
---- !u!114 &2679364760495210901
+--- !u!114 &1005958542439269062
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 68411528038002899}
+  m_GameObject: {fileID: 302423315928202336}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d9c125f8e214f6493e47ec17d43ce1f, type: 3}
+  m_Script: {fileID: 11500000, guid: 870c1451166640689cd9bf9fc9ce2d02, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Interactives.CollectableObject
+  m_EditorClassIdentifier: Assembly-CSharp::Interactives.NPC
   <InteractionDistance>k__BackingField: 2
   <InteractionOffset>k__BackingField: {x: 0, y: 0}
   showInteractionGizmo: 1
   description: {fileID: 0}
   interactionCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
-  ingredientA: {fileID: 0}
-  ingredientB: {fileID: 0}
-  itemIcon: {fileID: 0}
---- !u!1 &1947846429844681522
+  npcID: Kidnapper
+  currentGraph: {fileID: 3965311268370046156, guid: 406c9a1ccaa534a4cb55cc974760856d, type: 3}
+  barkGraph: {fileID: 0}
+  npcTextColor: {r: 1, g: 1, b: 1, a: 1}
+  alternativeStates:
+  - StateID: KidnapperGiveAle
+    DialogueGraph: {fileID: 3965311268370046156, guid: fff80e05cde8bc44a903da95a17180cf, type: 3}
+  cameraMove: 0
+  zoomCamera: 0
+  EventBus: {fileID: 11400000, guid: 12dd33ac5088a19498397bad87f52e37, type: 2}
+  cameraOffset: {x: 0, y: 1, z: 0}
+  zoom: 3
+  smoothTime: 0.5
+--- !u!1 &3036141953927668122
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -78,9 +88,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2501133519763946117}
-  - component: {fileID: 2281132599337580775}
-  - component: {fileID: 5895225509117860592}
+  - component: {fileID: 8744936377354581586}
+  - component: {fileID: 5609410937907581335}
+  - component: {fileID: 3089866088664511806}
   m_Layer: 0
   m_Name: Visual
   m_TagString: Untagged
@@ -88,29 +98,29 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2501133519763946117
+--- !u!4 &8744936377354581586
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1947846429844681522}
+  m_GameObject: {fileID: 3036141953927668122}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 0.32, z: 0}
+  m_LocalPosition: {x: -0, y: 10.24, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7576442741318365879}
+  m_Father: {fileID: 6008157236824627956}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &2281132599337580775
+--- !u!212 &5609410937907581335
 SpriteRenderer:
   serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1947846429844681522}
+  m_GameObject: {fileID: 3036141953927668122}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -152,24 +162,24 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: d94957c527ed1534dbc3893ea6978d86, type: 3}
+  m_Sprite: {fileID: 21300000, guid: efbe08f09ed50e046a3dce134a1eb1bc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.64, y: 0.64}
+  m_Size: {x: 20.48, y: 20.48}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
---- !u!61 &5895225509117860592
+--- !u!61 &3089866088664511806
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1947846429844681522}
+  m_GameObject: {fileID: 3036141953927668122}
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
@@ -201,11 +211,11 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 12, y: 12}
-    newSize: {x: 0.64, y: 0.64}
+    oldSize: {x: 20.48, y: 20.48}
+    newSize: {x: 20.48, y: 20.48}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.64, y: 0.64}
+  m_Size: {x: 20.48, y: 20.48}
   m_EdgeRadius: 0

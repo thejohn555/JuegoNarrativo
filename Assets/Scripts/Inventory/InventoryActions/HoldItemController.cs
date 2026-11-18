@@ -58,7 +58,7 @@ public class HeldItemController : MonoBehaviour
         }
         BlueprintsEventManager.Instance.ConsumeItem = Consume;
     }
-
+    
     // Coge el objeto del slot con el cursor
     public void Hold(int slotIndex)
     {
@@ -118,6 +118,7 @@ public class HeldItemController : MonoBehaviour
     
     public void ClearState(bool restoreMap = true)
     {
+        Debug.Log($"[ClearState] guid='{heldItemGuid}'\n{System.Environment.StackTrace}");
         heldSlotIndex = -1;
         heldItemName = null;
         heldItemGuid = null;
@@ -211,5 +212,20 @@ public class HeldItemController : MonoBehaviour
         yield return null; // esperamos a que termine el frame del click
         Debug.Log("Ya te puedes mover");
         inputs.Publish(new OnInventoryCloseEvent());
+    }
+    
+    [SerializeField] private PlayerMovementSystem playerMovement;
+
+    private void SetMovement(bool enabled)
+    {
+        if (playerMovement == null)
+        {
+            playerMovement = FindFirstObjectByType<PlayerMovementSystem>();
+        }
+
+        if (playerMovement != null)
+        {
+            playerMovement.enabled = enabled;
+        }
     }
 }

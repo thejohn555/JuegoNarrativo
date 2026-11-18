@@ -1,4 +1,4 @@
-using Assets.Scripts.EventBuses;
+    using Assets.Scripts.EventBuses;
 using EventBuses;
 using Unity.Jobs;
 using UnityEngine;
@@ -70,10 +70,10 @@ public class InputActionsSO : ScriptableObject, NewInputActions.IGamePlayActions
         currentMap.Disable();
         currentMap.Enable();
 
-        Debug.Log(
-            $"INPUT DEVICE Mouse {change}: " +
-            $"LeftMouse controls={leftMouseAction.controls.Count}"
-        );
+       // Debug.Log(
+            //$"INPUT DEVICE Mouse {change}: " +
+           // $"LeftMouse controls={leftMouseAction.controls.Count}"
+       // );
     }
 
     private void SwitchMap(InputActionMap newMap)
@@ -113,7 +113,7 @@ public class InputActionsSO : ScriptableObject, NewInputActions.IGamePlayActions
 
     public void OnLeftMouse(InputAction.CallbackContext context)
     {
-        Debug.Log($"INPUT CALLBACK LeftMouse: phase={context.phase}, map={context.action.actionMap.enabled}");
+        //Debug.Log($"INPUT CALLBACK LeftMouse: phase={context.phase}, map={context.action.actionMap.enabled}");
         if (context.started)
             EventBus.Publish(new OnLeftMouseClick());
     }
