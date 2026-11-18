@@ -15,4 +15,8 @@ namespace Blueprints_arquitectura_Dani_.Editor.Blueprints_arquitectura_Dani_.Edi
     [Node(categoryPath:"Nodes/TabernaGood/Nodes/References/Npc")]
     public class Ref_Npc_TabernaGood_Kidnapper : ReferenceNode
     { public override string Key => "Kidnapper"; }
+    [Serializable]
+    [Node(categoryPath:"Nodes/TabernaGood/Nodes/References/Npc")]
+    public class Ref_Npc_TabernaGood_BartenderTestFelipe : ReferenceNode
+    { public override string Key => "BartenderTestFelipe"; }
 }
