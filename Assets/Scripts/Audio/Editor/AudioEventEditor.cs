@@ -34,10 +34,10 @@ public class AudioEventEditor : Editor
         EditorGUILayout.PropertyField(soundOptions);
         
 
-        if(soundOptions.enumValueIndex == (int)SoundOptions.Variable)
-        {
-            EditorGUILayout.PropertyField(varOptions);
-        }
+        //if(soundOptions.enumValueIndex == (int)SoundOptions.Variable)
+        //{
+        //    EditorGUILayout.PropertyField(varOptions);
+        //}
         EditorGUILayout.EndVertical();
 
         serializedObject.ApplyModifiedProperties();

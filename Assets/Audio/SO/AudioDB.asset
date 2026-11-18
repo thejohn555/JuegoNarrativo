@@ -14,3 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Assets.Scripts.Audio.AudioDB
   sfxList: []
   musicList: []
+  audioBanks:
+  - key: 0
+    value:
+    - key: 0
+      value:
+      - {fileID: 8300000, guid: 49e7273485299e34f8fd16ac93da0041, type: 3}
+      - {fileID: 8300000, guid: 49e7273485299e34f8fd16ac93da0041, type: 3}
+    - key: 1
+      value:
+      - {fileID: 8300000, guid: 83bc23265c2a5d946bf88e53d69d91fd, type: 3}
+      - {fileID: 8300000, guid: 83bc23265c2a5d946bf88e53d69d91fd, type: 3}
+    - key: 2
+      value:
+      - {fileID: 8300000, guid: 83bc23265c2a5d946bf88e53d69d91fd, type: 3}
+      - {fileID: 8300000, guid: 83bc23265c2a5d946bf88e53d69d91fd, type: 3}

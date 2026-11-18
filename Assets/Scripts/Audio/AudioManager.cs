@@ -2,7 +2,6 @@ using Assets.Scripts.EventBuses;
 using Assets.Scripts.EventBuses.Events;
 using Audio.Enums;
 using EventBuses;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
@@ -27,10 +26,9 @@ public class AudioManager : Singleton<AudioManager>
         eventBus.Subscribe<OnSFXPlay>(PlaySFX);
     }
 
-
     public void PlayMusic(OnMusicPlay args)
     {
-        if(args.audioEvent == AudioEventsID.NULL)
+        if (args.audioEvent == AudioEventsID.NULL)
         {
             audioSource.clip = audioDB.MusicList[args.musicClip];
             audioSource.Play();
@@ -51,7 +49,5 @@ public class AudioManager : Singleton<AudioManager>
         {
             //args.audioEvent.Play();
         }
-        
     }
-
 }

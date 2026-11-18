@@ -1,15 +1,16 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Audio.Enums
 {
     #region EditorEnums
+
     public enum SoundOptions
     {
         Sequentially,
         Concurrent,
         Random,
-        Variable
+        Single
     }
 
     public enum VarOptions
@@ -19,9 +20,11 @@ namespace Audio.Enums
         Bool,
         Enum
     }
-    #endregion
+
+    #endregion EditorEnums
 
     #region ID
+
     public enum SFXID
     {
         NULL,
@@ -39,5 +42,28 @@ namespace Audio.Enums
     {
         NULL
     }
-    #endregion
+
+    public enum AudioBankID
+    {
+        FloorBank
+    }
+
+    #endregion ID
+
+    public enum EnumType
+    {
+        Floor
+    }
+
+    public enum Floor
+    {
+        Wood,
+        Stone,
+        Grass
+    }
+
+    public static class AudioEnums
+    {
+        public static Dictionary<EnumType, Type> dictionary = new Dictionary<EnumType, Type> { { EnumType.Floor, typeof(Floor) } };
+    }
 }
