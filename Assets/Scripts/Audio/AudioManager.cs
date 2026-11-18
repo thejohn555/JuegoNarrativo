@@ -2,36 +2,40 @@ using Assets.Scripts.EventBuses;
 using Assets.Scripts.EventBuses.Events;
 using Audio.Enums;
 using EventBuses;
+using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(AudioSource))]
 public class AudioManager : Singleton<AudioManager>
 {
     [SerializeField] private EventBusSO eventBus;
     [SerializeField] private AudioDB audioDB;
-    [SerializeField] private AudioEventsDB audioEventsDB;
 
     //source
-    private AudioSource audioSource;
+    private AudioSource MusicSource;
+    private AudioSource AmbienceSource;
+
 
     public override void Awake()
     {
         base.Awake();
-        audioSource = GetComponent<AudioSource>();
+
+        MusicSource = transform.Find("MusicSource").GetComponent<AudioSource>();
+        AmbienceSource = transform.Find("AmbienceSource").GetComponent<AudioSource>();
+
     }
 
     private void Start()
     {
         eventBus.Subscribe<OnMusicPlay>(PlayMusic);
-        eventBus.Subscribe<OnSFXPlay>(PlaySFX);
+        eventBus.Subscribe<OnSFXPlay>(PlayAmbience);
     }
 
-    public void PlayMusic(OnMusicPlay args)
+    private void PlayMusic(OnMusicPlay args)
     {
         if (args.audioEvent == AudioEventsID.NULL)
         {
-            audioSource.clip = audioDB.MusicList[args.musicClip];
-            audioSource.Play();
+            //audioSource.clip = audioDB.MusicList[args.musicClip];
+            //audioSource.Play();
         }
         else
         {
@@ -39,15 +43,20 @@ public class AudioManager : Singleton<AudioManager>
         }
     }
 
-    public void PlaySFX(OnSFXPlay args)
+    private void PlayAmbience(OnSFXPlay args)
     {
         if (args.audioEvent == AudioEventsID.NULL)
         {
-            audioSource.PlayOneShot(audioDB.SfxList[args.sfxClip]);
+            //audioSource.PlayOneShot(audioDB.SfxList[args.sfxClip]);
         }
         else
         {
             //args.audioEvent.Play();
         }
+    }
+
+    public AudioDB GetDatabase()
+    {
+        return audioDB;
     }
 }

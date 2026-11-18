@@ -12,6 +12,8 @@ public class AudioEventEditor : Editor
     SerializedProperty soundOptions;
     SerializedProperty varOptions;
     SerializedProperty loop;
+    SerializedProperty usingAudioBank;
+    SerializedProperty bankType;
 
     private void OnEnable()
     {
@@ -20,6 +22,8 @@ public class AudioEventEditor : Editor
         soundOptions = serializedObject.FindProperty("soundOptions");
         varOptions = serializedObject.FindProperty("varOptions");
         loop = serializedObject.FindProperty("loop");
+        usingAudioBank = serializedObject.FindProperty("usingAudioBank");
+        bankType = serializedObject.FindProperty("bankType");
     }
 
     #endregion
@@ -29,10 +33,18 @@ public class AudioEventEditor : Editor
         serializedObject.Update();
 
         EditorGUILayout.BeginVertical();
-        EditorGUILayout.PropertyField(eventBus); 
-        EditorGUILayout.PropertyField(sfx);
+        EditorGUILayout.PropertyField(eventBus);
+        EditorGUILayout.PropertyField(usingAudioBank);
+        if(usingAudioBank.boolValue == true)
+        {
+            EditorGUILayout.PropertyField(bankType);
+        }
+        else
+        {
+            EditorGUILayout.PropertyField(sfx);
+        }
         EditorGUILayout.PropertyField(soundOptions);
-        
+        EditorGUILayout.PropertyField(loop);
 
         //if(soundOptions.enumValueIndex == (int)SoundOptions.Variable)
         //{

@@ -29,7 +29,9 @@ namespace Audio.Enums
     {
         NULL,
         Dialogue,
-        Object
+        Object,
+        TabernAmbience,
+        TabernAmbience2
     }
 
     public enum MusicID
@@ -50,20 +52,10 @@ namespace Audio.Enums
 
     #endregion ID
 
-    public enum EnumType
-    {
-        Floor
-    }
-
     public enum Floor
     {
         Wood,
         Stone,
         Grass
-    }
-
-    public static class AudioEnums
-    {
-        public static Dictionary<EnumType, Type> dictionary = new Dictionary<EnumType, Type> { { EnumType.Floor, typeof(Floor) } };
     }
 }

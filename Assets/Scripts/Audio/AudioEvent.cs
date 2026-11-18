@@ -12,11 +12,10 @@ public class AudioEvent : ScriptableObject
     [SerializeField] private SoundOptions soundOptions;
     [SerializeField] private VarOptions varOptions;
     [SerializeField] private bool loop;
-
-    [SerializeField] private bool usingVarAudio;
+    [SerializeField] private bool usingAudioBank;
     [SerializeField] private AudioBankID bankType;
 
-    private int varValue;
+    private int varValue = 0;
     private Dictionary<int, List<AudioClip>> bankValue = new Dictionary<int, List<AudioClip>>();
 
     public void Initialize()
@@ -27,10 +26,11 @@ public class AudioEvent : ScriptableObject
 
     public void Play(AudioSource audioSource, AudioDB audioDB)
     {
-        bankValue = audioDB.AudioBanks[bankType];
-        switch (usingVarAudio)
+        
+        switch (usingAudioBank)
         {
             case true:
+                bankValue = audioDB.AudioBanks[bankType];
                 switch (soundOptions)
                 {
                     case SoundOptions.Concurrent:
@@ -92,7 +92,7 @@ public class AudioEvent : ScriptableObject
 
     private IEnumerator SequentialAudio(AudioDB audioDB, AudioSource audioSource)
     {
-        if(usingVarAudio == false)
+        if(usingAudioBank == false)
         {
             for (int i = 0; i < sfx.Count; i++)
             {
