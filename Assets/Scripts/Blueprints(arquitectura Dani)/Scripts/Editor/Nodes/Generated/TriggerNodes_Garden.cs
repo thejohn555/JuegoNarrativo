@@ -5,6 +5,6 @@ namespace Blueprints_arquitectura_Dani_.Editor.Blueprints_arquitectura_Dani_.Edi
 {
     [Serializable]
     [Node(categoryPath:"Nodes/Garden/Nodes/StartNodes/Triggers")]
-    public class OnTriggerEnter_Garden_GuardsTrigger : OnTriggerEnterNode
-    { public override string Key => "GuardsTrigger"; }
+    public class OnTriggerEnter_Garden_GuardsTriggers : OnTriggerEnterNode
+    { public override string Key => "GuardsTriggers"; }
 }
