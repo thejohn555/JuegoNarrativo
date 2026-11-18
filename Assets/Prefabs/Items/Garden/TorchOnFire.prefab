@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6566037787067771745}
   - component: {fileID: 1218167309613529584}
   - component: {fileID: 7474596956436416929}
+  - component: {fileID: 5352470038197603032}
   m_Layer: 0
   m_Name: TorchOnFire
   m_TagString: Untagged
@@ -67,9 +68,24 @@ MonoBehaviour:
   description: {fileID: 0}
   interactionCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
+  itemPrefab: {fileID: 0}
+  inventoryIcon: {fileID: 0}
   ingredientA: {fileID: 1818358276869602546, guid: eaca72b60208a9943ae4cceae8bc0bba, type: 3}
   ingredientB: {fileID: 8460750665225893426, guid: 1175405c35ac98742a5090a32328dadd, type: 3}
   itemIcon: {fileID: 0}
+--- !u!114 &5352470038197603032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3765694007834734557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40e431c3475c4e22ae9538d3eaede62a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Blueprints.Runtime::Blueprints_arquitectura_Dani_.Runtime.BlueprintItemId
+  guid: aad9895daca7a94489f7bc9595d8e6e7
 --- !u!1 &4987518989450085687
 GameObject:
   m_ObjectHideFlags: 0

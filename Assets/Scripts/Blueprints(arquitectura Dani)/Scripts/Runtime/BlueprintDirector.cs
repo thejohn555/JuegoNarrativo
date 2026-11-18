@@ -205,16 +205,16 @@ namespace Blueprints_arquitectura_Dani_.Runtime
                     break;
             }
         }
-        private void Run(Dictionary<string, RuntimeNodeGroup> dict, GameObject obj, string kind)
+        private void Run(Dictionary<string, List<RuntimeNodeGroup>> dict, GameObject obj, string kind)
         {
-            if (dict.TryGetValue(obj.name, out var group))
-                StartCoroutine(RunFrom(group, obj));
-            else
+            if (!dict.TryGetValue(obj.name, out var groups))
             {
-                Debug.LogWarning($"No hay {kind} '{obj.name}'. Registrados: {string.Join(", ", dict.Keys)}");
-                Debug.LogWarning($"No hay {kind} '{obj.name}'. Registrados: {string.Join(", ", dict.Keys)}");
-                //Debug.LogError($"No hay ningún {kind} '{obj.name}'");
+                Debug.Log($"No hay {kind} '{obj.name}'. Registrados: {string.Join(", ", dict.Keys)}");
+                return;
             }
+
+            foreach (var group in groups)
+                StartCoroutine(RunFrom(group, obj));
         }
         
         

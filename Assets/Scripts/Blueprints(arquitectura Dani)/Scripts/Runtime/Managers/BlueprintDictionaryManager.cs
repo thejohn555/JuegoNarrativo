@@ -24,9 +24,9 @@ namespace Blueprints_arquitectura_Dani_.Runtime.Managers
         public Dictionary<NodeTypes, (List<GameObject>list, Type eventRelayType)> nodeDictionary = new();
         
         //Diccionarios
-        public Dictionary <string, RuntimeNodeGroup> triggerDictionary = new ();
-        public Dictionary <string, RuntimeNodeGroup> interactDictionary = new ();
-        public Dictionary <string,RuntimeNodeGroup> npcDictionary = new ();
+        public Dictionary <string, List<RuntimeNodeGroup>> triggerDictionary = new ();
+        public Dictionary <string, List<RuntimeNodeGroup>> interactDictionary = new ();
+        public Dictionary <string,List<RuntimeNodeGroup>> npcDictionary = new ();
         public List<RuntimeNodeGroup> itemCollectedGroups = new();
         [FormerlySerializedAs("dialogueEndDictionary")] public  List<RuntimeNodeGroup> dialogueEndList = new ();
         void RebuildDictionary()
@@ -90,18 +90,18 @@ namespace Blueprints_arquitectura_Dani_.Runtime.Managers
 // #endif
         }
 
-        public void AddToDictionary(NodeTypes type,string name, RuntimeNodeGroup group)
+        public void AddToDictionary(NodeTypes type, string name, RuntimeNodeGroup group)
         {
             switch (type)
             {
                 case NodeTypes.Trigger:
-                    triggerDictionary[name] = group;
+                    AddToGroupList(triggerDictionary, name, group);
                     break;
                 case NodeTypes.Interactable:
-                    interactDictionary[name] = group;
+                    AddToGroupList(interactDictionary, name, group);
                     break;
                 case NodeTypes.InteractableNpc:
-                    npcDictionary[name] = group;
+                    AddToGroupList(npcDictionary, name, group);
                     break;
                 case NodeTypes.OnItemColleted:
                     itemCollectedGroups.Add(group);
@@ -110,7 +110,17 @@ namespace Blueprints_arquitectura_Dani_.Runtime.Managers
                     dialogueEndList.Add(group);
                     break;
             }
-            
+        }
+
+        private static void AddToGroupList(Dictionary<string, List<RuntimeNodeGroup>> dict, string name, RuntimeNodeGroup group)
+        {
+            if (!dict.TryGetValue(name, out var list))
+            {
+                list = new List<RuntimeNodeGroup>();
+                dict[name] = list;
+            }
+
+            list.Add(group);
         }
 
         public void CleanNullsFromList(List<GameObject> list)
