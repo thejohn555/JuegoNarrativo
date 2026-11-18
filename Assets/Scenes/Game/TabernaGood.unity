@@ -4059,11 +4059,11 @@ PrefabInstance:
     - target: {fileID: 6750985220364914118, guid: 530bb03191a676e46a47a39bd4cd5351, type: 3}
       propertyPath: alternativeStates.Array.data[2].DialogueGraph
       value: 
-      objectReference: {fileID: 3965311268370046156, guid: 1700abf7e9d1f704ea9701b69c903ed3, type: 3}
+      objectReference: {fileID: 3965311268370046156, guid: 86e124b95a9de184486d169b05c1a069, type: 3}
     - target: {fileID: 6750985220364914118, guid: 530bb03191a676e46a47a39bd4cd5351, type: 3}
       propertyPath: alternativeStates.Array.data[3].DialogueGraph
       value: 
-      objectReference: {fileID: 3965311268370046156, guid: 1700abf7e9d1f704ea9701b69c903ed3, type: 3}
+      objectReference: {fileID: 3965311268370046156, guid: 6b6de3a5566643c46aa294e67cdab618, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
