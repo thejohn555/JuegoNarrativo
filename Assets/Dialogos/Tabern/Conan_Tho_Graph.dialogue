@@ -262,7 +262,7 @@ MonoBehaviour:
     - rid: 5383461146217676810
       type: {class: 'Constant`1[[System.String, mscorlib]]', ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
       data:
-        m_Value: caca
+        m_Value: '*This is no time to trust luck*'
     - rid: 5383461146217676811
       type: {class: 'Constant`1[[System.Single, mscorlib]]', ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
       data:
