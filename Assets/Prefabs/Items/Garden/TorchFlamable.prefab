@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7017013119683683755}
   - component: {fileID: 6204877128120484674}
   - component: {fileID: 7104649866304411052}
-  - component: {fileID: 1537937829173366526}
+  - component: {fileID: 3994465156581760064}
   m_Layer: 0
   m_Name: TorchFlamable
   m_TagString: Untagged
@@ -68,12 +68,12 @@ MonoBehaviour:
   description: {fileID: 0}
   interactionCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
-  itemPrefab: {fileID: 0}
+  itemPrefab: {fileID: 1818358276869602546}
   inventoryIcon: {fileID: 0}
   ingredientA: {fileID: 327655049308182774, guid: a2093a8b6ebfacb4490dec0053ce27d9, type: 3}
-  ingredientB: {fileID: 68411528038002899, guid: 20ed6a6cdb7f01d4e82e4c3564e2fdb2, type: 3}
+  ingredientB: {fileID: 9092901951931886612, guid: 349f61df50c3d4847b0a61c52945d935, type: 3}
   itemIcon: {fileID: 0}
---- !u!114 &1537937829173366526
+--- !u!114 &3994465156581760064
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -9,6 +9,7 @@ public enum NodeTypes
     ReferenceGo,
     ReferenceNpc,
     ReferenceInteractable,
+    ReferenceTrigger,
     OnItemColleted, // este no se autogenere
     OnDialogueEnd, //este tampoco se autogenera
 }
@@ -25,6 +26,7 @@ namespace Blueprints_arquitectura_Dani_.Runtime
             { NodeTypes.ReferenceGo, ("Ref_Go_", "ReferenceNode", "ReferenceGoNodes.cs", "Nodes/References/GameObject") },
             {NodeTypes.ReferenceInteractable,("Ref_Interactable_","ReferenceNode", "ReferenceInteractableNodes.cs",  "Nodes/References/Interactable")},
             {NodeTypes.ReferenceNpc,("Ref_Npc_", "ReferenceNode", "ReferenceNpcNodes.cs", "Nodes/References/Npc")},
+            { NodeTypes.ReferenceTrigger ,("Ref_Trigger_","ReferenceNode", "ReferenceTriggerNodes.cs", "Nodes/References/Trigger")},
             { NodeTypes.InteractableNpc,("OnInteract_Npc_","OnInteractNpcNode", "InteractNpcNodes.cs", "Nodes/StartNodes/InteractNpcNodes" ) },
         };
     }

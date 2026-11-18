@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4691949184933114769}
   - component: {fileID: 6697833729690597386}
   - component: {fileID: 8526474606445738394}
-  - component: {fileID: 5980925246190827077}
+  - component: {fileID: 5385890533466983477}
   m_Layer: 0
   m_Name: Torch
   m_TagString: Untagged
@@ -68,12 +68,12 @@ MonoBehaviour:
   description: {fileID: 0}
   interactionCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
-  itemPrefab: {fileID: 0}
+  itemPrefab: {fileID: 327655049308182774}
   inventoryIcon: {fileID: 0}
   ingredientA: {fileID: 6256960041073247025, guid: a1816e3168265c34bac17e7d3f40e5d3, type: 3}
   ingredientB: {fileID: 6905244427617548228, guid: 76c4f75eac0f9b345964bd5dfae4a800, type: 3}
   itemIcon: {fileID: 0}
---- !u!114 &5980925246190827077
+--- !u!114 &5385890533466983477
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

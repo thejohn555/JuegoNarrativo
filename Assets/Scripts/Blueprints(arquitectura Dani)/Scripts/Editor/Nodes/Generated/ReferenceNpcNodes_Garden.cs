@@ -5,6 +5,6 @@ namespace Blueprints_arquitectura_Dani_.Editor.Blueprints_arquitectura_Dani_.Edi
 {
     [Serializable]
     [Node(categoryPath:"Nodes/Garden/Nodes/References/Npc")]
-    public class Ref_Npc_Garden_Tree : ReferenceNode
-    { public override string Key => "Tree"; }
+    public class Ref_Npc_Garden_Guards : ReferenceNode
+    { public override string Key => "Guards"; }
 }

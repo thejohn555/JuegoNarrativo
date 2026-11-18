@@ -5,6 +5,6 @@ namespace Blueprints_arquitectura_Dani_.Editor.Blueprints_arquitectura_Dani_.Edi
 {
     [Serializable]
     [Node(categoryPath:"Nodes/Garden/Nodes/StartNodes/InteractNpcNodes")]
-    public class OnInteract_Npc_Garden_Tree : OnInteractNpcNode
-    { public override string Key => "Tree"; }
+    public class OnInteract_Npc_Garden_Guards : OnInteractNpcNode
+    { public override string Key => "Guards"; }
 }
