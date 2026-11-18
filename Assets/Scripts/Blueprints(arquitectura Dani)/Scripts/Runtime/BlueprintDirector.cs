@@ -169,10 +169,10 @@ namespace Blueprints_arquitectura_Dani_.Runtime
                     // Debug.Log($"[Director] Nodo ejecutado: {currentNode.GetType().Name}");
                     // Debug.Log($"[Director] Output devuelto: {output}");
                     // Debug.Log($"[Director] Número de conexiones: {currentNode.NextNodeIndex.Count}");
-                    for (int i = 0; i < currentNode.NextNodeIndex.Count; i++)
-                    {
-                        Debug.Log($"[Director] NextNodeIndex[{i}] = {currentNode.NextNodeIndex[i]}");
-                    }
+                    // for (int i = 0; i < currentNode.NextNodeIndex.Count; i++)
+                    // {
+                    //     Debug.Log($"[Director] NextNodeIndex[{i}] = {currentNode.NextNodeIndex[i]}");
+                    // }
 
                     if (PendingWait > 0f)
                     {
