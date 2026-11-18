@@ -5,6 +5,6 @@ namespace Blueprints_arquitectura_Dani_.Editor.Blueprints_arquitectura_Dani_.Edi
 {
     [Serializable]
     [Node(categoryPath:"Nodes/Garden/Nodes/References/Trigger")]
-    public class Ref_Trigger_Garden_preuba_3 : ReferenceNode
-    { public override string Key => "preuba 3"; }
+    public class Ref_Trigger_Garden_GuardsTriggers2 : ReferenceNode
+    { public override string Key => "GuardsTriggers2"; }
 }
