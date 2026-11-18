@@ -213,19 +213,4 @@ public class HeldItemController : MonoBehaviour
         Debug.Log("Ya te puedes mover");
         inputs.Publish(new OnInventoryCloseEvent());
     }
-    
-    [SerializeField] private PlayerMovementSystem playerMovement;
-
-    private void SetMovement(bool enabled)
-    {
-        if (playerMovement == null)
-        {
-            playerMovement = FindFirstObjectByType<PlayerMovementSystem>();
-        }
-
-        if (playerMovement != null)
-        {
-            playerMovement.enabled = enabled;
-        }
-    }
 }
