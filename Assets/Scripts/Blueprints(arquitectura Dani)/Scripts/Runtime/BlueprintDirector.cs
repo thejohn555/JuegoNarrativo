@@ -11,6 +11,7 @@ using Blueprints_arquitectura_Dani_.Runtime.RuntimeNodes.SetActive;
 using Blueprints_arquitectura_Dani_.Runtime.RuntimeNodes.StartDialogue;
 using Blueprints_arquitectura_Dani_.Runtime.TriggerNode;
 using Blueprints_arquitectura_Dani_.Scripts.Runtime.RuntimeNodes.ChangeNpcState;
+using Blueprints_arquitectura_Dani_.Scripts.Runtime.RuntimeNodes.OnDialogueEnd;
 using Blueprints_arquitectura_Dani_.Scripts.Runtime.RuntimeNodes.OnItemCollected;
 using Blueprints_arquitectura_Dani_.Scripts.Runtime.RuntimeNodes.PlayTimeLine;
 using Blueprints_arquitectura_Dani_.Scripts.Runtime.RuntimeNodes.SetInteractable;
@@ -51,6 +52,7 @@ namespace Blueprints_arquitectura_Dani_.Runtime
                 {typeof(SetPlayerMovementRuntime),new  SetPlayerMovementExecutor()},
                 {typeof(PlayTimelineRuntime),new PlayTimelineExecutor()},
                 {typeof(StartBarkRuntime),new StartBarkExecutor()},
+                {typeof(OnDialogueEndRuntime),new OnDialogueEndExecutor()},
                 
             };
             if (Instance == null)
@@ -138,6 +140,9 @@ namespace Blueprints_arquitectura_Dani_.Runtime
                         case OnItemCollectedRuntime:
                             BlueprintDictionaryManager.Instance.AddToDictionary(NodeTypes.OnItemColleted, "-", node);
                             break;
+                        case OnDialogueEndRuntime:
+                            BlueprintDictionaryManager.Instance.AddToDictionary(NodeTypes.OnDialogueEnd, "-", node);
+                            break;
                     }
 
                     idx++;
@@ -192,6 +197,10 @@ namespace Blueprints_arquitectura_Dani_.Runtime
                     break;
                 case  NodeTypes.OnItemColleted:
                     foreach (var group in manager.itemCollectedGroups)
+                        StartCoroutine(RunFrom(group,obj));
+                    break;
+                case NodeTypes.OnDialogueEnd:
+                    foreach (var group in manager.dialogueEndList)
                         StartCoroutine(RunFrom(group,obj));
                     break;
             }

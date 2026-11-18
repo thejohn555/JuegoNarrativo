@@ -15,6 +15,7 @@ using Blueprints_arquitectura_Dani_.Runtime.RuntimeNodes.SetActive;
 using Blueprints_arquitectura_Dani_.Runtime.RuntimeNodes.StartDialogue;
 using Blueprints_arquitectura_Dani_.Runtime.TriggerNode;
 using Blueprints_arquitectura_Dani_.Scripts.Runtime.RuntimeNodes.ChangeNpcState;
+using Blueprints_arquitectura_Dani_.Scripts.Runtime.RuntimeNodes.OnDialogueEnd;
 using Blueprints_arquitectura_Dani_.Scripts.Runtime.RuntimeNodes.OnItemCollected;
 using Blueprints_arquitectura_Dani_.Scripts.Runtime.RuntimeNodes.PlayTimeLine;
 using Blueprints_arquitectura_Dani_.Scripts.Runtime.RuntimeNodes.SetInteractable;
@@ -159,7 +160,7 @@ public static class NodeTranslator
                 Sprite itemSprite = spriteRenderer != null ? spriteRenderer.sprite : null;
                 string path = AssetDatabase.GetAssetPath(prefab);
                 requiredGuid = AssetDatabase.AssetPathToGUID(path);
-                list.Add(new AddItemToInventoryRuntime(requiredGuid,prefab.name,itemSprite));
+                list.Add(new AddItemToInventoryRuntime(requiredGuid,prefab));
                 return true;
             }
             case ChangeNpcState changeNpcState:
@@ -236,7 +237,31 @@ public static class NodeTranslator
                         }
                     }
                 }
+                
                 list.Add(new StartBarkRuntime(key));
+                return true;
+            }
+            case OnDialogueEndNode onDialogueEndNode:
+            {
+                var port = onDialogueEndNode.GetInputPortByName(OnDialogueEndNode.ObjectPort);
+
+                string key = null;
+                if (port != null)
+                {
+                    if (port.IsConnected)
+                    {
+                        var connectedPort = port.FirstConnectedPort;
+                        var connectedNode = connectedPort.GetNode();
+                        if (connectedNode is ReferenceNode refNode)
+                        {
+                            key = refNode.Key;
+                        }
+                    }
+                }
+
+                string satateId;
+                onDialogueEndNode.GetNodeOptionByName(OnDialogueEndNode.StatePort).TryGetValue(out satateId);
+                list.Add(new OnDialogueEndRuntime(key,satateId));
                 return true;
             }
                 

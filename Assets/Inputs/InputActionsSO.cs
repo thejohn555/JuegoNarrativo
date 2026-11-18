@@ -12,6 +12,7 @@ public class InputActionsSO : ScriptableObject, NewInputActions.IGamePlayActions
     //input maps
     private NewInputActions inputActions;
     private InputActionMap currentMap;
+    private InputActionMap previousMap;
     //Map refs
     private InputActionMap gameplayMap;
     private InputActionMap inventoryMap;
@@ -38,6 +39,7 @@ public class InputActionsSO : ScriptableObject, NewInputActions.IGamePlayActions
         EventBus.Subscribe<OnDialogueDataEvent>(OnDialogueStarted);
         EventBus.Subscribe<OnDialogueEndedEvent>(OnDialogueEnded);
         EventBus.Subscribe<OnInventoryCloseEvent>(OnInventoryClosed);
+        EventBus.Subscribe<OnGamePausedEvent>(HandleGamePaused);
         
         SwitchMap(inputActions.GamePlay);
     }
@@ -49,6 +51,7 @@ public class InputActionsSO : ScriptableObject, NewInputActions.IGamePlayActions
             EventBus.UnSubscribe<OnDialogueDataEvent>(OnDialogueStarted);
             EventBus.UnSubscribe<OnDialogueEndedEvent>(OnDialogueEnded);
             EventBus.UnSubscribe<OnInventoryCloseEvent>(OnInventoryClosed);
+            EventBus.UnSubscribe<OnGamePausedEvent>(HandleGamePaused);
         }
 
         InputSystem.onDeviceChange -= OnInputDeviceChange;
@@ -67,10 +70,10 @@ public class InputActionsSO : ScriptableObject, NewInputActions.IGamePlayActions
         currentMap.Disable();
         currentMap.Enable();
 
-        Debug.Log(
-            $"INPUT DEVICE Mouse {change}: " +
-            $"LeftMouse controls={leftMouseAction.controls.Count}"
-        );
+       // Debug.Log(
+            //$"INPUT DEVICE Mouse {change}: " +
+           // $"LeftMouse controls={leftMouseAction.controls.Count}"
+       // );
     }
 
     private void SwitchMap(InputActionMap newMap)
@@ -80,6 +83,19 @@ public class InputActionsSO : ScriptableObject, NewInputActions.IGamePlayActions
         currentMap?.Enable();
         inputActions.Global.Enable();
         Debug.Log($"Mapa cambiado, actual: {currentMap?.ToString()}");
+    }
+
+    private void HandleGamePaused(OnGamePausedEvent ev)
+    {
+        if (ev.isPaused)
+        {
+            previousMap = currentMap;
+            SwitchMap(null);
+        }
+        else
+        {
+            SwitchMap(previousMap);
+        }
     }
 
     private void OnDialogueStarted(OnDialogueDataEvent ev)
@@ -97,7 +113,7 @@ public class InputActionsSO : ScriptableObject, NewInputActions.IGamePlayActions
 
     public void OnLeftMouse(InputAction.CallbackContext context)
     {
-        Debug.Log($"INPUT CALLBACK LeftMouse: phase={context.phase}, map={context.action.actionMap.enabled}");
+        //Debug.Log($"INPUT CALLBACK LeftMouse: phase={context.phase}, map={context.action.actionMap.enabled}");
         if (context.started)
             EventBus.Publish(new OnLeftMouseClick());
     }

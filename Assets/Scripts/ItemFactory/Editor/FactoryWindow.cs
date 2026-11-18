@@ -372,7 +372,7 @@ public class FactoryWindow : EditorWindow
             case FactoryConfiguration.TypeInteractive.InteractObject:
                 return interactObjectOptions;
             
-            case FactoryConfiguration.TypeInteractive.collectableObject:
+            case FactoryConfiguration.TypeInteractive.CollectableObject:
                 return collectableObjectOptions;
 
             case FactoryConfiguration.TypeInteractive.Buton:

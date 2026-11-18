@@ -15,7 +15,7 @@ namespace Blueprints_arquitectura_Dani_.Runtime
         
         public Func<string, bool> IsHoldingItem;
         public Func<bool> ConsumeItem;
-        public Func<string,Sprite,string, bool> AddItemToInventory;
+        public Func<GameObject, string, bool> AddItemToInventory; //Actualizado
         public Action<GameObject> StartNpcDialogue;
         public Action<string, string> ChangeNpcState;
         public Action<GameObject, bool> SetInteractable;
@@ -34,6 +34,7 @@ namespace Blueprints_arquitectura_Dani_.Runtime
 
         public void GetLastGuid(string guid)
         {
+            Debug.Log($"Lanzado Get LastGuid: {guid}");
             OnGetLastGuid?.Invoke(guid);
         }
 

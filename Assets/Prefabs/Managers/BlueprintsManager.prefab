@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6507854038104588364}
   - component: {fileID: 5733363012456426635}
   - component: {fileID: 1007069045151362929}
+  - component: {fileID: 8484218219258042342}
   m_Layer: 0
   m_Name: Extras
   m_TagString: Untagged
@@ -58,6 +59,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Blueprints_arquitectura_Dani_.EventRelay.MovementSwitch
   player: {fileID: 8831337603267046458, guid: 95f604d8a6b3a81439e2e09092fcd4a0, type: 3}
+--- !u!114 &8484218219258042342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1870454744130409485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28e9bfb5b39b4b0098cfa4dfccfe8700, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Blueprints.Runtime::Blueprints_arquitectura_Dani_.Scripts.Runtime.Managers.TimeLineManager
+  directors: []
 --- !u!1 &4461613810462725945
 GameObject:
   m_ObjectHideFlags: 0
@@ -107,7 +121,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 389d7c774bab44e884aeff96d9fd5273, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Blueprints.Runtime::Blueprints_arquitectura_Dani_.Runtime.BlueprintDirector
-  RuntimeGraph: []
+  RuntimeGraph:
+  - {fileID: -1759291010081333320, guid: 05f5aceef5b7021498da11efc202c3bd, type: 3}
 --- !u!114 &3284176198225476531
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -150,6 +165,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   itemCollectedGroups: []
+  dialogueEndList: []
   references:
     version: 2
     RefIds: []

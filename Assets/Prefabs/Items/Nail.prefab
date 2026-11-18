@@ -233,11 +233,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d9c125f8e214f6493e47ec17d43ce1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Interactives.CollectableObject
-  <InteractionDistance>k__BackingField: 2.9
-  <InteractionOffset>k__BackingField: {x: 0, y: 0}
+  <InteractionDistance>k__BackingField: 0.3
+  <InteractionOffset>k__BackingField: {x: -0.69, y: -3.38}
   showInteractionGizmo: 1
   description: {fileID: 3965311268370046156, guid: d148f02ba2a487644844242fc1fd5647, type: 3}
   interactionCursor: {fileID: 2800000, guid: c7c8fa24357b30c4196407e7d380231d, type: 3}
+  cursorHotspot: {x: 0, y: 0}
+  itemPrefab: {fileID: 0}
+  inventoryIcon: {fileID: 21300000, guid: 578d5026cf668414483aadf6d8e4d446, type: 3}
   ingredientA: {fileID: 0}
   ingredientB: {fileID: 0}
   itemIcon: {fileID: 0}

@@ -8,15 +8,15 @@ namespace Blueprints_arquitectura_Dani_.Runtime.RuntimeNodes.AddItemToInventory
         protected override int OnExecute(AddItemToInventoryRuntime node, BlueprintDirector ctx, GameObject obj)
         {
             
-            if (string.IsNullOrEmpty(node.requiredGuid))
+            if (string.IsNullOrEmpty(node.requiredGuid) || node.itemPrefab == null)
             {
-                Debug.LogError("The node dont have a prefab assign");
+                Debug.LogError("The node dont have a prefab assign" );
                 return -1;
             }
             else
             {
-                Debug.Log($"Añadiendo: {node.itemName}, {node.itemIcon}, {node.requiredGuid}");
-                BlueprintsEventManager.Instance.AddItemToInventory(node.itemName, node.itemIcon, node.requiredGuid);
+                Debug.Log($"Añadiendo: {node.itemPrefab.name}, {node.itemPrefab}, {node.requiredGuid}");
+                BlueprintsEventManager.Instance.AddItemToInventory(node.itemPrefab, node.requiredGuid);
                 return 0;
             }
         }

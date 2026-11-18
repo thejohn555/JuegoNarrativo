@@ -249,6 +249,8 @@ namespace ItemFactory
         public override Type ComponentType => typeof(Interactives.CollectableObject);
 
         private bool isCrafted;
+        private bool iconOnInventory;
+        private Sprite iconInventory;
         private GameObject ingredientA;
         private GameObject ingredientB;
 
@@ -256,26 +258,33 @@ namespace ItemFactory
         {
             EditorGUILayout.LabelField("Collectible Settings", EditorStyles.boldLabel);
             includeInNodeGraph = EditorGUILayout.Toggle("Include in NodeGraph", includeInNodeGraph);
+
+            iconOnInventory = EditorGUILayout.Toggle("Change Inventory Icon?", iconOnInventory);
+
+            if (!iconOnInventory)
+            {
+               EditorGUILayout.Space();
+               iconInventory = (Sprite)EditorGUILayout.ObjectField("Inventory Icon", iconInventory, typeof(Sprite));
+            }
+            
             isCrafted = EditorGUILayout.Toggle("Is this a craftable object?", isCrafted);
 
             if (!isCrafted)
-            {
-                return;
-            }
+            { 
+                EditorGUILayout.Space();
+                
+                ingredientA = (GameObject)EditorGUILayout.ObjectField("Ingredient A", ingredientA, typeof(GameObject), false);
+                ingredientB = (GameObject)EditorGUILayout.ObjectField("Ingredient B", ingredientB, typeof(GameObject), false);
 
-            ingredientA =
-                (GameObject)EditorGUILayout.ObjectField("Ingredient A", ingredientA, typeof(GameObject), false);
-            ingredientB =
-                (GameObject)EditorGUILayout.ObjectField("Ingredient B", ingredientB, typeof(GameObject), false);
+                if (ingredientA == null)
+                {
+                    EditorGUILayout.HelpBox("Assign Ingredient A to create this crafted item.", MessageType.Warning);
+                }
 
-            if (ingredientA == null)
-            {
-                EditorGUILayout.HelpBox("Assign Ingredient A to create this crafted item.", MessageType.Warning);
-            }
-
-            if (ingredientB == null)
-            {
-                EditorGUILayout.HelpBox("Assign Ingredient B to create this crafted item.", MessageType.Warning);
+                if (ingredientB == null)
+                {
+                    EditorGUILayout.HelpBox("Assign Ingredient B to create this crafted item.", MessageType.Warning);
+                }
             }
         }
 

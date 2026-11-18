@@ -58,13 +58,13 @@ public class HeldItemController : MonoBehaviour
         }
         BlueprintsEventManager.Instance.ConsumeItem = Consume;
     }
-
+    
     // Coge el objeto del slot con el cursor
     public void Hold(int slotIndex)
     {
         InventoryManager inventory = InventoryManager.Instance;
 
-        if (inventory == null || !inventory.TryGetItem(slotIndex, out string itemName, out Sprite icon, out string guid)) //Nuevo
+        if (inventory == null || !inventory.storage.TryGetItem(slotIndex, out InventoryItem item)) //Nuevo
         {
             return;
         }
@@ -75,16 +75,16 @@ public class HeldItemController : MonoBehaviour
         }
 
         heldSlotIndex = slotIndex;
-        heldItemName = itemName;
-        Debug.Log($"[Hold] '{itemName}' | guid recibido: '{guid}' | guardado: '{heldItemGuid}'");
-        heldItemGuid = guid;
+        heldItemName = item.Name;
+        Debug.Log($"[Hold] '{item.Name}' | guid recibido: '{item.guid}' | guardado: '{heldItemGuid}'");
+        heldItemGuid = item.guid;
         pickupFrame = Time.frameCount;
 
         inventory.HeldSlotIndex = slotIndex;
         inventory.UpdateUI();
 
-        CreateIcon(icon);
-        OnItemHeld?.Invoke(itemName);
+        CreateIcon(item.icon);
+        OnItemHeld?.Invoke(item.Name);
     }
 
     // Devuelve el objeto al inventario
@@ -111,13 +111,14 @@ public class HeldItemController : MonoBehaviour
 
         ClearState();
 
-        InventoryManager.Instance.ClearSlot(index);
+        InventoryManager.Instance.storage.ClearSlot(index);
 
         return true;
     }
     
     public void ClearState(bool restoreMap = true)
     {
+        Debug.Log($"[ClearState] guid='{heldItemGuid}'\n{System.Environment.StackTrace}");
         heldSlotIndex = -1;
         heldItemName = null;
         heldItemGuid = null;
@@ -211,5 +212,20 @@ public class HeldItemController : MonoBehaviour
         yield return null; // esperamos a que termine el frame del click
         Debug.Log("Ya te puedes mover");
         inputs.Publish(new OnInventoryCloseEvent());
+    }
+    
+    [SerializeField] private PlayerMovementSystem playerMovement;
+
+    private void SetMovement(bool enabled)
+    {
+        if (playerMovement == null)
+        {
+            playerMovement = FindFirstObjectByType<PlayerMovementSystem>();
+        }
+
+        if (playerMovement != null)
+        {
+            playerMovement.enabled = enabled;
+        }
     }
 }
