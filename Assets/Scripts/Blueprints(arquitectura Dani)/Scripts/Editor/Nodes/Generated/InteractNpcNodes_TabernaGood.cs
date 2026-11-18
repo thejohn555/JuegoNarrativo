@@ -13,10 +13,10 @@ namespace Blueprints_arquitectura_Dani_.Editor.Blueprints_arquitectura_Dani_.Edi
     { public override string Key => "Players"; }
     [Serializable]
     [Node(categoryPath:"Nodes/TabernaGood/Nodes/StartNodes/InteractNpcNodes")]
-    public class OnInteract_Npc_TabernaGood_Kidnapper : OnInteractNpcNode
-    { public override string Key => "Kidnapper"; }
-    [Serializable]
-    [Node(categoryPath:"Nodes/TabernaGood/Nodes/StartNodes/InteractNpcNodes")]
     public class OnInteract_Npc_TabernaGood_BartenderTestFelipe : OnInteractNpcNode
     { public override string Key => "BartenderTestFelipe"; }
+    [Serializable]
+    [Node(categoryPath:"Nodes/TabernaGood/Nodes/StartNodes/InteractNpcNodes")]
+    public class OnInteract_Npc_TabernaGood_Kidnapper : OnInteractNpcNode
+    { public override string Key => "Kidnapper"; }
 }
