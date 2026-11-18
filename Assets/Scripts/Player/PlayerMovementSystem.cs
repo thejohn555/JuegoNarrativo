@@ -42,11 +42,6 @@ public class PlayerMovementSystem : PlayerSystem
 
     public void SetNewDestination(Vector3 destination, float stoppingDistance, bool recalculateVelocity = true)
     {
-        if (!enabled) //Nuevo
-        {
-            return;
-        }
-        
         //Debug.Log($"PRUEBA 4: SetNewDestination; grid={pathfinding?.Grid != null}", this);
 
         // Cancelamos la ruta anterior.

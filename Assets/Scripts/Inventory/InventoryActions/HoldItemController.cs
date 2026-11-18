@@ -58,14 +58,6 @@ public class HeldItemController : MonoBehaviour
         }
         BlueprintsEventManager.Instance.ConsumeItem = Consume;
     }
-
-    private void OnDisable()
-    {
-        if (HasHeldItem)
-        {
-            SetMovement(true);
-        }
-    }
     
     // Coge el objeto del slot con el cursor
     public void Hold(int slotIndex)
@@ -93,7 +85,6 @@ public class HeldItemController : MonoBehaviour
 
         CreateIcon(item.icon);
         OnItemHeld?.Invoke(item.Name);
-        SetMovement(false);
     }
 
     // Devuelve el objeto al inventario
@@ -106,7 +97,6 @@ public class HeldItemController : MonoBehaviour
 
         OnItemReleased?.Invoke(heldItemName);
         ClearState(restoreMap);
-        SetMovement(true);
     }
 
     // Gasta el objeto (ej. la llave abre la puerta)
@@ -146,7 +136,6 @@ public class HeldItemController : MonoBehaviour
         }
 
         pendingMapRestore = restoreMap;
-        SetMovement(true);
     }
 
     private void CreateIcon(Sprite sprite)
