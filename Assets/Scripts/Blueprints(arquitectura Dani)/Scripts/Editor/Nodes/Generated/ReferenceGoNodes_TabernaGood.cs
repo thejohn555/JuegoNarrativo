@@ -15,8 +15,4 @@ namespace Blueprints_arquitectura_Dani_.Editor.Blueprints_arquitectura_Dani_.Edi
     [Node(categoryPath:"Nodes/TabernaGood/Nodes/References/GameObject")]
     public class Ref_Go_TabernaGood_Coins : ReferenceNode
     { public override string Key => "Coins"; }
-    [Serializable]
-    [Node(categoryPath:"Nodes/TabernaGood/Nodes/References/GameObject")]
-    public class Ref_Go_TabernaGood_LoadedDice : ReferenceNode
-    { public override string Key => "LoadedDice"; }
 }
