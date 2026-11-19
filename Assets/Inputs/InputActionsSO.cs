@@ -1,4 +1,4 @@
-using Assets.Scripts.EventBuses;
+    using Assets.Scripts.EventBuses;
 using EventBuses;
 using Unity.Jobs;
 using UnityEngine;

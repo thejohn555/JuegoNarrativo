@@ -1,58 +1,62 @@
 using Assets.Scripts.EventBuses;
 using Assets.Scripts.EventBuses.Events;
+using Audio.Enums;
 using EventBuses;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-#region enums 
-
-public enum SFX
-{
-    Dialogue,
-    Object
-}
-
-public enum Music
-{
-
-}
-#endregion
-
 public class AudioManager : Singleton<AudioManager>
 {
     [SerializeField] private EventBusSO eventBus;
-    //SoundCompilations
-    [Header("Sound Archive")]
-    [SerializeField] private Dictionary<Music,  AudioClip> music = new();
-    [SerializeField] private Dictionary<SFX, AudioClip> sfx = new();
+    [SerializeField] private AudioDB audioDB;
 
-    //sources
-    private AudioSource playerSfxSource;
-    private AudioSource musicSource;
+    //source
+    private AudioSource MusicSource;
+    private AudioSource AmbienceSource;
 
-    
 
-    void Start()
+    public override void Awake()
     {
+        base.Awake();
+
+        MusicSource = transform.Find("MusicSource").GetComponent<AudioSource>();
+        AmbienceSource = transform.Find("AmbienceSource").GetComponent<AudioSource>();
+
     }
 
-
-    public void PlayMusic(Music name)
+    private void Start()
     {
-        musicSource.clip = music[name];
-        if (musicSource.clip != null)
+        eventBus.Subscribe<OnMusicPlay>(PlayMusic);
+        eventBus.Subscribe<OnSFXPlay>(PlayAmbience);
+    }
+
+    private void PlayMusic(OnMusicPlay args)
+    {
+        if (args.audioEvent == AudioEventsID.NULL)
         {
-            eventBus.Publish<OnMusicPlay>(new OnMusicPlay(music[name]));
+            //audioSource.clip = audioDB.MusicList[args.musicClip];
+            //audioSource.Play();
+        }
+        else
+        {
+            //args.audioEvent.Play();
         }
     }
 
-    public void PlaySFX(SFX name)
+    private void PlayAmbience(OnSFXPlay args)
     {
-        if (musicSource.clip != null)
+        if (args.audioEvent == AudioEventsID.NULL)
         {
-            eventBus.Publish<OnSFXPlay>(new OnSFXPlay(sfx[name]));
+            //audioSource.PlayOneShot(audioDB.SfxList[args.sfxClip]);
+        }
+        else
+        {
+            //args.audioEvent.Play();
         }
     }
-    
+
+    public AudioDB GetDatabase()
+    {
+        return audioDB;
+    }
 }

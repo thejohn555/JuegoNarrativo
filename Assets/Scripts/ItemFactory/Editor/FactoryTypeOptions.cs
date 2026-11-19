@@ -82,14 +82,26 @@ namespace ItemFactory
 
     public sealed class TriggerFactoryTypeOptions : FactoryTypeOptions
     {
+        private bool includeInNodeGraph;
 
         public override Type ComponentType => typeof(Interactives.Trigger);
+        public override void DrawOptions()
+        {
+            includeInNodeGraph = EditorGUILayout.Toggle("Include in NodeGraph", includeInNodeGraph);
+        }
 
         public override void ConfigureCreatedObject(GameObject target)
         {
+            if (includeInNodeGraph)
+            {
+                Debug.Log("Incluyendo en node Graph");
+                DicitionaryFuntions.AddToDictionary(NodeTypes.ReferenceTrigger, target);
+            }
+
             DicitionaryFuntions.AddToDictionary(NodeTypes.Trigger, target);
 
         }
+        
     }
 
     public sealed class DecorationFactoryTypeOptions : FactoryTypeOptions
@@ -261,7 +273,7 @@ namespace ItemFactory
 
             iconOnInventory = EditorGUILayout.Toggle("Change Inventory Icon?", iconOnInventory);
 
-            if (!iconOnInventory)
+            if (iconOnInventory)
             {
                EditorGUILayout.Space();
                iconInventory = (Sprite)EditorGUILayout.ObjectField("Inventory Icon", iconInventory, typeof(Sprite));
@@ -269,7 +281,7 @@ namespace ItemFactory
             
             isCrafted = EditorGUILayout.Toggle("Is this a craftable object?", isCrafted);
 
-            if (!isCrafted)
+            if (isCrafted)
             { 
                 EditorGUILayout.Space();
                 
