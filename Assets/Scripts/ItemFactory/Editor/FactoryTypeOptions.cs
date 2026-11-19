@@ -225,7 +225,7 @@ namespace ItemFactory
 
             iconOnInventory = EditorGUILayout.Toggle("Change Inventory Icon?", iconOnInventory);
 
-            if (!iconOnInventory)
+            if (iconOnInventory)
             {
                EditorGUILayout.Space();
                iconInventory = (Sprite)EditorGUILayout.ObjectField("Inventory Icon", iconInventory, typeof(Sprite));
@@ -233,7 +233,7 @@ namespace ItemFactory
             
             isCrafted = EditorGUILayout.Toggle("Is this a craftable object?", isCrafted);
 
-            if (!isCrafted)
+            if (isCrafted)
             { 
                 EditorGUILayout.Space();
                 

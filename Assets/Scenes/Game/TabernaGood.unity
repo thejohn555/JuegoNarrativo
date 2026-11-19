@@ -3480,7 +3480,7 @@ PrefabInstance:
     - target: {fileID: 9025216357305333629, guid: 6a7aea6e28bbdbe47a20282e2680fd53, type: 3}
       propertyPath: craftingRecipes.Array.data[0].resultPrefab
       value: 
-      objectReference: {fileID: 6433144946823108048, guid: 9999f8eb15226a54e9a6afa481d638b8, type: 3}
+      objectReference: {fileID: 1533286376693599998, guid: 4c15ef0705c233e41936447548859da8, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
