@@ -93,7 +93,7 @@ public static class NodeTranslator
                     requiredGuid = AssetDatabase.AssetPathToGUID(path);
                 }
                 bool destroy = false;
-                onInteractNpcNode.GetNodeOptionByName(OnInteractNpcNode.RequiredBoolOption);
+                onInteractNpcNode.GetNodeOptionByName(OnInteractNpcNode.RequiredBoolOption).TryGetValue(out  destroy);
                 list.Add(new OnInteractNpcRuntime(onInteractNpcNode.Key, requiredGuid,destroy));
                 return true;
             }  
