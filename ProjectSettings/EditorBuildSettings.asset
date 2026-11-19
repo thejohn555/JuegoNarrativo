@@ -8,6 +8,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Game/TabernaGood.unity
     guid: eb2cb343e9241b64c876f2e9d24fa79b
+  - enabled: 1
+    path: Assets/Scenes/Game/Garden.unity
+    guid: 4dd1f65bd286c904ba5347501190fdfc
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 913591c6e4f09b64fb0e8a40889ed62a, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}

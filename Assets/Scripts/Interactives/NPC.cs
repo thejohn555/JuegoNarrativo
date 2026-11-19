@@ -38,7 +38,7 @@ namespace Interactives
         [SerializeField] public float zoom = 3f;
         [SerializeField] public float smoothTime  = 0.5f;
 
-        private string currentStateId = "";
+        public string currentStateId = ""; //Lo tengo que poner privado
         
 
         protected override void OnEnable()
