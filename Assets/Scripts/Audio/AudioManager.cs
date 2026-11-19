@@ -27,7 +27,7 @@ public class AudioManager : Singleton<AudioManager>
     private void Start()
     {
         eventBus.Subscribe<OnMusicPlay>(PlayMusic);
-        eventBus.Subscribe<OnSFXPlay>(PlayAmbience);
+        eventBus.Subscribe<OnSFXPlay>(PlaySFX);
     }
 
     private void PlayMusic(OnMusicPlay args)
@@ -43,15 +43,15 @@ public class AudioManager : Singleton<AudioManager>
         }
     }
 
-    private void PlayAmbience(OnSFXPlay args)
+    private void PlaySFX(OnSFXPlay args)
     {
         if (args.audioEvent == AudioEventsID.NULL)
         {
-            //audioSource.PlayOneShot(audioDB.SfxList[args.sfxClip]);
+            args.audioSource.PlayOneShot(audioDB.SfxList[args.sfxClip]);
         }
         else
         {
-            //args.audioEvent.Play();
+            audioDB.EventList[args.audioEvent].Play(args.audioSource,audioDB);
         }
     }
 

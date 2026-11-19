@@ -9,16 +9,20 @@ namespace Assets.Scripts.EventBuses
     {
         public AudioEventsID audioEvent;
         public SFXID sfxClip;
-        public OnSFXPlay(SFXID audio)
+
+        public AudioSource audioSource;
+        public OnSFXPlay(SFXID audio, AudioSource audioSource)
         {
             this.sfxClip = audio;
             audioEvent = AudioEventsID.NULL;
+            this.audioSource = audioSource;  
         }
 
-        public OnSFXPlay(AudioEventsID audioEvent)
+        public OnSFXPlay(AudioEventsID audioEvent, AudioSource audioSource)
         {
             this.audioEvent = audioEvent;
             sfxClip = SFXID.NULL;
+            this.audioSource = audioSource;
         }
     }
 }

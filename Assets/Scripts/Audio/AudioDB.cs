@@ -8,6 +8,7 @@ public class AudioDB : ScriptableObject
 {
     [SerializeField] private Dictionary<SFXID, AudioClip> sfxList;
     [SerializeField] private Dictionary<MusicID, AudioClip> musicList;
+    [SerializeField] private Dictionary<AudioEventsID, AudioEvent> eventList;
     [Header("For now you will have to select the enum options by int")]
     [Header("Remember to start by 0")]
     [SerializeField] private Dictionary<AudioBankID,Dictionary<int, List<AudioClip>>> audioBanks;
@@ -33,6 +34,14 @@ public class AudioDB : ScriptableObject
         get
         {
             return audioBanks;
+        }
+    }
+
+    public Dictionary<AudioEventsID, AudioEvent> EventList
+    {
+        get
+        {
+            return eventList;
         }
     }
 }
