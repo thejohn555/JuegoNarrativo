@@ -68,7 +68,7 @@ MonoBehaviour:
   description: {fileID: 0}
   interactionCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
-  itemPrefab: {fileID: 327655049308182774}
+  itemPrefab: {fileID: 0}
   inventoryIcon: {fileID: 0}
   ingredientA: {fileID: 6256960041073247025, guid: a1816e3168265c34bac17e7d3f40e5d3, type: 3}
   ingredientB: {fileID: 6905244427617548228, guid: 76c4f75eac0f9b345964bd5dfae4a800, type: 3}
