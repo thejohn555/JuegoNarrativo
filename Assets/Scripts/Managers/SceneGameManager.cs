@@ -24,21 +24,21 @@ namespace Managers
 
         private void OnDialogueEnded(OnDialogueEndedEvent obj)
         {
-            Debug.Log("Sale funcion");
+           
             if (obj.NpcID != Kidnapper.npcID)
             {
-                Debug.Log("No tiene mismo id");
+                
                 return;  
             }
                
             if (Kidnapper.currentStateId == "KidnapperGiveAle")
             {
-                Debug.Log("Cambiando escena");
+                
                 SwapScene(1);
             }
             else
             {
-                Debug.Log("No tiene mismo estado");
+                
             }
         }
     }
