@@ -30,6 +30,7 @@ public class FactoryWindow : EditorWindow
     private readonly InteractObjectFactoryTypeOptions interactObjectOptions = new InteractObjectFactoryTypeOptions();
     private readonly TriggerFactoryTypeOptions triggerOptions = new TriggerFactoryTypeOptions();
     private readonly DecorationFactoryTypeOptions decorationOptions = new DecorationFactoryTypeOptions();
+    private readonly DoorFactoryTypeOptions doorOptions = new DoorFactoryTypeOptions();
     private readonly EmptyFactoryTypeOptions emptyOptions = new EmptyFactoryTypeOptions();
 
     private bool addCollider = true;
@@ -382,6 +383,10 @@ public class FactoryWindow : EditorWindow
 
             case FactoryConfiguration.TypeInteractive.Decoration:
                 return decorationOptions;
+
+            case FactoryConfiguration.TypeInteractive.Door:
+                return doorOptions;
+
             default:
                 return null;
         }
