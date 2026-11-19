@@ -1,6 +1,7 @@
 #if UNITY_EDITOR
 using System;
 using Blueprints_arquitectura_Dani_.Runtime.Managers;
+using DoorGraph;
 using UnityEditor;
 using UnityEngine;
 
@@ -29,6 +30,53 @@ namespace ItemFactory
     public sealed class EmptyFactoryTypeOptions : FactoryTypeOptions
     {
         public override Type ComponentType => null;
+    }
+
+    public sealed class DoorFactoryTypeOptions : FactoryTypeOptions
+    {
+        private DoorManager doorManager;
+
+        public override Type ComponentType => null;
+
+        public override void DrawOptions()
+        {
+            if (doorManager == null)
+                doorManager = UnityEngine.Object.FindFirstObjectByType<DoorManager>();
+
+            EditorGUILayout.LabelField("Door Graph", EditorStyles.boldLabel);
+            doorManager = (DoorManager)EditorGUILayout.ObjectField(
+                "Door Manager", doorManager, typeof(DoorManager), true);
+            EditorGUILayout.HelpBox(
+                "The GameObject name will be used as the door node key. The door is added to the Door Manager, which generates its graph node.",
+                MessageType.Info);
+
+            if (doorManager == null)
+                EditorGUILayout.HelpBox(
+                    "Add a DoorManager to the active scene or assign one here before creating a door.",
+                    MessageType.Warning);
+        }
+
+        public override bool Validate(out string error)
+        {
+            if (doorManager == null)
+            {
+                error = "Assign a DoorManager from the active scene before creating a door.";
+                return false;
+            }
+
+            error = null;
+            return true;
+        }
+
+        public override void ConfigureCreatedObject(GameObject target)
+        {
+            if (doorManager == null || target == null)
+                return;
+
+            Undo.RecordObject(doorManager, "Add door to Door Graph");
+            doorManager.AddDoor(target);
+            UnityEditor.SceneManagement.EditorSceneManager.MarkSceneDirty(doorManager.gameObject.scene);
+        }
     }
 
 
@@ -225,7 +273,7 @@ namespace ItemFactory
 
             iconOnInventory = EditorGUILayout.Toggle("Change Inventory Icon?", iconOnInventory);
 
-            if (!iconOnInventory)
+            if (iconOnInventory)
             {
                EditorGUILayout.Space();
                iconInventory = (Sprite)EditorGUILayout.ObjectField("Inventory Icon", iconInventory, typeof(Sprite));
@@ -233,7 +281,7 @@ namespace ItemFactory
             
             isCrafted = EditorGUILayout.Toggle("Is this a craftable object?", isCrafted);
 
-            if (!isCrafted)
+            if (isCrafted)
             { 
                 EditorGUILayout.Space();
                 
