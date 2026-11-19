@@ -21,7 +21,7 @@ namespace Interactives
         public override void Interact(GameObject interactor)
         {
             Debug.Log("Se ha interactuado con el objeto");
-
+            Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
             if (InventoryManager.Instance == null)
             {
                 Debug.LogWarning("No se encontró ningún InventoryManager activo en la escena.");
