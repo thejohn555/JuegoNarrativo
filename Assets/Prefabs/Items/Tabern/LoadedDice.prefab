@@ -85,7 +85,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40e431c3475c4e22ae9538d3eaede62a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Blueprints.Runtime::Blueprints_arquitectura_Dani_.Runtime.BlueprintItemId
-  guid: 90323ee01e1c15f4aa9c149d7e4880b4
+  guid: 4c15ef0705c233e41936447548859da8
 --- !u!1 &4422592913603651381
 GameObject:
   m_ObjectHideFlags: 0

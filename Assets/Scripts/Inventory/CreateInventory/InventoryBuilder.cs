@@ -1,8 +1,10 @@
-#if UNITY_EDITOR
+
 using TMPro;
 using UnityEngine;
+#if UNITY_EDITOR
 using UnityEditor;
 using UnityEditor.SceneManagement;
+#endif
 using UnityEngine.UIElements;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
@@ -94,7 +96,9 @@ public static class InventoryBuilder
                 currentSlotIndex++;
             }
         }
+#if UNITY_EDITOR
         Selection.activeGameObject = panel;
+#endif
         return panel;
     }
    
@@ -129,8 +133,10 @@ public static class InventoryBuilder
         scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
         scaler.referenceResolution = new Vector2(1920, 1080);
  
+#if UNITY_EDITOR
         Undo.RegisterCreatedObjectUndo(go, "Create Canvas");
+#endif
         return canvas;
     }
 }
-#endif
+
