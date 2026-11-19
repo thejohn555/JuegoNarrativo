@@ -1609,7 +1609,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: -4
   m_MaskInteraction: 0
   m_Sprite: {fileID: -8090668429897507884, guid: 3a06dc1e09be3754b85d633d6a2655c4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -2287,7 +2287,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -4
+  m_SortingOrder: -5
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: bc69f8e77adfa9144bd30f908b12a1d3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -3740,6 +3740,10 @@ PrefabInstance:
       propertyPath: itemPrefab
       value: 
       objectReference: {fileID: 8858398409815618685, guid: 8bd784f793a26d84780b5b5b0c0e9a01, type: 3}
+    - target: {fileID: 4593633613192342425, guid: 8bd784f793a26d84780b5b5b0c0e9a01, type: 3}
+      propertyPath: <InteractionOffset>k__BackingField.x
+      value: -0.93
+      objectReference: {fileID: 0}
     - target: {fileID: 8858398409815618685, guid: 8bd784f793a26d84780b5b5b0c0e9a01, type: 3}
       propertyPath: m_Name
       value: DiePlayers
