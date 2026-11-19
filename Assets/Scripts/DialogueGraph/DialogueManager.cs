@@ -42,6 +42,8 @@ public class DialogueManager : Singleton<DialogueManager>
     {
         if (graph == null) return;
 
+        Debug.Log($"[StartDialogue] NPC ID recibido: '{data.npcID}'");
+        
         currentGraph = graph;
         currentDialogueData = data;
         EventBus.Publish(new OnDialogueDataEvent(data));
@@ -81,9 +83,11 @@ public class DialogueManager : Singleton<DialogueManager>
 
     public void EndDialogue()
     {
+        Debug.Log($"[EndDialogue] NPC ID guardado: '{currentDialogueData.npcID}'");
+        
         string finishedNpcId = currentDialogueData.npcID ?? string.Empty;
         RuntimeDialogueGraph finishedGraph = currentGraph;
-
+        
         currentDialogueData = default;
         currentGraph = null;
         currentNode = null;

@@ -165,6 +165,7 @@ namespace Interactives
         public DialogueData BuildDialogueData(GameObject interactor)
         {
             DialogueData data = new DialogueData();
+            data.npcID = npcID;
             data.targetPosition = transform;
             data.cameraOffset = cameraOffset;
             data.zoom = zoom;
