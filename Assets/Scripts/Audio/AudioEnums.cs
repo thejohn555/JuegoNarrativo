@@ -42,7 +42,8 @@ namespace Audio.Enums
 
     public enum AudioEventsID
     {
-        NULL
+        NULL,
+        TabernAmbienceEvent
     }
 
     public enum AudioBankID

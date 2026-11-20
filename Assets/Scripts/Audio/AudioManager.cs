@@ -2,6 +2,7 @@ using Assets.Scripts.EventBuses;
 using Assets.Scripts.EventBuses.Events;
 using Audio.Enums;
 using EventBuses;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,8 +13,8 @@ public class AudioManager : Singleton<AudioManager>
 
     //source
     private AudioSource MusicSource;
-    private AudioSource AmbienceSource;
 
+    private AudioSource AmbienceSource;
 
     public override void Awake()
     {
@@ -21,7 +22,6 @@ public class AudioManager : Singleton<AudioManager>
 
         MusicSource = transform.Find("MusicSource").GetComponent<AudioSource>();
         AmbienceSource = transform.Find("AmbienceSource").GetComponent<AudioSource>();
-
     }
 
     private void Start()
@@ -51,12 +51,18 @@ public class AudioManager : Singleton<AudioManager>
         }
         else
         {
-            audioDB.EventList[args.audioEvent].Play(args.audioSource,audioDB);
+            audioDB.EventList[args.audioEvent].Play(args.audioSource, audioDB, StartCoroutine);
+            
         }
     }
 
     public AudioDB GetDatabase()
     {
         return audioDB;
+    }
+
+    private IEnumerator iddd()
+    {
+        yield return null;
     }
 }

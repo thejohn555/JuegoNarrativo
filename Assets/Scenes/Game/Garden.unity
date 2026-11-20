@@ -2553,7 +2553,7 @@ PrefabInstance:
     - target: {fileID: 5098650879914241608, guid: f8d7f886628289546b13363460367872, type: 3}
       propertyPath: 'RuntimeGraph.Array.data[0]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: -1759291010081333320, guid: 7033fd93f974c0940870b05ff073331d, type: 3}
     - target: {fileID: 5098650879914241608, guid: f8d7f886628289546b13363460367872, type: 3}
       propertyPath: 'RuntimeGraph.Array.data[1]'
       value: 

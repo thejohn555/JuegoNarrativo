@@ -18,18 +18,7 @@ MonoBehaviour:
   - key: 4
     value: {fileID: 8300000, guid: bd6dce3cb79949a46a322d2cad42a87c, type: 3}
   musicList: []
-  audioBanks:
-  - key: 0
-    value:
-    - key: 0
-      value:
-      - {fileID: 8300000, guid: 49e7273485299e34f8fd16ac93da0041, type: 3}
-      - {fileID: 8300000, guid: 83bc23265c2a5d946bf88e53d69d91fd, type: 3}
-    - key: 1
-      value:
-      - {fileID: 8300000, guid: 83bc23265c2a5d946bf88e53d69d91fd, type: 3}
-      - {fileID: 8300000, guid: 83bc23265c2a5d946bf88e53d69d91fd, type: 3}
-    - key: 2
-      value:
-      - {fileID: 8300000, guid: 83bc23265c2a5d946bf88e53d69d91fd, type: 3}
-      - {fileID: 8300000, guid: 83bc23265c2a5d946bf88e53d69d91fd, type: 3}
+  eventList:
+  - key: 1
+    value: {fileID: 11400000, guid: 08ef1e8e192a182479ba3cb81759b580, type: 2}
+  audioBanks: []

@@ -17,7 +17,6 @@ public class AudioEventEditor : Editor
 
     private void OnEnable()
     {
-        eventBus = serializedObject.FindProperty("eventBus");
         sfx = serializedObject.FindProperty("sfx");
         soundOptions = serializedObject.FindProperty("soundOptions");
         varOptions = serializedObject.FindProperty("varOptions");
@@ -33,7 +32,6 @@ public class AudioEventEditor : Editor
         serializedObject.Update();
 
         EditorGUILayout.BeginVertical();
-        EditorGUILayout.PropertyField(eventBus);
         EditorGUILayout.PropertyField(usingAudioBank);
         if(usingAudioBank.boolValue == true)
         {

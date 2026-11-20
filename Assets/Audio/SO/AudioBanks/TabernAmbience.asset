@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e987eb6dccb52f41ab82cf7ffe99784, type: 3}
   m_Name: TabernAmbience
   m_EditorClassIdentifier: Assembly-CSharp::AudioEvent
-  eventBus: {fileID: 0}
-  sfx: 0300000003000000i
+  sfx: 0300000004000000i
   soundOptions: 2
   varOptions: 0
   loop: 1

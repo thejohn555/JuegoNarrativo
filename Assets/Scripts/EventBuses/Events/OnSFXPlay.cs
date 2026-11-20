@@ -9,8 +9,8 @@ namespace Assets.Scripts.EventBuses
     {
         public AudioEventsID audioEvent;
         public SFXID sfxClip;
-
         public AudioSource audioSource;
+
         public OnSFXPlay(SFXID audio, AudioSource audioSource)
         {
             this.sfxClip = audio;
