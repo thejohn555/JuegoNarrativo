@@ -5,28 +5,17 @@ using UnityEngine.UI;
 
 // Solo guarda los datos de los slots y expone la API del inventario.
 // El dibujo está en InventoryUI y el crafteo en InventoryCrafter.
-public class InventoryManager : MonoBehaviour
-{
-    public static InventoryManager Instance { get; set; }
-   
+public class InventoryManager : Singleton<InventoryManager>
+{  
     [Header("Settings")]
     [SerializeField] public InventorySettings settings;
     public InventoryStorage storage { get; } = new InventoryStorage();
     private InventoryUI ui;
     public int HeldSlotIndex { get; set; } = -1;
     
-    private void Awake()
+    public override void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-            return;
-        }
-
+        base.Awake();
         ui = GetComponent<InventoryUI>();
 
         if (ui == null)

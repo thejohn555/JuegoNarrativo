@@ -46,6 +46,10 @@ public class InputActionsSO : ScriptableObject, NewInputActions.IGamePlayActions
 
     private void OnDisable()
     {
+        
+    }
+    public void Distroy()
+    {
         if (EventBus != null)
         {
             EventBus.UnSubscribe<OnDialogueDataEvent>(OnDialogueStarted);
@@ -56,7 +60,6 @@ public class InputActionsSO : ScriptableObject, NewInputActions.IGamePlayActions
 
         InputSystem.onDeviceChange -= OnInputDeviceChange;
     }
-
     private void OnInputDeviceChange(InputDevice device, InputDeviceChange change)
     {
         if (device is not Mouse || currentMap == null)
@@ -177,7 +180,7 @@ public class InputActionsSO : ScriptableObject, NewInputActions.IGamePlayActions
         {
             SwitchMap(inputActions.GamePlay);
             EventBus.Publish(onScrollWheelPressed);
-            
+           
         } 
     }
     #endregion

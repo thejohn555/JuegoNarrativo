@@ -6,7 +6,7 @@ namespace Player
     [RequireComponent(typeof(PlayerMovementSystem))]
     public class PlayerMain : MonoBehaviour
     {
-        [HideInInspector] public EventBusSO  EventBus;
+        [SerializeField] public EventBusSO  EventBus;
         [SerializeField] private InputActionsSO inputReader;
         [SerializeField] public LayerMask whatIsClickable;
 
@@ -21,6 +21,10 @@ namespace Player
             EventBus=inputReader.EventBus;
             Cam = Camera.main;
             MovementSystem = GetComponent<PlayerMovementSystem>();
+        }
+        private void OnDestroy()
+        {
+            inputReader.Distroy();
         }
     }
 }
