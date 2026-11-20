@@ -1399,6 +1399,10 @@ PrefabInstance:
       propertyPath: itemPrefab
       value: 
       objectReference: {fileID: 8520369407981150369, guid: 6b3fb1c12978eeb43bfa9c093286b2d3, type: 3}
+    - target: {fileID: 3681975026779506111, guid: 6b3fb1c12978eeb43bfa9c093286b2d3, type: 3}
+      propertyPath: interactionCursor
+      value: 
+      objectReference: {fileID: 2800000, guid: 06d77cf1ec287d44da21c06cda063f08, type: 3}
     - target: {fileID: 8520369407981150369, guid: 6b3fb1c12978eeb43bfa9c093286b2d3, type: 3}
       propertyPath: m_Name
       value: 'Dice '
@@ -2916,6 +2920,10 @@ PrefabInstance:
       propertyPath: inventoryIcon
       value: 
       objectReference: {fileID: 21300000, guid: 578d5026cf668414483aadf6d8e4d446, type: 3}
+    - target: {fileID: 8738536837254363268, guid: 85699bffd616e3a4a8ecb4d0e930ff79, type: 3}
+      propertyPath: interactionCursor
+      value: 
+      objectReference: {fileID: 2800000, guid: 06d77cf1ec287d44da21c06cda063f08, type: 3}
     - target: {fileID: 9207451370440653793, guid: 85699bffd616e3a4a8ecb4d0e930ff79, type: 3}
       propertyPath: m_Name
       value: 'Nail '
@@ -3588,6 +3596,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1005958542439269062, guid: 8cd9b2f50e21a224b8b39aa85721d1cf, type: 3}
+      propertyPath: interactionCursor
+      value: 
+      objectReference: {fileID: 2800000, guid: 9b53f51b83e004c4984a28098162c6f5, type: 3}
+    - target: {fileID: 1005958542439269062, guid: 8cd9b2f50e21a224b8b39aa85721d1cf, type: 3}
       propertyPath: <InteractionDistance>k__BackingField
       value: 0.3
       objectReference: {fileID: 0}
@@ -3745,6 +3757,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8858398409815618685, guid: 8bd784f793a26d84780b5b5b0c0e9a01, type: 3}
     - target: {fileID: 4593633613192342425, guid: 8bd784f793a26d84780b5b5b0c0e9a01, type: 3}
+      propertyPath: interactionCursor
+      value: 
+      objectReference: {fileID: 2800000, guid: 06d77cf1ec287d44da21c06cda063f08, type: 3}
+    - target: {fileID: 4593633613192342425, guid: 8bd784f793a26d84780b5b5b0c0e9a01, type: 3}
       propertyPath: <InteractionOffset>k__BackingField.x
       value: -0.93
       objectReference: {fileID: 0}
@@ -3828,6 +3844,10 @@ PrefabInstance:
       propertyPath: itemPrefab
       value: 
       objectReference: {fileID: 430385769135049981, guid: 49f2d18cb7276634daf2065912143d9f, type: 3}
+    - target: {fileID: 4372737969108625290, guid: 49f2d18cb7276634daf2065912143d9f, type: 3}
+      propertyPath: interactionCursor
+      value: 
+      objectReference: {fileID: 2800000, guid: 06d77cf1ec287d44da21c06cda063f08, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3920,7 +3940,7 @@ PrefabInstance:
     - target: {fileID: 8825676836275762955, guid: ca40cd2aa6914c24fa2c3592a97ade8d, type: 3}
       propertyPath: interactionCursor
       value: 
-      objectReference: {fileID: 2800000, guid: c7c8fa24357b30c4196407e7d380231d, type: 3}
+      objectReference: {fileID: 2800000, guid: 06d77cf1ec287d44da21c06cda063f08, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4111,7 +4131,7 @@ PrefabInstance:
     - target: {fileID: 6750985220364914118, guid: 530bb03191a676e46a47a39bd4cd5351, type: 3}
       propertyPath: interactionCursor
       value: 
-      objectReference: {fileID: 2800000, guid: 79afe8cc60f842a47930fd91a12b7616, type: 3}
+      objectReference: {fileID: 2800000, guid: 9b53f51b83e004c4984a28098162c6f5, type: 3}
     - target: {fileID: 6750985220364914118, guid: 530bb03191a676e46a47a39bd4cd5351, type: 3}
       propertyPath: showInteractionGizmo
       value: 1
@@ -4231,7 +4251,7 @@ PrefabInstance:
     - target: {fileID: 4578883183671500963, guid: 2b1c4c4ee9c56a74494212ea44706414, type: 3}
       propertyPath: interactionCursor
       value: 
-      objectReference: {fileID: 2800000, guid: 79afe8cc60f842a47930fd91a12b7616, type: 3}
+      objectReference: {fileID: 2800000, guid: 9b53f51b83e004c4984a28098162c6f5, type: 3}
     - target: {fileID: 4578883183671500963, guid: 2b1c4c4ee9c56a74494212ea44706414, type: 3}
       propertyPath: alternativeStates.Array.size
       value: 1
