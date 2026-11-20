@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using Assets.Scripts.EventBuses;
 using EventBuses;
 using Interactives;
@@ -24,22 +26,24 @@ namespace Managers
 
         private void OnDialogueEnded(OnDialogueEndedEvent obj)
         {
-           
-            if (obj.NpcID != Kidnapper.npcID)
+            Debug.Log("OnDialgue end");
+            Debug.Log($"evento id: {obj.NpcID }, Kinapper NPC: {Kidnapper.npcID}");
+            if ( obj.NpcID != Kidnapper.npcID) return;
+            Debug.Log("Lanzamos corrutinas");
+            StartCoroutine(CheckStateNextFrame());
+        }
+
+        private IEnumerator CheckStateNextFrame()
+        {
+            Debug.Log("Corrutina");
+            yield return null;
+
+            if (Kidnapper != null && Kidnapper.currentStateId == "KidnapperGiveAle")
             {
-                
-                return;  
-            }
-               
-            if (Kidnapper.currentStateId == "KidnapperGiveAle")
-            {
-                
+                Debug.Log("Cambio de escena");
                 SwapScene(1);
             }
-            else
-            {
                 
-            }
         }
     }
 }
