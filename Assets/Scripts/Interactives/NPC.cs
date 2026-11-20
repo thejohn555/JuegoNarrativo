@@ -38,7 +38,7 @@ namespace Interactives
         [SerializeField] public float zoom = 3f;
         [SerializeField] public float smoothTime  = 0.5f;
 
-        private string currentStateId = "";
+        public string currentStateId = ""; //Lo tengo que poner privado
         
 
         protected override void OnEnable()
@@ -81,7 +81,7 @@ namespace Interactives
                 {
                     currentStateId= state.StateID;
                     currentGraph = state.DialogueGraph;
-                    Debug.Log($"[{npcID}] Dialogue graph changed to state: {ev.NewStateID}");
+                    Debug.LogError($"[{npcID}] Dialogue graph changed to state: {ev.NewStateID}");
                     return;
                 }
             }
@@ -165,6 +165,7 @@ namespace Interactives
         public DialogueData BuildDialogueData(GameObject interactor)
         {
             DialogueData data = new DialogueData();
+            data.npcID = npcID;
             data.targetPosition = transform;
             data.cameraOffset = cameraOffset;
             data.zoom = zoom;

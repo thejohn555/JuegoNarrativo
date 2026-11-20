@@ -150,7 +150,7 @@ GameObject:
   - component: {fileID: 6989270378806916136}
   - component: {fileID: 757374899070822262}
   - component: {fileID: 3099599605859802967}
-  - component: {fileID: 7457626585017888407}
+  - component: {fileID: 2830178979116579423}
   m_Layer: 0
   m_Name: Cloth
   m_TagString: Untagged
@@ -212,7 +212,7 @@ MonoBehaviour:
   ingredientA: {fileID: 0}
   ingredientB: {fileID: 0}
   itemIcon: {fileID: 0}
---- !u!114 &7457626585017888407
+--- !u!114 &2830178979116579423
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

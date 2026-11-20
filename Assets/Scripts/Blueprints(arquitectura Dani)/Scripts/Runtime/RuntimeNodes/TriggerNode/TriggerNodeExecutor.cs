@@ -7,7 +7,7 @@ namespace Blueprints_arquitectura_Dani_.Runtime.TriggerNode
     {
         protected override int OnExecute(TriggerEnterRuntimeNode node, BlueprintDirector ctx,GameObject obj)
         {
-            Debug.Log($"On Trigger Enter ");
+            Debug.LogError($"On Trigger Enter ");
             return 0; 
         }
     }

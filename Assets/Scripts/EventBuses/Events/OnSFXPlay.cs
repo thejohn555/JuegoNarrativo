@@ -1,15 +1,24 @@
 ﻿using EventBuses;
 using System.Collections;
 using UnityEngine;
+using Audio.Enums;
 
 namespace Assets.Scripts.EventBuses
 {
     public struct OnSFXPlay : IEvent
     {
-        private AudioClip audio;
-        public OnSFXPlay(AudioClip audio)
+        public AudioEventsID audioEvent;
+        public SFXID sfxClip;
+        public OnSFXPlay(SFXID audio)
         {
-            this.audio = audio;
+            this.sfxClip = audio;
+            audioEvent = AudioEventsID.NULL;
+        }
+
+        public OnSFXPlay(AudioEventsID audioEvent)
+        {
+            this.audioEvent = audioEvent;
+            sfxClip = SFXID.NULL;
         }
     }
 }

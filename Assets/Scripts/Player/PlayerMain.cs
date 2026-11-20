@@ -14,6 +14,7 @@ namespace Player
 
         public Camera Cam { get; private set; }
 
+
         private void Awake()
         {
             inputReader.Inicialize();
