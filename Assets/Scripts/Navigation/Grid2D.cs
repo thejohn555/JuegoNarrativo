@@ -6,6 +6,13 @@ using UnityEngine;
 
 public class Grid2D : MonoBehaviour
 {
+    [Serializable]
+    public struct ScalePoint
+    {
+        [Min(0f)] public float offset;
+        [Min(0f)] public float scale;
+    }
+
     [Header("Cell Settings")]
     [Min(0.1f)]
     [SerializeField] private float cellSize = 0.5f;
@@ -26,6 +33,10 @@ public class Grid2D : MonoBehaviour
     [Header("Debug")]
     [SerializeField] private bool showGrid = true;
 
+    [Header("Player Scale By Height")]
+    [Tooltip("Offset medido desde el borde inferior del grid y multiplicador de escala.")]
+    [SerializeField] private ScalePoint[] scalePoints = Array.Empty<ScalePoint>();
+
     private NodeGrid[,] grid;
     private readonly List<Collider2D> floorColliders = new List<Collider2D>();
 
@@ -35,6 +46,55 @@ public class Grid2D : MonoBehaviour
     private Vector2 gridWorldSize;
 
     public NodeGrid[,] Grid => grid;
+
+    public float GetScaleAtWorldY(float worldY)
+    {
+        if (scalePoints == null || scalePoints.Length == 0)
+            return 1f;
+
+        float offset = worldY - GetGridBottomY();
+        int lowerIndex = -1;
+        int upperIndex = -1;
+
+        for (int i = 0; i < scalePoints.Length; i++)
+        {
+            if (lowerIndex < 0 || scalePoints[i].offset < scalePoints[lowerIndex].offset)
+                lowerIndex = i;
+            if (upperIndex < 0 || scalePoints[i].offset > scalePoints[upperIndex].offset)
+                upperIndex = i;
+        }
+
+        if (offset <= scalePoints[lowerIndex].offset)
+            return scalePoints[lowerIndex].scale;
+        if (offset >= scalePoints[upperIndex].offset)
+            return scalePoints[upperIndex].scale;
+
+        int beforeIndex = lowerIndex;
+        int afterIndex = upperIndex;
+        for (int i = 0; i < scalePoints.Length; i++)
+        {
+            float pointOffset = scalePoints[i].offset;
+            if (pointOffset <= offset && pointOffset > scalePoints[beforeIndex].offset)
+                beforeIndex = i;
+            if (pointOffset >= offset && pointOffset < scalePoints[afterIndex].offset)
+                afterIndex = i;
+        }
+
+        ScalePoint before = scalePoints[beforeIndex];
+        ScalePoint after = scalePoints[afterIndex];
+        if (Mathf.Approximately(before.offset, after.offset))
+            return after.scale;
+
+        float t = Mathf.InverseLerp(before.offset, after.offset, offset);
+        return Mathf.Lerp(before.scale, after.scale, t);
+    }
+
+    private float GetGridBottomY()
+    {
+        if (areaCollider == null)
+            areaCollider = GetComponent<Collider2D>();
+        return areaCollider != null ? areaCollider.bounds.min.y : gridBottomLeft.y;
+    }
 
     private void Awake()
     {
@@ -339,12 +399,27 @@ public class Grid2D : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        if (areaCollider == null)
+            areaCollider = GetComponent<Collider2D>();
         Bounds bounds = areaCollider != null
             ? areaCollider.bounds
             : new Bounds(transform.position, Vector3.zero);
 
         Gizmos.color = Color.white;
         Gizmos.DrawWireCube(bounds.center, bounds.size);
+
+        if (scalePoints != null)
+        {
+            Gizmos.color = Color.magenta;
+            foreach (ScalePoint point in scalePoints)
+            {
+                float y = bounds.min.y + point.offset;
+                Gizmos.DrawLine(
+                    new Vector3(bounds.min.x, y, bounds.center.z),
+                    new Vector3(bounds.max.x, y, bounds.center.z)
+                );
+            }
+        }
 
         if (!showGrid || grid == null)
             return;

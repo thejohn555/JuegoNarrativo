@@ -15,6 +15,10 @@ public class PlayerMovementSystem : PlayerSystem
     [SerializeField] private float distanceForMinVelocity = 3f;
     [SerializeField] private float distanceForMaxVelocity = 5f;
 
+    [Header("Scale By Grid Height")]
+    [Min(0f)]
+    [SerializeField] private float scaleLerpSpeed = 8f;
+
     [Header("Pathfinding")]
     private Pathfinding2D pathfinding;
 
@@ -26,6 +30,7 @@ public class PlayerMovementSystem : PlayerSystem
     private int currentWaypointIndex;
     private bool isMoving;
     private bool destinationReached;
+    private Vector3 baseScale;
 
     public bool IsMoving => isMoving;
     public bool DestinationReached => destinationReached;
@@ -33,6 +38,7 @@ public class PlayerMovementSystem : PlayerSystem
     private void Start()
     {
         CachePathfinding();
+        baseScale = transform.localScale;
     }
     
     private void OnDisable() //Nuevo
@@ -117,10 +123,30 @@ public class PlayerMovementSystem : PlayerSystem
 
     private void Update()
     {
+        UpdateScaleForPosition();
+
         if (!isMoving || currentPath == null)
             return;
 
         MoveAlongPath();
+    }
+
+    private void UpdateScaleForPosition()
+    {
+        if (pathfinding == null || pathfinding.Grid == null)
+            CachePathfinding();
+
+        if (pathfinding == null || pathfinding.Grid == null)
+            return;
+
+        float scaleFactor = pathfinding.Grid.GetScaleAtWorldY(transform.position.y);
+        float lerpFactor = 1f - Mathf.Exp(-scaleLerpSpeed * Time.deltaTime);
+        Vector3 targetScale = new Vector3(
+            baseScale.x * scaleFactor,
+            baseScale.y * scaleFactor,
+            baseScale.z
+        );
+        transform.localScale = Vector3.Lerp(transform.localScale, targetScale, lerpFactor);
     }
 
     private void MoveAlongPath()

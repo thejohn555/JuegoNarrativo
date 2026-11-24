@@ -860,7 +860,6 @@ MonoBehaviour:
   useCameraBounds: 1
   boundsCenter: {x: -0.14, y: 0, z: 0}
   boundsSize: {x: 40.6, y: 10, z: 0}
-  zoomVelocity: 0.5
 --- !u!114 &722088533
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1471,6 +1470,10 @@ PrefabInstance:
     - target: {fileID: 5823953157644755407, guid: 95f604d8a6b3a81439e2e09092fcd4a0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5823953157644755407, guid: 95f604d8a6b3a81439e2e09092fcd4a0, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8831337603267046458, guid: 95f604d8a6b3a81439e2e09092fcd4a0, type: 3}
       propertyPath: m_Name
@@ -2636,6 +2639,26 @@ PrefabInstance:
     - target: {fileID: 704958490098690381, guid: 508086dc3d285d845afebdf09c8b6cca, type: 3}
       propertyPath: showGrid
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 704958490098690381, guid: 508086dc3d285d845afebdf09c8b6cca, type: 3}
+      propertyPath: scalePoints.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 704958490098690381, guid: 508086dc3d285d845afebdf09c8b6cca, type: 3}
+      propertyPath: scalePoints.Array.data[0].scale
+      value: 0.76
+      objectReference: {fileID: 0}
+    - target: {fileID: 704958490098690381, guid: 508086dc3d285d845afebdf09c8b6cca, type: 3}
+      propertyPath: scalePoints.Array.data[1].scale
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 704958490098690381, guid: 508086dc3d285d845afebdf09c8b6cca, type: 3}
+      propertyPath: scalePoints.Array.data[0].offset
+      value: 3.49
+      objectReference: {fileID: 0}
+    - target: {fileID: 704958490098690381, guid: 508086dc3d285d845afebdf09c8b6cca, type: 3}
+      propertyPath: scalePoints.Array.data[1].offset
+      value: 0.43
       objectReference: {fileID: 0}
     - target: {fileID: 6147220219749238926, guid: 508086dc3d285d845afebdf09c8b6cca, type: 3}
       propertyPath: m_Name

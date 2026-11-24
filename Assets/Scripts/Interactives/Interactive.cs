@@ -81,7 +81,7 @@ namespace Interactives
             //Cambio del cursor
             if (!IsInteractable) return;
             if (interactionCursor != null)
-                Cursor.SetCursor(interactionCursor, new Vector2(interactionCursor.width/2f,interactionCursor.height/3), CursorMode.Auto);
+                Cursor.SetCursor(interactionCursor, new Vector2(58f,12f), CursorMode.Auto);
             UseOutliner(false);
         }
 
@@ -95,7 +95,7 @@ namespace Interactives
         {
             //Cambio del cursor
             if (!IsInteractable) return;
-            Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+            Cursor.SetCursor(null, new Vector2(58f,12f), CursorMode.Auto);
             UseOutliner(false);
         }
         public void SetInteractable(bool value)//Nuevo hecho por Nacho
@@ -103,7 +103,7 @@ namespace Interactives
             Debug.Log($"[Interactive] {name} enabled = {value}");
             IsInteractable = value;
             if (!value)
-                Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+                Cursor.SetCursor(null, new Vector2(58f,12f), CursorMode.Auto);
         }
         
     }
