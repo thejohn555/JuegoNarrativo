@@ -362,9 +362,9 @@ MonoBehaviour:
         m_LastKnownBounds:
           serializedVersion: 2
           x: -304
-          y: 4.799999
-          width: 2780.8
-          height: 1988.7999
+          y: 5
+          width: 2779
+          height: 1989
         m_GraphElementMetaData:
         - m_Guid:
             m_Value0: 13496333838202742821

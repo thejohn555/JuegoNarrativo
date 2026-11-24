@@ -39,6 +39,7 @@ namespace Interactives
         [SerializeField] public float smoothTime  = 0.5f;
 
         public string currentStateId = ""; //Lo tengo que poner privado
+        private GameObject lastInteractor;
         
 
         protected override void OnEnable()
@@ -66,6 +67,7 @@ namespace Interactives
         {
             base.OnDisable();
             EventBus.UnSubscribe<OnNPCStateChangedEvent>(HandleStateChange);
+            EventBus.UnSubscribe<OnDialogueEndedEvent>(HandleDialogueEnded);
             BlueprintsEventManager.Instance.OnStartBark -= Handelbark;
         }
 
@@ -91,25 +93,8 @@ namespace Interactives
 
         public override void Interact(GameObject interactor)
         {
-            Debug.LogError($"[Interact] Interacting with {interactor.name}");
-            DialogueData data = new DialogueData();
-            data.targetPosition = transform;
-
-            data.cameraOffset = cameraOffset;
-            data.zoom = zoom;
-            data.smoothTime = smoothTime;
-            data.moveCamera = cameraMove;
-            data.zoomCamera = zoomCamera;
-            data.isDialogue = true;
-            data.textColor = npcTextColor;
-            data.npcID = npcID;
-
-            data.speakers = new Dictionary<string, SpeakerData>
-            {
-                { "Conan", new SpeakerData { transform = interactor.transform, textColor = Color.white } },
-                { npcID, new SpeakerData { transform = this.transform, textColor = npcTextColor } }
-            };
-
+            lastInteractor = interactor;
+            DialogueData data = BuildDialogueData();
 
             if (!HeldItemController.Instance.HasHeldItem)
             {
@@ -129,19 +114,6 @@ namespace Interactives
         {
             if (barkGraph == null) return;
 
-            //DialogueData data = new DialogueData();
-
-            //data.isDialogue = false;
-
-            //data.moveCamera = false;
-            //data.zoomCamera = false;
-
-            //data.speakers = new Dictionary<string, SpeakerData>
-            //{
-            //    { npcID, new SpeakerData { transform = this.transform, textColor = npcTextColor } }
-            //};
-
-            //DialogueManager.Instance.StartDialogue(barkGraph, data);
             EventBus.Publish(new OnBarkEvent(barkGraph, transform, npcID, npcTextColor));
         }
 
@@ -162,8 +134,10 @@ namespace Interactives
             Gizmos.DrawWireCube(cameraCenter, new Vector3(camWidth, camHeight, 0.1f));
         }
         
-        public DialogueData BuildDialogueData(GameObject interactor)
+        public DialogueData BuildDialogueData()
         {
+            GameObject resolvedInteractor = lastInteractor != null ? lastInteractor : GameObject.FindGameObjectWithTag("Player");
+
             DialogueData data = new DialogueData();
             data.npcID = npcID;
             data.targetPosition = transform;
@@ -176,8 +150,8 @@ namespace Interactives
             data.textColor = npcTextColor;
 
             data.speakers = new Dictionary<string, SpeakerData>();
-            if (interactor != null)
-                data.speakers["Conan"] = new SpeakerData { transform = interactor.transform, textColor = Color.white };
+            if (resolvedInteractor != null)
+                data.speakers["Conan"] = new SpeakerData { transform = resolvedInteractor.transform, textColor = Color.white };
             data.speakers[npcID] = new SpeakerData { transform = transform, textColor = npcTextColor };
 
             return data;

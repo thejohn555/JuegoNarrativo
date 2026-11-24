@@ -35,8 +35,7 @@ public class DialogueManager : Singleton<DialogueManager>
             return;
         }
 
-        var player = GameObject.FindGameObjectWithTag("Player");
-        StartDialogue(npc.CurrentGraph, npc.BuildDialogueData(player));
+        StartDialogue(npc.CurrentGraph, npc.BuildDialogueData());
     }
     public void StartDialogue(RuntimeDialogueGraph graph, DialogueData data)
     {
