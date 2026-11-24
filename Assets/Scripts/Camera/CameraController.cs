@@ -26,7 +26,7 @@ public class CameraController : MonoBehaviour
     public Vector3 boundsCenter = Vector3.zero;
     public Vector3 boundsSize = new Vector3(20f, 10f, 0f);
 
-    [SerializeField] private float zoomVelocity = 0.5f;
+    private float zoomVelocity;
     private Action currentStateBehavior;
     private Vector3 velocity = Vector3.zero;
     private CameraState currentCameraState;
@@ -159,10 +159,14 @@ public class CameraController : MonoBehaviour
         stateBeforeDialogue = currentCameraState;
         cameraPosBeforeDialogue = transform.position;
 
+        velocity = Vector3.zero;
+        zoomVelocity = 0f;
+
         if (data.moveCamera && data.targetPosition != null)
         {
             currentTargetPos = data.targetPosition.position + data.cameraOffset;
             currentTargetPos.z = transform.position.z;
+            currentTargetPos = ClampToBounds(currentTargetPos, data.zoomCamera ? data.zoom : cam.orthographicSize);
         }
         else
         {
@@ -202,7 +206,10 @@ public class CameraController : MonoBehaviour
             return;
         }
 
-        currentTargetPos = cameraPosBeforeDialogue;
+        velocity = Vector3.zero;
+        zoomVelocity = 0f;
+
+        currentTargetPos = ClampToBounds(cameraPosBeforeDialogue, defaultZoom);
         currentTargetPos.z = transform.position.z;
 
         currentTargetZoom = defaultZoom;
@@ -213,8 +220,13 @@ public class CameraController : MonoBehaviour
 
     private void HandleTransition()
     {
-        transform.position = Vector3.SmoothDamp(transform.position, currentTargetPos, ref velocity, currentSmoothTime);
-        cam.orthographicSize = Mathf.SmoothDamp(cam.orthographicSize, currentTargetZoom, ref zoomVelocity, currentSmoothTime);
+        float nextZoom = Mathf.SmoothDamp(cam.orthographicSize, currentTargetZoom, ref zoomVelocity, currentSmoothTime);
+        Vector3 nextPos = Vector3.SmoothDamp(transform.position, currentTargetPos, ref velocity, currentSmoothTime);
+
+        nextPos = ClampToBounds(nextPos, nextZoom);
+
+        cam.orthographicSize = nextZoom;
+        transform.position = nextPos;
 
         float distance = Vector2.Distance(transform.position, currentTargetPos);
         float zoomDiff = Mathf.Abs(cam.orthographicSize - currentTargetZoom);
@@ -223,13 +235,18 @@ public class CameraController : MonoBehaviour
         {
             transform.position = currentTargetPos;
             cam.orthographicSize = currentTargetZoom;
+            velocity = Vector3.zero;
+            zoomVelocity = 0f;
+
             if (isDialogue)
             {
                 EventBus.Publish(new OnDialogueStartedEvent());
                 ChangeCameraState(CameraState.Dialogue);
             }
             else
+            {
                 ChangeCameraState(stateBeforeDialogue);
+            }
         }
     }
 
@@ -260,26 +277,32 @@ public class CameraController : MonoBehaviour
         {
             Vector3 desiredPos = new Vector3(camPos.x + moveX, camPos.y + moveY, camPos.z);
             Vector3 nextPosition = Vector3.SmoothDamp(transform.position, desiredPos, ref velocity, smoothTime);
-
-            if (useCameraBounds)
-            {
-                float halfHeight = cam.orthographicSize;
-                float halfWidth = halfHeight * cam.aspect;
-
-                float minX = boundsCenter.x - (boundsSize.x / 2f) + halfWidth;
-                float maxX = boundsCenter.x + (boundsSize.x / 2f) - halfWidth;
-                float minY = boundsCenter.y - (boundsSize.y / 2f) + halfHeight;
-                float maxY = boundsCenter.y + (boundsSize.y / 2f) - halfHeight;
-
-                if (minX > maxX) minX = maxX = boundsCenter.x;
-                if (minY > maxY) minY = maxY = boundsCenter.y;
-
-                nextPosition.x = Mathf.Clamp(nextPosition.x, minX, maxX);
-                nextPosition.y = Mathf.Clamp(nextPosition.y, minY, maxY);
-            }
-
-            transform.position = nextPosition;
+            transform.position = ClampToBounds(nextPosition, cam.orthographicSize);
         }
+        else
+        {
+            velocity = Vector3.zero;
+        }
+    }
+
+    private Vector3 ClampToBounds(Vector3 pos, float orthoSize)
+    {
+        if (!useCameraBounds) return pos;
+
+        float halfHeight = orthoSize;
+        float halfWidth = halfHeight * cam.aspect;
+
+        float minX = boundsCenter.x - (boundsSize.x / 2f) + halfWidth;
+        float maxX = boundsCenter.x + (boundsSize.x / 2f) - halfWidth;
+        float minY = boundsCenter.y - (boundsSize.y / 2f) + halfHeight;
+        float maxY = boundsCenter.y + (boundsSize.y / 2f) - halfHeight;
+
+        if (minX > maxX) minX = maxX = boundsCenter.x;
+        if (minY > maxY) minY = maxY = boundsCenter.y;
+
+        pos.x = Mathf.Clamp(pos.x, minX, maxX);
+        pos.y = Mathf.Clamp(pos.y, minY, maxY);
+        return pos;
     }
 
     private void OnDrawGizmos()
