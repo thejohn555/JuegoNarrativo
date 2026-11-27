@@ -1,12 +1,11 @@
-﻿using Assets.Scripts.EventBuses;
-using Assets.Scripts.EventBuses.Events;
+﻿using Assets.Scripts.EventBuses.Events;
 using EventBuses;
+using System;
 using System.Collections;
 using UnityEngine;
 
 public class BarkUI : FloatingTextUI
 {
-    [SerializeField] private EventBusSO EventBus;
     [SerializeField] private CanvasGroup barkCanvasGroup;
     [SerializeField] private float visibleTimeAfterTyping = 2.5f;
 
@@ -14,38 +13,19 @@ public class BarkUI : FloatingTextUI
     private RuntimeDialogueGraph currentBarkGraph;
     private int currentNodeIndex;
 
-    private bool isMainDialogueActive;
+    private bool isHiddenByDialogue;
     private Transform barkSpeakerTransform;
-    protected override bool ShouldPlayTypingSound => !isMainDialogueActive;
+    private Action<BarkUI, Transform> onFinishedCallback;
 
-    private void OnEnable()
+    public Transform SpeakerTransform => barkSpeakerTransform;
+    //protected override bool ShouldPlayTypingSound => !isHiddenByDialogue;
+    protected override bool ShouldPlayTypingSound => false;
+
+    public void Play(OnBarkEvent ev, bool startHidden, Action<BarkUI, Transform> onFinished)
     {
-        EventBus.Subscribe<OnBarkEvent>(OnBarkTriggered);
-        EventBus.Subscribe<OnDialogueDataEvent>(OnMainDialogueStart);
-        EventBus.Subscribe<OnDialogueEndedEvent>(OnMainDialogueEnd);
-    }
+        StopRunningCoroutines();
 
-    private void OnDisable()
-    {
-        EventBus.UnSubscribe<OnBarkEvent>(OnBarkTriggered);
-        EventBus.UnSubscribe<OnDialogueDataEvent>(OnMainDialogueStart);
-        EventBus.UnSubscribe<OnDialogueEndedEvent>(OnMainDialogueEnd);
-    }
-
-    private void Start()
-    {
-        if (panel != null) panel.SetActive(false);
-    }
-
-    private void OnBarkTriggered(OnBarkEvent ev)
-    {
-        if (ev.barkGraph == null || ev.barkGraph.AllNodes == null || ev.barkGraph.AllNodes.Count == 0) return;
-        if (ev.speakerTransform == null) return;
-
-        if (isMainDialogueActive && activeSpeakerTransform == ev.speakerTransform) return;
-
-        CancelBark();
-
+        onFinishedCallback = onFinished;
         currentBarkGraph = ev.barkGraph;
         currentNodeIndex = 0;
         barkSpeakerTransform = ev.speakerTransform;
@@ -54,8 +34,9 @@ public class BarkUI : FloatingTextUI
         bodyText.color = ev.textColor;
         if (speakerText != null) speakerText.text = ev.speakerName;
 
-        panel.SetActive(true);
-        SetBarkVisibility(!isMainDialogueActive);
+        gameObject.SetActive(true);
+        if (panel != null) panel.SetActive(true);
+        SetVisibility(!startHidden);
 
         Canvas.ForceUpdateCanvases();
         UpdatePosition();
@@ -83,107 +64,42 @@ public class BarkUI : FloatingTextUI
     private IEnumerator AutoAdvanceRoutine()
     {
         yield return new WaitForSeconds(visibleTimeAfterTyping);
-
         currentNodeIndex++;
         PlayCurrentNode();
     }
 
-    private void SetBarkVisibility(bool visible)
+    public void SetVisibility(bool visible)
     {
+        isHiddenByDialogue = !visible;
         if (barkCanvasGroup != null)
         {
             barkCanvasGroup.alpha = visible ? 1f : 0f;
         }
-    }
-
-    public void ResetBark(int startNodeIndex)
-    {
-        if (currentBarkGraph == null || currentBarkGraph.AllNodes == null || currentBarkGraph.AllNodes.Count == 0)
-        {
-            CancelBark();
-            return;
-        }
-
-        if (startNodeIndex < 0 || startNodeIndex >= currentBarkGraph.AllNodes.Count)
-        {
-            CancelBark();
-            return;
-        }
-
-        if (typeWritingCoroutine != null)
-        {
-            StopCoroutine(typeWritingCoroutine);
-            typeWritingCoroutine = null;
-        }
-
-        if (autoAdvanceCoroutine != null)
-        {
-            StopCoroutine(autoAdvanceCoroutine);
-            autoAdvanceCoroutine = null;
-        }
-
-        currentNodeIndex = startNodeIndex;
-
-        if (panel != null && !panel.activeSelf)
-        {
-            panel.SetActive(true);
-        }
-
-        SetBarkVisibility(!isMainDialogueActive);
-        UpdatePosition();
-
-        PlayCurrentNode();
+        if (visible) UpdatePosition();
     }
 
     public void CancelBark()
+    {
+        StopRunningCoroutines();
+
+        Transform finishedSpeaker = barkSpeakerTransform;
+        activeSpeakerTransform = null;
+        barkSpeakerTransform = null;
+        currentBarkGraph = null;
+        currentNodeIndex = 0;
+
+        if (panel != null) panel.SetActive(false);
+
+        var callback = onFinishedCallback;
+        onFinishedCallback = null;
+        callback?.Invoke(this, finishedSpeaker);
+    }
+
+    private void StopRunningCoroutines()
     {
         if (typeWritingCoroutine != null) StopCoroutine(typeWritingCoroutine);
         if (autoAdvanceCoroutine != null) StopCoroutine(autoAdvanceCoroutine);
         typeWritingCoroutine = null;
         autoAdvanceCoroutine = null;
-
-        if (panel != null) panel.SetActive(false);
-        SetBarkVisibility(false);
-
-        activeSpeakerTransform = null;
-        barkSpeakerTransform = null;
-        currentBarkGraph = null;
-        currentNodeIndex = 0;
-    }
-
-    private void OnMainDialogueStart(OnDialogueDataEvent ev)
-    {
-        if (!ev.DialogueData.isDialogue) return;
-
-        isMainDialogueActive = true;
-
-        if (barkSpeakerTransform != null && ev.DialogueData.speakers != null)
-        {
-            foreach (var speaker in ev.DialogueData.speakers.Values)
-            {
-                if (speaker.transform == barkSpeakerTransform)
-                {
-                    CancelBark();
-                    return;
-                }
-            }
-        }
-
-        if (currentBarkGraph != null)
-        {
-            SetBarkVisibility(false);
-        }
-    }
-
-    private void OnMainDialogueEnd(OnDialogueEndedEvent ev)
-    {
-        isMainDialogueActive = false;
-
-        if (currentBarkGraph != null && panel.activeSelf)
-        {
-            SetBarkVisibility(true);
-            ResetBark(currentNodeIndex);
-            UpdatePosition();
-        }
     }
 }
