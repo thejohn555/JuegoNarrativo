@@ -13,7 +13,7 @@ namespace Managers
     {
         [SerializeField] EventBusSO eventBus;
         [SerializeField] NPC Kidnapper;
-        void SwapScene(int index)
+        public void SwapScene(int index)
         {
             SceneManager.LoadScene(index);
         }

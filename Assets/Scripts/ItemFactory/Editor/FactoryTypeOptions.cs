@@ -34,33 +34,24 @@ namespace ItemFactory
 
     public sealed class DoorFactoryTypeOptions : FactoryTypeOptions
     {
-        private DoorManager doorManager;
+        private int destinationSceneIndex = -1;
 
-        public override Type ComponentType => null;
+        public override Type ComponentType => typeof(Interactives.Door);
 
         public override void DrawOptions()
         {
-            if (doorManager == null)
-                doorManager = UnityEngine.Object.FindFirstObjectByType<DoorManager>();
-
-            EditorGUILayout.LabelField("Door Graph", EditorStyles.boldLabel);
-            doorManager = (DoorManager)EditorGUILayout.ObjectField(
-                "Door Manager", doorManager, typeof(DoorManager), true);
+            EditorGUILayout.LabelField("Door Settings", EditorStyles.boldLabel);
+            destinationSceneIndex = EditorGUILayout.IntField("Destination scene index", destinationSceneIndex);
             EditorGUILayout.HelpBox(
-                "The GameObject name will be used as the door node key. The door is added to the Door Manager, which generates its graph node.",
+                "Enter the destination scene's build index.",
                 MessageType.Info);
-
-            if (doorManager == null)
-                EditorGUILayout.HelpBox(
-                    "Add a DoorManager to the active scene or assign one here before creating a door.",
-                    MessageType.Warning);
         }
 
         public override bool Validate(out string error)
         {
-            if (doorManager == null)
+            if (destinationSceneIndex < 0)
             {
-                error = "Assign a DoorManager from the active scene before creating a door.";
+                error = "Enter a destination scene build index of 0 or greater.";
                 return false;
             }
 
@@ -70,8 +61,34 @@ namespace ItemFactory
 
         public override void ConfigureCreatedObject(GameObject target)
         {
-            if (doorManager == null || target == null)
+            if (target == null)
                 return;
+
+            Interactives.Door door = target.GetComponent<Interactives.Door>();
+            if (door != null)
+            {
+                SerializedObject serializedDoor = new SerializedObject(door);
+                SerializedProperty destinationProperty =
+                    serializedDoor.FindProperty("<DestinationScenePath>k__BackingField");
+                if (destinationProperty != null)
+                {
+                    Undo.RecordObject(door, "Set door destination scene");
+                    destinationProperty.intValue = destinationSceneIndex;
+                    serializedDoor.ApplyModifiedProperties();
+                    EditorUtility.SetDirty(door);
+                }
+                else
+                {
+                    Debug.LogWarning("Factory: Door.DestinationScenePath was not found.", door);
+                }
+            }
+
+            DoorManager doorManager = DoorManager.Instance;
+            if (doorManager == null)
+            {
+                Debug.LogWarning("Factory: no DoorManager instance was found; the door was not added to the Door Graph.", target);
+                return;
+            }
 
             Undo.RecordObject(doorManager, "Add door to Door Graph");
             doorManager.AddDoor(target);
