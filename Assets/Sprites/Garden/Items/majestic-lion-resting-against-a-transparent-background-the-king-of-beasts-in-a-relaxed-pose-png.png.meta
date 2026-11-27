@@ -1,0 +1,457 @@
+fileFormatVersion: 2
+guid: e186057d441b0c24ca6dc32fc5aea2f3
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5544972510141323383
+    second: majestic-lion-resting-against-a-transparent-background-the-king-of-beasts-in-a-relaxed-pose-png_0
+  - first:
+      213: -7128372202695202846
+    second: majestic-lion-resting-against-a-transparent-background-the-king-of-beasts-in-a-relaxed-pose-png_1
+  - first:
+      213: 2744462200343064867
+    second: majestic-lion-resting-against-a-transparent-background-the-king-of-beasts-in-a-relaxed-pose-png_2
+  - first:
+      213: 4308358600020596378
+    second: majestic-lion-resting-against-a-transparent-background-the-king-of-beasts-in-a-relaxed-pose-png_3
+  - first:
+      213: -2366203591018110033
+    second: majestic-lion-resting-against-a-transparent-background-the-king-of-beasts-in-a-relaxed-pose-png_4
+  - first:
+      213: 2878960597803523630
+    second: majestic-lion-resting-against-a-transparent-background-the-king-of-beasts-in-a-relaxed-pose-png_5
+  - first:
+      213: 8958082578665777731
+    second: majestic-lion-resting-against-a-transparent-background-the-king-of-beasts-in-a-relaxed-pose-png_6
+  - first:
+      213: 7540729861076094175
+    second: majestic-lion-resting-against-a-transparent-background-the-king-of-beasts-in-a-relaxed-pose-png_7
+  - first:
+      213: 6374581887438142420
+    second: majestic-lion-resting-against-a-transparent-background-the-king-of-beasts-in-a-relaxed-pose-png_8
+  - first:
+      213: -2702309470669909229
+    second: majestic-lion-resting-against-a-transparent-background-the-king-of-beasts-in-a-relaxed-pose-png_9
+  - first:
+      213: 2314617060110256031
+    second: majestic-lion-resting-against-a-transparent-background-the-king-of-beasts-in-a-relaxed-pose-png_10
+  - first:
+      213: 8485684257924165264
+    second: majestic-lion-resting-against-a-transparent-background-the-king-of-beasts-in-a-relaxed-pose-png_11
+  - first:
+      213: -4784474686218284656
+    second: majestic-lion-resting-against-a-transparent-background-the-king-of-beasts-in-a-relaxed-pose-png_12
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: majestic-lion-resting-against-a-transparent-background-the-king-of-beasts-in-a-relaxed-pose-png_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 925
+        width: 250
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 77897449e13b3fc40800000000000000
+      internalID: 5544972510141323383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: majestic-lion-resting-against-a-transparent-background-the-king-of-beasts-in-a-relaxed-pose-png_1
+      rect:
+        serializedVersion: 2
+        x: 502
+        y: 909
+        width: 139
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2e76597df3fe21d90800000000000000
+      internalID: -7128372202695202846
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: majestic-lion-resting-against-a-transparent-background-the-king-of-beasts-in-a-relaxed-pose-png_2
+      rect:
+        serializedVersion: 2
+        x: 656
+        y: 925
+        width: 353
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3217fe694d9461620800000000000000
+      internalID: 2744462200343064867
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: majestic-lion-resting-against-a-transparent-background-the-king-of-beasts-in-a-relaxed-pose-png_3
+      rect:
+        serializedVersion: 2
+        x: 1262
+        y: 909
+        width: 110
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a961a3fe15d5acb30800000000000000
+      internalID: 4308358600020596378
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: majestic-lion-resting-against-a-transparent-background-the-king-of-beasts-in-a-relaxed-pose-png_4
+      rect:
+        serializedVersion: 2
+        x: 123
+        y: 582
+        width: 139
+        height: 140
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa3ac13ee5e892fd0800000000000000
+      internalID: -2366203591018110033
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: majestic-lion-resting-against-a-transparent-background-the-king-of-beasts-in-a-relaxed-pose-png_5
+      rect:
+        serializedVersion: 2
+        x: 232
+        y: 158
+        width: 909
+        height: 662
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e2edc6a096f14f720800000000000000
+      internalID: 2878960597803523630
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: majestic-lion-resting-against-a-transparent-background-the-king-of-beasts-in-a-relaxed-pose-png_6
+      rect:
+        serializedVersion: 2
+        x: 1027
+        y: 599
+        width: 345
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 34a2df1b4a0815c70800000000000000
+      internalID: 8958082578665777731
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: majestic-lion-resting-against-a-transparent-background-the-king-of-beasts-in-a-relaxed-pose-png_7
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 271
+        width: 255
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fdc0f9c2bdd06a860800000000000000
+      internalID: 7540729861076094175
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: majestic-lion-resting-against-a-transparent-background-the-king-of-beasts-in-a-relaxed-pose-png_8
+      rect:
+        serializedVersion: 2
+        x: 1262
+        y: 255
+        width: 110
+        height: 140
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4dbb360e370177850800000000000000
+      internalID: 6374581887438142420
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: majestic-lion-resting-against-a-transparent-background-the-king-of-beasts-in-a-relaxed-pose-png_9
+      rect:
+        serializedVersion: 2
+        x: 123
+        y: 0
+        width: 139
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 313db879ad77f7ad0800000000000000
+      internalID: -2702309470669909229
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: majestic-lion-resting-against-a-transparent-background-the-king-of-beasts-in-a-relaxed-pose-png_10
+      rect:
+        serializedVersion: 2
+        x: 267
+        y: 0
+        width: 369
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f974eeae3fb2f1020800000000000000
+      internalID: 2314617060110256031
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: majestic-lion-resting-against-a-transparent-background-the-king-of-beasts-in-a-relaxed-pose-png_11
+      rect:
+        serializedVersion: 2
+        x: 882
+        y: 0
+        width: 139
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 09ea1bd9fd433c570800000000000000
+      internalID: 8485684257924165264
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: majestic-lion-resting-against-a-transparent-background-the-king-of-beasts-in-a-relaxed-pose-png_12
+      rect:
+        serializedVersion: 2
+        x: 1027
+        y: 0
+        width: 345
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0915c134f912a9db0800000000000000
+      internalID: -4784474686218284656
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      majestic-lion-resting-against-a-transparent-background-the-king-of-beasts-in-a-relaxed-pose-png_0: 5544972510141323383
+      majestic-lion-resting-against-a-transparent-background-the-king-of-beasts-in-a-relaxed-pose-png_1: -7128372202695202846
+      majestic-lion-resting-against-a-transparent-background-the-king-of-beasts-in-a-relaxed-pose-png_10: 2314617060110256031
+      majestic-lion-resting-against-a-transparent-background-the-king-of-beasts-in-a-relaxed-pose-png_11: 8485684257924165264
+      majestic-lion-resting-against-a-transparent-background-the-king-of-beasts-in-a-relaxed-pose-png_12: -4784474686218284656
+      majestic-lion-resting-against-a-transparent-background-the-king-of-beasts-in-a-relaxed-pose-png_2: 2744462200343064867
+      majestic-lion-resting-against-a-transparent-background-the-king-of-beasts-in-a-relaxed-pose-png_3: 4308358600020596378
+      majestic-lion-resting-against-a-transparent-background-the-king-of-beasts-in-a-relaxed-pose-png_4: -2366203591018110033
+      majestic-lion-resting-against-a-transparent-background-the-king-of-beasts-in-a-relaxed-pose-png_5: 2878960597803523630
+      majestic-lion-resting-against-a-transparent-background-the-king-of-beasts-in-a-relaxed-pose-png_6: 8958082578665777731
+      majestic-lion-resting-against-a-transparent-background-the-king-of-beasts-in-a-relaxed-pose-png_7: 7540729861076094175
+      majestic-lion-resting-against-a-transparent-background-the-king-of-beasts-in-a-relaxed-pose-png_8: 6374581887438142420
+      majestic-lion-resting-against-a-transparent-background-the-king-of-beasts-in-a-relaxed-pose-png_9: -2702309470669909229
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
