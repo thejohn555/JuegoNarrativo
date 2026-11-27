@@ -8,7 +8,7 @@ namespace DoorGraph.Editor
 {
     public static class DoorNodeGenerator
     {
-        const string OutputFolder = "Assets/Scripts/Doors/Editor/Generated";
+        const string OutputFolder = "Assets/Scripts/DoorGraph/Editor/Node/Generated";
 
         public static void GenerateAll()
         {
@@ -33,6 +33,7 @@ namespace DoorGraph.Editor
             sb.AppendLine("//(auto generado) No editar a mano.");
             sb.AppendLine("using System;");
             sb.AppendLine("using Unity.GraphToolkit.Editor;");
+            sb.AppendLine("using DoorGraph.Editor.Node;");
             sb.AppendLine("namespace Doors.Editor.Generated");
             sb.AppendLine("{");
 
@@ -49,9 +50,9 @@ namespace DoorGraph.Editor
                 }
 
                 sb.AppendLine("    [Serializable]");
-                sb.AppendLine("    [UseWithGraph(typeof(Doors.Editor.DoorGraph))]");
+                sb.AppendLine("    [UseWithGraph(typeof(DoorGraph.Editor.DoorGraph))]");
                 sb.AppendLine($"    [Node(categoryPath:\"Doors/{scene}\")]");
-                sb.AppendLine($"    public class Door_{sceneId}_{id} : Doors.Editor.DoorBaseNode");
+                sb.AppendLine($"    public class Door_{sceneId}_{id} : DoorBaseNode");
                 sb.AppendLine($"    {{ public override string Key => \"{name}\"; }}");
             }
 
