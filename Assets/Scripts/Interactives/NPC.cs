@@ -24,6 +24,7 @@ namespace Interactives
         [Header("Dialogues")]
         [SerializeField] private RuntimeDialogueGraph currentGraph;
         [SerializeField] private RuntimeDialogueGraph barkGraph;
+        [SerializeField] private Dictionary<BarkStateSO, RuntimeDialogueGraph> alternativeBarkStates;
         [HideInInspector]public RuntimeDialogueGraph CurrentGraph => currentGraph;//Nuevo
         [SerializeField] private Color npcTextColor = Color.white;
         [SerializeField] private List<DialogueState> alternativeStates;
@@ -47,6 +48,7 @@ namespace Interactives
             base.OnEnable();
             EventBus.Subscribe<OnNPCStateChangedEvent>(HandleStateChange);
             EventBus.Subscribe<OnDialogueEndedEvent>(HandleDialogueEnded);
+            EventBus.Subscribe<OnBarkStateChangedEvent>(HandleBarkStateChange);
             BlueprintsEventManager.Instance.OnStartBark += Handelbark;
             
         }
@@ -68,6 +70,7 @@ namespace Interactives
             base.OnDisable();
             EventBus.UnSubscribe<OnNPCStateChangedEvent>(HandleStateChange);
             EventBus.UnSubscribe<OnDialogueEndedEvent>(HandleDialogueEnded);
+            EventBus.UnSubscribe<OnBarkStateChangedEvent>(HandleBarkStateChange);
             BlueprintsEventManager.Instance.OnStartBark -= Handelbark;
         }
 
@@ -89,6 +92,20 @@ namespace Interactives
             }
 
             Debug.Log($"[{npcID}] State not found: {ev.NewStateID}");
+        }
+
+        private void HandleBarkStateChange(OnBarkStateChangedEvent ev)
+        {
+            if (ev.TargetNpc != this.gameObject || ev.NewBarkGraph == null) return;
+
+            if (alternativeBarkStates != null && alternativeBarkStates.TryGetValue(ev.NewBarkGraph, out RuntimeDialogueGraph newGraph))
+            {
+                barkGraph = newGraph;
+            }
+            else
+            {
+                Debug.LogWarning($"[{npcID}] No BarkGraph for '{ev.NewBarkGraph.name}'.");
+            }
         }
 
         public override void Interact(GameObject interactor)
