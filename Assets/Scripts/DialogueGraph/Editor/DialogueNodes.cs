@@ -11,6 +11,7 @@ namespace DialogueGraph.Editor
         public const string PortInput = "In";
         public const string PortChoiceOutput = "Choice ";
         public const string PortChoiceText = "Choice Text ";
+        public const string PortEventText = "Event Name";
     }
 
     [Serializable]
@@ -71,4 +72,16 @@ namespace DialogueGraph.Editor
              context.AddOption<int>(optionID).WithDefaultValue(2).Delayed();
          }
      }
+
+    [Serializable]
+    public class EventNode : Node
+    {
+        protected override void OnDefinePorts(IPortDefinitionContext context)
+        {
+            context.AddInputPort(PortNames.PortInput).Build();
+            context.AddOutputPort(PortNames.PortInput).Build();
+
+            context.AddInputPort<string>(PortNames.PortEventText).Build();
+        }
+    }
 }

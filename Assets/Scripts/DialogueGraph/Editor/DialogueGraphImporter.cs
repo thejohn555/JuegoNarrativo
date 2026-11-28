@@ -46,6 +46,10 @@ namespace DialogueGraph.Editor
                     case ChoiceNode choiceNode:
                         ProccessChoiceNode(choiceNode, runtimeNode, nodeIDMap);
                         break;
+
+                    case EventNode eventNode:
+                        ProccessEventNode(eventNode, runtimeNode, nodeIDMap);
+                        break;
         
                     default:
                         Debug.LogWarning($"El nodo de tipo {iNode.GetType()} no tiene una funcion de procesado asignada.");
@@ -96,6 +100,18 @@ namespace DialogueGraph.Editor
                  };
             
                  runtimeNode.Choices.Add(choiceData);
+            }
+        }
+
+        private void ProccessEventNode(EventNode node, RuntimeDialogueNode runtimeNode, Dictionary<INode, string> nodeIDMap)
+        {
+            runtimeNode.IsEventNode = true;
+            runtimeNode.EventName = GetPortValue<string>(node.GetInputPortByName(PortNames.PortEventText));
+
+            var nextNodePort = node.GetOutputPortByName(PortNames.PortOutput)?.FirstConnectedPort;
+            if (nextNodePort != null)
+            {
+                runtimeNode.NextNodeID = nodeIDMap[nextNodePort.GetNode()];
             }
         }
         

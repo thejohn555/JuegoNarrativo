@@ -31,4 +31,15 @@ namespace Assets.Scripts.EventBuses
             DialogueData = data;
         }
     }
+
+    public struct OnDialogueEventTriggered : IEvent
+    {
+        public string EventName;
+
+        public OnDialogueEventTriggered(string eventName)
+        {
+            this.EventName = eventName;
+        }
+    }
+
 }

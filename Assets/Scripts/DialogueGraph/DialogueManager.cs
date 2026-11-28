@@ -57,6 +57,17 @@ public class DialogueManager : Singleton<DialogueManager>
     {
         currentNode = currentGraph.GetNodeByID(nodeID);
 
+        if (currentNode.IsEventNode)
+        {
+            if (!string.IsNullOrEmpty(currentNode.EventName))
+            {
+                EventBus.Publish(new OnDialogueEventTriggered(currentNode.EventName));
+            }
+
+            AdvanceToNextNode();
+            return;
+        }
+
         if (string.IsNullOrEmpty(nodeID) || currentNode == null)
         {
             EndDialogue();

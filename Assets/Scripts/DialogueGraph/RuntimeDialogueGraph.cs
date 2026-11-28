@@ -23,6 +23,8 @@ public class RuntimeDialogueNode
     public float TextSpeed = DefaultTextSpeed;
     public List<ChoiceData> Choices = new List<ChoiceData>();
     public string NextNodeID;
+    public bool IsEventNode;
+    public string EventName;
 }
 
 [Serializable]
